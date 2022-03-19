@@ -14,10 +14,11 @@ y_offset = 10
 player_path = NodePath("../Player")
 
 [node name="CSGMesh" type="CSGMesh" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0676188, -0.0745678, -5.85421 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 mesh = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 vel = 2
+max_dist = 2
 
 [editable path="Player"]

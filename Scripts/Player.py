@@ -1,6 +1,6 @@
 from py4godot import *
 
-DEFAULT_VEL = 5
+DEFAULT_VEL = 2
 DEFAULT_DIST = 50
 @gdclass
 class Player(KinematicBody):
@@ -12,7 +12,9 @@ class Player(KinematicBody):
 		self.up_pressed = False
 		self.down_pressed = False
 		self.current_dist = 0
-		self._max_dist = DEFAULT_DIST
+		self.save_vertical_move = 0
+		self.save_horizontal_move = 0
+		self._max_dist = 2
 
 	@gdproperty(int, DEFAULT_VEL, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,10,1,slider")
 	def vel(self):
@@ -22,10 +24,10 @@ class Player(KinematicBody):
 		self.velocity = value
 	
 	@gdproperty(int, DEFAULT_DIST, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,10,1,slider")
-	def vel(self):
+	def max_dist(self):
 		return self._max_dist
-	@vel.setter
-	def vel(self, value):
+	@max_dist.setter
+	def max_dist(self, value):
 		self._max_dist = value
 
 	@gdmethod
@@ -36,15 +38,37 @@ class Player(KinematicBody):
 	@gdmethod
 	def _process(self, delta):
 		self.set_key_pressed()
+		self.reset_move()
 		self.move(delta)
 	
+	def reset_move(self):
+		"""Resetting, after player moved a block"""
+		if(self.current_dist > self.max_dist):
+			self.current_dist = 0
+			print(self.transform.get_origin())
+			self.transform.set_origin(self.round_vector(self.transform.get_origin()))
+			self.save_horizontal_move = 0
+			self.save_vertical_move = 0
+			
+	def round_vector(self, vector):
+		"""Function for rounding the position after arriving"""
+		return Vector3(round(vector.get_axis(Vector3_Axis.X.value)), 
+		round(vector.get_axis(Vector3_Axis.Y.value)),
+		round(vector.get_axis(Vector3_Axis.Z.value)))
+	
 	def move(self, delta):
-		vertical_modifier = self.move_vertical_val()
-		horizontal_modifier = self.move_horizontal_val()
-		if horizontal_modifier and vertical_modifier:
-			horizontal_modifier, vertical_modifier = 0,0
+		if(self.save_horizontal_move == 0 and self.save_vertical_move == 0):
+			vertical_modifier = self.move_vertical_val()
+			horizontal_modifier = self.move_horizontal_val()
+			if horizontal_modifier and vertical_modifier:
+				horizontal_modifier, vertical_modifier = 0,0
+			self.save_horizontal_move, self.save_vertical_move = horizontal_modifier, vertical_modifier
 		
-		self.move_and_collide(Vector3(self.vel * horizontal_modifier,0,self.vel * vertical_modifier) * delta, True, True, False)
+		move_vector = Vector3(self.save_horizontal_move,0,self.save_vertical_move)
+		
+		self.move_and_collide(move_vector* delta, True, True, False)
+		self.current_dist += move_vector.length() * delta
+		
 	
 	def move_vertical_val(self):
 		val = 0
