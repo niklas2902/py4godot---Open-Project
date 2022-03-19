@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Camera.py" type="Script" id=1]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleMesh" id=1]
+
+[node name="MainScene" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
+script = ExtResource( 1 )
+y_offset = 10
+player_path = NodePath("../Player")
+
+[node name="CSGMesh" type="CSGMesh" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0676188, -0.0745678, -5.85421 )
+mesh = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+vel = 2
+
+[editable path="Player"]
