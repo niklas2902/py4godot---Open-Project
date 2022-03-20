@@ -32,7 +32,6 @@ class Player(KinematicBody):
 
 	@gdmethod
 	def _ready(self):
-		print("_init")
 		self.input = Input.instance()
 	
 	@gdmethod
@@ -45,7 +44,6 @@ class Player(KinematicBody):
 		"""Resetting, after player moved a block"""
 		if(self.current_dist > self.max_dist):
 			self.current_dist = 0
-			print(self.transform.get_origin())
 			self.transform.set_origin(self.round_vector(self.transform.get_origin()))
 			self.save_horizontal_move = 0
 			self.save_vertical_move = 0
@@ -66,8 +64,8 @@ class Player(KinematicBody):
 		
 		move_vector = Vector3(self.save_horizontal_move,0,self.save_vertical_move)
 		
-		self.move_and_collide(move_vector* delta, True, True, False)
-		self.current_dist += move_vector.length() * delta
+		self.move_and_collide(move_vector* delta * self.vel)
+		self.current_dist += move_vector.length() * delta * self.vel
 		
 	
 	def move_vertical_val(self):
