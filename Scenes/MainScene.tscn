@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Camera.py" type="Script" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/rock.tscn" type="PackedScene" id=3]
-[ext_resource path="res://main_char_opened.tscn" type="PackedScene" id=4]
+[ext_resource path="res://main_char.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -27,6 +27,6 @@ max_dist = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
 
 [node name="main_char" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7319, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
 
 [editable path="Player"]
