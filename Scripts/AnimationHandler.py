@@ -16,11 +16,11 @@ class MotionHandler(Spatial):
 			self.turn = 0
 			
 		node = self.get_node(self._node)
-		animationTree = AnimationTree.cast(node)
+		self.animation_tree = AnimationTree.cast(node)
 		print(self.vel, self.turn)
-		animationTree.set("parameters/Movement/blend_position", Variant(Vector2(self.vel,self.turn)))
-		print("get_value",animationTree.get("parameters/Movement/blend_position").get_converted_value())
-			
+		self.animation_tree.set("parameters/Movement/blend_position", Variant(Vector2(self.vel,self.turn)))
+		print("get_value",self.animation_tree.get("parameters/Movement/blend_position").get_converted_value())
+		
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self):
