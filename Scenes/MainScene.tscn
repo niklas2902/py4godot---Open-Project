@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Camera.py" type="Script" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/rock.tscn" type="PackedScene" id=3]
-[ext_resource path="res://main_char.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/MainChar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 

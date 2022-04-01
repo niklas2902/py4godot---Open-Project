@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="OpenProject"
-run/main_scene="res://main_char.tscn"
+run/main_scene="res://Prefabs/MainChar.tscn"
 config/icon="res://icon.png"
 
 [gdnative]

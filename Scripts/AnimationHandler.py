@@ -14,6 +14,8 @@ class MotionHandler(Spatial):
 	def _ready(self):
 		if(self.turn == None):
 			self.turn = 0
+		if(self. vel == None):
+			self.vel = 0
 			
 		node = self.get_node(self._node)
 		self.animation_tree = AnimationTree.cast(node)
