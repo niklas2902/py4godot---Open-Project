@@ -1,7 +1,11 @@
 
-from py4godot import *
+from py4godot.enums.enums import *
+from py4godot.core import *
+from py4godot.classes.generated import *
+from py4godot.pluginscript_api.utils.annotations import *
 import math
 
+DEFAULT_MAX_DIST = 10
 @gdclass
 class CharHandler(KinematicBody):
 
@@ -18,12 +22,15 @@ class CharHandler(KinematicBody):
 	def node(self, value):
 		self._node = value
 	
+	@gdproperty(int, DEFAULT_MAX_DIST)
+	def max_dist(self):
+		return self._max_dist
+	@max_dist.setter
+	def max_dist(self, value):
+		self._max_dist= value
+	
 	@gdmethod
 	def _ready(self):
-		self.left_pressed = False
-		self.right_pressed = False
-		self.up_pressed = False
-		self.down_pressed = False
 		self.save_rotation = 0
 		
 		node = self.get_node(self._node)
@@ -39,33 +46,34 @@ class CharHandler(KinematicBody):
 		self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0), math.pi * -self.rotation_angle))
 		
 		self.input = Input.instance()
+		
+		if(self._max_dist == None):
+			self._max_dist = DEFAULT_MAX_DIST
 	
 	@gdmethod
 	def _physics_process(self, delta):
-		self.apply_root_motion(delta)
+		mouse_angle = self.mouse_angle()
+		self.apply_root_motion(delta, mouse_angle)
 		self.set_key_pressed()
 		
-		is_moving = False
-		horizontal_val = self.move_horizontal_val()
-		is_moving = is_moving or horizontal_val
-		if horizontal_val == -1:
-			horizontal_val = 0.5
-		elif horizontal_val == 1:
-			horizontal_val = -0.5
 		
-		vertical_val = self.move_vertical_val()
-		is_moving = is_moving or vertical_val
-		if vertical_val == -1:
-			vertical_val = 0
-		elif vertical_val == 1:
-			vertical_val = 1
+		self.animation_tree.set("parameters/Movement/blend_position", Variant(Vector2(int(mouse_angle != None),0)))
+		if(mouse_angle != None):
+			self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
 		
-		self.animation_tree.set("parameters/Movement/blend_position", Variant(Vector2(int(is_moving),0)))
-		if(is_moving):
-			self.save_rotation = math.pi * (horizontal_val + vertical_val)
-		self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),self.save_rotation))	
-		
-	def apply_root_motion(self, delta):
+	def mouse_angle(self):
+		"""Getting the angle of the mouse to be able to move to a position"""
+		if self.input.is_action_pressed("mouse_action"):
+			mouse_pos = self.get_viewport().get_mouse_position()
+			object_pos = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
+			if (mouse_pos - object_pos).length() <= self.max_dist:
+				return
+				
+			return math.atan2(object_pos.get_x() - mouse_pos.get_x(),
+			object_pos.get_y() - mouse_pos.get_y())
+		return
+	
+	def apply_root_motion(self, delta, angle):
 		# Taken from: https://github.com/godotengine/tps-demo/blob/master/player/player.gd
 		# and https://www.youtube.com/watch?v=2AUMMmTNijg&list=LL&index=1
 		
@@ -83,27 +91,6 @@ class CharHandler(KinematicBody):
 		trans = Transform(self.orientation.get_basis(), self.global_transform.get_origin())
 		self.global_transform = trans
 	
-	def move_vertical_val(self):
-		val = 0
-		if self.up_pressed and self.down_pressed:
-			val = 0
-		elif not self.up_pressed and self.down_pressed:
-			val = 1
-		elif self.up_pressed and not self.down_pressed:
-			val = -1
-		
-		return val
-	
-	def move_horizontal_val(self):
-		val = 0
-		if self.left_pressed and self.right_pressed:
-			val = 0
-		elif not self.left_pressed and self.right_pressed:
-			val = 1
-		elif self.left_pressed and not self.right_pressed:
-			val = -1
-		
-		return val
 	def set_key_pressed(self):
 		"""Function for setting pressed keys"""
 		self.left_pressed = self.input.is_key_pressed(GlobalConstants.KEY_A)

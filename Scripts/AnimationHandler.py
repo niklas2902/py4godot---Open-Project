@@ -1,5 +1,7 @@
-
-from py4godot import *
+from py4godot.enums.enums import *
+from py4godot.core import *
+from py4godot.classes.generated import *
+from py4godot.pluginscript_api.utils.annotations import *
 
 @gdclass
 class MotionHandler(Spatial):
@@ -12,6 +14,7 @@ class MotionHandler(Spatial):
 		self._node = None
 	@gdmethod
 	def _ready(self):
+		print("####################ready####################")
 		if(self.turn == None):
 			self.turn = 0
 		if(self. vel == None):
@@ -24,7 +27,8 @@ class MotionHandler(Spatial):
 		print("get_value",self.animation_tree.get("parameters/Movement/blend_position").get_converted_value())
 		
 	
-	@gdproperty(NodePath, NodePath())
+	@gdproperty(NodePath, NodePath(), 
+	hint=PropertyHint.GODOT_PROPERTY_HINT_TYPE_STRING.value, hint_string = "AnimationTree")
 	def node(self):
 		return self._node
 	@node.setter
