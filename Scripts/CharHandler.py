@@ -6,6 +6,7 @@ from py4godot.pluginscript_api.utils.annotations import *
 import math
 
 DEFAULT_MAX_DIST = 10
+DEFAULT_SPRINT_DIST = 200
 @gdclass
 class CharHandler(KinematicBody):
 
@@ -22,12 +23,19 @@ class CharHandler(KinematicBody):
 	def node(self, value):
 		self._node = value
 	
-	@gdproperty(int, DEFAULT_MAX_DIST)
+	@gdproperty(float, DEFAULT_MAX_DIST)
 	def max_dist(self):
 		return self._max_dist
 	@max_dist.setter
 	def max_dist(self, value):
 		self._max_dist= value
+	
+	@gdproperty(float, DEFAULT_SPRINT_DIST)
+	def sprint_dist(self):
+		return self._sprint_dist
+	@sprint_dist.setter
+	def sprint_dist(self, value):
+		self._sprint_dist= value
 	
 	@gdmethod
 	def _ready(self):
@@ -49,6 +57,8 @@ class CharHandler(KinematicBody):
 		
 		if(self._max_dist == None):
 			self._max_dist = DEFAULT_MAX_DIST
+		if self._sprint_dist == None:
+			self._sprint_dist = DEFAULT_SPRINT_DIST
 	
 	@gdmethod
 	def _physics_process(self, delta):
@@ -56,8 +66,8 @@ class CharHandler(KinematicBody):
 		self.apply_root_motion(delta, mouse_angle)
 		self.set_key_pressed()
 		
-		
-		self.animation_tree.set("parameters/Movement/blend_position", Variant(Vector2(int(mouse_angle != None),0)))
+		#print("speed:", self.get_speed())
+		self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
 		if(mouse_angle != None):
 			self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
 		
@@ -72,6 +82,15 @@ class CharHandler(KinematicBody):
 			return math.atan2(object_pos.get_x() - mouse_pos.get_x(),
 			object_pos.get_y() - mouse_pos.get_y())
 		return
+		
+	def get_speed(self):
+		"""Getting the angle of the mouse to be able to move to a position"""
+		if self.input.is_action_pressed("mouse_action"):
+			mouse_pos = self.get_viewport().get_mouse_position()
+			object_pos = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
+				
+			return (mouse_pos - object_pos).length() / self.sprint_dist
+		return 0
 	
 	def apply_root_motion(self, delta, angle):
 		# Taken from: https://github.com/godotengine/tps-demo/blob/master/player/player.gd
