@@ -7,6 +7,7 @@ import math
 
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
+DEFAULT_MIN_SPRINT_VEL = 0.1
 @gdclass
 class CharHandler(KinematicBody):
 
@@ -37,6 +38,13 @@ class CharHandler(KinematicBody):
 	def sprint_dist(self, value):
 		self._sprint_dist= value
 	
+	@gdproperty(float, DEFAULT_MIN_SPRINT_VEL)
+	def min_sprint_vel(self):
+		return self._min_sprint_vel
+	@min_sprint_vel.setter
+	def min_sprint_vel(self, value):
+		self._min_sprint_vel= value
+	
 	@gdmethod
 	def _ready(self):
 		self.save_rotation = 0
@@ -55,10 +63,13 @@ class CharHandler(KinematicBody):
 		
 		self.input = Input.instance()
 		
+		#Setting the min velocity
 		if(self._max_dist == None):
 			self._max_dist = DEFAULT_MAX_DIST
 		if self._sprint_dist == None:
 			self._sprint_dist = DEFAULT_SPRINT_DIST
+		if self._min_sprint_vel == None:
+			self._min_sprint_vel = DEFAULT_MIN_SPRINT_VEL
 	
 	@gdmethod
 	def _physics_process(self, delta):
@@ -84,12 +95,15 @@ class CharHandler(KinematicBody):
 		return
 		
 	def get_speed(self):
-		"""Getting the angle of the mouse to be able to move to a position"""
+		"""Getting the speed of the player depending on the current mouse position relative to the player"""
 		if self.input.is_action_pressed("mouse_action"):
 			mouse_pos = self.get_viewport().get_mouse_position()
 			object_pos = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
-				
-			return (mouse_pos - object_pos).length() / self.sprint_dist
+			if (mouse_pos - object_pos).length() <= self.max_dist:
+				# if player arrived at place, stop
+				print((mouse_pos - object_pos).length(), self.max_dist)
+				return 0
+			return max(self.min_sprint_vel,(mouse_pos - object_pos).length() / self.sprint_dist)
 		return 0
 	
 	def apply_root_motion(self, delta, angle):
