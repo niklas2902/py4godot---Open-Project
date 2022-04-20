@@ -8,6 +8,7 @@ import math
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
 DEFAULT_MIN_SPRINT_VEL = 0.1
+DEFAULT_WEIGHT = 60
 @gdclass
 class CharHandler(KinematicBody):
 
@@ -16,6 +17,8 @@ class CharHandler(KinematicBody):
 		super().__init__()
 		self.velocity = 0
 		self.rotation_angle = 0
+		self._weight = 0
+		self.is_grounded = True
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self):
@@ -30,6 +33,13 @@ class CharHandler(KinematicBody):
 	@max_dist.setter
 	def max_dist(self, value):
 		self._max_dist= value
+	
+	@gdproperty(float, DEFAULT_WEIGHT)
+	def weight(self):
+		return self._weight
+	@weight.setter
+	def weight(self, value):
+		self._weight = value
 	
 	@gdproperty(float, DEFAULT_SPRINT_DIST)
 	def sprint_dist(self):
@@ -72,12 +82,17 @@ class CharHandler(KinematicBody):
 			self._min_sprint_vel = DEFAULT_MIN_SPRINT_VEL
 	
 	@gdmethod
+	def set_grounded(self, val):
+		self.grounded = val
+	
+	@gdmethod
 	def _physics_process(self, delta):
 		mouse_angle = self.mouse_angle()
 		self.apply_root_motion(delta, mouse_angle)
 		self.set_key_pressed()
+		self.transform.set_origin(self.transform.get_origin() - Vector3(0,1,0)*delta)
 		
-		#print("speed:", self.get_speed())
+		print(self.is_on_floor())
 		self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
 		if(mouse_angle != None):
 			self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
@@ -101,7 +116,6 @@ class CharHandler(KinematicBody):
 			object_pos = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
 			if (mouse_pos - object_pos).length() <= self.max_dist:
 				# if player arrived at place, stop
-				print((mouse_pos - object_pos).length(), self.max_dist)
 				return 0
 			return max(self.min_sprint_vel,(mouse_pos - object_pos).length() / self.sprint_dist)
 		return 0

@@ -25,6 +25,5 @@ class PlayerCam(Camera):
 		self._y_offset = -(self.player.transform.get_origin().get_axis(1) - self.transform.get_origin().get_axis(1))
 	@gdmethod
 	def _process(self, delta):
-		print(self.player.transform.get_origin())
-		self.transform.set_origin(self.player.transform.get_origin() + Vector3(0,self.y_offset,self._z_offset))
+		self.transform.set_origin(self.player.transform.get_origin() + Vector3(0,self._y_offset,self._z_offset))
 
