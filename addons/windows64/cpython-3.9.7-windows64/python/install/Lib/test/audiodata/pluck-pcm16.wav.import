@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pluck-pcm16.wav-d860f34a34292be7a4c3c73f9d1e2905.sample"
+
+[deps]
+
+source_file="res://addons/windows64/cpython-3.9.7-windows64/python/install/Lib/test/audiodata/pluck-pcm16.wav"
+dest_files=[ "res://.import/pluck-pcm16.wav-d860f34a34292be7a4c3c73f9d1e2905.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
