@@ -7,6 +7,7 @@ import math
 
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
+GRAVITY = 9.81
 @gdclass
 class CharHandler(KinematicBody):
 
@@ -15,6 +16,7 @@ class CharHandler(KinematicBody):
 		super().__init__()
 		self.velocity = 0
 		self.rotation_angle = 0
+		self.y_speed = 0
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self):
@@ -64,13 +66,22 @@ class CharHandler(KinematicBody):
 	def _physics_process(self, delta):
 		mouse_angle = self.mouse_angle()
 		self.apply_root_motion(delta, mouse_angle)
+		self.apply_gravity(delta)
 		self.set_key_pressed()
 		
 		#print("speed:", self.get_speed())
 		self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
 		if(mouse_angle != None):
 			self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
-		
+	
+	def apply_gravity(self, delta):
+		"""applying gravity to the player"""
+		print(self.is_on_floor())
+		if(not self.is_on_floor()):
+			self.y_speed += GRAVITY
+			self.move_and_slide(Vector3(0,self.y_speed,0)*-1*delta,Vector3(0,1,0))
+		else:
+			self.y_speed = 0
 	def mouse_angle(self):
 		"""Getting the angle of the mouse to be able to move to a position"""
 		if self.input.is_action_pressed("mouse_action"):
