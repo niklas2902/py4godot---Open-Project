@@ -15,5 +15,4 @@ from py4godot.core.dictionary.Dictionary import *
 from py4godot.core.color.Color import *
 from py4godot.core.basis.Basis import *
 from py4godot.core.array.Array import *
-from py4godot.core.pool_array.PoolArrays import *
 from py4godot.core.aabb.AABB import *

@@ -24,6 +24,14 @@ class CharHandler(KinematicBody):
 	@node.setter
 	def node(self, value):
 		self._node = value
+
+	@gdproperty(NodePath, NodePath())
+	def raycast(self):
+		return self._raycast
+	@node.setter
+	def raycast(self, value):
+		self._raycast = value
+
 	
 	@gdproperty(float, DEFAULT_MAX_DIST)
 	def max_dist(self):
@@ -45,6 +53,7 @@ class CharHandler(KinematicBody):
 		
 		node = self.get_node(self._node)
 		self.animation_tree = AnimationTree.cast(node)
+		
 		
 		#Taken from: https://github.com/godotengine/tps-demo/blob/master/player/player.gd
 		self.orientation = self.transform
@@ -74,9 +83,15 @@ class CharHandler(KinematicBody):
 		if(mouse_angle != None):
 			self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
 	
+	@gdmethod
+	def entered_ramp(self):
+		print("entered_ramp")
+	
+	def exited_ramp(self):
+		print("exited_ramp")
+	
 	def apply_gravity(self, delta):
 		"""applying gravity to the player"""
-		print(self.is_on_floor())
 		if(not self.is_on_floor()):
 			self.y_speed += GRAVITY
 			self.move_and_slide(Vector3(0,self.y_speed,0)*-1*delta,Vector3(0,1,0))

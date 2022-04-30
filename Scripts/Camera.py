@@ -27,3 +27,5 @@ class PlayerCam(Camera):
 	def _process(self, delta):
 		self.transform.set_origin(self.player.transform.get_origin() + Vector3(0,self._y_offset,self._z_offset))
 
+
+
