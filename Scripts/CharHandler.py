@@ -17,6 +17,7 @@ class CharHandler(KinematicBody):
 		self.velocity = 0
 		self.rotation_angle = 0
 		self.y_speed = 0
+		self.is_on_ramp=False
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self):
@@ -86,13 +87,15 @@ class CharHandler(KinematicBody):
 	@gdmethod
 	def entered_ramp(self):
 		print("entered_ramp")
+		self.is_on_ramp=True
 	
 	def exited_ramp(self):
 		print("exited_ramp")
+		self.is_on_ramp=False
 	
 	def apply_gravity(self, delta):
 		"""applying gravity to the player"""
-		if(not self.is_on_floor()):
+		if(not self.is_on_floor()) and not self.is_on_ramp:
 			self.y_speed += GRAVITY
 			self.move_and_slide(Vector3(0,self.y_speed,0)*-1*delta,Vector3(0,1,0))
 		else:
