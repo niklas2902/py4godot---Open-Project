@@ -1965,6 +1965,7 @@ nodes/output/position = Vector2( 480, 160 )
 node_connections = [ "output", 0, "Movement" ]
 
 [sub_resource type="SphereShape" id=39]
+radius = 0.55106
 
 [sub_resource type="ConvexPolygonShape" id=37]
 margin = 0.056
@@ -2322,7 +2323,7 @@ bones/65/enabled = true
 bones/65/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.999952, 0.00542216, 0.00821059, 0.00288494, 0.959348, -0.282213, -0.00940765, -0.282175, -0.959316, -2.23028, 122.339, 0.351603 )
+transform = Transform( -0.998556, 0.0127022, 0.0522064, -0.00195222, 0.962433, -0.271511, -0.0536946, -0.27122, -0.961018, -2.86808, 122.311, 1.07806 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hair" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment"]
@@ -2331,7 +2332,7 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.999952, 0.00542216, 0.00821059, 0.00288494, 0.959348, -0.282213, -0.00940765, -0.282175, -0.959316, -2.23028, 122.339, 0.351603 )
+transform = Transform( -0.998556, 0.0127022, 0.0522064, -0.00195222, 0.962433, -0.271511, -0.0536946, -0.27122, -0.961018, -2.86808, 122.311, 1.07806 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hat1" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment2"]
@@ -2340,7 +2341,7 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.999952, 0.00542216, 0.00821059, 0.00288494, 0.959348, -0.282213, -0.00940765, -0.282175, -0.959316, -2.23028, 122.339, 0.351603 )
+transform = Transform( -0.998556, 0.0127022, 0.0522064, -0.00195222, 0.962433, -0.271511, -0.0536946, -0.27122, -0.961018, -2.86808, 122.311, 1.07806 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hat2" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment3"]
@@ -2349,7 +2350,7 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.999952, 0.00542216, 0.00821059, 0.00288494, 0.959348, -0.282213, -0.00940765, -0.282175, -0.959316, -2.23028, 122.339, 0.351603 )
+transform = Transform( -0.998556, 0.0127022, 0.0522064, -0.00195222, 0.962433, -0.271511, -0.0536946, -0.27122, -0.961018, -2.86808, 122.311, 1.07806 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Plane" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment4"]
@@ -2358,7 +2359,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="BoneAttachment5" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998511, 0.0333192, 0.04321, 0.0329418, 0.999413, -0.00941642, -0.0434984, -0.00797912, -0.999021, -3.67308, 87.1179, 1.09555 )
+transform = Transform( -0.996613, 0.0261515, 0.0779721, 0.0261121, 0.999658, -0.00152274, -0.0779852, 0.000518266, -0.996954, -4.16097, 87.0813, 1.45959 )
 bone_name = "mixamorig_Spine1"
 
 [node name="Backpack" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment5"]
@@ -2367,7 +2368,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="BoneAttachment6" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998511, 0.0333192, 0.04321, 0.0329418, 0.999413, -0.00941642, -0.0434984, -0.00797912, -0.999021, -3.67308, 87.1179, 1.09555 )
+transform = Transform( -0.996613, 0.0261515, 0.0779721, 0.0261121, 0.999658, -0.00152274, -0.0779852, 0.000518266, -0.996954, -4.16097, 87.0813, 1.45959 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment6"]
@@ -2376,7 +2377,7 @@ mesh = SubResource( 6 )
 material/0 = null
 
 [node name="BoneAttachment7" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998511, 0.0333192, 0.04321, 0.0329418, 0.999413, -0.00941642, -0.0434984, -0.00797912, -0.999021, -3.67308, 87.1179, 1.09555 )
+transform = Transform( -0.996613, 0.0261515, 0.0779721, 0.0261121, 0.999658, -0.00152274, -0.0779852, 0.000518266, -0.996954, -4.16097, 87.0813, 1.45959 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton2" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment7"]
@@ -2385,7 +2386,7 @@ mesh = SubResource( 7 )
 material/0 = null
 
 [node name="BoneAttachment8" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998511, 0.0333192, 0.04321, 0.0329418, 0.999413, -0.00941642, -0.0434984, -0.00797912, -0.999021, -3.67308, 87.1179, 1.09555 )
+transform = Transform( -0.996613, 0.0261515, 0.0779721, 0.0261121, 0.999658, -0.00152274, -0.0779852, 0.000518266, -0.996954, -4.16097, 87.0813, 1.45959 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton3" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment8"]
@@ -2471,13 +2472,15 @@ active = true
 root_motion_track = NodePath("Armature/Skeleton:Bone")
 parameters/Movement/blend_position = 0
 
-[node name="Area" type="Area" parent="main_char"]
+[node name="OnRampCheck" type="Area" parent="main_char"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.439654 )
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 14 )
 playerPath = NodePath("..")
 
-[node name="CollisionShape" type="CollisionShape" parent="main_char/Area"]
+[node name="CollisionShape" type="CollisionShape" parent="main_char/OnRampCheck"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.140183, 0 )
 shape = SubResource( 39 )
 
 [node name="Ramp" type="StaticBody" parent="."]
@@ -2502,7 +2505,7 @@ mesh = SubResource( 30 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.358482, 0 )
 shape = SubResource( 38 )
 
-[connection signal="area_entered" from="main_char/Area" to="main_char/Area" method="_on_Area_area_entered"]
-[connection signal="body_entered" from="main_char/Area" to="main_char/Area" method="_on_Area_body_entered"]
-[connection signal="body_exited" from="main_char/Area" to="main_char/Area" method="_on_Area_body_exited"]
-[connection signal="ready" from="main_char/Area" to="main_char/Area" method="_on_Area_ready"]
+[connection signal="area_entered" from="main_char/OnRampCheck" to="main_char/OnRampCheck" method="_on_Area_area_entered"]
+[connection signal="body_entered" from="main_char/OnRampCheck" to="main_char/OnRampCheck" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="main_char/OnRampCheck" to="main_char/OnRampCheck" method="_on_Area_body_exited"]
+[connection signal="ready" from="main_char/OnRampCheck" to="main_char/OnRampCheck" method="_on_Area_ready"]
