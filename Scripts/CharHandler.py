@@ -18,6 +18,7 @@ class CharHandler(KinematicBody):
 		self.rotation_angle = 0
 		self.y_speed = 0
 		self.is_on_ramp=False
+		self.sound = 0
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self):
@@ -73,6 +74,10 @@ class CharHandler(KinematicBody):
 			self._sprint_dist = DEFAULT_SPRINT_DIST
 	
 	@gdmethod
+	def _process(self, delta):
+		self.emit_sound()
+	
+	@gdmethod
 	def _physics_process(self, delta):
 		mouse_angle = self.mouse_angle()
 		self.apply_root_motion(delta, mouse_angle)
@@ -80,17 +85,16 @@ class CharHandler(KinematicBody):
 		self.set_key_pressed()
 		
 		#print("speed:", self.get_speed())
+		self.sound = min(1,self.get_speed())
 		self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
 		if(mouse_angle != None):
 			self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
 	
 	@gdmethod
 	def entered_ramp(self):
-		print("entered_ramp")
 		self.is_on_ramp=True
 	
 	def exited_ramp(self):
-		print("exited_ramp")
 		self.is_on_ramp=False
 	
 	def apply_gravity(self, delta):
@@ -145,3 +149,6 @@ class CharHandler(KinematicBody):
 		self.right_pressed = self.input.is_key_pressed(GlobalConstants.KEY_D)
 		self.up_pressed = self.input.is_key_pressed(GlobalConstants.KEY_W)
 		self.down_pressed = self.input.is_key_pressed(GlobalConstants.KEY_S)
+	
+	def emit_sound(self):
+		print("sound:",self.sound)
