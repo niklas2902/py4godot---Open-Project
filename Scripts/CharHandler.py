@@ -14,7 +14,7 @@ class CharHandler(KinematicBody):
 	def __init__(self):
 		#Don't call any godot-methods here
 		super().__init__()
-		self.velocity = 0
+		self.velocity = Vector3(0,0,0)
 		self.rotation_angle = 0
 		self.y_speed = 0
 		self.is_on_ramp=False
@@ -76,6 +76,7 @@ class CharHandler(KinematicBody):
 	@gdmethod
 	def _process(self, delta):
 		self.emit_sound()
+		self.handle_ray()
 	
 	@gdmethod
 	def _physics_process(self, delta):
@@ -152,3 +153,15 @@ class CharHandler(KinematicBody):
 	
 	def emit_sound(self):
 		print("sound:",self.sound)
+		
+	
+	def handle_ray(self):
+		ray_length = 100
+		mouse_pos = self.get_viewport().get_mouse_position()
+		camera = self.get_viewport().get_camera()
+		from_ = camera.project_ray_origin(mouse_pos)
+		to = from_ - camera.project_ray_normal(mouse_pos) * ray_length
+		exclude = Array()
+		#exclude.append(self)
+		result = self.get_world().direct_space_state.intersect_ray(from_, self.global_transform.get_origin(),exclude)
+		print("result:", result.size())
