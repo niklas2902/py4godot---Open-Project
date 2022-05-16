@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [gdnative]
 
-singletons=[ "res://py4godot.gdnlib" ]
+singletons=[ "res://py4godot_lib.tres" ]
 
 [input]
 

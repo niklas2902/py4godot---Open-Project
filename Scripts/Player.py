@@ -2,6 +2,7 @@ from py4godot.enums.enums import *
 from py4godot.core import *
 from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.pluginscript_api.hints import *
 
 DEFAULT_VEL = 2
 DEFAULT_DIST = 50
@@ -19,14 +20,14 @@ class Player(KinematicBody):
 		self.save_horizontal_move = 0
 		self._max_dist = 2
 
-	@gdproperty(int, DEFAULT_VEL, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,10,1,slider")
+	@gdproperty(int, DEFAULT_VEL,hint = RangeHint(1,10))
 	def vel(self):
 		return self.velocity
 	@vel.setter
 	def vel(self, value):
 		self.velocity = value
 	
-	@gdproperty(int, DEFAULT_DIST, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,10,1,slider")
+	@gdproperty(int, DEFAULT_DIST, hint=RangeHint(1,10))
 	def max_dist(self):
 		return self._max_dist
 	@max_dist.setter

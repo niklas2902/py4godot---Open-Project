@@ -1,0 +1,8 @@
+[gd_resource type="GDNativeLibrary" format=2]
+
+[resource]
+load_once = false
+singleton = true
+reloadable = false
+entry/Windows.64 = "res://addons/windows64/cpython-3.9.7-windows64/python/install/main.pyd"
+dependency/Windows.64 = [  ]
