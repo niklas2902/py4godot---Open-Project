@@ -1,3 +1,4 @@
-[submodule "submodule/py4godot"]
-	path = submodule/py4godot
+
+[submodule "submodules/py4godot"]
+	path = submodules/py4godot
 	url = https://github.com/niklas2902/py4godot.git
