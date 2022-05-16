@@ -25,4 +25,4 @@ if __name__ == "__main__":
 
     if os.path.exists(f"addons/{args.target_platform}"):
         rmtree(f"addons/{args.target_platform}")
-    copytree(f"submodule/py4godot/build/addons/{args.target_platform}", f"addons/{args.target_platform}")
+    copytree(f"submoduless/py4godot/build/addons/{args.target_platform}", f"addons/{args.target_platform}")
