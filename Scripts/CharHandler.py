@@ -19,6 +19,7 @@ class CharHandler(KinematicBody):
 		self.y_speed = 0
 		self.is_on_ramp=False
 		self.sound = 0
+		self._push_obj_layer = 0
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self):
@@ -48,6 +49,13 @@ class CharHandler(KinematicBody):
 	@sprint_dist.setter
 	def sprint_dist(self, value):
 		self._sprint_dist= value
+	
+	@gdproperty(int, 0, hint = RangeHint(0, 2147483647))
+	def push_obj_layer(self):
+		return self._push_obj_layer
+	@push_obj_layer.setter
+	def push_obj_layer(self, value):
+		self._push_obj_layer = value
 	
 	@gdmethod
 	def _ready(self):
@@ -166,7 +174,9 @@ class CharHandler(KinematicBody):
 		exclude.append(self)
 		#TODO: check for nullptr before returning
 		print("before_raycast")
-		result = self.get_world().direct_space_state.intersect_ray(from_, self.global_transform.get_origin(),exclude, 6)
+		print("push_obj_layer:", self.push_obj_layer)
+		layer = self.push_obj_layer
+		result = self.get_world().direct_space_state.intersect_ray(from_, from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, collision_mask = layer)
 		print("collider:",result.get("collider"))
 		print("position:", result.get("position"))
 		#for i in range(0, result.size()):
