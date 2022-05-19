@@ -160,25 +160,28 @@ class CharHandler(KinematicBody):
 		self.down_pressed = self.input.is_key_pressed(GlobalConstants.KEY_S)
 	
 	def emit_sound(self):
-		print("sound:",self.sound)
+		pass
+		#print("sound:",self.sound)
 		
 	
 	def handle_ray(self):
-		print("handle ray")
-		ray_length = 100
-		mouse_pos = self.get_viewport().get_mouse_position()
-		camera = self.get_viewport().get_camera()
-		from_ = camera.project_ray_origin(mouse_pos)
-		to = from_ - camera.project_ray_normal(mouse_pos) * ray_length
-		exclude = Array()
-		exclude.append(self)
-		#TODO: check for nullptr before returning
-		print("before_raycast")
-		print("push_obj_layer:", self.push_obj_layer)
-		layer = self.push_obj_layer
-		result = self.get_world().direct_space_state.intersect_ray(from_, from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, collision_mask = layer)
-		print("collider:",result.get("collider"))
-		print("position:", result.get("position"))
-		#for i in range(0, result.size()):
-		#	print(f"result[{i}]:", result.keys()[i])
+		
+		if self.input.is_action_pressed("mouse_action"):
+			print("handle ray")
+			ray_length = 100
+			mouse_pos = self.get_viewport().get_mouse_position()
+			camera = self.get_viewport().get_camera()
+			from_ = camera.project_ray_origin(mouse_pos)
+			to = from_ - camera.project_ray_normal(mouse_pos) * ray_length
+			exclude = Array()
+			exclude.append(self)
+			#TODO: check for nullptr before returning
+			print("before_raycast")
+			print("push_obj_layer:", self.push_obj_layer)
+			layer = self.push_obj_layer
+			result = self.get_world().direct_space_state.intersect_ray(from_, from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, collision_mask = layer)
+			print("collider:",result.get("collider"))
+			print("position:", result.get("position"))
+			#for i in range(0, result.size()):
+			#	print(f"result[{i}]:", result.keys()[i])
 		
