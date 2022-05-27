@@ -4,6 +4,7 @@ from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.pluginscript_api.hints import *
 import math
+#from Scripts.Tools.Draw import draw_sphere
 
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
@@ -92,6 +93,7 @@ class CharHandler(KinematicBody):
 		self.apply_root_motion(delta, mouse_angle)
 		self.apply_gravity(delta)
 		self.set_key_pressed()
+		#draw_spehre(2)
 		
 		#print("speed:", self.get_speed())
 		self.sound = min(1,self.get_speed())
