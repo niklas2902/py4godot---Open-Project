@@ -167,7 +167,6 @@ class CharHandler(KinematicBody):
 		
 	
 	def handle_ray(self):
-		
 		if self.input.is_action_pressed("mouse_action"):
 			print("handle ray")
 			ray_length = 100
