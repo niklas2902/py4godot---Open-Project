@@ -15,7 +15,6 @@ class CharHandler(KinematicBody):
 	def __init__(self):
 		#Don't call any godot-methods here
 		super().__init__()
-		self.velocity = Vector3(0,0,0)
 		self.rotation_angle = 0
 		self.y_speed = 0
 		self.is_on_ramp=False
@@ -60,8 +59,8 @@ class CharHandler(KinematicBody):
 	
 	@gdmethod
 	def _ready(self):
+		self.input = Input.instance()
 		self.save_rotation = 0
-		
 		node = self.get_node(self._node)
 		self.animation_tree = AnimationTree.cast(node)
 		
@@ -74,8 +73,6 @@ class CharHandler(KinematicBody):
 		
 		#self.orientation.set_basis(self.orientation.get_basis().rotated(Vector3(0,1,0), math.pi*-self.rotation_angle))
 		self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0), math.pi * -self.rotation_angle))
-		
-		self.input = Input.instance()
 		
 		if(self._max_dist == None):
 			self._max_dist = DEFAULT_MAX_DIST
