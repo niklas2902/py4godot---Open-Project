@@ -4,13 +4,14 @@ from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.pluginscript_api.hints import *
 import math
-#from Scripts.Tools.Draw import draw_sphere
+from Scripts.Tools.Draw import Draw
 
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
 GRAVITY = 9.81
+SPHERE_HANDLE = "SPHERE"
 @gdclass
-class CharHandler(KinematicBody):
+class CharHandler(KinematicBody, Draw):
 
 	def __init__(self):
 		#Don't call any godot-methods here
@@ -31,10 +32,9 @@ class CharHandler(KinematicBody):
 	@gdproperty(NodePath, NodePath())
 	def raycast(self):
 		return self._raycast
-	@node.setter
+	@raycast.setter
 	def raycast(self, value):
 		self._raycast = value
-
 	
 	@gdproperty(float, DEFAULT_MAX_DIST)
 	def max_dist(self):
@@ -59,6 +59,7 @@ class CharHandler(KinematicBody):
 	
 	@gdmethod
 	def _ready(self):
+		self.immediate_geometry_init(self, SPHERE_HANDLE)
 		self.input = Input.instance()
 		self.save_rotation = 0
 		node = self.get_node(self._node)
@@ -82,15 +83,15 @@ class CharHandler(KinematicBody):
 	@gdmethod
 	def _process(self, delta):
 		self.emit_sound()
-		self.handle_ray()
+		#self.handle_ray()
 	
 	@gdmethod
 	def _physics_process(self, delta):
+		self.draw_sphere(SPHERE_HANDLE, 2, self.transform.get_origin())
 		mouse_angle = self.mouse_angle()
 		self.apply_root_motion(delta, mouse_angle)
 		self.apply_gravity(delta)
 		self.set_key_pressed()
-		#draw_spehre(2)
 		
 		#print("speed:", self.get_speed())
 		self.sound = min(1,self.get_speed())
