@@ -10,6 +10,7 @@ DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
 GRAVITY = 9.81
 SPHERE_HANDLE = "SPHERE"
+RAY_HANDLE = "RAY"
 @gdclass
 class CharHandler(KinematicBody, Draw):
 
@@ -60,6 +61,7 @@ class CharHandler(KinematicBody, Draw):
 	@gdmethod
 	def _ready(self):
 		self.immediate_geometry_init(self, SPHERE_HANDLE)
+		self.immediate_geometry_init(self, RAY_HANDLE)
 		self.input = Input.instance()
 		self.save_rotation = 0
 		node = self.get_node(self._node)
@@ -83,10 +85,10 @@ class CharHandler(KinematicBody, Draw):
 	@gdmethod
 	def _process(self, delta):
 		self.emit_sound()
-		#self.handle_ray()
 	
 	@gdmethod
 	def _physics_process(self, delta):
+		self.handle_ray()
 		self.draw_sphere(SPHERE_HANDLE, 2, self.transform.get_origin())
 		mouse_angle = self.mouse_angle()
 		self.apply_root_motion(delta, mouse_angle)
@@ -178,9 +180,8 @@ class CharHandler(KinematicBody, Draw):
 			print("before_raycast")
 			print("push_obj_layer:", self.push_obj_layer)
 			layer = self.push_obj_layer
-			result = self.get_world().direct_space_state.intersect_ray(from_, from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, collision_mask = layer)
+			result = self.get_world().direct_space_state.intersect_ray(from_, 
+			from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, collision_mask = layer)
 			print("collider:",result.get("collider"))
 			print("position:", result.get("position"))
-			#for i in range(0, result.size()):
-			#	print(f"result[{i}]:", result.keys()[i])
-		
+			self.draw_sphere(RAY_HANDLE, 0.5, result["position"])
