@@ -29,13 +29,13 @@ class CharHandler(KinematicBody, Draw):
 	@node.setter
 	def node(self, value):
 		self._node = value
-
+	
 	@gdproperty(NodePath, NodePath())
-	def raycast(self):
-		return self._raycast
-	@raycast.setter
-	def raycast(self, value):
-		self._raycast = value
+	def navigation(self):
+		return self._navigation
+	@navigation.setter
+	def navigation(self, value):
+		self._navigation = value
 	
 	@gdproperty(float, DEFAULT_MAX_DIST)
 	def max_dist(self):
@@ -67,6 +67,8 @@ class CharHandler(KinematicBody, Draw):
 		node = self.get_node(self._node)
 		self.animation_tree = AnimationTree.cast(node)
 		
+		nav = self.get_node(self._navigation)
+		self.navigation_obj = Navigation.cast(nav)
 		
 		#Taken from: https://github.com/godotengine/tps-demo/blob/master/player/player.gd
 		self.orientation = self.transform
@@ -91,7 +93,7 @@ class CharHandler(KinematicBody, Draw):
 		self.handle_ray()
 		self.draw_sphere(SPHERE_HANDLE, 2, self.transform.get_origin())
 		mouse_angle = self.mouse_angle()
-		self.apply_root_motion(delta, mouse_angle)
+		#self.apply_root_motion(delta, mouse_angle)
 		self.apply_gravity(delta)
 		self.set_key_pressed()
 		
@@ -168,7 +170,6 @@ class CharHandler(KinematicBody, Draw):
 	
 	def handle_ray(self):
 		if self.input.is_action_pressed("mouse_action"):
-			print("handle ray")
 			ray_length = 100
 			mouse_pos = self.get_viewport().get_mouse_position()
 			camera = self.get_viewport().get_camera()
@@ -176,12 +177,11 @@ class CharHandler(KinematicBody, Draw):
 			to = from_ - camera.project_ray_normal(mouse_pos) * ray_length
 			exclude = Array()
 			exclude.append(self)
-			#TODO: check for nullptr before returning
-			print("before_raycast")
-			print("push_obj_layer:", self.push_obj_layer)
 			layer = self.push_obj_layer
 			result = self.get_world().direct_space_state.intersect_ray(from_, 
 			from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, collision_mask = layer)
-			print("collider:",result.get("collider"))
-			print("position:", result.get("position"))
 			self.draw_sphere(RAY_HANDLE, 0.5, result["position"])
+			
+			res = self.navigation_obj.get_simple_path(self.get_transform().get_origin(), result["position"])
+			print("size:",res.size())
+			

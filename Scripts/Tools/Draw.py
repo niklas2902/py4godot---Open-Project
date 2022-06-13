@@ -19,7 +19,6 @@ class Draw():
 		immediate_geometry = ImmediateGeometry._new()
 		caller.get_tree().get_root().call_deferred("add_child",immediate_geometry)
 		self.immediate_geometry_dict[handle] = immediate_geometry
-		print("")
 	@gdmethod
 	def draw_cirlce(self,handle,pos, rad):
 		immediate_geometry = self.immediate_geometry_dict[handle]
@@ -39,7 +38,6 @@ class Draw():
 		immediate_geometry.end()
 
 	def draw_sphere(self,handle, rad, position):
-		print("draw_sphere")
 		immediate_geometry = self.immediate_geometry_dict[handle]
 		immediate_geometry.clear()
 		immediate_geometry.begin(1, ImageTexture._new());
