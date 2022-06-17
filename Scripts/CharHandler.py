@@ -11,6 +11,7 @@ DEFAULT_SPRINT_DIST = 200
 GRAVITY = 9.81
 SPHERE_HANDLE = "SPHERE"
 RAY_HANDLE = "RAY"
+DIST_NAVIGATION = 0.1
 @gdclass
 class CharHandler(KinematicBody, Draw):
 
@@ -60,6 +61,8 @@ class CharHandler(KinematicBody, Draw):
 	
 	@gdmethod
 	def _ready(self):
+		self.path = None
+		self.current_path_ind = 0
 		self.immediate_geometry_init(self, SPHERE_HANDLE)
 		self.immediate_geometry_init(self, RAY_HANDLE)
 		self.input = Input.instance()
@@ -92,17 +95,22 @@ class CharHandler(KinematicBody, Draw):
 	def _physics_process(self, delta):
 		self.handle_ray()
 		self.draw_sphere(SPHERE_HANDLE, 2, self.transform.get_origin())
-		mouse_angle = self.mouse_angle()
-		#self.apply_root_motion(delta, mouse_angle)
+				
+		mouse_angle = self.follow_path(delta)
 		self.apply_gravity(delta)
-		self.set_key_pressed()
+		self.animation_tree.set("parameters/Movement/blend_position", Variant(1))
+		if(self.path == None):
+			mouse_angle = self.mouse_angle()
+			self.set_key_pressed()
+			self.apply_root_motion(delta, mouse_angle)
+			self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
 		
+		if(mouse_angle != None):
+				self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
+			
 		#print("speed:", self.get_speed())
 		self.sound = min(1,self.get_speed())
-		self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
-		if(mouse_angle != None):
-			self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
-	
+		
 	@gdmethod
 	def entered_ramp(self):
 		self.is_on_ramp=True
@@ -167,8 +175,32 @@ class CharHandler(KinematicBody, Draw):
 		pass
 		#print("sound:",self.sound)
 		
-	
+	def follow_path(self, delta):
+		if self.path == None:
+			return
+		
+		if self.current_path_ind >= self.path.size():
+			self.path = None
+			self.current_path_ind = 0
+			return
+		pos = self.transform.get_origin()
+		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
+		dist_vector.y = 0
+		dist = dist_vector.length()
+		print("dist:", dist)
+		vel = (self.path[self.current_path_ind] - self.transform.get_origin())
+		if dist < DIST_NAVIGATION:
+			self.current_path_ind += 1
+		print("vel:",vel)
+		vel_z = vel.z
+		if vel.z == 0:
+			vel_z = 0.001
+		self.apply_root_motion(delta, math.atan2(vel.x,vel_z))
+		return  math.atan2(vel.x,vel_z)
+		
 	def handle_ray(self):
+		self.path = None
+		self.current_path_ind = 0
 		if self.input.is_action_pressed("mouse_action"):
 			ray_length = 100
 			mouse_pos = self.get_viewport().get_mouse_position()
@@ -177,11 +209,14 @@ class CharHandler(KinematicBody, Draw):
 			to = from_ - camera.project_ray_normal(mouse_pos) * ray_length
 			exclude = Array()
 			exclude.append(self)
-			layer = self.push_obj_layer
+			
 			result = self.get_world().direct_space_state.intersect_ray(from_, 
-			from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, collision_mask = layer)
+			from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, 
+			collision_mask = self.push_obj_layer)
+			print("position:", result["position"])
+			
+			if result["position"] == None:
+				return None
 			self.draw_sphere(RAY_HANDLE, 0.5, result["position"])
-			
-			res = self.navigation_obj.get_simple_path(self.get_transform().get_origin(), result["position"])
-			print("size:",res.size())
-			
+			self.path = self.navigation_obj.get_simple_path(self.get_transform().get_origin(), result["position"])
+			self.current_path_ind = 1		
