@@ -12,6 +12,7 @@ GRAVITY = 9.81
 SPHERE_HANDLE = "SPHERE"
 RAY_HANDLE = "RAY"
 DIST_NAVIGATION = 0.1
+MOUSE_ACTION = "mouse_action"
 @gdclass
 class CharHandler(KinematicBody, Draw):
 
@@ -23,6 +24,7 @@ class CharHandler(KinematicBody, Draw):
 		self.is_on_ramp=False
 		self.sound = 0
 		self._push_obj_layer = 0
+		self._clicked_before = False
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self):
@@ -127,19 +129,22 @@ class CharHandler(KinematicBody, Draw):
 			self.y_speed = 0
 	def mouse_angle(self):
 		"""Getting the angle of the mouse to be able to move to a position"""
-		if self.input.is_action_pressed("mouse_action"):
+		if(self.input.is_action_just_released(MOUSE_ACTION)):
+			self._clicked_before = False
+			
+		if self.input.is_action_pressed(MOUSE_ACTION):
 			mouse_pos = self.get_viewport().get_mouse_position()
 			object_pos = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
 			if (mouse_pos - object_pos).length() <= self.max_dist:
 				return
-				
+			self._clicked_before = True
 			return math.atan2(object_pos.get_x() - mouse_pos.get_x(),
 			object_pos.get_y() - mouse_pos.get_y())
 		return
 		
 	def get_speed(self):
 		"""Getting the angle of the mouse to be able to move to a position"""
-		if self.input.is_action_pressed("mouse_action"):
+		if self.input.is_action_pressed(MOUSE_ACTION):
 			mouse_pos = self.get_viewport().get_mouse_position()
 			object_pos = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
 				
@@ -199,9 +204,13 @@ class CharHandler(KinematicBody, Draw):
 		return  math.atan2(vel.x,vel_z)
 		
 	def handle_ray(self):
-		self.path = None
-		self.current_path_ind = 0
-		if self.input.is_action_pressed("mouse_action"):
+		"""handling the player clicking on a PushObj here"""
+		if self.input.is_action_pressed(MOUSE_ACTION):
+			if(self._clicked_before):
+				return
+			
+			self.path = None
+			self.current_path_ind = 0
 			ray_length = 100
 			mouse_pos = self.get_viewport().get_mouse_position()
 			camera = self.get_viewport().get_camera()
