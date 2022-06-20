@@ -8,7 +8,7 @@ from Scripts.Tools.Draw import Draw
 
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
-GRAVITY = 9.81
+GRAVITY = 20
 SPHERE_HANDLE = "SPHERE"
 RAY_HANDLE = "RAY"
 DIST_NAVIGATION = 0.1
@@ -192,11 +192,9 @@ class CharHandler(KinematicBody, Draw):
 		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
 		dist_vector.y = 0
 		dist = dist_vector.length()
-		print("dist:", dist)
 		vel = (self.path[self.current_path_ind] - self.transform.get_origin())
 		if dist < DIST_NAVIGATION:
 			self.current_path_ind += 1
-		print("vel:",vel)
 		vel_z = vel.z
 		if vel.z == 0:
 			vel_z = 0.001
@@ -222,10 +220,35 @@ class CharHandler(KinematicBody, Draw):
 			result = self.get_world().direct_space_state.intersect_ray(from_, 
 			from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, 
 			collision_mask = self.push_obj_layer)
-			print("position:", result["position"])
 			
 			if result["position"] == None:
 				return None
-			self.draw_sphere(RAY_HANDLE, 0.5, result["position"])
-			self.path = self.navigation_obj.get_simple_path(self.get_transform().get_origin(), result["position"])
+			
+			point_to_move_to = Spatial.cast(self.get_min_point(result["position"],
+			Node.cast(Node.cast(result["collider"]).get_node(NodePath("Triggers"))).get_children(), result["collider"]))
+			print("point_to_move_to:", Spatial.cast(point_to_move_to).global_transform.get_origin())
+			self.draw_sphere(RAY_HANDLE, 0.5, Spatial.cast(point_to_move_to).global_transform.get_origin())
+			self.path = self.navigation_obj.get_simple_path(self.global_transform.get_origin(),
+			 point_to_move_to.global_transform.get_origin())
 			self.current_path_ind = 1		
+	
+	def get_min_point(self, collider, points, alt_object):
+		if(points.size() == 0):
+			return alt_object
+		return_val = points[0]
+		min_dist = abs((collider - Spatial.cast(points[0]).global_transform.get_origin()).length())
+		
+		print("1:", Spatial.cast(points[0]).global_transform.get_origin())
+		print( "2:",Spatial.cast(points.get(1)).global_transform.get_origin())
+		print( "3:",Spatial.cast(points.get(2)).global_transform.get_origin())
+		print( "4:",Spatial.cast(points.get(3)).global_transform.get_origin())
+		print("#####################")
+		for point_index in range(1, points.size()):
+			point = points[point_index]
+			length = abs((collider - Spatial.cast(point).global_transform.get_origin()).length())
+			print(f"{point_index} : {length}")
+			if(min_dist > length):
+				return_val = point
+				min_dist = length
+				print("min_val:", point_index)
+		return return_val

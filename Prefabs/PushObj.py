@@ -7,14 +7,22 @@ from py4godot.pluginscript_api.hints import *
 @gdclass
 class PushObj(StaticBody):
 
+	@gdproperty(NodePath, NodePath())
+	def trigger(self):
+		return self._trigger
+	@trigger.setter
+	def trigger(self, value):
+		self._trigger = value
 	def __init__(self):
 		#Don't call any godot-methods here
 		super().__init__()
 	@gdmethod
 	def _ready(self):
-		print("_init")
-
+		if self._trigger:
+			trigger = self.get_node(self._trigger)
+			self.trigger_obj = Node.cast(trigger)
+	
 	@gdmethod
-	def _process(self, delta):
-		print(delta)
+	def get_triggers(self):
+		return self.trigger_obj.get_children()
 
