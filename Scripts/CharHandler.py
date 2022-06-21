@@ -62,6 +62,10 @@ class CharHandler(KinematicBody, Draw):
 		self._push_obj_layer = value
 	
 	@gdmethod
+	def test_call(self):
+		return Array()
+	
+	@gdmethod
 	def _ready(self):
 		self.path = None
 		self.current_path_ind = 0

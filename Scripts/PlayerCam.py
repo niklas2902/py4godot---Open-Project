@@ -22,6 +22,7 @@ class PlayerCam(Camera):
 	@gdmethod
 	def _ready(self):
 		self.player = KinematicBody.cast(self.get_node(self.player_path))
+		print(self.player.call("test_call").get_converted_value())
 		self._z_offset = -(self.player.transform.get_origin().get_axis(2) - self.transform.get_origin().get_axis(2))
 		self._y_offset = -(self.player.transform.get_origin().get_axis(1) - self.transform.get_origin().get_axis(1))
 	@gdmethod
