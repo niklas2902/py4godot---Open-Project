@@ -67,6 +67,8 @@ class CharHandler(KinematicBody, Draw):
 	
 	@gdmethod
 	def _ready(self):
+		print("class:",self.get_class())
+		
 		self.path = None
 		self.current_path_ind = 0
 		self.immediate_geometry_init(self, SPHERE_HANDLE)
@@ -228,8 +230,9 @@ class CharHandler(KinematicBody, Draw):
 			if result["position"] == None:
 				return None
 			
-			point_to_move_to = Spatial.cast(self.get_min_point(result["position"],
-			Node.cast(Node.cast(result["collider"]).get_node(NodePath("Triggers"))).get_children(), result["collider"]))
+			print(result["collider"])
+			point_to_move_to = self.get_min_point(result["position"],
+			Node.cast(result["collider"].get_node(NodePath("Triggers"))).get_children(), result["collider"])
 			print("point_to_move_to:", Spatial.cast(point_to_move_to).global_transform.get_origin())
 			self.draw_sphere(RAY_HANDLE, 0.5, Spatial.cast(point_to_move_to).global_transform.get_origin())
 			self.path = self.navigation_obj.get_simple_path(self.global_transform.get_origin(),
@@ -242,14 +245,14 @@ class CharHandler(KinematicBody, Draw):
 		return_val = points[0]
 		min_dist = abs((collider - Spatial.cast(points[0]).global_transform.get_origin()).length())
 		
-		print("1:", Spatial.cast(points[0]).global_transform.get_origin())
-		print( "2:",Spatial.cast(points.get(1)).global_transform.get_origin())
-		print( "3:",Spatial.cast(points.get(2)).global_transform.get_origin())
-		print( "4:",Spatial.cast(points.get(3)).global_transform.get_origin())
+		print("1:", points[0].global_transform.get_origin())
+		print( "2:",points.get(1).global_transform.get_origin())
+		print( "3:",points.get(2).global_transform.get_origin())
+		print( "4:",points.get(3).global_transform.get_origin())
 		print("#####################")
 		for point_index in range(1, points.size()):
 			point = points[point_index]
-			length = abs((collider - Spatial.cast(point).global_transform.get_origin()).length())
+			length = abs((collider - point.global_transform.get_origin()).length())
 			print(f"{point_index} : {length}")
 			if(min_dist > length):
 				return_val = point
