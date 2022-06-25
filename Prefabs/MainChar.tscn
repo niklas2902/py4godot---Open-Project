@@ -2347,7 +2347,7 @@ bones/65/enabled = true
 bones/65/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.99889, 0.0129059, 0.0453098, -0.000291972, 0.960031, -0.279894, -0.0471117, -0.279596, -0.95896, -2.69898, 122.316, 0.765863 )
+transform = Transform( -0.999326, 0.00626836, 0.0361794, -0.00313555, 0.967151, -0.254182, -0.0365849, -0.254123, -0.966479, -2.58557, 122.328, 0.958132 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hair" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment"]
@@ -2356,7 +2356,7 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.99889, 0.0129059, 0.0453098, -0.000291972, 0.960031, -0.279894, -0.0471117, -0.279596, -0.95896, -2.69898, 122.316, 0.765863 )
+transform = Transform( -0.999326, 0.00626836, 0.0361794, -0.00313555, 0.967151, -0.254182, -0.0365849, -0.254123, -0.966479, -2.58557, 122.328, 0.958132 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hat1" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment2"]
@@ -2365,7 +2365,7 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.99889, 0.0129059, 0.0453098, -0.000291972, 0.960031, -0.279894, -0.0471117, -0.279596, -0.95896, -2.69898, 122.316, 0.765863 )
+transform = Transform( -0.999326, 0.00626836, 0.0361794, -0.00313555, 0.967151, -0.254182, -0.0365849, -0.254123, -0.966479, -2.58557, 122.328, 0.958132 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hat2" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment3"]
@@ -2374,7 +2374,7 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.99889, 0.0129059, 0.0453098, -0.000291972, 0.960031, -0.279894, -0.0471117, -0.279596, -0.95896, -2.69898, 122.316, 0.765863 )
+transform = Transform( -0.999326, 0.00626836, 0.0361794, -0.00313555, 0.967151, -0.254182, -0.0365849, -0.254123, -0.966479, -2.58557, 122.328, 0.958132 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Plane" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment4"]
@@ -2383,7 +2383,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="BoneAttachment5" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.996627, 0.0283319, 0.077026, 0.0280536, 0.999596, -0.0046915, -0.0771277, -0.00251498, -0.997018, -4.05848, 87.09, 1.33459 )
+transform = Transform( -0.997756, 0.030497, 0.0596115, 0.0305842, 0.999532, 0.000552788, -0.0595667, 0.00237454, -0.998221, -3.90201, 87.0996, 1.02968 )
 bone_name = "mixamorig_Spine1"
 
 [node name="Backpack" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment5"]
@@ -2392,7 +2392,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="BoneAttachment6" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.996627, 0.0283319, 0.077026, 0.0280536, 0.999596, -0.0046915, -0.0771277, -0.00251498, -0.997018, -4.05848, 87.09, 1.33459 )
+transform = Transform( -0.997756, 0.030497, 0.0596115, 0.0305842, 0.999532, 0.000552788, -0.0595667, 0.00237454, -0.998221, -3.90201, 87.0996, 1.02968 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment6"]
@@ -2401,7 +2401,7 @@ mesh = SubResource( 6 )
 material/0 = null
 
 [node name="BoneAttachment7" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.996627, 0.0283319, 0.077026, 0.0280536, 0.999596, -0.0046915, -0.0771277, -0.00251498, -0.997018, -4.05848, 87.09, 1.33459 )
+transform = Transform( -0.997756, 0.030497, 0.0596115, 0.0305842, 0.999532, 0.000552788, -0.0595667, 0.00237454, -0.998221, -3.90201, 87.0996, 1.02968 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton2" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment7"]
@@ -2410,7 +2410,7 @@ mesh = SubResource( 7 )
 material/0 = null
 
 [node name="BoneAttachment8" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.996627, 0.0283319, 0.077026, 0.0280536, 0.999596, -0.0046915, -0.0771277, -0.00251498, -0.997018, -4.05848, 87.09, 1.33459 )
+transform = Transform( -0.997756, 0.030497, 0.0596115, 0.0305842, 0.999532, 0.000552788, -0.0595667, 0.00237454, -0.998221, -3.90201, 87.0996, 1.02968 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton3" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment8"]

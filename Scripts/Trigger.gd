@@ -23,7 +23,6 @@ func _on_Area_area_entered(area):
 
 
 func _on_Area_body_entered(body):
-	print("body_entered:", body)
 	player.entered_ramp()
 	pass # Replace with function body.
 

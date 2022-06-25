@@ -209,7 +209,7 @@ class CharHandler(KinematicBody, Draw):
 		
 	def handle_ray(self):
 		"""handling the player clicking on a PushObj here"""
-		if self.input.is_action_pressed(MOUSE_ACTION):
+		if self.input.is_action_just_pressed(MOUSE_ACTION):
 			if(self._clicked_before):
 				return
 			
@@ -230,11 +230,11 @@ class CharHandler(KinematicBody, Draw):
 			if result["position"] == None:
 				return None
 			
-			print(result["collider"])
+			print("Collider:",result["collider"])
 			point_to_move_to = self.get_min_point(result["position"],
-			Node.cast(result["collider"].get_node(NodePath("Triggers"))).get_children(), result["collider"])
-			print("point_to_move_to:", Spatial.cast(point_to_move_to).global_transform.get_origin())
-			self.draw_sphere(RAY_HANDLE, 0.5, Spatial.cast(point_to_move_to).global_transform.get_origin())
+			result["collider"].get_node(NodePath("Triggers")).get_children(), result["collider"])
+
+			self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to.global_transform.get_origin())
 			self.path = self.navigation_obj.get_simple_path(self.global_transform.get_origin(),
 			 point_to_move_to.global_transform.get_origin())
 			self.current_path_ind = 1		
@@ -243,19 +243,12 @@ class CharHandler(KinematicBody, Draw):
 		if(points.size() == 0):
 			return alt_object
 		return_val = points[0]
-		min_dist = abs((collider - Spatial.cast(points[0]).global_transform.get_origin()).length())
+		min_dist = abs((collider - points[0].global_transform.get_origin()).length())
 		
-		print("1:", points[0].global_transform.get_origin())
-		print( "2:",points.get(1).global_transform.get_origin())
-		print( "3:",points.get(2).global_transform.get_origin())
-		print( "4:",points.get(3).global_transform.get_origin())
-		print("#####################")
 		for point_index in range(1, points.size()):
 			point = points[point_index]
 			length = abs((collider - point.global_transform.get_origin()).length())
-			print(f"{point_index} : {length}")
 			if(min_dist > length):
 				return_val = point
 				min_dist = length
-				print("min_val:", point_index)
 		return return_val
