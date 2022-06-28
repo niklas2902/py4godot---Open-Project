@@ -10,9 +10,9 @@ class MotionHandler(Spatial):
 	def __init__(self):
 		#Don't call any godot-methods here
 		super().__init__()
-		self.velocity = 0
-		self._turn = 0
-		self._node = None
+		self.velocity:float = 0
+		self._turn:float = 0
+		self._node:Node = None
 	@gdmethod
 	def _ready(self):
 		print("####################ready####################")

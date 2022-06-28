@@ -23,6 +23,10 @@ class PushObj(StaticBody):
 			self.trigger_obj = Node.cast(trigger)
 	
 	@gdmethod
+	def start_pushing(self):
+		print("start pushing")
+	
+	@gdmethod
 	def get_triggers(self):
 		return self.trigger_obj.get_children()
 
