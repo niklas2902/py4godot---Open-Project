@@ -26,6 +26,7 @@ class CharHandler(KinematicBody, Draw):
 		self._push_obj_layer:int = 0
 		self._clicked_before:bool = False
 		self.selected_push_obj:bool = None
+		self.is_pushing:bool = True
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self)->NodePath:
@@ -196,6 +197,7 @@ class CharHandler(KinematicBody, Draw):
 			self.path = None
 			self.current_path_ind = 0
 			self.push_obj_selected.call("start_pushing")
+			self.is_pushing = True
 			return
 		pos:Vector3 = self.transform.get_origin()
 		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
