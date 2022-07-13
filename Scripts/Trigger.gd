@@ -30,3 +30,8 @@ func _on_Area_body_entered(body):
 func _on_Area_body_exited(body):
 	player.exited_ramp()
 	pass # Replace with function body.
+
+
+func _on_OnRampCheck_area_entered(area):
+	print("area:", area)
+	player.entered_ramp()

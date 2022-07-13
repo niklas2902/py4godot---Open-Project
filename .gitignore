@@ -8,3 +8,4 @@ submodule/py4godot
 # Mono-specific ignores
 .mono/
 data_*/
+/addons/windows64/py4godot/

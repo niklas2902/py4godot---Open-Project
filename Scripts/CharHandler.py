@@ -25,7 +25,8 @@ class CharHandler(KinematicBody, Draw):
 		self.sound:float = 0
 		self._push_obj_layer:int = 0
 		self._clicked_before:bool = False
-		self.selected_push_obj:bool = None
+		self.selected_push_obj:KinematicBody = None
+		self.push_obj_selected:Object = None
 		self.is_pushing:bool = True
 	
 	@gdproperty(NodePath, NodePath())
@@ -112,7 +113,8 @@ class CharHandler(KinematicBody, Draw):
 		if(self.path == None):
 			mouse_angle = self.mouse_angle()
 			if (mouse_angle != None):
-				self.selected_push_obj = None
+				pass
+				#self.selected_push_obj = None
 			self.set_key_pressed()
 			self.apply_root_motion(delta, mouse_angle)
 			self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
@@ -121,6 +123,13 @@ class CharHandler(KinematicBody, Draw):
 				self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
 
 		self.sound = min(1,self.get_speed())
+		
+		print("selected_push_obj:", self.selected_push_obj)
+		if(self.selected_push_obj != None):
+			
+			#print("delta_pushing:",self.selected_push_obj.call("get_delta_pushing").get_converted_value())
+			self.selected_push_obj.global_transform.set_origin(self.global_transform.get_origin() + \
+															 self.selected_push_obj.call("get_delta_pushing").get_converted_value())
 		
 	@gdmethod
 	def entered_ramp(self):
@@ -196,9 +205,12 @@ class CharHandler(KinematicBody, Draw):
 		if self.current_path_ind >= self.path.size():
 			self.path = None
 			self.current_path_ind = 0
-			self.push_obj_selected.call("start_pushing")
+			self.selected_push_obj = self.push_obj_selected
+			print("set_selected_push_obj:", self.selected_push_obj)
+			self.selected_push_obj.callv("start_pushing", Array(self))
 			self.is_pushing = True
 			return
+			
 		pos:Vector3 = self.transform.get_origin()
 		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
 		dist_vector.y = 0
