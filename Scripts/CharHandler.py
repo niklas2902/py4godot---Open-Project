@@ -27,7 +27,7 @@ class CharHandler(KinematicBody, Draw):
 		self._clicked_before:bool = False
 		self.selected_push_obj:KinematicBody = None
 		self.push_obj_selected:Object = None
-		self.is_pushing:bool = True
+		self.is_pushing:bool = False
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self)->NodePath:
@@ -115,6 +115,9 @@ class CharHandler(KinematicBody, Draw):
 			if (mouse_angle != None):
 				pass
 				#self.selected_push_obj = None
+			if(self.is_pushing and mouse_angle != None):
+				print("is_pushing:" , mouse_angle)
+				mouse_angle = (round(mouse_angle/(math.pi / 2)))*(math.pi / 2)
 			self.set_key_pressed()
 			self.apply_root_motion(delta, mouse_angle)
 			self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
