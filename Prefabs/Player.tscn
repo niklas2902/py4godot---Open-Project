@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Player.py" type="Script" id=1]
+
+[sub_resource type="CapsuleMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.945098, 0, 0, 1 )
+
+[sub_resource type="CapsuleShape" id=4]
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+vel = 3
+
+[node name="CSGMesh" type="CSGMesh" parent="."]
+mesh = SubResource( 2 )
+material = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 4 )
