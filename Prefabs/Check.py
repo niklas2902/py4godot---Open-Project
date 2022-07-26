@@ -22,12 +22,21 @@ class Check(Spatial):
 		self._orientation:int = 0
 		
 		self._bool_val:bool = False
+		self._util_path:NodePath = None
+		self.util:Spatial = None
 	@gdproperty(str, "", hint=EnumHint("north", "south", "east", "west"))
 	def direction(self):
 		return self._dir
 	@direction.setter
 	def dir(self, value):
 		self._dir = value
+		
+	@gdproperty(NodePath, NodePath())
+	def util_path(self)->NodePath:
+		return self._util_path
+	@util_path.setter
+	def util_path(self, value:NodePath)->None:
+		self._util_path = value
 		
 	
 	@gdproperty(int, 0, FlagsHint("north","south", "east", "west"))
@@ -45,20 +54,15 @@ class Check(Spatial):
 		self._bool_val = value
 	
 	@gdmethod
+	def _ready(self):
+		if self._util_path:
+			util:Node = self.get_node(self._util_path)
+			self._util:Spatial = Spatial.cast(util)
+	
+	@gdmethod
 	def check_collision(self, other:KinematicBody):
-		shape:SphereShape = PhysicsServer.instance().create_shape(1)
-		shape.set_radius(RADIUS)
-		
-		params:PhysicsShapeQueryParameters = PhysicsShapeQueryParameters._new()
-		params.set_shape(shape)
-		print("shape:", shape)
-		print("shape_rid:", params.shape_rid.get_id())
-		params.set_transform(self.get_transform()) # same transform as parent, just translate
-		#params.set_exclude(Array())
-		#res = self.get_world().direct_space_state.intersect_shape(params, 1)
-		res = self.get_world().direct_space_state.cast_motion(params, Vector3(1,0,0))
-		print("res:",res)
-		return res.size() > 0
+		res = self._util.callv("sphere_cast",Array(self.global_transform.get_origin(), 1, Array(), 2**5))
+		print("collision:",res.get_converted_value().size())
 		
 	@gdmethod
 	def is_north(self):
