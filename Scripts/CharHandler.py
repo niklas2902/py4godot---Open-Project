@@ -32,7 +32,7 @@ class CharHandler(KinematicBody, Draw):
 		self._sprint_dist:float = DEFAULT_SPRINT_DIST
 		self.test = None
 	
-	register_property("test", NodePath, NodePath())
+	prop("test", NodePath, NodePath())
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self)->NodePath:
