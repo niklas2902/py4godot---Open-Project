@@ -24,12 +24,8 @@ class Check(Spatial):
 		self._bool_val:bool = False
 		self._util_path:NodePath = None
 		self.util:Spatial = None
-	@gdproperty(str, "", hint=EnumHint("north", "south", "east", "west"))
-	def direction(self):
-		return self._dir
-	@direction.setter
-	def dir(self, value):
-		self._dir = value
+		
+	register_property("direction",int, 0, FlagsHint("north","south", "east", "west"))
 		
 	@gdproperty(NodePath, NodePath())
 	def util_path(self)->NodePath:

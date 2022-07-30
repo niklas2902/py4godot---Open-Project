@@ -30,6 +30,9 @@ class CharHandler(KinematicBody, Draw):
 		self.is_pushing:bool = False
 		self._max_dist:float = DEFAULT_MAX_DIST
 		self._sprint_dist:float = DEFAULT_SPRINT_DIST
+		self.test = None
+	
+	register_property("test", NodePath, NodePath())
 	
 	@gdproperty(NodePath, NodePath())
 	def node(self)->NodePath:
