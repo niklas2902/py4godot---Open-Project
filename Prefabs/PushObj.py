@@ -21,6 +21,7 @@ class PushObj(StaticBody, Draw):
 		self._arrows:Node = None
 		self._trigger = None
 		self.player:KinematicBody = None
+		self._direction:string = None
 
 
 	@gdproperty(NodePath, NodePath())
@@ -85,17 +86,30 @@ class PushObj(StaticBody, Draw):
 
 		self._delta_pushing = self.global_transform.get_origin() - other.global_transform.get_origin()
 
-		print("test_delta_pushing:", self._delta_pushing)
 		self._is_pushing = False
 
 		print(self.get_collision_layer())
 
-		self.get_direction(other)
+		self._direction = self.get_direction(other)
+	
+	@gdmethod
+	def is_move_allowed(self, vector:Vector2)->bool:
+		print(vector.get_x(), vector.get_y())
+		if(self._direction == "east" or self._direction == "west"):
+			if vector.get_x() != 0 :
+				return True
+		else:
+			if vector.get_y() != 0:
+				return True
+		return False
 
 	def get_direction(self, other:KinematicBody)->None:
 		for arrow in self._arrows.get_children():
-			print("other:", other)
-			print("check_collision:",arrow.callv("check_collision", Array(other)))
+			res = arrow.callv("check_collision", Array(other)).get_converted_value()
+			if res.size() >0:
+				return arrow.call("get_direction").get_converted_value()
+			
+				
 
 	@gdmethod
 	def get_triggers(self)->Array:

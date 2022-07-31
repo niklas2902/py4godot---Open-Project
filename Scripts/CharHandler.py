@@ -107,6 +107,7 @@ class CharHandler(KinematicBody, Draw):
 	
 	@gdmethod
 	def _physics_process(self, delta:float):
+		ignore:bool = False
 		self.handle_ray()
 		self.draw_sphere(SPHERE_HANDLE, 2, self.transform.get_origin())
 				
@@ -121,26 +122,41 @@ class CharHandler(KinematicBody, Draw):
 			if(self.is_pushing and mouse_angle != None):
 				mouse_angle = (round(mouse_angle/(math.pi / 2)))*(math.pi / 2)
 			self.set_key_pressed()
+			if self.is_pushing:
+				if not self.selected_push_obj.callv("is_move_allowed", Array(self.get_move_dir())).get_converted_value():
+					ignore = True
 			self.apply_root_motion(delta, mouse_angle)
-			self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed())))
+			self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1,self.get_speed(ignore))))
 		
 		if(mouse_angle != None):
 				self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0,1,0),mouse_angle))	
 
-		self.sound = min(1,self.get_speed())
+		self.sound = min(1,self.get_speed(ignore))
 		
 		if(self.selected_push_obj != None):
 			
 			#print("delta_pushing:",self.selected_push_obj.call("get_delta_pushing").get_converted_value())
 			self.selected_push_obj.global_transform.set_origin(self.global_transform.get_origin() + \
 															 self.selected_push_obj.call("get_delta_pushing").get_converted_value())
-		
+	
 	@gdmethod
 	def entered_ramp(self):
 		self.is_on_ramp=True
 	
 	def exited_ramp(self):
 		self.is_on_ramp=False
+	
+	def get_move_dir(self)->Vector2:
+		if self.input.is_action_pressed(MOUSE_ACTION):
+			mouse_pos:Vector2 = self.get_viewport().get_mouse_position()
+			object_pos:Vector3 = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
+			if(abs(object_pos.get_x() - mouse_pos.get_x()) > abs (object_pos.get_y() - mouse_pos.get_y())):
+				return Vector2((object_pos.get_x() - mouse_pos.get_x())/abs(object_pos.get_x() - mouse_pos.get_x()),
+				0)
+			else:
+				print("y")
+				return Vector2(0, (object_pos.get_y() - mouse_pos.get_y())/abs (object_pos.get_y() - mouse_pos.get_y()))
+		return Vector2(0,0)
 	
 	def apply_gravity(self, delta):
 		"""applying gravity to the player"""
@@ -164,9 +180,9 @@ class CharHandler(KinematicBody, Draw):
 			object_pos.get_y() - mouse_pos.get_y())
 		return
 		
-	def get_speed(self)->float:
+	def get_speed(self, ignore:bool = False)->float:
 		"""Getting the angle of the mouse to be able to move to a position"""
-		if self.input.is_action_pressed(MOUSE_ACTION):
+		if self.input.is_action_pressed(MOUSE_ACTION) and not ignore:
 			mouse_pos = self.get_viewport().get_mouse_position()
 			object_pos = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
 				

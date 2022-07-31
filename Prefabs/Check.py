@@ -57,9 +57,20 @@ class Check(Spatial):
 	
 	@gdmethod
 	def check_collision(self, other:KinematicBody):
-		res = self._util.callv("sphere_cast",Array(self.global_transform.get_origin(), 1, Array(), 2**5))
-		print("collision:",res.get_converted_value().size())
-		
+		res = self._util.callv("sphere_cast",Array(self.global_transform.get_origin(), 0.4, Array(), 2**5)).get_converted_value()
+		return res
+	
+	@gdmethod
+	def get_direction(self):
+		if(self.is_north()):
+			return "north"
+		if(self.is_south()):
+			return "south"
+		if(self.is_east()):
+			return "east"
+		if(self.is_west()):
+			return "west"
+	
 	@gdmethod
 	def is_north(self):
 		return bool(self._orientation & NORTH)
