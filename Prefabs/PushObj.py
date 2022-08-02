@@ -22,8 +22,10 @@ class PushObj(StaticBody, Draw):
 		self._trigger = None
 		self.player:KinematicBody = None
 		self._direction:string = None
+		self._util:Node = None
 
-
+	prop("util_path",NodePath, NodePath())
+	
 	@gdproperty(NodePath, NodePath())
 	def trigger(self)->NodePath:
 		return self._trigger
@@ -56,6 +58,7 @@ class PushObj(StaticBody, Draw):
 		if(self._arrow_path):
 			self._arrows = self.get_node(self._arrow_path)
 			self._arrows = Node.cast(self._arrows)
+		self._util = self.get_node(self.util_path)
 
 		if(not self._arrow_path):
 			return
@@ -97,10 +100,19 @@ class PushObj(StaticBody, Draw):
 		print(vector.get_x(), vector.get_y())
 		if(self._direction == "east" or self._direction == "west"):
 			if vector.get_x() != 0 :
-				return True
+				self._util.callv("sphere_cast", 
+				Array(self.global_transform.get_origin() + Vector3(vector.get_x()*0.5,0,0),
+				0.02,Array(self), 2**5)).get_converted_value()
+				
+				return res.size() == 0
 		else:
 			if vector.get_y() != 0:
-				return True
+				res = self._util.callv("sphere_cast", 
+				Array(self.global_transform.get_origin() + Vector3(0,0,vector.get_y() * 0.5),
+				0.02,Array(self), 2**5)).get_converted_value()
+				
+				print("size:",res.size())
+				return res.size() == 0
 		return False
 
 	def get_direction(self, other:KinematicBody)->None:

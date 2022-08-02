@@ -154,7 +154,6 @@ class CharHandler(KinematicBody, Draw):
 				return Vector2((object_pos.get_x() - mouse_pos.get_x())/abs(object_pos.get_x() - mouse_pos.get_x()),
 				0)
 			else:
-				print("y")
 				return Vector2(0, (object_pos.get_y() - mouse_pos.get_y())/abs (object_pos.get_y() - mouse_pos.get_y()))
 		return Vector2(0,0)
 	
