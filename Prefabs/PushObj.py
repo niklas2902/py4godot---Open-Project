@@ -65,6 +65,7 @@ class PushObj(StaticBody, Draw):
 		print("arrows:", self._arrows)
 		for child in self._arrows.get_children():
 			self.immediate_geometry_init(self, child.get_name())
+		self.immediate_geometry_init(self, "push")
 
 	@gdmethod
 	def _process(self, delta):
@@ -97,20 +98,27 @@ class PushObj(StaticBody, Draw):
 	
 	@gdmethod
 	def is_move_allowed(self, vector:Vector2)->bool:
-		print(vector.get_x(), vector.get_y())
 		if(self._direction == "east" or self._direction == "west"):
 			if vector.get_x() != 0 :
-				self._util.callv("sphere_cast", 
-				Array(self.global_transform.get_origin() + Vector3(vector.get_x()*0.5,0,0),
-				0.02,Array(self), 2**5)).get_converted_value()
+				res = self._util.callv("sphere_cast", 
+				Array(self.global_transform.get_origin() + 
+				Vector3(vector.get_x(),0,0),
+				0.02,Array(self), 64+32+16+1+2)).get_converted_value()
 				
+				print("x:")
+				self.draw_sphere("push", 1, self.global_transform.get_origin() + 
+				Vector3(vector.get_x(),0,0))
+				print("size:", res.size())
+				if(res.size() > 0):
+					print(res[0])
 				return res.size() == 0
 		else:
 			if vector.get_y() != 0:
 				res = self._util.callv("sphere_cast", 
-				Array(self.global_transform.get_origin() + Vector3(0,0,vector.get_y() * 0.5),
-				0.02,Array(self), 2**5)).get_converted_value()
-				
+				Array(self.global_transform.get_origin() + Vector3(0,0,0),
+				0.02,Array(self), 64)).get_converted_value()
+				self.draw_sphere("push", 1, self.global_transform.get_origin() + 
+				Vector3(0,vector.get_y(),0))
 				print("size:",res.size())
 				return res.size() == 0
 		return False

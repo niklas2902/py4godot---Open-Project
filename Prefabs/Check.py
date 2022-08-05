@@ -57,7 +57,7 @@ class Check(Spatial):
 	
 	@gdmethod
 	def check_collision(self, other:KinematicBody):
-		res = self._util.callv("sphere_cast",Array(self.global_transform.get_origin(), 0.4, Array(), 2**5)).get_converted_value()
+		res = self._util.callv("sphere_cast",Array(self.global_transform.get_origin(), 0.4, Array(), -1)).get_converted_value()
 		return res
 	
 	@gdmethod
