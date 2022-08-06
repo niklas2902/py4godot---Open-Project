@@ -4,6 +4,7 @@ from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.pluginscript_api.hints import *
 from Scripts.Tools.Draw import Draw
+from typing import Optional
 
 ARROW_RAD = 0.5
 PUSHLAYER = 7
@@ -17,13 +18,15 @@ class PushObj(StaticBody, Draw):
 		self._push_layer:int = PUSHLAYER
 		self._is_pushing:bool = False
 		self._delta_pushing:Vector3 = Vector3(0,0,0)
-		self._arrow_path:NodePath = None
-		self._arrows:Node = None
-		self._trigger = None
-		self.player:KinematicBody = None
-		self._direction:string = None
-		self._util:Node = None
+		self._arrow_path:Optional[NodePath] = None
+		self._arrows:Optional[Node] = None
+		self._trigger:Optional[Node] = None
+		self.player:Optional[KinematicBody] = None
+		self._direction:Optional[str] = None
+		self._util:Optional[Node] = None
+		self.collision_layer_direction:int = 0
 
+	prop("collision_layer_direction",int, 64, RangeHint(0,2**16,1))
 	prop("util_path",NodePath, NodePath())
 	
 	@gdproperty(NodePath, NodePath())
@@ -103,23 +106,18 @@ class PushObj(StaticBody, Draw):
 				res = self._util.callv("sphere_cast", 
 				Array(self.global_transform.get_origin() + 
 				Vector3(vector.get_x(),0,0),
-				0.02,Array(self), 64+32+16+1+2)).get_converted_value()
-				
-				print("x:")
+				0.02,Array(self), self.collision_layer_direction)).get_converted_value()
+
 				self.draw_sphere("push", 1, self.global_transform.get_origin() + 
 				Vector3(vector.get_x(),0,0))
-				print("size:", res.size())
-				if(res.size() > 0):
-					print(res[0])
 				return res.size() == 0
 		else:
 			if vector.get_y() != 0:
 				res = self._util.callv("sphere_cast", 
-				Array(self.global_transform.get_origin() + Vector3(0,0,0),
-				0.02,Array(self), 64)).get_converted_value()
+				Array(self.global_transform.get_origin() + Vector3(0,vector.get_y(),0),
+				0.02,Array(self), self.collision_layer_direction)).get_converted_value()
 				self.draw_sphere("push", 1, self.global_transform.get_origin() + 
 				Vector3(0,vector.get_y(),0))
-				print("size:",res.size())
 				return res.size() == 0
 		return False
 

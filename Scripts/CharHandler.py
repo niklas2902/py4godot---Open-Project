@@ -149,10 +149,10 @@ class CharHandler(KinematicBody, Draw):
 	def get_move_dir(self)->Vector2:
 		if self.input.is_action_pressed(MOUSE_ACTION):
 			mouse_pos:Vector2 = self.get_viewport().get_mouse_position()
-			object_pos:Vector3 = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
+			object_pos:Vector2 = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
 			if(abs(object_pos.get_x() - mouse_pos.get_x()) > abs (object_pos.get_y() - mouse_pos.get_y())):
-				return Vector2((object_pos.get_x() - mouse_pos.get_x())/abs(object_pos.get_x() - mouse_pos.get_x()),
-				0)
+				return Vector2((object_pos.get_x() - mouse_pos.get_x())/
+							   abs(object_pos.get_x() - mouse_pos.get_x()),0)
 			else:
 				return Vector2(0, (object_pos.get_y() - mouse_pos.get_y())/abs (object_pos.get_y() - mouse_pos.get_y()))
 		return Vector2(0,0)
@@ -250,7 +250,7 @@ class CharHandler(KinematicBody, Draw):
 			
 			self.path:Array = None
 			self.current_path_ind:int = 0
-			ray_length:float = 100
+			ray_length:float = 100000
 			mouse_pos:Vector2 = self.get_viewport().get_mouse_position()
 			camera:Camera = self.get_viewport().get_camera()
 			from_:Vector3 = camera.project_ray_origin(mouse_pos)
@@ -261,6 +261,7 @@ class CharHandler(KinematicBody, Draw):
 			result = self.get_world().direct_space_state.intersect_ray(from_, 
 			from_ + camera.project_ray_normal(mouse_pos) * ray_length,exclude, 
 			collision_mask = self.push_obj_layer)
+			print("result:", result["name"])
 			
 			if result["position"] == None:
 				return None
