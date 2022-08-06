@@ -171,7 +171,7 @@ class CharHandler(KinematicBody, Draw):
 			
 		if self.input.is_action_pressed(MOUSE_ACTION):
 			mouse_pos:Vector2 = self.get_viewport().get_mouse_position()
-			object_pos:Vector3 = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
+			object_pos:Vector2 = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
 			if (mouse_pos - object_pos).length() <= self.max_dist:
 				return
 			self._clicked_before = True
