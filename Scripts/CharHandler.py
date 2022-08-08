@@ -5,6 +5,7 @@ from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.pluginscript_api.hints import *
 import math
 from Scripts.Tools.Draw import Draw
+from typing import Optional
 
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
@@ -25,8 +26,8 @@ class CharHandler(KinematicBody, Draw):
 		self.sound:float = 0
 		self._push_obj_layer:int = 0
 		self._clicked_before:bool = False
-		self.selected_push_obj:KinematicBody = None
-		self.push_obj_selected:Object = None
+		self.selected_push_obj:Optional[KinematicBody] = None
+		self.push_obj_selected:Optional[Object] = None
 		self.is_pushing:bool = False
 		self._max_dist:float = DEFAULT_MAX_DIST
 		self._sprint_dist:float = DEFAULT_SPRINT_DIST
@@ -164,10 +165,11 @@ class CharHandler(KinematicBody, Draw):
 			self.move_and_slide(Vector3(0,self.y_speed,0)*-1*delta,Vector3(0,1,0))
 		else:
 			self.y_speed = 0
-	def mouse_angle(self)->float:
+	def mouse_angle(self)->Optional[float]:
 		"""Getting the angle of the mouse to be able to move to a position"""
 		if(self.input.is_action_just_released(MOUSE_ACTION)):
 			self._clicked_before = False
+			self.reset_pushing()
 			
 		if self.input.is_action_pressed(MOUSE_ACTION):
 			mouse_pos:Vector2 = self.get_viewport().get_mouse_position()
@@ -178,6 +180,12 @@ class CharHandler(KinematicBody, Draw):
 			return math.atan2(object_pos.get_x() - mouse_pos.get_x(),
 			object_pos.get_y() - mouse_pos.get_y())
 		return
+
+	def reset_pushing(self)->None:
+		"""function for resetting push, so that it gets aborted"""
+		self.is_pushing = False
+		self.push_obj_selected = None
+		self.selected_push_obj = None
 		
 	def get_speed(self, ignore:bool = False)->float:
 		"""Getting the angle of the mouse to be able to move to a position"""
