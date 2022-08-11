@@ -17,7 +17,6 @@ class PushObj(StaticBody, Draw):
 		self._arrow_pszh = None
 		self._push_layer:int = PUSHLAYER
 		self._is_pushing:bool = False
-		self._delta_pushing:Vector3 = Vector3(0,0,0)
 		self._arrow_path:Optional[NodePath] = None
 		self._arrows:Optional[Node] = None
 		self._trigger:Optional[Node] = None
@@ -25,6 +24,11 @@ class PushObj(StaticBody, Draw):
 		self._direction:Optional[str] = None
 		self._util:Optional[Node] = None
 		self.collision_layer_direction:int = 0
+		print("init PushObj")
+		
+	@gdmethod
+	def _ready(self):
+		self._delta_pushing:Vector3 = Vector3(0,0,0)
 
 	prop("collision_layer_direction",int, 64, RangeHint(0,2**16,1))
 	prop("util_path",NodePath, NodePath())

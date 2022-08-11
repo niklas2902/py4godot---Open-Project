@@ -24,9 +24,10 @@ class Check(Spatial):
 		self._bool_val:bool = False
 		self._util_path:NodePath = None
 		self.util:Spatial = None
+		print("init_trigger")
 		
 	prop("direction",int, 0, FlagsHint("north","south", "east", "west"))
-		
+	prop("test", int, 0)
 	@gdproperty(NodePath, NodePath())
 	def util_path(self)->NodePath:
 		return self._util_path
