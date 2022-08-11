@@ -66,8 +66,10 @@ class PushObj(StaticBody, Draw):
 		if(not self._arrow_path):
 			return
 		print("arrows:", self._arrows)
-		for child in self._arrows.get_children():
-			self.immediate_geometry_init(self, child.get_name())
+		if(self._arrows and self._arrows.get_children()):
+			print("arrows_childs:", self._arrows.get_children(), self._arrows.get_children().size())
+			for child in self._arrows.get_children():
+				self.immediate_geometry_init(self, child.get_name())
 		self.immediate_geometry_init(self, "push")
 
 	@gdmethod
