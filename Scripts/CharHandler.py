@@ -1,8 +1,4 @@
-from py4godot.enums.enums import *
-from py4godot.core import *
-from py4godot.classes.generated import *
-from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.pluginscript_api.hints import *
+from py4godot import *
 import math
 from Scripts.Tools.Draw import Draw
 from typing import Optional
