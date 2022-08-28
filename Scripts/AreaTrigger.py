@@ -22,19 +22,15 @@ class AreaTrigger(Spatial):
 		
 	@gdmethod
 	def body_entered(self, other:KinematicBody):
-		print("body_entered", other)
 		self.set_color(Color(0,1,0))
 		self.emit_signal("trigger_entered")
 
 	@gdmethod
 	def body_exited(self, other:KinematicBody):
-		print("body_exited", other)
 		self.set_color(Color(1,0,0))
 		self.emit_signal("trigger_exited")
 
 	def set_color(self, color:Color)->None:
-		print("mesh:",self.mesh)
-		print(self.mesh.get_class())
 		material:SpatialMaterial = SpatialMaterial.cast(self.mesh.get_material())
 
 		if material == None:
