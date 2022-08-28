@@ -9,3 +9,4 @@ submodule/py4godot
 .mono/
 data_*/
 /addons/windows64/py4godot/
+/addons/windows64/
