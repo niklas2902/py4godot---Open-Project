@@ -18,6 +18,10 @@ config/icon="res://icon.png"
 
 singletons=[ "res://py4godot_lib.tres" ]
 
+[global]
+
+GLE=false
+
 [input]
 
 mouse_action={
@@ -32,4 +36,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
+quality/driver/fallback_to_gles2=true
 environment/default_environment="res://default_env.tres"

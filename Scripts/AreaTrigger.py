@@ -11,6 +11,7 @@ class AreaTrigger(Spatial):
 		self.mesh_path:Optional[NodePath] = None
 		self.mesh:Optional[CSGMesh] = None
 		self.connected_obj:Optional[Spatial] = None
+		self.activated:bool = False
 	
 	prop("mesh_path", NodePath, NodePath())
 	register_signal("trigger_entered")
@@ -23,13 +24,15 @@ class AreaTrigger(Spatial):
 	@gdmethod
 	def body_entered(self, other:KinematicBody):
 		self.set_color(Color(0,1,0))
+		self.activated = True
 		self.emit_signal("trigger_entered")
 
 	@gdmethod
 	def body_exited(self, other:KinematicBody):
 		self.set_color(Color(1,0,0))
+		self.activated = False
 		self.emit_signal("trigger_exited")
-
+		
 	def set_color(self, color:Color)->None:
 		material:SpatialMaterial = SpatialMaterial.cast(self.mesh.get_material())
 
