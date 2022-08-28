@@ -47,4 +47,6 @@ class AreaTrigger(Spatial):
 
 	def load_finish_mat(self)->SpatialMaterial:
 		return SpatialMaterial.cast(ResourceLoader.instance().load("res://Materials/green.mat"))
-
+	
+	def _on_Logic_tree_entered(self)->None:
+		print("----------------------tree entered-----------------")
