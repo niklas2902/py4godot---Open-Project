@@ -1,7 +1,7 @@
 extends Area
 
 var node_path = NodePath("Logic")
-onready var logic = get_node(node_path)
+onready	var logic = get_node(node_path)
 
 func _on_Area_body_entered(body):
 	print("-----------------------Area_body_entered")
