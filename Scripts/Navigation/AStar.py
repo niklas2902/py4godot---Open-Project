@@ -2,6 +2,8 @@ from py4godot import *
 from typing import Optional
 
 WALKABLE_GROUP = "walkable"
+GRIDSIZE	   = 0.1
+
 @gdclass
 class AStar(Spatial):
 
@@ -29,8 +31,14 @@ class AStar(Spatial):
 			if (not mesh):
 				continue
 			aabb: AABB = mesh.get_transformed_aabb()
+			self.generate_squares(aabb)
 			print("Python AABB:", aabb, aabb.has_no_area())
 
+	def generate_squares(self, box_to_fill:AABB) -> None:
+		""" Generate objects at matching points """
+		print(box_to_fill)
+		print(box_to_fill.get_size())
+		print(box_to_fill.get_position())
 	def get_mesh(self, node:Node) -> Optional[MeshInstance]:
 		for child in node.get_children():
 			print("Node:", child)
