@@ -3,6 +3,7 @@ from typing import Optional
 
 WALKABLE_GROUP = "walkable"
 GRIDSIZE	   = 0.1
+SCALE 		   = 1000
 
 @gdclass
 class AStar(Spatial):
@@ -39,6 +40,13 @@ class AStar(Spatial):
 		print(box_to_fill)
 		print(box_to_fill.get_size())
 		print(box_to_fill.get_position())
+		for x in range(int(box_to_fill.get_position().x * SCALE),
+					   int((box_to_fill.get_position().x + box_to_fill.get_size().x)*SCALE),
+					   int(GRIDSIZE * SCALE)):
+			for z in range(int(box_to_fill.get_position().z * SCALE),
+						   int((box_to_fill.get_position().z + box_to_fill.get_size().z)*SCALE),
+						   int(GRIDSIZE * SCALE)):
+				print("x:",x/SCALE, "|", "z:", z/SCALE)
 	def get_mesh(self, node:Node) -> Optional[MeshInstance]:
 		for child in node.get_children():
 			print("Node:", child)
