@@ -65,6 +65,12 @@ class Draw():
 			immediate_geometry.add_vertex(vector + position)
 		immediate_geometry.end()
 
+	def draw_solid_sphere(self, handle, rad, position):
+		immediate_geometry:ImmediateGeometry = self.immediate_geometry_dict[handle]
+		immediate_geometry.clear()
+		immediate_geometry.begin(1, ImageTexture._new());
+		immediate_geometry.add_sphere(10, 10 , rad)
+		immediate_geometry.transform.set_origin(position)
 	@gdmethod
 	def draw_ray(self,handle, origin, direction, length):
 		immediate_geometry = self.immediate_geometry_dict[handle]
