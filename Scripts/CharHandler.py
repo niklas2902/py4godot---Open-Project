@@ -1,6 +1,7 @@
 from py4godot import *
 import math
 from Scripts.Tools.Draw import Draw
+from Scripts.Navigation.AStar import AStar as NavAstar
 from typing import Optional
 
 DEFAULT_MAX_DIST = 10
@@ -30,10 +31,13 @@ class CharHandler(KinematicBody, Draw):
 		self._max_dist: float = DEFAULT_MAX_DIST
 		self._sprint_dist: float = DEFAULT_SPRINT_DIST
 		self.test = None
+		self.astar_path:Optional[NodePath] = None
+		self._astar:Optional[NavAstar] = None
 
 		print("init CharHandler")
 
 	prop("test", NodePath, NodePath())
+	prop("astar_path", NodePath, NodePath())
 
 	@gdproperty(NodePath, NodePath())
 	def node(self) -> NodePath:
@@ -110,6 +114,7 @@ class CharHandler(KinematicBody, Draw):
 		if self._sprint_dist == None:
 			self._sprint_dist = DEFAULT_SPRINT_DIST
 		a = NavigationMeshInstance._new()
+		self._astar = self.get_node(self.astar_path).get_pyscript()
 
 	@gdmethod
 	def _process(self, delta: float):
@@ -294,8 +299,14 @@ class CharHandler(KinematicBody, Draw):
 												  result["collider"])
 
 			self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to.global_transform.get_origin())
-			self.path = self.navigation_obj.get_simple_path(self.global_transform.get_origin(),
-															point_to_move_to.global_transform.get_origin())
+			#self.path = self.navigation_obj.get_simple_path(self.global_transform.get_origin(),
+			#												point_to_move_to.global_transform.get_origin())
+			self.path = Array()
+			for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
+												   point_to_move_to.global_transform.get_origin()):
+				self.path.append(path_point)
+			for point in self.path:
+				print(point)
 			self.current_path_ind = 1
 
 	def get_min_point(self, collider: Spatial, points: Array, alt_object: Spatial):

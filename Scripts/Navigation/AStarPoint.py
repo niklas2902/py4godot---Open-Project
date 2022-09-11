@@ -5,3 +5,6 @@ class AStarPoint():
         self.position:Vector3 = Vector3(x,y,z)
         self.id:int = id
         self.connected_points:List = []
+
+    def __str__(self)->str:
+        return f"AStarPoint<{self.position}|{self.id}>"
