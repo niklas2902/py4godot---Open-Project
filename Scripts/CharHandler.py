@@ -305,6 +305,7 @@ class CharHandler(KinematicBody, Draw):
 			for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
 												   point_to_move_to.global_transform.get_origin()):
 				self.path.append(path_point)
+
 			for point in self.path:
 				print(point)
 			self.current_path_ind = 1
