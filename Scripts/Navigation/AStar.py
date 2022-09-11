@@ -21,7 +21,12 @@ class AStar(Spatial, Draw):
 		self.walkables: Optional[Array] = None
 		self.points:List = []
 		self.dict_points:Dict = dict()
+		self.utils_path:Optional[NodePath] = None
+		self.utils:Optional[Spatial] = None
+		self.push_obj_layer:int = 32
 
+	prop("utils_path", NodePath, NodePath())
+	prop("push_obj_layer", int, 32)
 	@gdmethod
 	def _ready(self):
 		self.astar = py4godot.AStar._new()
@@ -32,6 +37,8 @@ class AStar(Spatial, Draw):
 		self.immediate_geometry_init(self, "test")
 		self.draw_sphere("test", 5, Vector3(0,0,0))
 
+		self.utils = self.get_node(self.utils_path)
+
 		for point in self.points:
 			self.draw_sphere(point.id, DRAW_RAD, point.position)
 
@@ -40,6 +47,8 @@ class AStar(Spatial, Draw):
 		b = self.astar.get_closest_point(Vector3(0,0,5))
 
 		path:Array = self.astar.get_point_path(a,b)
+
+		self.generate_disabled()
 	def method(self):
 		print("method")
 
@@ -87,6 +96,20 @@ class AStar(Spatial, Draw):
 				if diff.length() <= math.sqrt(2) * GRIDSIZE + FLOAT_TOLERANCE and other_point != point:
 					self.astar.connect_points(point.id, other_point.id)
 					point.connected_points.append(other_point)
+
+	def generate_disabled(self)->None:
+		for point in self.points:
+			self.set_point_disabled(point)
+	def set_point_disabled(self, point:AStarPoint)->None:
+
+		erg: Variant = self.utils.callv("sphere_cast", Array(point.position,
+				GRIDSIZE * math.sqrt(2),Array(self), self.push_obj_layer))
+
+		disabled:bool = erg.get_converted_value().size() != 0
+		if disabled:
+			print("is_disabled", point)
+
+		self.astar.set_point_disabled(point.id, disabled=disabled)
 
 
 	@gdmethod
