@@ -3,6 +3,7 @@ import py4godot
 from Scripts.Tools.Draw import *
 from Scripts.Navigation.AStarPoint import AStarPoint
 from typing import Optional, List, Dict
+from Scripts.Navigation import NavigationUtils
 
 WALKABLE_GROUP     = "walkable"
 GRIDSIZE	       = 1
@@ -24,6 +25,7 @@ class AStar(Spatial, Draw):
 		self.utils_path:Optional[NodePath] = None
 		self.utils:Optional[Spatial] = None
 		self.push_obj_layer:int = 32
+		self.disabled_points:List = []
 
 	prop("utils_path", NodePath, NodePath())
 	prop("push_obj_layer", int, 32)
@@ -73,7 +75,8 @@ class AStar(Spatial, Draw):
 				point:AStarPoint = AStarPoint(x / SCALE,
 								   			  box_to_fill.get_position().y + box_to_fill.get_size().y,
 											  z/SCALE,
-								   			  id_counter)
+								   			  NavigationUtils.calc_point_id(x//SCALE, z//SCALE))
+				print("id:", NavigationUtils.calc_point_id(x//SCALE, z//SCALE))
 				self.points.append(point)
 				self.dict_points[point.id] = point
 				self.astar.add_point(point.id, point.position, weight_scale=10.)
@@ -111,6 +114,17 @@ class AStar(Spatial, Draw):
 
 		self.astar.set_point_disabled(point.id, disabled=disabled)
 
+	def disable_points(self, x:int, z:int, x_size:int, z_size:int )->None:
+		for point in self.disabled_points:
+			self.astar.set_point_disabled(point.id, False)
+		self.disabled_points = []
+		print("x:",x, "| z:",z)
+		for x in range(x, x+x_size,1):
+			for z in range(z, z+z_size,1):
+				point_id: int = NavigationUtils.calc_point_id(x, z)
+				if point_id in self.dict_points.values():
+					self.astar.set_point_disabled(point_id, True)
+					self.disabled_points.append(self.dict_points[point_id])
 
 	@gdmethod
 	def get_way_points(self, start_position:Vector3, end_position:Vector3)->PoolVector3Array:
