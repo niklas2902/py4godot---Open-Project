@@ -157,7 +157,7 @@ class CharHandler(KinematicBody, Draw):
 
 	@gdmethod
 	def entered_ramp(self):
-		self.is_on_ramp = True
+		self.is_on_ramp = True and not self.selected_push_obj
 
 	def exited_ramp(self):
 		self.is_on_ramp = False
