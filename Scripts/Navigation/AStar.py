@@ -1,5 +1,5 @@
 from py4godot import *
-import py4godot
+import py4godot, math
 from Scripts.Tools.Draw import *
 from Scripts.Navigation.AStarPoint import AStarPoint
 from typing import Optional, List, Dict
@@ -41,9 +41,6 @@ class AStar(Spatial, Draw):
 
 		self.utils = self.get_node(self.utils_path)
 
-		for point in self.points:
-			self.draw_sphere(point.id, DRAW_RAD, point.position)
-
 		self.generate_point_connections()
 		a = self.astar.get_closest_point(Vector3(0,0,0))
 		b = self.astar.get_closest_point(Vector3(0,0,5))
@@ -51,6 +48,15 @@ class AStar(Spatial, Draw):
 		path:Array = self.astar.get_point_path(a,b)
 
 		self.generate_disabled()
+		for point in self.points:
+			self.draw_sphere(point.id, DRAW_RAD, point.position, color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
+
+
+	@gdmethod
+	def _process(self, delta: float) ->None:
+		for point in self.disabled_points:
+			self.draw_sphere(point.id, DRAW_RAD, point.position,
+							 color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
 	def method(self):
 		print("method")
 
@@ -104,7 +110,6 @@ class AStar(Spatial, Draw):
 		for point in self.points:
 			self.set_point_disabled(point)
 	def set_point_disabled(self, point:AStarPoint)->None:
-
 		erg: Variant = self.utils.callv("sphere_cast", Array(point.position,
 				GRIDSIZE * math.sqrt(2),Array(self), self.push_obj_layer))
 
@@ -114,17 +119,24 @@ class AStar(Spatial, Draw):
 
 		self.astar.set_point_disabled(point.id, disabled=disabled)
 
-	def disable_points(self, x:int, z:int, x_size:int, z_size:int )->None:
+	def disable_points(self, x_pos:int, z_pos:int, x_size:int, z_size:int )->None:
+		print("disable_points")
+
 		for point in self.disabled_points:
+			self.draw_sphere(point.id, DRAW_RAD, point.position)
 			self.astar.set_point_disabled(point.id, False)
 		self.disabled_points = []
-		print("x:",x, "| z:",z)
-		for x in range(x, x+x_size,1):
-			for z in range(z, z+z_size,1):
+		print("x:",x_pos, "| z:",z_pos)
+		for x in range(round(x_pos-x_size/2.), round(x_pos+x_size/2. + 1),GRIDSIZE):
+			for z in range(round(z_pos-z_size/2.), round(z_pos+z_size/2.+ 1),GRIDSIZE):
 				point_id: int = NavigationUtils.calc_point_id(x, z)
-				if point_id in self.dict_points.values():
+				print("check_disable:", x, "|", z,"|",point_id)
+				if point_id in self.dict_points.keys():
+					print("disable_point")
 					self.astar.set_point_disabled(point_id, True)
 					self.disabled_points.append(self.dict_points[point_id])
+				else:
+					print("point_to_disable_not_found:", point_id)
 
 	@gdmethod
 	def get_way_points(self, start_position:Vector3, end_position:Vector3)->PoolVector3Array:

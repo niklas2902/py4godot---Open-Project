@@ -203,7 +203,7 @@ class CharHandler(KinematicBody, Draw):
 		self.is_pushing = False
 		if self.selected_push_obj:
 			push_obj_pos: Vector3 = self.selected_push_obj.transform.get_origin()
-			self._astar.disable_points(int(push_obj_pos.x), int(push_obj_pos.z), 2,2)
+			self._astar.disable_points(round(push_obj_pos.x), round(push_obj_pos.z), 2,2)
 		self.push_obj_selected = None
 		self.selected_push_obj = None
 
