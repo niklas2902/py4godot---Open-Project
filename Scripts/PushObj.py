@@ -124,11 +124,21 @@ class PushObj(StaticBody, Draw):
 		return False
 
 	def get_direction(self, other:KinematicBody)->None:
-		for arrow in self._arrows.get_children():
-			res = arrow.callv("check_collision", Array(other)).get_converted_value()
-			if res.size() >0:
-				return arrow.call("get_direction").get_converted_value()
-			
+
+		print("################1111get_direction:")
+		min = 1000000
+		min_arrow:Optional[Spatial] = None
+		for arrow_index in range(0,self._arrows.get_children().size()):
+			arrow:Spatial = Spatial.cast(self._arrows.get_children()[arrow_index])
+			if((arrow.global_transform.get_origin() - other.global_transform.get_origin()).length() < min):
+				min_arrow = arrow
+				min = (arrow.global_transform.get_origin() - other.global_transform.get_origin()).length()
+
+		print("min_arrow:", min_arrow)
+		print(min_arrow.get_name())
+		if min_arrow:
+			return min_arrow.call("get_direction").get_converted_value()
+
 				
 
 	@gdmethod

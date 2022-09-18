@@ -2,7 +2,7 @@
 from py4godot import *
 
 NORTH = 0b0001
-SOTH = 0b0010
+SOUTH = 0b0010
 EAST = 0b0100
 WEST = 0b1000
 
@@ -54,18 +54,23 @@ class Check(Spatial):
 	
 	@gdmethod
 	def check_collision(self, other:KinematicBody):
-		res = self._util.callv("sphere_cast",Array(self.global_transform.get_origin(), 0.4, Array(), -1)).get_converted_value()
+		res = self._util.callv("sphere_cast",Array(self.global_transform.get_origin(), 0.1, Array(), -1)).get_converted_value()
 		return res
 	
 	@gdmethod
 	def get_direction(self):
+		print("orientation:",self._orientation)
 		if(self.is_north()):
+			print("###########is_north")
 			return "north"
 		if(self.is_south()):
+			print("###########is_south")
 			return "south"
 		if(self.is_east()):
+			print("###########is_east")
 			return "east"
 		if(self.is_west()):
+			print("###########is_west")
 			return "west"
 	
 	@gdmethod
@@ -74,7 +79,7 @@ class Check(Spatial):
 	
 	@gdmethod
 	def is_south(self):
-		return bool(self._orientation & NORTH)
+		return bool(self._orientation & SOUTH)
 	
 	@gdmethod
 	def is_east(self):

@@ -82,7 +82,6 @@ class AStar(Spatial, Draw):
 								   			  box_to_fill.get_position().y + box_to_fill.get_size().y,
 											  z/SCALE,
 								   			  NavigationUtils.calc_point_id(x//SCALE, z//SCALE))
-				print("id:", NavigationUtils.calc_point_id(x//SCALE, z//SCALE))
 				self.points.append(point)
 				self.dict_points[point.id] = point
 				self.astar.add_point(point.id, point.position, weight_scale=10.)
@@ -114,25 +113,19 @@ class AStar(Spatial, Draw):
 				GRIDSIZE * math.sqrt(2),Array(self), self.push_obj_layer))
 
 		disabled:bool = erg.get_converted_value().size() != 0
-		if disabled:
-			print("is_disabled", point)
 
 		self.astar.set_point_disabled(point.id, disabled=disabled)
 
 	def disable_points(self, x_pos:int, z_pos:int, x_size:int, z_size:int )->None:
-		print("disable_points")
 
 		for point in self.disabled_points:
 			self.draw_sphere(point.id, DRAW_RAD, point.position)
 			self.astar.set_point_disabled(point.id, False)
 		self.disabled_points = []
-		print("x:",x_pos, "| z:",z_pos)
 		for x in range(round(x_pos-x_size/2.), round(x_pos+x_size/2. + 1),GRIDSIZE):
 			for z in range(round(z_pos-z_size/2.), round(z_pos+z_size/2.+ 1),GRIDSIZE):
 				point_id: int = NavigationUtils.calc_point_id(x, z)
-				print("check_disable:", x, "|", z,"|",point_id)
 				if point_id in self.dict_points.keys():
-					print("disable_point")
 					self.astar.set_point_disabled(point_id, True)
 					self.disabled_points.append(self.dict_points[point_id])
 				else:
