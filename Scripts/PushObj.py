@@ -115,11 +115,12 @@ class PushObj(StaticBody, Draw):
 				return res.size() == 0
 		else:
 			if vector.get_y() != 0:
-				res = self._util.callv("sphere_cast", 
-				Array(self.global_transform.get_origin() + Vector3(0,vector.get_y(),0),
+				print("vector_y:",vector.get_y())
+				res = self._util.callv("sphere_cast",
+				Array(self.global_transform.get_origin() + Vector3(0,0,vector.get_y()),
 				0.02,Array(self), self.collision_layer_direction)).get_converted_value()
-				self.draw_sphere("push", 1, self.global_transform.get_origin() + 
-				Vector3(0,vector.get_y(),0))
+				self.draw_sphere("push", 1, self.global_transform.get_origin() +
+				Vector3(0,0,vector.get_y()))
 				return res.size() == 0
 		return False
 
