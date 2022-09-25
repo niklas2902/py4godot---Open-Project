@@ -256,9 +256,10 @@ class CharHandler(KinematicBody, Draw):
 			self.selected_push_obj = self.push_obj_selected
 			self.selected_push_obj.callv("start_pushing", Array(self))
 			self.is_pushing = True
+
+			self.face_push_obj()
 			return
 
-		pos: Vector3 = self.transform.get_origin()
 		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
 		dist_vector.y = 0
 		dist: float = dist_vector.length()
@@ -270,6 +271,12 @@ class CharHandler(KinematicBody, Draw):
 			vel_z = 0.001
 		self.apply_root_motion(delta, math.atan2(vel.x, vel_z))
 		return math.atan2(vel.x, vel_z)
+
+	def face_push_obj(self):
+		angle_to = math.atan2(self.transform.get_origin().x - self.selected_push_obj.transform.get_origin().x,
+							  -(self.transform.get_origin().z - self.selected_push_obj.transform.get_origin().z))
+		print("angle_to:", angle_to)
+		self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0, 1, 0), angle_to * math.pi))
 
 	def handle_ray(self):
 		"""handling the player clicking on a PushObj here"""
@@ -309,8 +316,6 @@ class CharHandler(KinematicBody, Draw):
 												   point_to_move_to.global_transform.get_origin()):
 				self.path.append(path_point)
 
-			for point in self.path:
-				print(point)
 			self.current_path_ind = 1
 
 	def get_min_point(self, collider: Spatial, points: Array, alt_object: Spatial):
