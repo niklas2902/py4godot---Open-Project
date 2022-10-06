@@ -2,7 +2,7 @@ from py4godot import *
 import py4godot, math
 from Scripts.Tools.Draw import *
 from Scripts.Navigation.AStarPoint import AStarPoint
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Set, Tuple
 from Scripts.Navigation import NavigationUtils
 
 WALKABLE_GROUP     = "walkable"
@@ -26,6 +26,7 @@ class AStar(Spatial, Draw):
 		self.utils:Optional[Spatial] = None
 		self.push_obj_layer:int = 32
 		self.disabled_points:List = []
+		self.already_traced_pos:Set[Tuple[int, int, int]] = set()
 
 	prop("utils_path", NodePath, NodePath())
 	prop("push_obj_layer", int, 32)
@@ -34,23 +35,16 @@ class AStar(Spatial, Draw):
 		self.astar = py4godot.AStar._new()
 		self.walkables = self.get_tree().get_nodes_in_group(WALKABLE_GROUP)
 		self.get_pyscript().method()
-		self.generate_points()
-
-		self.immediate_geometry_init(self, "test")
-		self.draw_sphere("test", 5, Vector3(0,0,0))
+		#self.generate_points()
 
 		self.utils = self.get_node(self.utils_path)
 
-		self.generate_point_connections()
-		a = self.astar.get_closest_point(Vector3(0,0,0))
-		b = self.astar.get_closest_point(Vector3(0,0,5))
+		#self.generate_point_connections()
 
-		path:Array = self.astar.get_point_path(a,b)
-
+		self.generate_points_advanced()
 		self.generate_disabled()
 		for point in self.points:
 			self.draw_sphere(point.id, DRAW_RAD, point.position, color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
-
 
 	@gdmethod
 	def _process(self, delta: float) ->None:
@@ -59,6 +53,37 @@ class AStar(Spatial, Draw):
 							 color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
 	def method(self):
 		print("method")
+
+	def generate_points_advanced(self)->None:
+		"""Here we use advanced generation to calculate points"""
+		self.add_point(Vector3(0,GRIDSIZE/2,0),-1)
+
+	def add_point(self, pos:Vector3, current_dir:int)->None:
+		"""Recursive algorithm to run over all possible points."""
+		if not self.point_below(pos) or (pos.x, pos.y, pos.z) in self.already_traced_pos:
+			return
+		self.already_traced_pos.add((pos.x, pos.y, pos.z))
+		print("add_point:", pos.x, "|", pos.y, "|", pos.z)
+		self.points.append(AStarPoint(pos.x / SCALE,
+									  pos.y,
+									  pos.z,
+									  NavigationUtils.calc_point_id(pos.x // SCALE, pos.z // SCALE)))
+		# TODO: convert this to enums
+		if (current_dir != 0):
+			self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), 1)
+		if (current_dir != 1):
+			self.add_point(Vector3(pos.x - GRIDSIZE, pos.y, pos.z), 0)
+		if (current_dir != 2):
+			self.add_point(Vector3(pos.x, pos.y, pos.z + GRIDSIZE),3)
+		if (current_dir != 3):
+			self.add_point(Vector3(pos.x, pos.y, pos.z - GRIDSIZE), 2)
+	def point_below(self,pos:Vector3):
+		"""Function for checking point below"""
+		result = self.get_world().direct_space_state.intersect_ray(pos,
+																   pos + Vector3(0,-1,0) * GRIDSIZE, Array(),
+																   collision_mask=1)
+
+		return result.size() > 0
 
 	def generate_points(self)->None:
 		"""Here we are generating all the points we could later use for astar"""
