@@ -36,12 +36,13 @@ class AStar(Spatial, Draw):
 		self.walkables = self.get_tree().get_nodes_in_group(WALKABLE_GROUP)
 		self.get_pyscript().method()
 		#self.generate_points()
-
+		self.generate_points_advanced()
+		for point in self.points:
+			self.immediate_geometry_init(self, point.id)
 		self.utils = self.get_node(self.utils_path)
 
-		#self.generate_point_connections()
+		self.generate_point_connections()
 
-		self.generate_points_advanced()
 		self.generate_disabled()
 		for point in self.points:
 			self.draw_sphere(point.id, DRAW_RAD, point.position, color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
@@ -56,18 +57,20 @@ class AStar(Spatial, Draw):
 
 	def generate_points_advanced(self)->None:
 		"""Here we use advanced generation to calculate points"""
-		self.add_point(Vector3(0,GRIDSIZE/2,0),-1)
+		self.add_point(Vector3(0,GRIDSIZE/100.,0),-1)
 
 	def add_point(self, pos:Vector3, current_dir:int)->None:
 		"""Recursive algorithm to run over all possible points."""
 		if not self.point_below(pos) or (pos.x, pos.y, pos.z) in self.already_traced_pos:
 			return
 		self.already_traced_pos.add((pos.x, pos.y, pos.z))
-		print("add_point:", pos.x, "|", pos.y, "|", pos.z)
-		self.points.append(AStarPoint(pos.x / SCALE,
+		point:AStarPoint = AStarPoint(pos.x / SCALE,
 									  pos.y,
 									  pos.z,
-									  NavigationUtils.calc_point_id(pos.x // SCALE, pos.z // SCALE)))
+									  NavigationUtils.calc_point_id(pos.x // SCALE, pos.z // SCALE))
+		self.points.append(point)
+		self.dict_points[point.id] =point
+		self.astar.add_point(point.id, point.position, weight_scale=1.)
 		# TODO: convert this to enums
 		if (current_dir != 0):
 			self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), 1)
@@ -96,7 +99,6 @@ class AStar(Spatial, Draw):
 
 	def generate_squares(self, box_to_fill:AABB) -> None:
 		""" Generate objects at matching points """
-		id_counter:int = 0
 		for x in range(int(box_to_fill.get_position().x * SCALE),
 					   int((box_to_fill.get_position().x + box_to_fill.get_size().x)*SCALE),
 					   int(GRIDSIZE * SCALE)):
@@ -110,10 +112,7 @@ class AStar(Spatial, Draw):
 				self.points.append(point)
 				self.dict_points[point.id] = point
 				self.astar.add_point(point.id, point.position, weight_scale=10.)
-				id_counter += 1
 
-		for point in self.points:
-			self.immediate_geometry_init(self, point.id)
 	def get_mesh(self, node:Node) -> Optional[MeshInstance]:
 		"""This function is used to get a mesh child from a given Node"""
 		for child in node.get_children():
