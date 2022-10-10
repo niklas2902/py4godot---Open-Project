@@ -20,11 +20,13 @@ class PushObj(StaticBody, Draw):
 		self._direction:Optional[str] = None
 		self._util:Optional[Node] = None
 		self.collision_layer_direction:int = 0
+		self.pos_before:Optional[Vector3] = None
 		print("init PushObj")
 		
 	@gdmethod
 	def _ready(self):
 		self._delta_pushing:Vector3 = Vector3(0,0,0)
+		self.pos_before = self.global_transform.get_origin()
 
 	prop("collision_layer_direction",int, 64, RangeHint(0,2**16,1))
 	prop("util_path",NodePath, NodePath())
@@ -83,6 +85,8 @@ class PushObj(StaticBody, Draw):
 	@gdmethod
 	def start_pushing(self, other:KinematicBody)->None:
 		print("start pushing", other)
+		self.pos_before = self.global_transform.get_origin()
+
 		self.set_collision_layer_bit(0, False)
 		self.set_collision_layer_bit(1, False)
 		self.set_collision_layer_bit(6, True)

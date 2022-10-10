@@ -1,3 +1,6 @@
+import typing
+
+from Scripts.PushObj import PushObj
 from py4godot import *
 import math
 from Scripts.Tools.Draw import Draw
@@ -255,6 +258,8 @@ class CharHandler(KinematicBody, Draw):
 			self.current_path_ind = 0
 			self.selected_push_obj = self.push_obj_selected
 			self.selected_push_obj.callv("start_pushing", Array(self))
+			scripts:PushObj = typing.cast(PushObj,self.selected_push_obj.get_pyscript())
+			self._astar.enable_points(round(scripts.pos_before.x), round(scripts.pos_before.z), 2,2)
 			self.is_pushing = True
 
 			self.face_push_obj()
