@@ -47,6 +47,7 @@ class AStar(Spatial, Draw):
 		for point in self.points:
 			self.draw_sphere(point.id, DRAW_RAD, point.position, color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
 
+		self.disable_obstacles()
 	@gdmethod
 	def _process(self, delta: float) ->None:
 		for point in self.disabled_points:
@@ -54,6 +55,13 @@ class AStar(Spatial, Draw):
 							 color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
 	def method(self):
 		print("method")
+
+	def disable_obstacles(self):
+		for node in self.get_tree().get_nodes_in_group("obstacle"):
+			vector3_node:Spatial = Spatial.cast(node)
+			self.disable_points(vector3_node.global_transform.get_origin().x,
+								vector3_node.global_transform.get_origin().z,
+								2, 2)
 
 	def generate_points_advanced(self)->None:
 		"""Here we use advanced generation to calculate points"""
