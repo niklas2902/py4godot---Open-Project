@@ -159,11 +159,6 @@ class AStar(Spatial, Draw):
 				else:
 					print("point_to_disable_not_found:", point_id)
 	def disable_points(self, x_pos:int, z_pos:int, x_size:int, z_size:int )->None:
-
-		for point in self.disabled_points:
-			self.draw_sphere(point.id, DRAW_RAD, point.position)
-			self.astar.set_point_disabled(point.id, False)
-		self.disabled_points = set()
 		for x in range(round(x_pos-x_size/2.), round(x_pos+x_size/2. + 1),GRIDSIZE):
 			for z in range(round(z_pos-z_size/2.), round(z_pos+z_size/2.+ 1),GRIDSIZE):
 				point_id: int = NavigationUtils.calc_point_id(x, z)
