@@ -88,6 +88,10 @@ class AStar(Spatial, Draw):
 			self.add_point(Vector3(pos.x, pos.y, pos.z + GRIDSIZE),3)
 		if (current_dir != 3):
 			self.add_point(Vector3(pos.x, pos.y, pos.z - GRIDSIZE), 2)
+		if(current_dir != 4):
+			self.add_point(Vector3(pos.x, pos.y+GRIDSIZE, pos.z), 5)
+		if (current_dir != 5):
+			self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z), 4)
 	def point_below(self,pos:Vector3):
 		"""Function for checking point below"""
 		result = self.get_world().direct_space_state.intersect_ray(pos,
