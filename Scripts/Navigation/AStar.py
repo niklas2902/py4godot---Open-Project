@@ -98,7 +98,7 @@ class AStar(Spatial, Draw):
 		"""Function for checking point below"""
 		result = self.get_world().direct_space_state.intersect_ray(pos,
 																   pos + Vector3(0,-1,0) * GRIDSIZE, Array(),
-																   collision_mask=1)
+																   collision_mask=1|2**4|2**3|2**6)
 
 		return result.size() > 0
 
@@ -159,11 +159,16 @@ class AStar(Spatial, Draw):
 			for z in range(round(z_pos-z_size/2.), round(z_pos+z_size/2.+ 1),GRIDSIZE):
 				point_id: int = NavigationUtils.calc_point_id(x, z)
 				if point_id in self.dict_points.keys():
-					self.astar.set_point_disabled(point_id, False)
-					if point_id in self.disabled_points:
+					point = self.dict_points[point_id]
+					self.astar.set_point_disabled(point.id, False)
+					if point in self.disabled_points:
 						self.disabled_points.remove(self.dict_points[point_id])
+					else:
+						print("point not in disabled_points")
+					print("-------------------draw_sphere-----------------------")
+					self.draw_sphere(point.id, DRAW_RAD, Vector3(point.position.x,point.position.y,point.position.z), color=Color(0,1,0))
 				else:
-					print("point_to_disable_not_found:", point_id)
+					print("point_to_enable_not_found:", point_id)
 	def disable_points(self, x_pos:int, z_pos:int, x_size:int, z_size:int )->None:
 		for x in range(round(x_pos-x_size/2.), round(x_pos+x_size/2. + 1),GRIDSIZE):
 			for z in range(round(z_pos-z_size/2.), round(z_pos+z_size/2.+ 1),GRIDSIZE):
