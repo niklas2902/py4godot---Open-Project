@@ -67,7 +67,7 @@ class PushObj(StaticBody, Draw):
 
 		if(not self._arrow_path):
 			return
-		print("arrows:", self._arrows)
+
 		if(self._arrows and self._arrows.get_children()):
 			print("arrows_childs:", self._arrows.get_children(), self._arrows.get_children().size())
 			for child in self._arrows.get_children():

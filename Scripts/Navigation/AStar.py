@@ -45,7 +45,7 @@ class AStar(Spatial, Draw):
 
 		self.generate_disabled()
 		for point in self.points:
-			self.draw_sphere(point.id, DRAW_RAD, point.position, color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
+			self.draw_sphere(point.id, DRAW_RAD, point.position, color=Color(1,0,0) if point in self.disabled_points else Color(0,1,1))
 
 		self.disable_obstacles()
 	@gdmethod
@@ -79,6 +79,8 @@ class AStar(Spatial, Draw):
 		self.points.append(point)
 		self.dict_points[point.id] =point
 		self.astar.add_point(point.id, point.position, weight_scale=1.)
+		if(pos.y > 0.2):
+			print("Vector:", pos)
 		# TODO: convert this to enums
 		if (current_dir != 0):
 			self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), 1)
