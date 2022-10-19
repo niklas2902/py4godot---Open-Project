@@ -2,7 +2,7 @@ from py4godot import *
 import py4godot, math
 from Scripts.Tools.Draw import *
 from Scripts.Navigation.AStarPoint import AStarPoint
-from typing import Optional, List, Dict, Set, Tuple
+from typing import Optional, List, Dict, Set, Tuple, cast
 from Scripts.Navigation import NavigationUtils
 
 WALKABLE_GROUP     = "walkable"
@@ -94,13 +94,21 @@ class AStar(Spatial, Draw):
 			self.add_point(Vector3(pos.x, pos.y+GRIDSIZE, pos.z), 5)
 		if (current_dir != 5):
 			self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z), 4)
+		#TODO add diagonal movement
 	def point_below(self,pos:Vector3):
 		"""Function for checking point below"""
-		result = self.get_world().direct_space_state.intersect_ray(pos,
+		result:Dictionary = self.get_world().direct_space_state.intersect_ray(pos,
 																   pos + Vector3(0,-1,0) * GRIDSIZE, Array(),
 																   collision_mask=1|2**4|2**3|2**6)
-
-		return result.size() > 0
+		if pos.y < 1 and pos.x >= -1 and pos.x < 3 and pos.z == 3:
+			print(pos, result.size())
+			if(result.size() > 0):
+				print(pos, result["position"])
+				print("diff:",(pos - result["position"]).length())
+			#print(result.size(), result.keys())
+		if(result.size() > 0):
+			return pos != cast(Vector3, result["position"])
+		return False
 
 	def generate_points(self)->None:
 		"""Here we are generating all the points we could later use for astar"""
