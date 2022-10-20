@@ -75,7 +75,7 @@ class AStar(Spatial, Draw):
 		point:AStarPoint = AStarPoint(pos.x / SCALE,
 									  pos.y,
 									  pos.z,
-									  NavigationUtils.calc_point_id(pos.x // SCALE, pos.z // SCALE))
+									  NavigationUtils.calc_point_id(pos.x // SCALE,pos.y//SCALE, pos.z // SCALE))
 		self.points.append(point)
 		self.dict_points[point.id] =point
 		self.astar.add_point(point.id, point.position, weight_scale=1.)
@@ -94,7 +94,15 @@ class AStar(Spatial, Draw):
 			self.add_point(Vector3(pos.x, pos.y+GRIDSIZE, pos.z), 5)
 		if (current_dir != 5):
 			self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z), 4)
+
 		#TODO add diagonal movement
+
+		self.add_point(Vector3(pos.x+GRIDSIZE, pos.y + GRIDSIZE, pos.z), -1)
+		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y - GRIDSIZE, pos.z), -1)
+
+		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z + GRIDSIZE), -1)
+		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z + GRIDSIZE), -1)
+		
 	def point_below(self,pos:Vector3):
 		"""Function for checking point below"""
 		result:Dictionary = self.get_world().direct_space_state.intersect_ray(pos,
@@ -130,7 +138,7 @@ class AStar(Spatial, Draw):
 				point:AStarPoint = AStarPoint(x / SCALE,
 								   			  box_to_fill.get_position().y + box_to_fill.get_size().y,
 											  z/SCALE,
-								   			  NavigationUtils.calc_point_id(x//SCALE, z//SCALE))
+								   			  NavigationUtils.calc_point_id(x//SCALE,box_to_fill.get_position().y // SCALE, z//SCALE))
 				self.points.append(point)
 				self.dict_points[point.id] = point
 				self.astar.add_point(point.id, point.position, weight_scale=10.)
@@ -165,7 +173,8 @@ class AStar(Spatial, Draw):
 	def enable_points(self, x_pos:int, z_pos:int, x_size:int, z_size:int):
 		for x in range(round(x_pos-x_size/2.), round(x_pos+x_size/2. + 1),GRIDSIZE):
 			for z in range(round(z_pos-z_size/2.), round(z_pos+z_size/2.+ 1),GRIDSIZE):
-				point_id: int = NavigationUtils.calc_point_id(x, z)
+				#TODO: foor loop for y
+				point_id: int = NavigationUtils.calc_point_id(x,0, z)
 				if point_id in self.dict_points.keys():
 					point = self.dict_points[point_id]
 					self.astar.set_point_disabled(point.id, False)
@@ -180,7 +189,8 @@ class AStar(Spatial, Draw):
 	def disable_points(self, x_pos:int, z_pos:int, x_size:int, z_size:int )->None:
 		for x in range(round(x_pos-x_size/2.), round(x_pos+x_size/2. + 1),GRIDSIZE):
 			for z in range(round(z_pos-z_size/2.), round(z_pos+z_size/2.+ 1),GRIDSIZE):
-				point_id: int = NavigationUtils.calc_point_id(x, z)
+				#TODO:for loop for y
+				point_id: int = NavigationUtils.calc_point_id(x,0, z)
 				if point_id in self.dict_points.keys():
 					self.astar.set_point_disabled(point_id, True)
 					self.disabled_points.add(self.dict_points[point_id])
