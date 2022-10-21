@@ -47,6 +47,12 @@ class AStar(Spatial, Draw):
 		for point in self.points:
 			self.draw_sphere(point.id, DRAW_RAD, point.position, color=Color(1,0,0) if point in self.disabled_points else Color(0,1,1))
 
+		"""
+		for point in self.points:
+			for connected_point in point.connected_points:
+				self.immediate_geometry_init(self, str(point.id) + "|" + str(connected_point.id))
+				self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position, connected_point.position)
+		"""
 		self.disable_obstacles()
 	@gdmethod
 	def _process(self, delta: float) ->None:
@@ -97,11 +103,15 @@ class AStar(Spatial, Draw):
 
 		#TODO add diagonal movement
 
-		self.add_point(Vector3(pos.x+GRIDSIZE, pos.y + GRIDSIZE, pos.z), -1)
+		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y + GRIDSIZE, pos.z), -1)
 		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y - GRIDSIZE, pos.z), -1)
+		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y + GRIDSIZE, pos.z), -1)
+		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y - GRIDSIZE, pos.z), -1)
 
 		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z + GRIDSIZE), -1)
 		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z + GRIDSIZE), -1)
+		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z - GRIDSIZE), -1)
+		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z - GRIDSIZE), -1)
 		
 	def point_below(self,pos:Vector3):
 		"""Function for checking point below"""
