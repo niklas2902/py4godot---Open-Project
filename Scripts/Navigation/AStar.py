@@ -35,6 +35,9 @@ class AStar(Spatial, Draw):
 		self.astar = py4godot.AStar._new()
 		self.walkables = self.get_tree().get_nodes_in_group(WALKABLE_GROUP)
 		self.get_pyscript().method()
+
+		self.disable_enable_collision(True)
+
 		#self.generate_points()
 		self.generate_points_advanced()
 		for point in self.points:
@@ -54,6 +57,17 @@ class AStar(Spatial, Draw):
 				self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position, connected_point.position)
 		"""
 		self.disable_obstacles()
+
+		self.disable_enable_collision(False)
+
+	def disable_enable_collision(self, disable:bool )->None:
+		for node in self.get_tree().get_nodes_in_group("obstacle"):
+			obstacle: Spatial = Spatial.cast(node)
+			for child in obstacle.get_children():
+				if child.get_name() == "CollisionShape":
+					collider: CollisionShape = CollisionShape.cast(child)
+					collider.disabled = disable
+
 	@gdmethod
 	def _process(self, delta: float) ->None:
 		for point in self.disabled_points:
