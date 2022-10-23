@@ -12,6 +12,17 @@ DRAW_RAD 	       = 0.2
 FLOAT_TOLERANCE	   = 0.1
 WEIGHT_SCALE	   = 1
 
+from enum import Enum
+class DIRECTION(Enum):
+	UNDEFINED = -1
+	LEFT = 0
+	RIGHT = 1
+	FORWARD = 2
+	BACKWARDS = 3
+	DOWN = 4
+	UP = 5
+
+
 @gdclass
 class AStar(Spatial, Draw):
 
@@ -99,45 +110,39 @@ class AStar(Spatial, Draw):
 		self.points.append(point)
 		self.dict_points[point.id] =point
 		self.astar.add_point(point.id, point.position, weight_scale=1.)
-		if(pos.y > 0.2):
-			print("Vector:", pos)
 		# TODO: convert this to enums
-		if (current_dir != 0):
-			self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), 1)
-		if (current_dir != 1):
-			self.add_point(Vector3(pos.x - GRIDSIZE, pos.y, pos.z), 0)
-		if (current_dir != 2):
-			self.add_point(Vector3(pos.x, pos.y, pos.z + GRIDSIZE),3)
-		if (current_dir != 3):
-			self.add_point(Vector3(pos.x, pos.y, pos.z - GRIDSIZE), 2)
-		if(current_dir != 4):
-			self.add_point(Vector3(pos.x, pos.y+GRIDSIZE, pos.z), 5)
-		if (current_dir != 5):
-			self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z), 4)
+		if (current_dir != DIRECTION.LEFT):
+			self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), DIRECTION.RIGHT.value)
+		if (current_dir != DIRECTION.RIGHT.value):
+			self.add_point(Vector3(pos.x - GRIDSIZE, pos.y, pos.z), DIRECTION.LEFT.value)
+		if (current_dir != DIRECTION.FORWARD.value):
+			self.add_point(Vector3(pos.x, pos.y, pos.z + GRIDSIZE),DIRECTION.BACKWARDS.value)
+		if (current_dir != DIRECTION.BACKWARDS.value):
+			self.add_point(Vector3(pos.x, pos.y, pos.z - GRIDSIZE), DIRECTION.FORWARD.value)
+		if(current_dir != DIRECTION.DOWN.value):
+			self.add_point(Vector3(pos.x, pos.y+GRIDSIZE, pos.z), DIRECTION.UP.value)
+		if (current_dir != DIRECTION.UP.value):
+			self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z), DIRECTION.DOWN.value)
 
 		#TODO add diagonal movement
 
-		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y + GRIDSIZE, pos.z), -1)
-		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y - GRIDSIZE, pos.z), -1)
-		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y + GRIDSIZE, pos.z), -1)
-		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y - GRIDSIZE, pos.z), -1)
+		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED.value
 
-		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z + GRIDSIZE), -1)
-		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z + GRIDSIZE), -1)
-		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z - GRIDSIZE), -1)
-		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z - GRIDSIZE), -1)
+					   )
+		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED.value)
+		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED.value)
+		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED.value)
+
+		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED.value)
+		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED.value)
+		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED.value)
+		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED.value)
 		
 	def point_below(self,pos:Vector3):
 		"""Function for checking point below"""
 		result:Dictionary = self.get_world().direct_space_state.intersect_ray(pos,
 																   pos + Vector3(0,-1,0) * GRIDSIZE, Array(),
 																   collision_mask=1|2**4|2**3|2**6)
-		if pos.y < 1 and pos.x >= -1 and pos.x < 3 and pos.z == 3:
-			print(pos, result.size())
-			if(result.size() > 0):
-				print(pos, result["position"])
-				print("diff:",(pos - result["position"]).length())
-			#print(result.size(), result.keys())
 		if(result.size() > 0):
 			return pos != cast(Vector3, result["position"])
 		return False
@@ -206,7 +211,6 @@ class AStar(Spatial, Draw):
 						self.disabled_points.remove(self.dict_points[point_id])
 					else:
 						print("point not in disabled_points")
-					print("-------------------draw_sphere-----------------------")
 					self.draw_sphere(point.id, DRAW_RAD, Vector3(point.position.x,point.position.y,point.position.z), color=Color(0,1,0))
 				else:
 					print("point_to_enable_not_found:", point_id)
