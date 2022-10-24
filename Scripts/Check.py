@@ -61,16 +61,12 @@ class Check(Spatial):
 	def get_direction(self):
 		print("orientation:",self._orientation)
 		if(self.is_north()):
-			print("###########is_north")
 			return "north"
 		if(self.is_south()):
-			print("###########is_south")
 			return "south"
 		if(self.is_east()):
-			print("###########is_east")
 			return "east"
 		if(self.is_west()):
-			print("###########is_west")
 			return "west"
 	
 	@gdmethod

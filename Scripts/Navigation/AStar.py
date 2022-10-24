@@ -98,7 +98,7 @@ class AStar(Spatial, Draw):
 		"""Here we use advanced generation to calculate points"""
 		self.add_point(Vector3(0,GRIDSIZE/100.,0),-1)
 
-	def add_point(self, pos:Vector3, current_dir:int)->None:
+	def add_point(self, pos:Vector3, current_dir:DIRECTION)->None:
 		"""Recursive algorithm to run over all possible points."""
 		if not self.point_below(pos) or (pos.x, pos.y, pos.z) in self.already_traced_pos:
 			return
@@ -112,31 +112,29 @@ class AStar(Spatial, Draw):
 		self.astar.add_point(point.id, point.position, weight_scale=1.)
 		# TODO: convert this to enums
 		if (current_dir != DIRECTION.LEFT):
-			self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), DIRECTION.RIGHT.value)
-		if (current_dir != DIRECTION.RIGHT.value):
-			self.add_point(Vector3(pos.x - GRIDSIZE, pos.y, pos.z), DIRECTION.LEFT.value)
-		if (current_dir != DIRECTION.FORWARD.value):
-			self.add_point(Vector3(pos.x, pos.y, pos.z + GRIDSIZE),DIRECTION.BACKWARDS.value)
-		if (current_dir != DIRECTION.BACKWARDS.value):
-			self.add_point(Vector3(pos.x, pos.y, pos.z - GRIDSIZE), DIRECTION.FORWARD.value)
-		if(current_dir != DIRECTION.DOWN.value):
-			self.add_point(Vector3(pos.x, pos.y+GRIDSIZE, pos.z), DIRECTION.UP.value)
-		if (current_dir != DIRECTION.UP.value):
-			self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z), DIRECTION.DOWN.value)
+			self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), DIRECTION.RIGHT)
+		if (current_dir != DIRECTION.RIGHT):
+			self.add_point(Vector3(pos.x - GRIDSIZE, pos.y, pos.z), DIRECTION.LEFT)
+		if (current_dir != DIRECTION.FORWARD):
+			self.add_point(Vector3(pos.x, pos.y, pos.z + GRIDSIZE),DIRECTION.BACKWARDS)
+		if (current_dir != DIRECTION.BACKWARDS):
+			self.add_point(Vector3(pos.x, pos.y, pos.z - GRIDSIZE), DIRECTION.FORWARD)
+		if(current_dir != DIRECTION.DOWN):
+			self.add_point(Vector3(pos.x, pos.y+GRIDSIZE, pos.z), DIRECTION.UP)
+		if (current_dir != DIRECTION.UP):
+			self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z), DIRECTION.DOWN)
 
 		#TODO add diagonal movement
 
-		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED.value
+		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
+		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
+		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
+		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
 
-					   )
-		self.add_point(Vector3(pos.x + GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED.value)
-		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED.value)
-		self.add_point(Vector3(pos.x - GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED.value)
-
-		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED.value)
-		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED.value)
-		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED.value)
-		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED.value)
+		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED)
+		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED)
+		self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED)
+		self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED)
 		
 	def point_below(self,pos:Vector3):
 		"""Function for checking point below"""

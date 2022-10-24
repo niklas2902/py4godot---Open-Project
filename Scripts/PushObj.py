@@ -21,7 +21,6 @@ class PushObj(StaticBody, Draw):
 		self._util:Optional[Node] = None
 		self.collision_layer_direction:int = 0
 		self.pos_before:Optional[Vector3] = None
-		print("init PushObj")
 		
 	@gdmethod
 	def _ready(self):
@@ -69,7 +68,6 @@ class PushObj(StaticBody, Draw):
 			return
 
 		if(self._arrows and self._arrows.get_children()):
-			print("arrows_childs:", self._arrows.get_children(), self._arrows.get_children().size())
 			for child in self._arrows.get_children():
 				self.immediate_geometry_init(self, child.get_name())
 		self.immediate_geometry_init(self, "push")
@@ -79,12 +77,8 @@ class PushObj(StaticBody, Draw):
 		if(not self._arrows):
 			return
 
-		#for child in self._arrows.get_children():
-		#	self.draw_sphere(child.get_name(), ARROW_RAD, child.global_transform.get_origin())
-
 	@gdmethod
 	def start_pushing(self, other:KinematicBody)->None:
-		print("start pushing", other)
 		self.pos_before = self.global_transform.get_origin()
 
 		self.set_collision_layer_bit(0, False)
@@ -100,8 +94,6 @@ class PushObj(StaticBody, Draw):
 		self._delta_pushing = self.global_transform.get_origin() - other.global_transform.get_origin()
 
 		self._is_pushing = False
-
-		print(self.get_collision_layer())
 
 		self._direction = self.get_direction(other)
 	
@@ -119,7 +111,6 @@ class PushObj(StaticBody, Draw):
 				return res.size() == 0
 		else:
 			if vector.get_y() != 0:
-				print("vector_y:",vector.get_y())
 				res = self._util.callv("sphere_cast",
 				Array(self.global_transform.get_origin() + Vector3(0,0,vector.get_y()),
 				0.02,Array(self), self.collision_layer_direction)).get_converted_value()
@@ -129,8 +120,6 @@ class PushObj(StaticBody, Draw):
 		return False
 
 	def get_direction(self, other:KinematicBody)->None:
-
-		print("################1111get_direction:")
 		min = 1000000
 		min_arrow:Optional[Spatial] = None
 		for arrow_index in range(0,self._arrows.get_children().size()):
@@ -139,8 +128,6 @@ class PushObj(StaticBody, Draw):
 				min_arrow = arrow
 				min = (arrow.global_transform.get_origin() - other.global_transform.get_origin()).length()
 
-		print("min_arrow:", min_arrow)
-		print(min_arrow.get_name())
 		if min_arrow:
 			return min_arrow.call("get_direction").get_converted_value()
 

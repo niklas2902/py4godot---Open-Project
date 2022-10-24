@@ -278,10 +278,9 @@ class CharHandler(KinematicBody, Draw):
 		return math.atan2(vel.x, vel_z)
 
 	def face_push_obj(self):
-		angle_to = math.atan2(self.transform.get_origin().x - self.selected_push_obj.transform.get_origin().x,
-							  -(self.transform.get_origin().z - self.selected_push_obj.transform.get_origin().z))
-		print("angle_to:", angle_to)
-		self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0, 1, 0), angle_to * math.pi))
+		angle_to = math.atan2(-(self.global_transform.get_origin().x - self.selected_push_obj.global_transform.get_origin().x),
+							  -(self.global_transform.get_origin().z - self.selected_push_obj.global_transform.get_origin().z))
+		self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0, 1, 0), angle_to))
 
 	def handle_ray(self):
 		"""handling the player clicking on a PushObj here"""
