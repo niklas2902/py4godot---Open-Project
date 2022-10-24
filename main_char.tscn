@@ -2278,7 +2278,6 @@ bone_name = "mixamorig_HeadTop_End"
 [node name="Hair" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
 transform = Transform( 45.9914, 0.0575093, 0.00875568, -0.0575093, 43.9076, 13.6869, 0.00875567, -13.6869, 43.9076, -0.153859, -117.13, 37.892 )
 mesh = SubResource( 37 )
-material/0 = null
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( -0.999911, 0.00333203, 0.0129898, -0.000482486, 0.959074, -0.283156, -0.0134017, -0.283136, -0.958988, -2.3219, 122.33, 0.309779 )
@@ -2287,7 +2286,6 @@ bone_name = "mixamorig_HeadTop_End"
 [node name="Hat1" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
 transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6869, 0.00875566, -13.6869, 43.9077, -0.153859, -117.13, 37.892 )
 mesh = SubResource( 38 )
-material/0 = null
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( -0.999911, 0.00333203, 0.0129898, -0.000482486, 0.959074, -0.283156, -0.0134017, -0.283136, -0.958988, -2.3219, 122.33, 0.309779 )
@@ -2296,7 +2294,6 @@ bone_name = "mixamorig_HeadTop_End"
 [node name="Hat2" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment3"]
 transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6869, 0.00875566, -13.6869, 43.9077, -0.153859, -117.13, 37.892 )
 mesh = SubResource( 39 )
-material/0 = null
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( -0.999911, 0.00333203, 0.0129898, -0.000482486, 0.959074, -0.283156, -0.0134017, -0.283136, -0.958988, -2.3219, 122.33, 0.309779 )
@@ -2305,7 +2302,6 @@ bone_name = "mixamorig_HeadTop_End"
 [node name="Plane" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment4"]
 transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6869, 0.00875566, -13.6869, 43.9077, -0.153859, -117.13, 37.892 )
 mesh = SubResource( 40 )
-material/0 = null
 
 [node name="BoneAttachment5" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( -0.998407, 0.0326997, 0.0460028, 0.0323183, 0.999437, -0.0090123, -0.0462717, -0.00751112, -0.998901, -3.71003, 87.1085, 1.05348 )
@@ -2314,7 +2310,6 @@ bone_name = "mixamorig_Spine1"
 [node name="Backpack" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment5"]
 transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521, -1.90242, 2.91694e-10, 1.90242, 45.9521, -0.000183105, -87.7994, -2.6456 )
 mesh = SubResource( 41 )
-material/0 = null
 
 [node name="BoneAttachment6" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( -0.998407, 0.0326997, 0.0460028, 0.0323183, 0.999437, -0.0090123, -0.0462717, -0.00751112, -0.998901, -3.71003, 87.1085, 1.05348 )
@@ -2323,7 +2318,6 @@ bone_name = "mixamorig_Spine1"
 [node name="BackpackButton" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment6"]
 transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521, -1.90242, 2.91694e-10, 1.90242, 45.9521, -0.000183105, -87.7994, -2.6456 )
 mesh = SubResource( 42 )
-material/0 = null
 
 [node name="BoneAttachment7" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( -0.998407, 0.0326997, 0.0460028, 0.0323183, 0.999437, -0.0090123, -0.0462717, -0.00751112, -0.998901, -3.71003, 87.1085, 1.05348 )
@@ -2332,7 +2326,6 @@ bone_name = "mixamorig_Spine1"
 [node name="BackpackButton2" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment7"]
 transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521, -1.90242, 2.91694e-10, 1.90242, 45.9521, -0.000183105, -87.7994, -2.6456 )
 mesh = SubResource( 43 )
-material/0 = null
 
 [node name="BoneAttachment8" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( -0.998407, 0.0326997, 0.0460028, 0.0323183, 0.999437, -0.0090123, -0.0462717, -0.00751112, -0.998901, -3.71003, 87.1085, 1.05348 )
@@ -2341,67 +2334,54 @@ bone_name = "mixamorig_Spine1"
 [node name="BackpackButton3" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment8"]
 transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521, -1.90242, 2.91694e-10, 1.90242, 45.9521, -0.000183105, -87.7994, -2.6456 )
 mesh = SubResource( 44 )
-material/0 = null
 
 [node name="Backpack2" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 45 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Belt" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 47 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Belt2" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 48 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Body" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 49 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Button" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 50 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Button2" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 51 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Button3" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 52 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Button4" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 53 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Clothes1" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 54 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Clothes2" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 55 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Shoes1" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 56 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="Shoes2" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 57 )
 skin = SubResource( 46 )
-material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle-loop = SubResource( 58 )
