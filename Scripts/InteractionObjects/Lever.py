@@ -8,10 +8,15 @@ from py4godot.pluginscript_api.hints import *
 @gdclass
 class Lever(StaticBody):
 
-    def __init__(self):
-        #Don't call any godot-methods here
-        super().__init__()
-        self._activated = True
+	def __init__(self)->None:
+		#Don't call any godot-methods here
+		super().__init__()
+		self._activated:bool = False
+	
+	@gdmethod
+	def ready(self)->None:
+		self._activated = self.activated
+		print("Activated:", self._activated)
 
-    prop("activated",bool, False)
+	prop("activated",int, 0, hint=FlagsHint("on"))
 

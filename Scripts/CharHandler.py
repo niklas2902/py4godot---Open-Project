@@ -307,20 +307,27 @@ class CharHandler(KinematicBody, Draw):
 			if result["position"] == None:
 				return None
 
-			self.push_obj_selected = result["collider"]
-			point_to_move_to = self.get_min_point(result["position"],
-												  result["collider"].get_node(NodePath("Triggers")).get_children(),
-												  result["collider"])
+			self.interpret_result(result)
 
-			self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to.global_transform.get_origin())
-			#self.path = self.navigation_obj.get_simple_path(self.global_transform.get_origin(),
-			#												point_to_move_to.global_transform.get_origin())
-			self.path = Array()
-			for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
-												   point_to_move_to.global_transform.get_origin()):
-				self.path.append(path_point)
+	def interpret_result(self, result):
+		collider:object = result["collider"].get_pyscript()
+		#TODO: Check why isinstance is not working
+		if collider.__class__.__name__ == PushObj.__name__:
+			self.handle_ray_hit_push_obj(result)
+		else:
+			print ("##############Error-unhandled#########################")
 
-			self.current_path_ind = 1
+	def handle_ray_hit_push_obj(self, result):
+		self.push_obj_selected = result["collider"]
+		point_to_move_to = self.get_min_point(result["position"],
+											  result["collider"].get_node(NodePath("Triggers")).get_children(),
+											  result["collider"])
+		self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to.global_transform.get_origin())
+		self.path = Array()
+		for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
+													 point_to_move_to.global_transform.get_origin()):
+			self.path.append(path_point)
+		self.current_path_ind = 1
 
 	def get_min_point(self, collider: Spatial, points: Array, alt_object: Spatial):
 		if (points.size() == 0):
