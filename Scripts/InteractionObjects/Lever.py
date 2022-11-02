@@ -12,11 +12,11 @@ class Lever(StaticBody):
 		#Don't call any godot-methods here
 		super().__init__()
 		self._activated:bool = False
-	
-	@gdmethod
-	def ready(self)->None:
-		self._activated = self.activated
-		print("Activated:", self._activated)
 
 	prop("activated",int, 0, hint=FlagsHint("on"))
+	
+	@gdmethod
+	def _ready(self)->None:
+		self._activated = bool(self.activated)
+		print("Activated:", self._activated)
 
