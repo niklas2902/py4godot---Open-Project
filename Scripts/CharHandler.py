@@ -1,4 +1,5 @@
 import typing
+from Scripts.InteractionObjects.Lever import Lever
 
 from Scripts.PushObj import PushObj
 from py4godot import *
@@ -310,13 +311,14 @@ class CharHandler(KinematicBody, Draw):
 			self.interpret_result(result)
 
 	def interpret_result(self, result):
-		collider:object = result["collider"].get_pyscript()
+		collider:Object = result["collider"].get_pyscript()
 		#TODO: Check why isinstance is not working
 		if collider.__class__.__name__ == PushObj.__name__:
 			self.handle_ray_hit_push_obj(result)
+		elif collider.__class__.__name__ == Lever.__name__:
+			print("Got lever as input")
 		else:
-			print ("##############Error-unhandled#########################")
-
+			raise Exception("handled click on unknown class")
 	def handle_ray_hit_push_obj(self, result):
 		self.push_obj_selected = result["collider"]
 		point_to_move_to = self.get_min_point(result["position"],
