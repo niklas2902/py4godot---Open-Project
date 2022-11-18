@@ -257,13 +257,14 @@ class CharHandler(KinematicBody, Draw):
 		if self.current_path_ind >= self.path.size():
 			self.path = None
 			self.current_path_ind = 0
-			self.selected_push_obj = self.push_obj_selected
-			self.selected_push_obj.callv("start_pushing", Array(self))
-			scripts:PushObj = typing.cast(PushObj,self.selected_push_obj.get_pyscript())
-			self._astar.enable_points(round(scripts.pos_before.x), round(scripts.pos_before.z), 2,2)
-			self.is_pushing = True
+			if self.push_obj_selected:
+				self.selected_push_obj = self.push_obj_selected
+				self.selected_push_obj.callv("start_pushing", Array(self))
+				scripts:PushObj = typing.cast(PushObj,self.selected_push_obj.get_pyscript())
+				self._astar.enable_points(round(scripts.pos_before.x), round(scripts.pos_before.z), 2,2)
+				self.is_pushing = True
 
-			self.face_push_obj()
+				self.face_push_obj()
 			return
 
 		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
@@ -316,10 +317,21 @@ class CharHandler(KinematicBody, Draw):
 		if collider.__class__.__name__ == PushObj.__name__:
 			self.handle_ray_hit_push_obj(result)
 		elif collider.__class__.__name__ == Lever.__name__:
-			print("Got lever as input")
+			self.handle_ray_hit_lever(result)
 		else:
 			raise Exception("handled click on unknown class")
-	def handle_ray_hit_push_obj(self, result):
+
+	def handle_ray_hit_lever(self, result:Dictionary)->None:
+		print("Got lever as input")
+		point_to_move_to:Vector3 = result["position"]
+		point_to_move_to = Vector3(point_to_move_to.x, 0, point_to_move_to.z)
+		self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to)
+		self.path = Array()
+		for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
+													 point_to_move_to):
+			self.path.append(path_point)
+		self.current_path_ind = 1
+	def handle_ray_hit_push_obj(self, result:Dictionary)->None:
 		self.push_obj_selected = result["collider"]
 		point_to_move_to = self.get_min_point(result["position"],
 											  result["collider"].get_node(NodePath("Triggers")).get_children(),
