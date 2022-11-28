@@ -31,6 +31,7 @@ class CharHandler(KinematicBody, Draw):
 		self._clicked_before: bool = False
 		self.selected_push_obj: Optional[KinematicBody] = None
 		self.push_obj_selected: Optional[Object] = None
+		self.lever_obj_selected: Optional[Object] = None
 		self.is_pushing: bool = False
 		self._max_dist: float = DEFAULT_MAX_DIST
 		self._sprint_dist: float = DEFAULT_SPRINT_DIST
@@ -265,6 +266,8 @@ class CharHandler(KinematicBody, Draw):
 				self.is_pushing = True
 
 				self.face_push_obj()
+			if self.lever_obj_selected:
+				print("##############handle lever")
 			return
 
 		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
@@ -323,7 +326,7 @@ class CharHandler(KinematicBody, Draw):
 
 	def handle_ray_hit_lever(self, result:Dictionary)->None:
 		print("Got lever as input")
-		point_to_move_to:Vector3 = result["position"]
+		point_to_move_to:Vector3 = typing.cast(Vector3,result["position"])
 		point_to_move_to = Vector3(point_to_move_to.x, 0, point_to_move_to.z)
 		self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to)
 		self.path = Array()
@@ -331,6 +334,7 @@ class CharHandler(KinematicBody, Draw):
 													 point_to_move_to):
 			self.path.append(path_point)
 		self.current_path_ind = 1
+		self.lever_obj_selected = result["Collider"]
 	def handle_ray_hit_push_obj(self, result:Dictionary)->None:
 		self.push_obj_selected = result["collider"]
 		point_to_move_to = self.get_min_point(result["position"],
