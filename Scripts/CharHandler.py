@@ -31,7 +31,7 @@ class CharHandler(KinematicBody, Draw):
 		self._clicked_before: bool = False
 		self.selected_push_obj: Optional[KinematicBody] = None
 		self.push_obj_selected: Optional[Object] = None
-		self.lever_obj_selected: Optional[Object] = None
+		self.lever_obj_selected: Optional[Lever] = None
 		self.is_pushing: bool = False
 		self._max_dist: float = DEFAULT_MAX_DIST
 		self._sprint_dist: float = DEFAULT_SPRINT_DIST
@@ -268,6 +268,8 @@ class CharHandler(KinematicBody, Draw):
 				self.face_push_obj()
 			if self.lever_obj_selected:
 				print("##############handle lever")
+				self.lever_obj_selected.trigger_connected_object()
+				self.lever_obj_selected = None
 			return
 
 		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
@@ -334,7 +336,7 @@ class CharHandler(KinematicBody, Draw):
 													 point_to_move_to):
 			self.path.append(path_point)
 		self.current_path_ind = 1
-		self.lever_obj_selected = result["Collider"]
+		self.lever_obj_selected = typing.cast(Node, result["collider"]).get_pyscript()
 	def handle_ray_hit_push_obj(self, result:Dictionary)->None:
 		self.push_obj_selected = result["collider"]
 		point_to_move_to = self.get_min_point(result["position"],

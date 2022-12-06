@@ -1,3 +1,4 @@
+from typing import Optional
 
 from py4godot import *
 
@@ -8,14 +9,29 @@ class TriggerObj(Spatial):
 		#Don't call any godot-methods here
 		super().__init__()
 		self.velocity = 0
-		
+		self.mesh:Optional[CSGMesh] = None
+
+	prop("mesh_path", NodePath, NodePath())
+
 	@gdmethod
-	def trigger_entered(self):
-		print("trigger_entered")
+	def _ready(self) ->None:
+		self.mesh = CSGMesh.cast(self.get_node(self.mesh_path))
+	@gdmethod
+	def action(self):
+		print("--------------action----------------")
+
+		self.set_color(Color(0,0,1))
+	def set_color(self, color:Color)->None:
+		material:SpatialMaterial = SpatialMaterial.cast(self.mesh.get_material())
+
+		if material == None:
+			#print("before new_mat")
+			new_mat:SpatialMaterial = SpatialMaterial._new()
+			self.mesh.material = new_mat
+			material = SpatialMaterial.cast(self.mesh.get_material())
+
+		material.albedo_color = color
 	
-	@gdmethod
-	def trigger_exited(self):
-		print("trigger_exited")
 
 
 
