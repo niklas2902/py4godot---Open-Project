@@ -18,14 +18,12 @@ class TriggerObj(Spatial):
 		self.mesh = CSGMesh.cast(self.get_node(self.mesh_path))
 	@gdmethod
 	def action(self):
-		print("--------------action----------------")
 
 		self.set_color(Color(0,0,1))
 	def set_color(self, color:Color)->None:
 		material:SpatialMaterial = SpatialMaterial.cast(self.mesh.get_material())
 
 		if material == None:
-			#print("before new_mat")
 			new_mat:SpatialMaterial = SpatialMaterial._new()
 			self.mesh.material = new_mat
 			material = SpatialMaterial.cast(self.mesh.get_material())

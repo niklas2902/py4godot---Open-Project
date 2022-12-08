@@ -26,8 +26,11 @@ class PlayerCam(Camera):
 		print("end_ready_camera")
 	@gdmethod
 	def _process(self, delta:float):
-		pass
-		#self.transform.set_origin(self.player.transform.get_origin() + Vector3(0,self._y_offset,self._z_offset))
+		self.transform.set_origin(self.player.transform.get_origin() + Vector3(0,self._y_offset,self._z_offset))
+
+	@gdmethod
+	def toggle_zoom(self)->None:
+		print("toggle_zoom")
 
 
 
