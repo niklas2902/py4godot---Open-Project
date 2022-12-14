@@ -17,9 +17,11 @@ class TriggerObj(Spatial):
 	def _ready(self) ->None:
 		self.mesh = CSGMesh.cast(self.get_node(self.mesh_path))
 	@gdmethod
-	def action(self):
-
-		self.set_color(Color(0,0,1))
+	def action(self, is_activated):
+		if(is_activated):
+			self.set_color(Color(0,0,1))
+		else:
+			self.set_color(Color(1,0,0))
 	def set_color(self, color:Color)->None:
 		material:SpatialMaterial = SpatialMaterial.cast(self.mesh.get_material())
 
