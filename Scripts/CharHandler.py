@@ -38,10 +38,11 @@ class CharHandler(KinematicBody, Draw):
 		self.test = None
 		self.astar_path:Optional[NodePath] = None
 		self._astar:Optional[NavAstar] = None
+		self._can_move:int = 1
 
 		print("init CharHandler")
 
-	prop("test", NodePath, NodePath())
+	prop("can_move", int, 1, hint=FlagsHint("enabled"))
 	prop("astar_path", NodePath, NodePath())
 
 	@gdproperty(NodePath, NodePath())
@@ -109,7 +110,8 @@ class CharHandler(KinematicBody, Draw):
 																	 Vector3(0, 0, 1), Vector3(0, 0, 0))
 		self.motion: Vector2 = Vector2(0, 0)
 		self.velocity: Vector3 = Vector3(0, 0, 0)
-		print("end_ ready_Char Handler")
+
+		self._can_move = bool(self.can_move)
 
 		# self.orientation.set_basis(self.orientation.get_basis().rotated(Vector3(0,1,0), math.pi*-self.rotation_angle))
 		self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0, 1, 0), math.pi * -self.rotation_angle))
@@ -123,10 +125,15 @@ class CharHandler(KinematicBody, Draw):
 
 	@gdmethod
 	def _process(self, delta: float):
+		if(not self._can_move):
+			return
 		self.emit_sound()
 
 	@gdmethod
 	def _physics_process(self, delta: float):
+		if not self._can_move:
+			self.animation_tree.set("parameters/Movement/blend_position", Variant(0))
+			return
 		ignore: bool = False
 		self.handle_ray()
 		self.draw_sphere(SPHERE_HANDLE, 2, self.transform.get_origin())
@@ -161,9 +168,12 @@ class CharHandler(KinematicBody, Draw):
 																   "get_delta_pushing").get_converted_value())
 
 	@gdmethod
-	def entered_ramp(self):
+	def entered_ramp(self) ->None:
 		self.is_on_ramp = True and not self.selected_push_obj
 
+	@gdmethod
+	def set_can_move(self, value:bool)->None:
+		self._can_move = value
 	def exited_ramp(self):
 		self.is_on_ramp = False
 
@@ -284,7 +294,7 @@ class CharHandler(KinematicBody, Draw):
 		self.apply_root_motion(delta, math.atan2(vel.x, vel_z))
 		return math.atan2(vel.x, vel_z)
 
-	def face_push_obj(self):
+	def face_push_obj(self)->None:
 		angle_to = math.atan2(-(self.global_transform.get_origin().x - self.selected_push_obj.global_transform.get_origin().x),
 							  -(self.global_transform.get_origin().z - self.selected_push_obj.global_transform.get_origin().z))
 		self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0, 1, 0), angle_to))
@@ -362,3 +372,13 @@ class CharHandler(KinematicBody, Draw):
 				return_val = point
 				min_dist = length
 		return return_val
+
+
+	def _on_Camera_zoomed_out(self)->None:
+		self._can_move = False
+	
+	def _on_Camera_zoomed_in(self)->None:
+		self._can_move = True
+	
+
+
