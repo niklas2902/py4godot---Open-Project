@@ -1,5 +1,4 @@
-import typing
-from typing import cast
+from typing import *
 
 from py4godot import *
 
@@ -9,6 +8,7 @@ MOUSE_ACTION = "mouse_action"
 class PlayerCam(Camera):
 	def __init__(self):
 		super().__init__()
+		self.start_origin = None
 		print("__init__camera")
 		self._player_path:NodePath = None
 		self._y_offset:float = 0
@@ -16,6 +16,8 @@ class PlayerCam(Camera):
 		self.scale_multiply:float = 1
 		self.is_zooming_in:bool = False
 		self.is_key_down:bool = False
+		self.last_mouse_pos: Optional[Vector2] = None
+		self.start_mouse_pos: Optional[Vector2] = None
 		print("end_init_camera")
 
 	prop("scale_multipy", int, 1)
@@ -43,14 +45,35 @@ class PlayerCam(Camera):
 		self.tween = self.create_tween()
 	@gdmethod
 	def _process(self, delta:float):
-		self.transform.set_origin(self.player.transform.get_origin() + Vector3(0,self._y_offset,self._z_offset) * self.scale_multiply)
+		if not self.is_key_down:
+			self.transform.set_origin(self.player.transform.get_origin() + Vector3(0,self._y_offset,self._z_offset) * self.scale_multiply)
 		self.handle_zoom_input()
 	@gdmethod
 	def handle_zoom_input(self):
 		input = Input.instance()
-		if(input.is_action_pressed(MOUSE_ACTION)):
+		if(input.is_action_just_pressed(MOUSE_ACTION)):
 			print("action_pressed")
+			self.is_key_down = True
+			#self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(0,1,0), 0.1))
+			#self.look_at(self.player.global_transform.get_origin(), Vector3(0,1,0))
+			self.start_mouse_pos = self.get_viewport().get_mouse_position()
+			self.start_origin = self.global_transform.get_origin()
+
+		elif(input.is_action_just_released(MOUSE_ACTION)):
+			print("action_release")
 			self.is_key_down = False
+			self.last_mouse_pos = None
+
+		if (input.is_action_pressed(MOUSE_ACTION)):
+			if(self.last_mouse_pos != None):
+				print("diff_mouue_pos:", self.get_viewport().get_mouse_position() - self.start_mouse_pos)
+			self.last_mouse_pos =  self.get_viewport().get_mouse_position()
+			self.global_transform.set_origin(self.start_origin)
+			self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(0, 1, 0), (self.start_mouse_pos.get_x() - self.last_mouse_pos.get_x())/100.))
+			#self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(1, 0, 0), (
+			#			self.start_mouse_pos.get_y() - self.last_mouse_pos.get_y()) / 100.))
+			self.look_at(self.player.global_transform.get_origin(), Vector3(0, 1, 0))
+
 	@gdmethod
 	def toggle_zoom(self)->None:
 		print("toggle_zoom")
@@ -64,12 +87,12 @@ class PlayerCam(Camera):
 	def _on_zoom_in(self)->None:
 		print("on_zoom_in")
 		print("#############hallo################")
-		child:Node = Node.cast(typing.cast(Node,self.get_children()[0]))
+		child:Node = Node.cast(cast(Node,self.get_children()[0]))
 		child.call("start_zoom_anim_in")
 		self.is_zooming_in = True
 
 	def _on_zoom_out(self)->None:
-		child:Node = Node.cast(typing.cast(Node,self.get_children()[0]))
+		child:Node = Node.cast(cast(Node,self.get_children()[0]))
 		print(child)
 		child.call("start_zoom_anim_out")
 		self.emit_signal("zoomed_out")
