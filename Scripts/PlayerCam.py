@@ -70,8 +70,10 @@ class PlayerCam(Camera):
 			self.last_mouse_pos =  self.get_viewport().get_mouse_position()
 			self.global_transform.set_origin(self.start_origin)
 			self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(0, 1, 0), (self.start_mouse_pos.get_x() - self.last_mouse_pos.get_x())/100.))
-			#self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(1, 0, 0), (
-			#			self.start_mouse_pos.get_y() - self.last_mouse_pos.get_y()) / 100.))
+			forward_vector = Vector3(self.global_transform.get_origin().get_axis(0), 0, self.global_transform.get_origin().get_axis(2)).normalized()
+			self.global_transform.set_origin(self.global_transform.get_origin().rotated(forward_vector, (
+						self.start_mouse_pos.get_y() - self.last_mouse_pos.get_y()) / 100.))
+
 			self.look_at(self.player.global_transform.get_origin(), Vector3(0, 1, 0))
 
 	@gdmethod
