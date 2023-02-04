@@ -8,7 +8,8 @@ MOUSE_ACTION = "mouse_action"
 class PlayerCam(Camera):
 	def __init__(self):
 		super().__init__()
-		self.start_origin = None
+		self.start_origin:Optional[Vector3] = None
+		self.start_pos:Optional[Vector3] = None
 		print("__init__camera")
 		self._player_path:NodePath = None
 		self._y_offset:float = 0
@@ -18,6 +19,7 @@ class PlayerCam(Camera):
 		self.is_key_down:bool = False
 		self.last_mouse_pos: Optional[Vector2] = None
 		self.start_mouse_pos: Optional[Vector2] = None
+		self.is_zoomed_in:bool = True
 		print("end_init_camera")
 
 	prop("scale_multipy", int, 1)
@@ -51,6 +53,8 @@ class PlayerCam(Camera):
 	@gdmethod
 	def handle_zoom_input(self):
 		input = Input.instance()
+		if self.is_zoomed_in:
+			return
 		if(input.is_action_just_pressed(MOUSE_ACTION)):
 			print("action_pressed")
 			self.is_key_down = True
@@ -58,11 +62,15 @@ class PlayerCam(Camera):
 			#self.look_at(self.player.global_transform.get_origin(), Vector3(0,1,0))
 			self.start_mouse_pos = self.get_viewport().get_mouse_position()
 			self.start_origin = self.global_transform.get_origin()
+			self.start_pos = self.global_transform.get_origin()
 
-		elif(input.is_action_just_released(MOUSE_ACTION)):
+		elif(input.is_action_just_released(MOUSE_ACTION) and self.scale_multiply == 7):
 			print("action_release")
 			self.is_key_down = False
 			self.last_mouse_pos = None
+			self.global_transform.set_origin(self.start_pos)
+			self.look_at(self.player.global_transform.get_origin(), Vector3(0, 1, 0))
+
 
 		if (input.is_action_pressed(MOUSE_ACTION)):
 			if(self.last_mouse_pos != None):
@@ -70,7 +78,7 @@ class PlayerCam(Camera):
 			self.last_mouse_pos =  self.get_viewport().get_mouse_position()
 			self.global_transform.set_origin(self.start_origin)
 			self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(0, 1, 0), (self.start_mouse_pos.get_x() - self.last_mouse_pos.get_x())/100.))
-			forward_vector = Vector3(self.global_transform.get_origin().get_axis(0), 0, self.global_transform.get_origin().get_axis(2)).normalized()
+			forward_vector:Vector3 = Vector3(self.global_transform.get_origin().get_axis(0), 0, self.global_transform.get_origin().get_axis(2)).normalized()
 			self.global_transform.set_origin(self.global_transform.get_origin().rotated(forward_vector, (
 						self.start_mouse_pos.get_y() - self.last_mouse_pos.get_y()) / 100.))
 
@@ -85,6 +93,7 @@ class PlayerCam(Camera):
 		self.scale_multiply = value
 		if(self.is_zooming_in and value == 1):
 			self.emit_signal("zoomed_in")
+			self.is_zoomed_in = True
 
 	def _on_zoom_in(self)->None:
 		print("on_zoom_in")
@@ -99,4 +108,5 @@ class PlayerCam(Camera):
 		child.call("start_zoom_anim_out")
 		self.emit_signal("zoomed_out")
 		self.is_zooming_in = False
+		self.is_zoomed_in = False
 
