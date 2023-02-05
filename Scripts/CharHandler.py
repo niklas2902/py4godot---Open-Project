@@ -39,6 +39,8 @@ class CharHandler(KinematicBody, Draw):
 		self.astar_path:Optional[NodePath] = None
 		self._astar:Optional[NavAstar] = None
 		self._can_move:int = 1
+		self._move_possible :bool = False
+
 
 		print("init CharHandler")
 
@@ -125,13 +127,13 @@ class CharHandler(KinematicBody, Draw):
 
 	@gdmethod
 	def _process(self, delta: float):
-		if(not self._can_move):
+		if not self._can_move:
 			return
 		self.emit_sound()
 
 	@gdmethod
 	def _physics_process(self, delta: float):
-		if not self._can_move:
+		if not self._can_move or not self._move_possible:
 			self.animation_tree.set("parameters/Movement/blend_position", Variant(0))
 			return
 		ignore: bool = False
@@ -380,5 +382,17 @@ class CharHandler(KinematicBody, Draw):
 	def _on_Camera_zoomed_in(self)->None:
 		self._can_move = True
 	
+	@gdmethod 
+	def move_impossible(self)->None:
+		print("move impossible")
+		self._move_possible = False
+	
+	@gdmethod
+	def move_possible(self)->None:
+		print("move_possible")
+		self._move_possible = True
+
+
+
 
 
