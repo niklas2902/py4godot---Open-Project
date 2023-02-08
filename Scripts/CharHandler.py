@@ -39,7 +39,7 @@ class CharHandler(KinematicBody, Draw):
 		self.astar_path:Optional[NodePath] = None
 		self._astar:Optional[NavAstar] = None
 		self._can_move:int = 1
-		self._move_possible :bool = False
+		self._move_possible :bool = True
 
 
 		print("init CharHandler")
