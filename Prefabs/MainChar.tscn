@@ -2030,10 +2030,10 @@ node = NodePath("..")
 [node name="main_char" type="KinematicBody" parent="."]
 collision_mask = 223
 script = ExtResource( 13 )
+node = NodePath("AnimationTree")
 navigation = NodePath("../Navigation")
 push_obj_layer = 32
 astar_path = NodePath("../AStar")
-node = NodePath("AnimationTree")
 
 [node name="Armature" type="Spatial" parent="main_char"]
 transform = Transform( -0.0217432, 3.09688e-16, -7.08485e-09, -5.34099e-22, 0.0217432, 9.50426e-10, 7.08485e-09, 9.50426e-10, -0.0217432, 0, 0, 0 )
@@ -2371,7 +2371,7 @@ bones/65/enabled = true
 bones/65/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998247, 0.0137311, 0.0575834, -0.000463589, 0.970883, -0.239553, -0.0591967, -0.239159, -0.969173, -2.85152, 122.324, 1.38348 )
+transform = Transform( -0.998699, 0.0139257, 0.0490654, -0.00024325, 0.960691, -0.277619, -0.0510034, -0.277269, -0.959437, -2.77872, 122.32, 0.886661 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hair" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment"]
@@ -2379,7 +2379,7 @@ transform = Transform( 45.9914, 0.0575093, 0.00875568, -0.0575093, 43.9076, 13.6
 mesh = SubResource( 1 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998247, 0.0137311, 0.0575834, -0.000463589, 0.970883, -0.239553, -0.0591967, -0.239159, -0.969173, -2.85152, 122.324, 1.38348 )
+transform = Transform( -0.998699, 0.0139257, 0.0490654, -0.00024325, 0.960691, -0.277619, -0.0510034, -0.277269, -0.959437, -2.77872, 122.32, 0.886661 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hat1" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment2"]
@@ -2387,7 +2387,7 @@ transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6
 mesh = SubResource( 2 )
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998247, 0.0137311, 0.0575834, -0.000463589, 0.970883, -0.239553, -0.0591967, -0.239159, -0.969173, -2.85152, 122.324, 1.38348 )
+transform = Transform( -0.998699, 0.0139257, 0.0490654, -0.00024325, 0.960691, -0.277619, -0.0510034, -0.277269, -0.959437, -2.77872, 122.32, 0.886661 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hat2" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment3"]
@@ -2395,7 +2395,7 @@ transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6
 mesh = SubResource( 3 )
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998247, 0.0137311, 0.0575834, -0.000463589, 0.970883, -0.239553, -0.0591967, -0.239159, -0.969173, -2.85152, 122.324, 1.38348 )
+transform = Transform( -0.998699, 0.0139257, 0.0490654, -0.00024325, 0.960691, -0.277619, -0.0510034, -0.277269, -0.959437, -2.77872, 122.32, 0.886661 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Plane" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment4"]
@@ -2403,7 +2403,7 @@ transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6
 mesh = SubResource( 4 )
 
 [node name="BoneAttachment5" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.99684, 0.027525, 0.0745213, 0.0278398, 0.999607, 0.0031896, -0.0744042, 0.00525399, -0.997214, -4.18191, 87.1017, 1.17569 )
+transform = Transform( -0.996552, 0.0273936, 0.0783244, 0.0272005, 0.999624, -0.00353052, -0.0783916, -0.00138806, -0.996921, -4.126, 87.0934, 1.39829 )
 bone_name = "mixamorig_Spine1"
 
 [node name="Backpack" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment5"]
@@ -2411,7 +2411,7 @@ transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521
 mesh = SubResource( 5 )
 
 [node name="BoneAttachment6" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.99684, 0.027525, 0.0745213, 0.0278398, 0.999607, 0.0031896, -0.0744042, 0.00525399, -0.997214, -4.18191, 87.1017, 1.17569 )
+transform = Transform( -0.996552, 0.0273936, 0.0783244, 0.0272005, 0.999624, -0.00353052, -0.0783916, -0.00138806, -0.996921, -4.126, 87.0934, 1.39829 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment6"]
@@ -2419,7 +2419,7 @@ transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521
 mesh = SubResource( 6 )
 
 [node name="BoneAttachment7" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.99684, 0.027525, 0.0745213, 0.0278398, 0.999607, 0.0031896, -0.0744042, 0.00525399, -0.997214, -4.18191, 87.1017, 1.17569 )
+transform = Transform( -0.996552, 0.0273936, 0.0783244, 0.0272005, 0.999624, -0.00353052, -0.0783916, -0.00138806, -0.996921, -4.126, 87.0934, 1.39829 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton2" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment7"]
@@ -2427,7 +2427,7 @@ transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521
 mesh = SubResource( 7 )
 
 [node name="BoneAttachment8" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.99684, 0.027525, 0.0745213, 0.0278398, 0.999607, 0.0031896, -0.0744042, 0.00525399, -0.997214, -4.18191, 87.1017, 1.17569 )
+transform = Transform( -0.996552, 0.0273936, 0.0783244, 0.0272005, 0.999624, -0.00353052, -0.0783916, -0.00138806, -0.996921, -4.126, 87.0934, 1.39829 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton3" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment8"]
@@ -2543,10 +2543,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.704, 1, 0 )
 collision_layer = 33
 collision_mask = 33
 script = ExtResource( 15 )
-collision_layer_direction = 97
 push_layer = 0
-util_path = NodePath("../../../Util")
 trigger = NodePath("Triggers")
+collision_layer_direction = 97
+util_path = NodePath("../../../Util")
 arrow_path = NodePath("ArrawPos")
 
 [node name="CSGMesh" type="CSGMesh" parent="Navigation/NavigationMeshInstance/PushObj"]
@@ -2595,33 +2595,33 @@ mesh = SubResource( 47 )
 [node name="Trigger1" type="Spatial" parent="Navigation/NavigationMeshInstance/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.19474 )
 script = ExtResource( 4 )
-util_path = NodePath("../../../../../Util")
 orientation = 1
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger2" type="Spatial" parent="Navigation/NavigationMeshInstance/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.35827 )
 script = ExtResource( 4 )
-util_path = NodePath("../../../../../Util")
 orientation = 2
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger3" type="Spatial" parent="Navigation/NavigationMeshInstance/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71112, 0, 0.0103167 )
 script = ExtResource( 4 )
-util_path = NodePath("../../../../../Util")
 orientation = 4
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger4" type="Spatial" parent="Navigation/NavigationMeshInstance/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37227, 0, 0.0206334 )
 script = ExtResource( 4 )
-util_path = NodePath("../../../../../Util")
 orientation = 8
+util_path = NodePath("../../../../../Util")
 
 [node name="PushObj3" type="StaticBody" parent="Navigation/NavigationMeshInstance" groups=["obstacle"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.704, 1, 4.12028 )
 collision_mask = 33
 script = ExtResource( 15 )
-util_path = NodePath("../../../Util")
 trigger = NodePath("Triggers")
+util_path = NodePath("../../../Util")
 arrow_path = NodePath("ArrawPos")
 
 [node name="CSGMesh" type="CSGMesh" parent="Navigation/NavigationMeshInstance/PushObj3"]
@@ -2670,26 +2670,26 @@ mesh = SubResource( 47 )
 [node name="Trigger1" type="Spatial" parent="Navigation/NavigationMeshInstance/PushObj3/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.15374 )
 script = ExtResource( 4 )
-util_path = NodePath("../../../../../Util")
 orientation = 1
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger2" type="Spatial" parent="Navigation/NavigationMeshInstance/PushObj3/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.09569 )
 script = ExtResource( 4 )
-util_path = NodePath("../../../../../Util")
 orientation = 2
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger3" type="Spatial" parent="Navigation/NavigationMeshInstance/PushObj3/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71112, 0, 0.0103167 )
 script = ExtResource( 4 )
-util_path = NodePath("../../../../../Util")
 orientation = 4
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger4" type="Spatial" parent="Navigation/NavigationMeshInstance/PushObj3/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11146, 0, 0.0103167 )
 script = ExtResource( 4 )
-util_path = NodePath("../../../../../Util")
 orientation = 8
+util_path = NodePath("../../../../../Util")
 
 [node name="GroundObj" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0132506, 0.918345, 5.56421 )
@@ -2801,6 +2801,7 @@ script = ExtResource( 24 )
 
 [connection signal="zoomed_in" from="Camera" to="main_char" method="_on_Camera_zoomed_in"]
 [connection signal="zoomed_out" from="Camera" to="main_char" method="_on_Camera_zoomed_out"]
+[connection signal="finished_animation" from="Camera/GDAdapter" to="Camera" method="finished_animation"]
 [connection signal="area_entered" from="main_char/OnRampCheck" to="main_char/OnRampCheck" method="_on_OnRampCheck_area_entered"]
 [connection signal="body_entered" from="main_char/OnRampCheck" to="main_char/OnRampCheck" method="_on_Area_body_entered"]
 [connection signal="body_exited" from="main_char/OnRampCheck" to="main_char/OnRampCheck" method="_on_Area_body_exited"]

@@ -20,6 +20,7 @@ class PlayerCam(Camera):
 		self.last_mouse_pos: Optional[Vector2] = None
 		self.start_mouse_pos: Optional[Vector2] = None
 		self.is_zoomed_in:bool = True
+		self.is_animating:bool = False
 		print("end_init_camera")
 
 	prop("scale_multipy", int, 1)
@@ -53,7 +54,8 @@ class PlayerCam(Camera):
 	@gdmethod
 	def handle_zoom_input(self):
 		input = Input.instance()
-		if self.is_zoomed_in:
+		if self.is_zoomed_in or self.is_animating:
+			self.is_key_down = False
 			return
 		if(input.is_action_just_pressed(MOUSE_ACTION)):
 			print("action_pressed")
@@ -101,6 +103,7 @@ class PlayerCam(Camera):
 		child:Node = Node.cast(cast(Node,self.get_children()[0]))
 		child.call("start_zoom_anim_in")
 		self.is_zooming_in = True
+		self.is_animating = True
 
 	def _on_zoom_out(self)->None:
 		child:Node = Node.cast(cast(Node,self.get_children()[0]))
@@ -109,4 +112,13 @@ class PlayerCam(Camera):
 		self.emit_signal("zoomed_out")
 		self.is_zooming_in = False
 		self.is_zoomed_in = False
+		self.is_animating = True
+
+	def finished_animation(self)->None:
+		print("#############finished_zoom###########")
+		self.is_animating = False
+
+
+
+
 
