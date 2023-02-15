@@ -1,8 +1,10 @@
 from typing import *
+import copy
 
 from py4godot import *
 
 MOUSE_ACTION = "mouse_action"
+ROTATION_SCALE = 100.
 
 @gdclass
 class PlayerCam(Camera):
@@ -35,7 +37,6 @@ class PlayerCam(Camera):
 
 	@gdmethod
 	def _ready(self):
-		print("ready_camera")
 		self.player:KinematicBody = KinematicBody.cast(self.get_node(self.player_path))
 		self._z_offset = -(self.player.transform.get_origin().get_axis(2) - self.transform.get_origin().get_axis(2))
 		self._y_offset = -(self.player.transform.get_origin().get_axis(1) - self.transform.get_origin().get_axis(1))
@@ -43,9 +44,8 @@ class PlayerCam(Camera):
 		self.start:Variant = Variant(1)
 		self.end:Variant = Variant(10)
 		self.duration = 10
-		print("end_ready_camera")
-		
-		self.tween = self.create_tween()
+
+		self.rotate_cam_to_player()
 	@gdmethod
 	def _process(self, delta:float):
 		if not self.is_key_down:
@@ -58,33 +58,40 @@ class PlayerCam(Camera):
 			self.is_key_down = False
 			return
 		if(input.is_action_just_pressed(MOUSE_ACTION)):
-			print("action_pressed")
-			self.is_key_down = True
-			#self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(0,1,0), 0.1))
-			#self.look_at(self.player.global_transform.get_origin(), Vector3(0,1,0))
-			self.start_mouse_pos = self.get_viewport().get_mouse_position()
-			self.start_origin = self.global_transform.get_origin()
-			self.start_pos = self.global_transform.get_origin()
+			self.init_move_around_cam()
 
 		elif(input.is_action_just_released(MOUSE_ACTION) and self.scale_multiply == 7):
-			print("action_release")
-			self.is_key_down = False
-			self.last_mouse_pos = None
-			self.global_transform.set_origin(self.start_pos)
-			self.look_at(self.player.global_transform.get_origin(), Vector3(0, 1, 0))
-
+			self.finish_move_around_cam()
 
 		if (input.is_action_pressed(MOUSE_ACTION)):
-			if(self.last_mouse_pos != None):
-				print("diff_mouue_pos:", self.get_viewport().get_mouse_position() - self.start_mouse_pos)
-			self.last_mouse_pos =  self.get_viewport().get_mouse_position()
-			self.global_transform.set_origin(self.start_origin)
-			self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(0, 1, 0), (self.start_mouse_pos.get_x() - self.last_mouse_pos.get_x())/100.))
-			forward_vector:Vector3 = Vector3(self.global_transform.get_origin().get_axis(0), 0, self.global_transform.get_origin().get_axis(2)).normalized()
-			self.global_transform.set_origin(self.global_transform.get_origin().rotated(forward_vector, (
-						self.start_mouse_pos.get_y() - self.last_mouse_pos.get_y()) / 100.))
+			self.set_position_of_cam()
 
-			self.look_at(self.player.global_transform.get_origin(), Vector3(0, 1, 0))
+			self.rotate_cam_to_player()
+
+	def rotate_cam_to_player(self):
+		self.look_at(self.player.global_transform.get_origin(), Vector3(0, 1, 0))
+
+	def set_position_of_cam(self):
+		self.last_mouse_pos = self.get_viewport().get_mouse_position()
+		self.global_transform.set_origin(self.start_origin)
+		self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(0, 1, 0), (
+					self.start_mouse_pos.get_x() - self.last_mouse_pos.get_x()) / 100.))
+		forward_vector: Vector3 = Vector3(self.global_transform.get_origin().get_axis(0), 0,
+										  self.global_transform.get_origin().get_axis(2)).normalized()
+		self.global_transform.set_origin(self.global_transform.get_origin().rotated(forward_vector, (
+				self.start_mouse_pos.get_y() - self.last_mouse_pos.get_y()) / ROTATION_SCALE))
+
+	def finish_move_around_cam(self):
+		self.is_key_down = False
+		self.last_mouse_pos = None
+		self.global_transform.set_origin(self.start_pos)
+		self.rotate_cam_to_player()
+
+	def init_move_around_cam(self):
+		self.start_origin = self.global_transform.get_origin()
+		self.is_key_down = True
+		self.start_mouse_pos = self.get_viewport().get_mouse_position()
+		self.start_pos = self.global_transform.get_origin()
 
 	@gdmethod
 	def toggle_zoom(self)->None:
