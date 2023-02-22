@@ -171,6 +171,7 @@ class CharHandler(KinematicBody, Draw):
 
 	@gdmethod
 	def entered_ramp(self) ->None:
+		print("entered_ram")
 		self.is_on_ramp = True and not self.selected_push_obj
 
 	@gdmethod
