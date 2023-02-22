@@ -58,6 +58,7 @@ class PlayerCam(Camera):
 			self.is_key_down = False
 			return
 		if(input.is_action_just_pressed(MOUSE_ACTION)):
+			print("ACTION Just Pressed")
 			self.init_move_around_cam()
 
 		elif(input.is_action_just_released(MOUSE_ACTION) and self.scale_multiply == 7):
@@ -65,13 +66,14 @@ class PlayerCam(Camera):
 
 		if (input.is_action_pressed(MOUSE_ACTION)):
 			self.set_position_of_cam()
-
 			self.rotate_cam_to_player()
 
-	def rotate_cam_to_player(self):
+	def rotate_cam_to_player(self)->None:
 		self.look_at(self.player.global_transform.get_origin(), Vector3(0, 1, 0))
 
-	def set_position_of_cam(self):
+	def set_position_of_cam(self)->None:
+		if self.start_mouse_pos is None:
+			return
 		self.last_mouse_pos = self.get_viewport().get_mouse_position()
 		self.global_transform.set_origin(self.start_origin)
 		self.global_transform.set_origin(self.global_transform.get_origin().rotated(Vector3(0, 1, 0), (
@@ -81,13 +83,15 @@ class PlayerCam(Camera):
 		self.global_transform.set_origin(self.global_transform.get_origin().rotated(forward_vector, (
 				self.start_mouse_pos.get_y() - self.last_mouse_pos.get_y()) / ROTATION_SCALE))
 
-	def finish_move_around_cam(self):
+	def finish_move_around_cam(self)->None:
+		if not self.start_pos:
+			return
 		self.is_key_down = False
 		self.last_mouse_pos = None
 		self.global_transform.set_origin(self.start_pos)
 		self.rotate_cam_to_player()
 
-	def init_move_around_cam(self):
+	def init_move_around_cam(self)->None:
 		self.start_origin = self.global_transform.get_origin()
 		self.is_key_down = True
 		self.start_mouse_pos = self.get_viewport().get_mouse_position()
@@ -98,7 +102,7 @@ class PlayerCam(Camera):
 		print("toggle_zoom")
 
 	@gdmethod
-	def tween_method(self, value):
+	def tween_method(self, value)->None:
 		self.scale_multiply = value
 		if(self.is_zooming_in and value == 1):
 			self.emit_signal("zoomed_in")
