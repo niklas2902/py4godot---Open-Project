@@ -4,6 +4,7 @@ from typing import Optional
 
 ARROW_RAD = 0.5
 PUSHLAYER = 7
+SIZE=2
 @gdclass
 class PushObj(StaticBody, Draw):
 	
@@ -101,19 +102,23 @@ class PushObj(StaticBody, Draw):
 	def is_move_allowed(self, vector:Vector2)->bool:
 		if(self._direction == "east" or self._direction == "west"):
 			if vector.get_x() != 0 :
-				res = self._util.callv("sphere_cast", 
-				Array(self.global_transform.get_origin() + 
-				Vector3(vector.get_x(),0,0),
-				0.02,Array(self), self.collision_layer_direction)).get_converted_value()
+				origin: Vector3 = self.global_transform.get_origin()
+				origin.y -= SIZE/2
+				res = self._util.callv("box_cast",
+				Array(origin +
+				Vector3(vector.get_x(),0,0),0.02,0.02,SIZE,
+				Array(self), self.collision_layer_direction)).get_converted_value()
 
 				self.draw_sphere("push", 1, self.global_transform.get_origin() + 
 				Vector3(vector.get_x(),0,0))
 				return res.size() == 0
 		else:
 			if vector.get_y() != 0:
-				res = self._util.callv("sphere_cast",
-				Array(self.global_transform.get_origin() + Vector3(0,0,vector.get_y()),
-				0.02,Array(self), self.collision_layer_direction)).get_converted_value()
+				origin: Vector3 = self.global_transform.get_origin()
+				origin.y -= SIZE/2
+				res = self._util.callv("box_cast",
+				Array(origin + Vector3(0,0,vector.get_y()),
+				SIZE,0.02,0.02,Array(self), self.collision_layer_direction)).get_converted_value()
 				self.draw_sphere("push", 1, self.global_transform.get_origin() +
 				Vector3(0,0,vector.get_y()))
 				return res.size() == 0
