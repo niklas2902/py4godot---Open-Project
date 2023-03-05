@@ -28,6 +28,7 @@ class PlayerCam(Camera):
 	prop("scale_multipy", int, 1)
 	register_signal("zoomed_out")
 	register_signal("zoomed_in")
+	register_signal("finished_animation")
 	@gdproperty(NodePath, NodePath())
 	def player_path(self):
 		return self._player_path
@@ -128,6 +129,7 @@ class PlayerCam(Camera):
 	def finished_animation(self)->None:
 		print("#############finished_zoom###########")
 		self.is_animating = False
+		self.emit_signal("finished_animation")
 
 
 
