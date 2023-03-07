@@ -45,7 +45,6 @@ class AStar(Spatial, Draw):
 	def _ready(self):
 		self.astar = py4godot.AStar._new()
 		self.walkables = self.get_tree().get_nodes_in_group(WALKABLE_GROUP)
-		self.get_pyscript().method()
 
 		self.disable_enable_collision(True)
 
@@ -84,8 +83,6 @@ class AStar(Spatial, Draw):
 		for point in self.disabled_points:
 			self.draw_sphere(point.id, DRAW_RAD, point.position,
 							 color=Color(1,0,0) if point in self.disabled_points else Color(1,1,1))
-	def method(self):
-		print("method")
 
 	def disable_obstacles(self):
 		for node in self.get_tree().get_nodes_in_group("obstacle"):

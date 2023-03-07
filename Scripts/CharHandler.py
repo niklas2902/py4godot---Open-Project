@@ -41,9 +41,6 @@ class CharHandler(KinematicBody, Draw):
 		self._can_move:int = 1
 		self._move_possible :bool = True
 
-
-		print("init CharHandler")
-
 	prop("can_move", int, 1, hint=FlagsHint("enabled"))
 	prop("astar_path", NodePath, NodePath())
 
@@ -93,7 +90,6 @@ class CharHandler(KinematicBody, Draw):
 
 	@gdmethod
 	def _ready(self):
-		print("ready_Char Handler")
 		self.path: Optional[Array] = None
 		self.current_path_ind: int = 0
 		self.immediate_geometry_init(self, SPHERE_HANDLE)
@@ -164,14 +160,12 @@ class CharHandler(KinematicBody, Draw):
 		self.sound = min(1, self.get_speed(ignore))
 
 		if (self.selected_push_obj != None):
-			# print("delta_pushing:",self.selected_push_obj.call("get_delta_pushing").get_converted_value())
 			self.selected_push_obj.global_transform.set_origin(self.global_transform.get_origin() + \
 															   self.selected_push_obj.call(
 																   "get_delta_pushing").get_converted_value())
 
 	@gdmethod
 	def entered_ramp(self) ->None:
-		print("entered_ram")
 		self.is_on_ramp = True and not self.selected_push_obj
 
 	@gdmethod
@@ -262,8 +256,6 @@ class CharHandler(KinematicBody, Draw):
 	def emit_sound(self):
 		pass
 
-	# print("sound:",self.sound)
-
 	def follow_path(self, delta: float):
 		if self.path == None:
 			return
@@ -280,7 +272,6 @@ class CharHandler(KinematicBody, Draw):
 
 				self.face_push_obj()
 			if self.lever_obj_selected:
-				print("##############handle lever")
 				self.lever_obj_selected.trigger_connected_object()
 				self.lever_obj_selected = None
 			return
@@ -322,7 +313,6 @@ class CharHandler(KinematicBody, Draw):
 																	   from_ + camera.project_ray_normal(
 																		   mouse_pos) * ray_length, exclude,
 																	   collision_mask=self.push_obj_layer)
-			print("result:", result["name"])
 
 			if result["position"] == None:
 				return None
@@ -340,7 +330,6 @@ class CharHandler(KinematicBody, Draw):
 			raise Exception("handled click on unknown class")
 
 	def handle_ray_hit_lever(self, result:Dictionary)->None:
-		print("Got lever as input")
 		point_to_move_to:Vector3 = typing.cast(Vector3,result["position"])
 		point_to_move_to = Vector3(point_to_move_to.x, 0, point_to_move_to.z)
 		self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to)
@@ -385,12 +374,10 @@ class CharHandler(KinematicBody, Draw):
 	
 	@gdmethod 
 	def move_impossible(self)->None:
-		print("move impossible")
 		self._move_possible = False
 	
 	@gdmethod
 	def move_possible(self)->None:
-		print("move_possible")
 		self._move_possible = True
 
 

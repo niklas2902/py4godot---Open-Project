@@ -2036,7 +2036,7 @@ push_obj_layer = 32
 astar_path = NodePath("../AStar")
 
 [node name="Armature" type="Spatial" parent="main_char"]
-transform = Transform( -0.0217432, 3.09688e-16, -7.08485e-09, -5.52516e-22, 0.0217432, 9.50426e-10, 7.08485e-09, 9.50426e-10, -0.0217432, 0, 0, 0 )
+transform = Transform( -0.0217432, 3.09688e-16, -7.08485e-09, -5.15682e-22, 0.0217432, 9.50426e-10, 7.08485e-09, 9.50426e-10, -0.0217432, 0, 0, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="main_char/Armature"]
 bones/0/name = "Bone"
@@ -2371,7 +2371,7 @@ bones/65/enabled = true
 bones/65/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998622, 0.0117006, 0.0511804, -0.000982665, 0.970511, -0.241053, -0.0524923, -0.24077, -0.969161, -2.8081, 122.321, 1.27569 )
+transform = Transform( -0.998877, 0.0094195, 0.0464502, -0.00230542, 0.969234, -0.24613, -0.0473401, -0.24596, -0.968122, -2.70223, 122.324, 1.14014 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hair" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment"]
@@ -2379,7 +2379,7 @@ transform = Transform( 45.9914, 0.0575093, 0.00875568, -0.0575093, 43.9076, 13.6
 mesh = SubResource( 1 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998622, 0.0117006, 0.0511804, -0.000982665, 0.970511, -0.241053, -0.0524923, -0.24077, -0.969161, -2.8081, 122.321, 1.27569 )
+transform = Transform( -0.998877, 0.0094195, 0.0464502, -0.00230542, 0.969234, -0.24613, -0.0473401, -0.24596, -0.968122, -2.70223, 122.324, 1.14014 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hat1" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment2"]
@@ -2387,7 +2387,7 @@ transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6
 mesh = SubResource( 2 )
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998622, 0.0117006, 0.0511804, -0.000982665, 0.970511, -0.241053, -0.0524923, -0.24077, -0.969161, -2.8081, 122.321, 1.27569 )
+transform = Transform( -0.998877, 0.0094195, 0.0464502, -0.00230542, 0.969234, -0.24613, -0.0473401, -0.24596, -0.968122, -2.70223, 122.324, 1.14014 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Hat2" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment3"]
@@ -2395,7 +2395,7 @@ transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6
 mesh = SubResource( 3 )
 
 [node name="BoneAttachment4" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.998622, 0.0117006, 0.0511804, -0.000982665, 0.970511, -0.241053, -0.0524923, -0.24077, -0.969161, -2.8081, 122.321, 1.27569 )
+transform = Transform( -0.998877, 0.0094195, 0.0464502, -0.00230542, 0.969234, -0.24613, -0.0473401, -0.24596, -0.968122, -2.70223, 122.324, 1.14014 )
 bone_name = "mixamorig_HeadTop_End"
 
 [node name="Plane" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment4"]
@@ -2403,7 +2403,7 @@ transform = Transform( 45.9914, 0.0575094, 0.00875567, -0.0575093, 43.9076, 13.6
 mesh = SubResource( 4 )
 
 [node name="BoneAttachment5" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.997229, 0.0277678, 0.0690236, 0.0280713, 0.9996, 0.0034328, -0.0689007, 0.00536069, -0.997609, -4.13169, 87.0978, 1.089 )
+transform = Transform( -0.997334, 0.0291621, 0.0668981, 0.0294029, 0.999564, 0.00262018, -0.0667925, 0.00458002, -0.997756, -4.01569, 87.0981, 1.04168 )
 bone_name = "mixamorig_Spine1"
 
 [node name="Backpack" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment5"]
@@ -2411,7 +2411,7 @@ transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521
 mesh = SubResource( 5 )
 
 [node name="BoneAttachment6" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.997229, 0.0277678, 0.0690236, 0.0280713, 0.9996, 0.0034328, -0.0689007, 0.00536069, -0.997609, -4.13169, 87.0978, 1.089 )
+transform = Transform( -0.997334, 0.0291621, 0.0668981, 0.0294029, 0.999564, 0.00262018, -0.0667925, 0.00458002, -0.997756, -4.01569, 87.0981, 1.04168 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment6"]
@@ -2419,7 +2419,7 @@ transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521
 mesh = SubResource( 6 )
 
 [node name="BoneAttachment7" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.997229, 0.0277678, 0.0690236, 0.0280713, 0.9996, 0.0034328, -0.0689007, 0.00536069, -0.997609, -4.13169, 87.0978, 1.089 )
+transform = Transform( -0.997334, 0.0291621, 0.0668981, 0.0294029, 0.999564, 0.00262018, -0.0667925, 0.00458002, -0.997756, -4.01569, 87.0981, 1.04168 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton2" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment7"]
@@ -2427,7 +2427,7 @@ transform = Transform( 45.9914, 1.65261e-11, -2.92628e-10, -2.86164e-11, 45.9521
 mesh = SubResource( 7 )
 
 [node name="BoneAttachment8" type="BoneAttachment" parent="main_char/Armature/Skeleton"]
-transform = Transform( -0.997229, 0.0277678, 0.0690236, 0.0280713, 0.9996, 0.0034328, -0.0689007, 0.00536069, -0.997609, -4.13169, 87.0978, 1.089 )
+transform = Transform( -0.997334, 0.0291621, 0.0668981, 0.0294029, 0.999564, 0.00262018, -0.0667925, 0.00458002, -0.997756, -4.01569, 87.0981, 1.04168 )
 bone_name = "mixamorig_Spine1"
 
 [node name="BackpackButton3" type="MeshInstance" parent="main_char/Armature/Skeleton/BoneAttachment8"]
@@ -2544,10 +2544,10 @@ collision_layer = 33
 collision_mask = 33
 script = ExtResource( 15 )
 util_path = NodePath("../../../Util")
-collision_layer_direction = 97
 trigger = NodePath("Triggers")
-arrow_path = NodePath("ArrawPos")
 push_layer = 0
+collision_layer_direction = 97
+arrow_path = NodePath("ArrawPos")
 
 [node name="CSGMesh" type="CSGMesh" parent="Navigation/NavigationMeshInstance/PushObj"]
 mesh = SubResource( 40 )

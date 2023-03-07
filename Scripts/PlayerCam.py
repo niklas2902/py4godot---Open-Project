@@ -12,7 +12,6 @@ class PlayerCam(Camera):
 		super().__init__()
 		self.start_origin:Optional[Vector3] = None
 		self.start_pos:Optional[Vector3] = None
-		print("__init__camera")
 		self._player_path:NodePath = None
 		self._y_offset:float = 0
 		self._z_offset:float = 0
@@ -23,7 +22,6 @@ class PlayerCam(Camera):
 		self.start_mouse_pos: Optional[Vector2] = None
 		self.is_zoomed_in:bool = True
 		self.is_animating:bool = False
-		print("end_init_camera")
 
 	prop("scale_multipy", int, 1)
 	register_signal("zoomed_out")
@@ -59,7 +57,6 @@ class PlayerCam(Camera):
 			self.is_key_down = False
 			return
 		if(input.is_action_just_pressed(MOUSE_ACTION)):
-			print("ACTION Just Pressed")
 			self.init_move_around_cam()
 
 		elif(input.is_action_just_released(MOUSE_ACTION) and self.scale_multiply == 7):
@@ -100,7 +97,7 @@ class PlayerCam(Camera):
 
 	@gdmethod
 	def toggle_zoom(self)->None:
-		print("toggle_zoom")
+		pass
 
 	@gdmethod
 	def tween_method(self, value)->None:
@@ -110,8 +107,6 @@ class PlayerCam(Camera):
 			self.is_zoomed_in = True
 
 	def _on_zoom_in(self)->None:
-		print("on_zoom_in")
-		print("#############hallo################")
 		child:Node = Node.cast(cast(Node,self.get_children()[0]))
 		child.call("start_zoom_anim_in")
 		self.is_zooming_in = True
@@ -119,7 +114,6 @@ class PlayerCam(Camera):
 
 	def _on_zoom_out(self)->None:
 		child:Node = Node.cast(cast(Node,self.get_children()[0]))
-		print(child)
 		child.call("start_zoom_anim_out")
 		self.emit_signal("zoomed_out")
 		self.is_zooming_in = False
@@ -127,7 +121,6 @@ class PlayerCam(Camera):
 		self.is_animating = True
 
 	def finished_animation(self)->None:
-		print("#############finished_zoom###########")
 		self.is_animating = False
 		self.emit_signal("finished_animation")
 
