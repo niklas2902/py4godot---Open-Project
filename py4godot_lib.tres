@@ -4,5 +4,5 @@
 load_once = false
 singleton = true
 reloadable = false
-entry/Windows.64 = "res://addons/windows64/cpython-3.9.7-windows64/python/install/main.pyd"
+entry/Windows.64 = "res://addons/windows64/cpython-3.9.7-windows64/python/install/main.dll"
 dependency/Windows.64 = [  ]

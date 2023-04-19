@@ -7,6 +7,7 @@ import math
 from Scripts.Tools.Draw import Draw
 from Scripts.Navigation.AStar import AStar as NavAstar
 from typing import Optional
+import debugpy, os
 
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
@@ -121,8 +122,16 @@ class CharHandler(KinematicBody, Draw):
 		a = NavigationMeshInstance._new()
 		self._astar = self.get_node(self.astar_path).get_pyscript()
 
+		try:
+			debugpy.log_to('log.txt')
+			debugpy.configure(python = r"C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\python.exe")
+			debugpy.listen(("localhost", 5678))
+			debugpy.wait_for_client()  # blocks execution until client is attached
+		except Exception as e:
+			print("Exception:", e)
 	@gdmethod
 	def _process(self, delta: float):
+		#debugpy.breakpoint()
 		if not self._can_move:
 			return
 		self.emit_sound()
