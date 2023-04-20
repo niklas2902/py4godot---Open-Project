@@ -1,0 +1,1021 @@
+I+00000.047: Windows-10-10.0.22621-SP0 AMD64
+             CPython 3.9.7 (64-bit)
+             debugpy 1.6.7
+
+I+00000.047: debugpy.adapter startup environment:
+             
+             System paths:
+                 sys.executable: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\python.exe
+                 sys.prefix: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 sys.base_prefix: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 sys.real_prefix: <missing>
+                 site.getsitepackages(): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                                         C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages)
+                 site.getusersitepackages(): C:\Users\nikla\AppData\Roaming\Python\Python39\site-packages
+                 sys.path (site-packages): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages)
+                 sysconfig.get_path('stdlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib
+                 sysconfig.get_path('platstdlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib
+                 sysconfig.get_path('purelib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages
+                 sysconfig.get_path('platlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages
+                 sysconfig.get_path('include'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Include(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\include)
+                 sysconfig.get_path('scripts'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Scripts
+                 sysconfig.get_path('data'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 os.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\os.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\os.py)
+                 threading.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\threading.py)
+                 debugpy.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\__init__.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages\debugpy\__init__.py)
+
+I+00000.062: Listening for incoming Client connections on 127.0.0.1:5678...
+
+I+00000.062: Listening for incoming Server connections on 127.0.0.1:57883...
+
+I+00000.062: Sending endpoints info to debug server at localhost:57882:
+             {
+                 "client": {
+                     "host": "127.0.0.1",
+                     "port": 5678
+                 },
+                 "server": {
+                     "host": "127.0.0.1",
+                     "port": 57883
+                 }
+             }
+
+I+00000.062: Accepted incoming Server connection from 127.0.0.1:57885.
+
+D+00000.062: Starting message loop for channel Server[?]
+
+D+00000.062: Server[?] <-- {
+                 "seq": 1,
+                 "type": "request",
+                 "command": "pydevdAuthorize",
+                 "arguments": {
+                     "debugServerAccessToken": "8a146d77d79fd84d2306d46f1807067c5960410fb6356de4ceaef4bd4cd605ec"
+                 }
+             }
+
+D+00000.062: Server[?] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 2,
+                 "type": "response",
+                 "request_seq": 1,
+                 "success": true,
+                 "command": "pydevdAuthorize",
+                 "body": {
+                     "clientAccessToken": null
+                 }
+             }
+
+D+00000.062: Server[?] <-- {
+                 "seq": 2,
+                 "type": "request",
+                 "command": "pydevdSystemInfo"
+             }
+
+D+00000.078: Server[?] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 4,
+                 "type": "response",
+                 "request_seq": 2,
+                 "success": true,
+                 "command": "pydevdSystemInfo",
+                 "body": {
+                     "python": {
+                         "version": "3.9.7final0",
+                         "implementation": {
+                             "name": "cpython",
+                             "version": "3.9.7final0",
+                             "description": "CPython"
+                         }
+                     },
+                     "platform": {
+                         "name": "win32"
+                     },
+                     "process": {
+                         "pid": 17884,
+                         "ppid": 17116,
+                         "executable": "C:\\Users\\nikla\\Downloads\\Godot_v3.5.1-stable_win64.exe(1)\\Godot_v3.5.1-stable_win64.exe",
+                         "bitness": 64
+                     },
+                     "pydevd": {
+                         "usingCython": true,
+                         "usingFrameEval": false
+                     }
+                 }
+             }
+
+I+00000.078: No active debug session for parent process of Server[pid=17884].
+
+I+00093.218: Accepted incoming Client connection from 127.0.0.1:57921.
+
+D+00093.218: Starting message loop for channel Client[1]
+
+D+00093.218: Client[1] <-- {
+                 "seq": 1,
+                 "type": "event",
+                 "event": "output",
+                 "body": {
+                     "category": "telemetry",
+                     "output": "ptvsd",
+                     "data": {
+                         "packageVersion": "1.6.7"
+                     }
+                 }
+             }
+
+D+00093.218: Client[1] <-- {
+                 "seq": 2,
+                 "type": "event",
+                 "event": "output",
+                 "body": {
+                     "category": "telemetry",
+                     "output": "debugpy",
+                     "data": {
+                         "packageVersion": "1.6.7"
+                     }
+                 }
+             }
+
+D+00093.218: Client[1] --> {
+                 "seq": 1,
+                 "type": "request",
+                 "command": "initialize",
+                 "arguments": {
+                     "clientID": "vscode",
+                     "clientName": "Visual Studio Code",
+                     "adapterID": "python",
+                     "pathFormat": "path",
+                     "linesStartAt1": true,
+                     "columnsStartAt1": true,
+                     "supportsVariableType": true,
+                     "supportsVariablePaging": true,
+                     "supportsRunInTerminalRequest": true,
+                     "locale": "en",
+                     "supportsProgressReporting": true,
+                     "supportsInvalidatedEvent": true,
+                     "supportsMemoryReferences": true,
+                     "supportsArgsCanBeInterpretedByShell": true,
+                     "supportsMemoryEvent": true,
+                     "supportsStartDebuggingRequest": true
+                 }
+             }
+
+D+00093.218: /handling #1 request "initialize" from Client[1]/
+             Capabilities: {
+                 "supportsVariableType": true,
+                 "supportsVariablePaging": true,
+                 "supportsRunInTerminalRequest": true,
+                 "supportsMemoryReferences": true,
+                 "supportsArgsCanBeInterpretedByShell": true,
+                 "supportsStartDebuggingRequest": true
+             }
+
+D+00093.218: /handling #1 request "initialize" from Client[1]/
+             Expectations: {
+                 "locale": "en",
+                 "linesStartAt1": true,
+                 "columnsStartAt1": true,
+                 "pathFormat": "path"
+             }
+
+D+00093.218: /handling #1 request "initialize" from Client[1]/
+             Client[1] <-- {
+                 "seq": 3,
+                 "type": "response",
+                 "request_seq": 1,
+                 "success": true,
+                 "command": "initialize",
+                 "body": {
+                     "supportsCompletionsRequest": true,
+                     "supportsConditionalBreakpoints": true,
+                     "supportsConfigurationDoneRequest": true,
+                     "supportsDebuggerProperties": true,
+                     "supportsDelayedStackTraceLoading": true,
+                     "supportsEvaluateForHovers": true,
+                     "supportsExceptionInfoRequest": true,
+                     "supportsExceptionOptions": true,
+                     "supportsFunctionBreakpoints": true,
+                     "supportsHitConditionalBreakpoints": true,
+                     "supportsLogPoints": true,
+                     "supportsModulesRequest": true,
+                     "supportsSetExpression": true,
+                     "supportsSetVariable": true,
+                     "supportsValueFormattingOptions": true,
+                     "supportsTerminateRequest": true,
+                     "supportsGotoTargetsRequest": true,
+                     "supportsClipboardContext": true,
+                     "exceptionBreakpointFilters": [
+                         {
+                             "filter": "raised",
+                             "label": "Raised Exceptions",
+                             "default": false,
+                             "description": "Break whenever any exception is raised."
+                         },
+                         {
+                             "filter": "uncaught",
+                             "label": "Uncaught Exceptions",
+                             "default": true,
+                             "description": "Break when the process is exiting due to unhandled exception."
+                         },
+                         {
+                             "filter": "userUnhandled",
+                             "label": "User Uncaught Exceptions",
+                             "default": false,
+                             "description": "Break when exception escapes into library code."
+                         }
+                     ],
+                     "supportsStepInTargetsRequest": true
+                 }
+             }
+
+D+00093.234: Client[1] --> {
+                 "seq": 2,
+                 "type": "request",
+                 "command": "attach",
+                 "arguments": {
+                     "name": "Attach (Remote Debug)",
+                     "type": "python",
+                     "request": "attach",
+                     "port": 5678,
+                     "host": "localhost",
+                     "preLaunchTask": "start-godot",
+                     "__configurationTarget": 6,
+                     "clientOS": "windows",
+                     "debugOptions": [
+                         "RedirectOutput",
+                         "FixFilePathCase",
+                         "ShowReturnValue"
+                     ],
+                     "justMyCode": true,
+                     "showReturnValue": true,
+                     "workspaceFolder": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                     "pathMappings": [
+                         {
+                             "localRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                             "remoteRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project"
+                         }
+                     ],
+                     "__sessionId": "cc581eb7-30b8-4ce4-b3e2-dd3724635a3d"
+                 }
+             }
+
+D+00093.234: /handling #2 request "attach" from Client[1]/
+             Client[1] <-- {
+                 "seq": 4,
+                 "type": "event",
+                 "event": "debugpyWaitingForServer",
+                 "body": {
+                     "host": "127.0.0.1",
+                     "port": 57883
+                 }
+             }
+
+I+00093.234: /handling #2 request "attach" from Client[1]/
+             Session[1] waiting for connection from debug server...
+
+I+00093.234: /handling #2 request "attach" from Client[1]/
+             Attaching Server[pid=17884] to Session[1]
+
+D+00093.234: /handling #2 request "attach" from Client[1]/
+             Server[1] <-- {
+                 "seq": 3,
+                 "type": "request",
+                 "command": "pydevdAuthorize",
+                 "arguments": {
+                     "debugServerAccessToken": "8a146d77d79fd84d2306d46f1807067c5960410fb6356de4ceaef4bd4cd605ec"
+                 }
+             }
+
+D+00093.234: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 6,
+                 "type": "response",
+                 "request_seq": 3,
+                 "success": true,
+                 "command": "pydevdAuthorize",
+                 "body": {
+                     "clientAccessToken": null
+                 }
+             }
+
+D+00093.234: /handling #2 request "attach" from Client[1]/
+             Server[1] <-- {
+                 "seq": 4,
+                 "type": "request",
+                 "command": "initialize",
+                 "arguments": {
+                     "clientID": "vscode",
+                     "clientName": "Visual Studio Code",
+                     "adapterID": "python",
+                     "pathFormat": "path",
+                     "linesStartAt1": true,
+                     "columnsStartAt1": true,
+                     "supportsVariableType": true,
+                     "supportsVariablePaging": true,
+                     "supportsRunInTerminalRequest": true,
+                     "locale": "en",
+                     "supportsProgressReporting": true,
+                     "supportsInvalidatedEvent": true,
+                     "supportsMemoryReferences": true,
+                     "supportsArgsCanBeInterpretedByShell": true,
+                     "supportsMemoryEvent": true,
+                     "supportsStartDebuggingRequest": true
+                 }
+             }
+
+D+00093.234: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 8,
+                 "type": "response",
+                 "request_seq": 4,
+                 "success": true,
+                 "command": "initialize",
+                 "body": {
+                     "supportsConfigurationDoneRequest": true,
+                     "supportsFunctionBreakpoints": true,
+                     "supportsConditionalBreakpoints": true,
+                     "supportsHitConditionalBreakpoints": true,
+                     "supportsEvaluateForHovers": true,
+                     "exceptionBreakpointFilters": [
+                         {
+                             "filter": "raised",
+                             "label": "Raised Exceptions",
+                             "default": false
+                         },
+                         {
+                             "filter": "uncaught",
+                             "label": "Uncaught Exceptions",
+                             "default": true
+                         },
+                         {
+                             "filter": "userUnhandled",
+                             "label": "User Uncaught Exceptions",
+                             "default": false
+                         }
+                     ],
+                     "supportsStepBack": false,
+                     "supportsSetVariable": true,
+                     "supportsRestartFrame": false,
+                     "supportsGotoTargetsRequest": true,
+                     "supportsStepInTargetsRequest": true,
+                     "supportsCompletionsRequest": true,
+                     "completionTriggerCharacters": [],
+                     "supportsModulesRequest": true,
+                     "additionalModuleColumns": [],
+                     "supportedChecksumAlgorithms": [],
+                     "supportsRestartRequest": false,
+                     "supportsExceptionOptions": true,
+                     "supportsValueFormattingOptions": true,
+                     "supportsExceptionInfoRequest": true,
+                     "supportTerminateDebuggee": true,
+                     "supportsDelayedStackTraceLoading": true,
+                     "supportsLoadedSourcesRequest": false,
+                     "supportsLogPoints": true,
+                     "supportsTerminateThreadsRequest": false,
+                     "supportsSetExpression": true,
+                     "supportsTerminateRequest": true,
+                     "supportsDataBreakpoints": false,
+                     "supportsReadMemoryRequest": false,
+                     "supportsDisassembleRequest": false,
+                     "supportsClipboardContext": true,
+                     "supportsDebuggerProperties": true,
+                     "pydevd": {
+                         "processId": 17884
+                     }
+                 }
+             }
+
+D+00093.234: /handling #2 request "attach" from Client[1]/
+             Capabilities: {
+                 "supportsCompletionsRequest": true,
+                 "supportsConditionalBreakpoints": true,
+                 "supportsConfigurationDoneRequest": true,
+                 "supportsDataBreakpoints": false,
+                 "supportsDelayedStackTraceLoading": true,
+                 "supportsDisassembleRequest": false,
+                 "supportsEvaluateForHovers": true,
+                 "supportsExceptionInfoRequest": true,
+                 "supportsExceptionOptions": true,
+                 "supportsFunctionBreakpoints": true,
+                 "supportsGotoTargetsRequest": true,
+                 "supportsHitConditionalBreakpoints": true,
+                 "supportsLoadedSourcesRequest": false,
+                 "supportsLogPoints": true,
+                 "supportsModulesRequest": true,
+                 "supportsReadMemoryRequest": false,
+                 "supportsRestartFrame": false,
+                 "supportsRestartRequest": false,
+                 "supportsSetExpression": true,
+                 "supportsSetVariable": true,
+                 "supportsStepBack": false,
+                 "supportsStepInTargetsRequest": true,
+                 "supportsTerminateRequest": true,
+                 "supportsTerminateThreadsRequest": false,
+                 "supportsValueFormattingOptions": true,
+                 "exceptionBreakpointFilters": [
+                     {
+                         "filter": "raised",
+                         "label": "Raised Exceptions",
+                         "default": false
+                     },
+                     {
+                         "filter": "uncaught",
+                         "label": "Uncaught Exceptions",
+                         "default": true
+                     },
+                     {
+                         "filter": "userUnhandled",
+                         "label": "User Uncaught Exceptions",
+                         "default": false
+                     }
+                 ],
+                 "additionalModuleColumns": [],
+                 "supportedChecksumAlgorithms": []
+             }
+
+D+00093.234: /handling #2 request "attach" from Client[1]/
+             Server[1] <-- {
+                 "seq": 5,
+                 "type": "request",
+                 "command": "attach",
+                 "arguments": {
+                     "name": "Attach (Remote Debug)",
+                     "type": "python",
+                     "request": "attach",
+                     "port": 5678,
+                     "host": "localhost",
+                     "preLaunchTask": "start-godot",
+                     "__configurationTarget": 6,
+                     "clientOS": "windows",
+                     "debugOptions": [
+                         "RedirectOutput",
+                         "FixFilePathCase",
+                         "ShowReturnValue"
+                     ],
+                     "justMyCode": true,
+                     "showReturnValue": true,
+                     "workspaceFolder": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                     "pathMappings": [
+                         {
+                             "localRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                             "remoteRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project"
+                         }
+                     ],
+                     "__sessionId": "cc581eb7-30b8-4ce4-b3e2-dd3724635a3d"
+                 }
+             }
+
+D+00093.234: Server[1] --> {
+                 "pydevd_cmd_id": 204,
+                 "seq": 10,
+                 "type": "event",
+                 "event": "process",
+                 "body": {
+                     "name": "",
+                     "systemProcessId": 17884,
+                     "isLocalProcess": true,
+                     "startMethod": "attach"
+                 }
+             }
+
+D+00093.234: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 12,
+                 "type": "event",
+                 "event": "initialized"
+             }
+
+D+00093.234: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 14,
+                 "type": "response",
+                 "request_seq": 5,
+                 "success": true,
+                 "command": "attach"
+             }
+
+D+00093.234: /handling #2 request "attach" from Client[1]/
+             Client[1] <-- {
+                 "seq": 5,
+                 "type": "event",
+                 "event": "initialized"
+             }
+
+D+00093.234: /handling #10 event "process" from Server[1]/
+             Propagation deferred.
+
+D+00093.234: Client[1] --> {
+                 "seq": 3,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "hello.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+                     },
+                     "lines": [
+                         5
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 5
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00093.250: /handling #3 request "setBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 6,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "hello.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+                     },
+                     "lines": [
+                         5
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 5
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00093.250: Client[1] --> {
+                 "seq": 4,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "start_godot.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\.vscode\\start_godot.py"
+                     },
+                     "lines": [
+                         11
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 11
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00093.250: Client[1] --> {
+                 "seq": 5,
+                 "type": "request",
+                 "command": "setFunctionBreakpoints",
+                 "arguments": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00093.250: Client[1] --> {
+                 "seq": 6,
+                 "type": "request",
+                 "command": "setExceptionBreakpoints",
+                 "arguments": {
+                     "filters": [
+                         "uncaught"
+                     ]
+                 }
+             }
+
+D+00093.250: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 16,
+                 "type": "response",
+                 "request_seq": 6,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 0,
+                             "source": {
+                                 "name": "hello.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+                             },
+                             "line": 1
+                         }
+                     ]
+                 }
+             }
+
+D+00093.250: /handling #3 request "setBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 6,
+                 "type": "response",
+                 "request_seq": 3,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 0,
+                             "source": {
+                                 "name": "hello.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+                             },
+                             "line": 1
+                         }
+                     ]
+                 }
+             }
+
+D+00093.250: /handling #4 request "setBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 7,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "start_godot.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\.vscode\\start_godot.py"
+                     },
+                     "lines": [
+                         11
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 11
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00093.250: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 18,
+                 "type": "response",
+                 "request_seq": 7,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 1,
+                             "source": {
+                                 "name": "start_godot.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\.vscode\\start_godot.py"
+                             },
+                             "line": 11
+                         }
+                     ]
+                 }
+             }
+
+D+00093.250: /handling #4 request "setBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 7,
+                 "type": "response",
+                 "request_seq": 4,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 1,
+                             "source": {
+                                 "name": "start_godot.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\.vscode\\start_godot.py"
+                             },
+                             "line": 11
+                         }
+                     ]
+                 }
+             }
+
+D+00093.250: /handling #5 request "setFunctionBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 8,
+                 "type": "request",
+                 "command": "setFunctionBreakpoints",
+                 "arguments": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00093.250: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 20,
+                 "type": "response",
+                 "request_seq": 8,
+                 "success": true,
+                 "command": "setFunctionBreakpoints",
+                 "body": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00093.250: /handling #5 request "setFunctionBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 8,
+                 "type": "response",
+                 "request_seq": 5,
+                 "success": true,
+                 "command": "setFunctionBreakpoints",
+                 "body": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00093.250: /handling #6 request "setExceptionBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 9,
+                 "type": "request",
+                 "command": "setExceptionBreakpoints",
+                 "arguments": {
+                     "filters": [
+                         "uncaught"
+                     ]
+                 }
+             }
+
+D+00093.250: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 22,
+                 "type": "response",
+                 "request_seq": 9,
+                 "success": true,
+                 "command": "setExceptionBreakpoints",
+                 "body": {}
+             }
+
+D+00093.250: /handling #6 request "setExceptionBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 9,
+                 "type": "response",
+                 "request_seq": 6,
+                 "success": true,
+                 "command": "setExceptionBreakpoints"
+             }
+
+D+00093.265: Client[1] --> {
+                 "seq": 7,
+                 "type": "request",
+                 "command": "configurationDone"
+             }
+
+D+00093.265: /handling #7 request "configurationDone" from Client[1]/
+             Server[1] <-- {
+                 "seq": 10,
+                 "type": "request",
+                 "command": "configurationDone"
+             }
+
+D+00093.265: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 24,
+                 "type": "response",
+                 "request_seq": 10,
+                 "success": true,
+                 "command": "configurationDone"
+             }
+
+D+00093.265: /handling #7 request "configurationDone" from Client[1]/
+             Client[1] <-- {
+                 "seq": 10,
+                 "type": "response",
+                 "request_seq": 7,
+                 "success": true,
+                 "command": "configurationDone"
+             }
+
+D+00093.265: Server[1] --> {
+                 "pydevd_cmd_id": 103,
+                 "seq": 26,
+                 "type": "event",
+                 "event": "thread",
+                 "body": {
+                     "reason": "started",
+                     "threadId": 1
+                 }
+             }
+
+D+00093.265: /handling #7 request "configurationDone" from Client[1]/
+             Client[1] <-- {
+                 "seq": 11,
+                 "type": "response",
+                 "request_seq": 2,
+                 "success": true,
+                 "command": "attach"
+             }
+
+D+00093.265: /handling #7 request "configurationDone" from Client[1]/
+             Propagating deferred events to Client[1]...
+
+D+00093.265: /handling #7 request "configurationDone" from Client[1]/
+             Propagating deferred #10 event "process" from Server[1]
+
+D+00093.265: /handling #7 request "configurationDone" from Client[1]/
+             Client[1] <-- {
+                 "seq": 12,
+                 "type": "event",
+                 "event": "process",
+                 "body": {
+                     "name": "",
+                     "systemProcessId": 17884,
+                     "isLocalProcess": true,
+                     "startMethod": "attach"
+                 }
+             }
+
+I+00093.265: /handling #7 request "configurationDone" from Client[1]/
+             All deferred events propagated to Client[1].
+
+D+00093.265: /handling #26 event "thread" from Server[1]/
+             Client[1] <-- {
+                 "seq": 13,
+                 "type": "event",
+                 "event": "thread",
+                 "body": {
+                     "reason": "started",
+                     "threadId": 1
+                 }
+             }
+
+D+00093.265: Client[1] --> {
+                 "seq": 8,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00093.265: /handling #8 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 11,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00093.265: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 28,
+                 "type": "response",
+                 "request_seq": 11,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00093.265: /handling #8 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 14,
+                 "type": "response",
+                 "request_seq": 8,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00093.375: Client[1] --> {
+                 "seq": 9,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00093.375: /handling #9 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 12,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00093.406: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 30,
+                 "type": "response",
+                 "request_seq": 12,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00093.406: /handling #9 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 15,
+                 "type": "response",
+                 "request_seq": 9,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00103.312: Server[1] --> {
+                 "pydevd_cmd_id": 104,
+                 "seq": 32,
+                 "type": "event",
+                 "event": "thread",
+                 "body": {
+                     "reason": "exited",
+                     "threadId": 1
+                 }
+             }
+
+D+00103.312: /handling #32 event "thread" from Server[1]/
+             Client[1] <-- {
+                 "seq": 16,
+                 "type": "event",
+                 "event": "thread",
+                 "body": {
+                     "reason": "exited",
+                     "threadId": 1
+                 }
+             }
+
+D+00103.484: Server[1] --> {
+                 "pydevd_cmd_id": 129,
+                 "seq": 34,
+                 "type": "event",
+                 "event": "terminated",
+                 "body": {}
+             }
+
+D+00103.484: /handling #34 event "terminated" from Server[1]/
+             Closing Server[1] message stream
+
+D+00103.500: Exiting message loop for channel Server[1]: [WinError 10038] Ein Vorgang bezog sich auf ein Objekt, das kein Socket ist
+
+I+00103.500: /handling disconnect from Server[1]/
+             Server[1] has disconnected; finalizing Session[1].
+
+I+00103.500: All debug servers disconnected; waiting for remaining sessions...
+
+D+00103.500: /handling disconnect from Server[1]/
+             Client[1] <-- {
+                 "seq": 17,
+                 "type": "event",
+                 "event": "terminated"
+             }
+
+I+00103.500: /handling disconnect from Server[1]/
+             Session[1] finalized.
+
+D+00103.500: Client[1] --> {
+                 "seq": 10,
+                 "type": "request",
+                 "command": "disconnect",
+                 "arguments": {
+                     "restart": false
+                 }
+             }
+
+D+00103.500: /handling #10 request "disconnect" from Client[1]/
+             Client[1] <-- {
+                 "seq": 18,
+                 "type": "response",
+                 "request_seq": 10,
+                 "success": true,
+                 "command": "disconnect"
+             }
+
+D+00103.500: Exiting message loop for channel Client[1]: No more messages
+
+D+00103.500: Closing Client[1] message stream
+
+I+00103.500: /handling disconnect from Client[1]/
+             Session[1] has ended.
+
+I+00103.500: All debug sessions have ended; exiting.
+
+I+00103.500: Not logging to "<stderr>" anymore.
+

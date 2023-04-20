@@ -1,0 +1,194 @@
+I+00000.046: Windows-10-10.0.22621-SP0 AMD64
+             CPython 3.9.7 (64-bit)
+             debugpy 1.6.7
+
+I+00000.046: debugpy.adapter startup environment:
+             
+             System paths:
+                 sys.executable: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\python.exe
+                 sys.prefix: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 sys.base_prefix: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 sys.real_prefix: <missing>
+                 site.getsitepackages(): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                                         C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages)
+                 site.getusersitepackages(): C:\Users\nikla\AppData\Roaming\Python\Python39\site-packages
+                 sys.path (site-packages): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages)
+                 sysconfig.get_path('stdlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib
+                 sysconfig.get_path('platstdlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib
+                 sysconfig.get_path('purelib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages
+                 sysconfig.get_path('platlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages
+                 sysconfig.get_path('include'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Include(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\include)
+                 sysconfig.get_path('scripts'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Scripts
+                 sysconfig.get_path('data'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 os.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\os.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\os.py)
+                 threading.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\threading.py)
+                 debugpy.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\__init__.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages\debugpy\__init__.py)
+
+I+00000.046: Listening for incoming Client connections on 127.0.0.1:5678...
+
+I+00000.046: Listening for incoming Server connections on 127.0.0.1:55741...
+
+I+00000.062: Sending endpoints info to debug server at localhost:55740:
+             {
+                 "client": {
+                     "host": "127.0.0.1",
+                     "port": 5678
+                 },
+                 "server": {
+                     "host": "127.0.0.1",
+                     "port": 55741
+                 }
+             }
+
+I+00000.062: Accepted incoming Server connection from 127.0.0.1:55743.
+
+D+00000.062: Starting message loop for channel Server[?]
+
+D+00000.062: Server[?] <-- {
+                 "seq": 1,
+                 "type": "request",
+                 "command": "pydevdAuthorize",
+                 "arguments": {
+                     "debugServerAccessToken": "aa6efbd9f24d0b04b3b31f7d505ef82a3f69b5a0a00bb13c7d02a8fb78777155"
+                 }
+             }
+
+D+00000.062: Server[?] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 2,
+                 "type": "response",
+                 "request_seq": 1,
+                 "success": true,
+                 "command": "pydevdAuthorize",
+                 "body": {
+                     "clientAccessToken": null
+                 }
+             }
+
+D+00000.062: Server[?] <-- {
+                 "seq": 2,
+                 "type": "request",
+                 "command": "pydevdSystemInfo"
+             }
+
+D+00000.078: Server[?] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 4,
+                 "type": "response",
+                 "request_seq": 2,
+                 "success": true,
+                 "command": "pydevdSystemInfo",
+                 "body": {
+                     "python": {
+                         "version": "3.9.7final0",
+                         "implementation": {
+                             "name": "cpython",
+                             "version": "3.9.7final0",
+                             "description": "CPython"
+                         }
+                     },
+                     "platform": {
+                         "name": "win32"
+                     },
+                     "process": {
+                         "pid": 17372,
+                         "ppid": 12056,
+                         "executable": "C:\\Users\\nikla\\Downloads\\Godot_v3.5.1-stable_win64.exe(1)\\Godot_v3.5.1-stable_win64.exe",
+                         "bitness": 64
+                     },
+                     "pydevd": {
+                         "usingCython": true,
+                         "usingFrameEval": false
+                     }
+                 }
+             }
+
+I+00000.078: No active debug session for parent process of Server[pid=17372].
+
+I+00000.140: Accepted incoming Client connection from 127.0.0.1:55739.
+
+D+00000.140: Starting message loop for channel Client[1]
+
+D+00000.140: Client[1] <-- {
+                 "seq": 1,
+                 "type": "event",
+                 "event": "output",
+                 "body": {
+                     "category": "telemetry",
+                     "output": "ptvsd",
+                     "data": {
+                         "packageVersion": "1.6.7"
+                     }
+                 }
+             }
+
+D+00000.140: Exiting message loop for channel Client[1]: [WinError 10053] Eine bestehende Verbindung wurde softwaregesteuert
+             durch den Hostcomputer abgebrochen
+
+E+00000.156: Client[1] <-- {
+                 "seq": 2,
+                 "type": "event",
+                 "event": "output",
+                 "body": {
+                     "category": "telemetry",
+                     "output": "debugpy",
+                     "data": {
+                         "packageVersion": "1.6.7"
+                     }
+                 }
+             }
+             
+             Traceback (most recent call last):
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\messaging.py", line 297, in write_json
+                 written = writer.write(data[data_written:])
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\socket.py", line 722, in write
+                 return self._sock.send(b)
+             ConnectionAbortedError: [WinError 10053] Eine bestehende Verbindung wurde softwaregesteuert
+             durch den Hostcomputer abgebrochen
+             
+             Stack where logged:
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py", line 930, in _bootstrap
+                 self._bootstrap_inner()
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py", line 973, in _bootstrap_inner
+                 self.run()
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py", line 910, in run
+                 self._target(*self._args, **self._kwargs)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\sockets.py", line 122, in accept_worker
+                 handler(sock)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\adapter\clients.py", line 105, in __init__
+                 self.channel.send_event(
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\messaging.py", line 1262, in send_event
+                 pass
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\contextlib.py", line 126, in __exit__
+                 next(self.gen)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\messaging.py", line 1223, in _send_message
+                 self.stream.write_json(message)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\messaging.py", line 301, in write_json
+                 self._log_message("<--", value, logger=log.swallow_exception)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\messaging.py", line 162, in _log_message
+                 return logger("{0} {1} {2}", self.name, dir, data)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\log.py", line 215, in swallow_exception
+                 _exception(format_string, *args, **kwargs)
+             
+
+D+00000.156: Closing Client[1] message stream
+
+I+00000.156: /handling disconnect from Client[1]/
+             Session[1] has ended.
+
+I+00000.156: /handling disconnect from Client[1]/
+             Client[1] has disconnected; finalizing Session[1].
+
+I+00000.156: /handling disconnect from Client[1]/
+             Session[1] finalized.
+
+D+00016.203: Exiting message loop for channel Server[pid=17372]: [WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen
+
+D+00016.203: Closing Server[pid=17372] message stream
+
+I+00016.203: All debug servers disconnected; waiting for remaining sessions...
+
+I+00016.203: All debug sessions have ended; exiting.
+
+I+00016.203: Not logging to "<stderr>" anymore.
+

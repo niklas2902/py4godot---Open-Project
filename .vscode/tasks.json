@@ -1,0 +1,11 @@
+// tasks.json
+{
+    "tasks": [
+        {
+            "label": "start-godot",
+            "command": "python", // Could be any other shell command
+            "args": [".vscode/start_godot.py"],
+            "type": "shell"
+        }
+    ]
+  }

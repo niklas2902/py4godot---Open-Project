@@ -1,0 +1,3068 @@
+I+00000.047: Windows-10-10.0.22621-SP0 AMD64
+             CPython 3.9.7 (64-bit)
+             debugpy 1.6.7
+
+I+00000.047: debugpy.adapter startup environment:
+             
+             System paths:
+                 sys.executable: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\python.exe
+                 sys.prefix: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 sys.base_prefix: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 sys.real_prefix: <missing>
+                 site.getsitepackages(): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                                         C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages)
+                 site.getusersitepackages(): C:\Users\nikla\AppData\Roaming\Python\Python39\site-packages
+                 sys.path (site-packages): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages)
+                 sysconfig.get_path('stdlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib
+                 sysconfig.get_path('platstdlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib
+                 sysconfig.get_path('purelib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages
+                 sysconfig.get_path('platlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages
+                 sysconfig.get_path('include'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Include(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\include)
+                 sysconfig.get_path('scripts'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Scripts
+                 sysconfig.get_path('data'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 os.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\os.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\os.py)
+                 threading.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\threading.py)
+                 debugpy.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\__init__.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages\debugpy\__init__.py)
+
+I+00000.062: Listening for incoming Client connections on 127.0.0.1:5678...
+
+I+00000.062: Listening for incoming Server connections on 127.0.0.1:55634...
+
+I+00000.062: Sending endpoints info to debug server at localhost:55633:
+             {
+                 "client": {
+                     "host": "127.0.0.1",
+                     "port": 5678
+                 },
+                 "server": {
+                     "host": "127.0.0.1",
+                     "port": 55634
+                 }
+             }
+
+I+00000.062: Accepted incoming Server connection from 127.0.0.1:55636.
+
+D+00000.062: Starting message loop for channel Server[?]
+
+D+00000.078: Server[?] <-- {
+                 "seq": 1,
+                 "type": "request",
+                 "command": "pydevdAuthorize",
+                 "arguments": {
+                     "debugServerAccessToken": "c54983d009766278ad1532dcf99ecbe3d6da6b35ae64ebb26320411184b8b26e"
+                 }
+             }
+
+D+00000.078: Server[?] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 2,
+                 "type": "response",
+                 "request_seq": 1,
+                 "success": true,
+                 "command": "pydevdAuthorize",
+                 "body": {
+                     "clientAccessToken": null
+                 }
+             }
+
+D+00000.078: Server[?] <-- {
+                 "seq": 2,
+                 "type": "request",
+                 "command": "pydevdSystemInfo"
+             }
+
+D+00000.078: Server[?] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 4,
+                 "type": "response",
+                 "request_seq": 2,
+                 "success": true,
+                 "command": "pydevdSystemInfo",
+                 "body": {
+                     "python": {
+                         "version": "3.9.7final0",
+                         "implementation": {
+                             "name": "cpython",
+                             "version": "3.9.7final0",
+                             "description": "CPython"
+                         }
+                     },
+                     "platform": {
+                         "name": "win32"
+                     },
+                     "process": {
+                         "pid": 7372,
+                         "ppid": 25112,
+                         "executable": "C:\\Users\\nikla\\Downloads\\Godot_v3.5.1-stable_win64.exe(1)\\Godot_v3.5.1-stable_win64.exe",
+                         "bitness": 64
+                     },
+                     "pydevd": {
+                         "usingCython": true,
+                         "usingFrameEval": false
+                     }
+                 }
+             }
+
+I+00000.078: No active debug session for parent process of Server[pid=7372].
+
+I+00010.000: Accepted incoming Client connection from 127.0.0.1:55654.
+
+D+00010.000: Starting message loop for channel Client[1]
+
+D+00010.000: Client[1] <-- {
+                 "seq": 1,
+                 "type": "event",
+                 "event": "output",
+                 "body": {
+                     "category": "telemetry",
+                     "output": "ptvsd",
+                     "data": {
+                         "packageVersion": "1.6.7"
+                     }
+                 }
+             }
+
+D+00010.000: Client[1] <-- {
+                 "seq": 2,
+                 "type": "event",
+                 "event": "output",
+                 "body": {
+                     "category": "telemetry",
+                     "output": "debugpy",
+                     "data": {
+                         "packageVersion": "1.6.7"
+                     }
+                 }
+             }
+
+D+00010.000: Client[1] --> {
+                 "seq": 1,
+                 "type": "request",
+                 "command": "initialize",
+                 "arguments": {
+                     "clientID": "vscode",
+                     "clientName": "Visual Studio Code",
+                     "adapterID": "python",
+                     "pathFormat": "path",
+                     "linesStartAt1": true,
+                     "columnsStartAt1": true,
+                     "supportsVariableType": true,
+                     "supportsVariablePaging": true,
+                     "supportsRunInTerminalRequest": true,
+                     "locale": "en",
+                     "supportsProgressReporting": true,
+                     "supportsInvalidatedEvent": true,
+                     "supportsMemoryReferences": true,
+                     "supportsArgsCanBeInterpretedByShell": true,
+                     "supportsMemoryEvent": true,
+                     "supportsStartDebuggingRequest": true
+                 }
+             }
+
+D+00010.000: /handling #1 request "initialize" from Client[1]/
+             Capabilities: {
+                 "supportsVariableType": true,
+                 "supportsVariablePaging": true,
+                 "supportsRunInTerminalRequest": true,
+                 "supportsMemoryReferences": true,
+                 "supportsArgsCanBeInterpretedByShell": true,
+                 "supportsStartDebuggingRequest": true
+             }
+
+D+00010.000: /handling #1 request "initialize" from Client[1]/
+             Expectations: {
+                 "locale": "en",
+                 "linesStartAt1": true,
+                 "columnsStartAt1": true,
+                 "pathFormat": "path"
+             }
+
+D+00010.000: /handling #1 request "initialize" from Client[1]/
+             Client[1] <-- {
+                 "seq": 3,
+                 "type": "response",
+                 "request_seq": 1,
+                 "success": true,
+                 "command": "initialize",
+                 "body": {
+                     "supportsCompletionsRequest": true,
+                     "supportsConditionalBreakpoints": true,
+                     "supportsConfigurationDoneRequest": true,
+                     "supportsDebuggerProperties": true,
+                     "supportsDelayedStackTraceLoading": true,
+                     "supportsEvaluateForHovers": true,
+                     "supportsExceptionInfoRequest": true,
+                     "supportsExceptionOptions": true,
+                     "supportsFunctionBreakpoints": true,
+                     "supportsHitConditionalBreakpoints": true,
+                     "supportsLogPoints": true,
+                     "supportsModulesRequest": true,
+                     "supportsSetExpression": true,
+                     "supportsSetVariable": true,
+                     "supportsValueFormattingOptions": true,
+                     "supportsTerminateRequest": true,
+                     "supportsGotoTargetsRequest": true,
+                     "supportsClipboardContext": true,
+                     "exceptionBreakpointFilters": [
+                         {
+                             "filter": "raised",
+                             "label": "Raised Exceptions",
+                             "default": false,
+                             "description": "Break whenever any exception is raised."
+                         },
+                         {
+                             "filter": "uncaught",
+                             "label": "Uncaught Exceptions",
+                             "default": true,
+                             "description": "Break when the process is exiting due to unhandled exception."
+                         },
+                         {
+                             "filter": "userUnhandled",
+                             "label": "User Uncaught Exceptions",
+                             "default": false,
+                             "description": "Break when exception escapes into library code."
+                         }
+                     ],
+                     "supportsStepInTargetsRequest": true
+                 }
+             }
+
+D+00010.016: Client[1] --> {
+                 "seq": 2,
+                 "type": "request",
+                 "command": "attach",
+                 "arguments": {
+                     "name": "Attach (Remote Debug)",
+                     "type": "python",
+                     "request": "attach",
+                     "port": 5678,
+                     "host": "localhost",
+                     "preLaunchTask": "start-godot",
+                     "__configurationTarget": 6,
+                     "clientOS": "windows",
+                     "debugOptions": [
+                         "RedirectOutput",
+                         "FixFilePathCase",
+                         "ShowReturnValue"
+                     ],
+                     "justMyCode": true,
+                     "showReturnValue": true,
+                     "workspaceFolder": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                     "pathMappings": [
+                         {
+                             "localRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                             "remoteRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project"
+                         }
+                     ],
+                     "__sessionId": "686f4f58-a088-4576-958d-ed0e5a56a106"
+                 }
+             }
+
+D+00010.016: /handling #2 request "attach" from Client[1]/
+             Client[1] <-- {
+                 "seq": 4,
+                 "type": "event",
+                 "event": "debugpyWaitingForServer",
+                 "body": {
+                     "host": "127.0.0.1",
+                     "port": 55634
+                 }
+             }
+
+I+00010.016: /handling #2 request "attach" from Client[1]/
+             Session[1] waiting for connection from debug server...
+
+I+00010.016: /handling #2 request "attach" from Client[1]/
+             Attaching Server[pid=7372] to Session[1]
+
+D+00010.016: /handling #2 request "attach" from Client[1]/
+             Server[1] <-- {
+                 "seq": 3,
+                 "type": "request",
+                 "command": "pydevdAuthorize",
+                 "arguments": {
+                     "debugServerAccessToken": "c54983d009766278ad1532dcf99ecbe3d6da6b35ae64ebb26320411184b8b26e"
+                 }
+             }
+
+D+00010.016: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 6,
+                 "type": "response",
+                 "request_seq": 3,
+                 "success": true,
+                 "command": "pydevdAuthorize",
+                 "body": {
+                     "clientAccessToken": null
+                 }
+             }
+
+D+00010.016: /handling #2 request "attach" from Client[1]/
+             Server[1] <-- {
+                 "seq": 4,
+                 "type": "request",
+                 "command": "initialize",
+                 "arguments": {
+                     "clientID": "vscode",
+                     "clientName": "Visual Studio Code",
+                     "adapterID": "python",
+                     "pathFormat": "path",
+                     "linesStartAt1": true,
+                     "columnsStartAt1": true,
+                     "supportsVariableType": true,
+                     "supportsVariablePaging": true,
+                     "supportsRunInTerminalRequest": true,
+                     "locale": "en",
+                     "supportsProgressReporting": true,
+                     "supportsInvalidatedEvent": true,
+                     "supportsMemoryReferences": true,
+                     "supportsArgsCanBeInterpretedByShell": true,
+                     "supportsMemoryEvent": true,
+                     "supportsStartDebuggingRequest": true
+                 }
+             }
+
+D+00010.016: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 8,
+                 "type": "response",
+                 "request_seq": 4,
+                 "success": true,
+                 "command": "initialize",
+                 "body": {
+                     "supportsConfigurationDoneRequest": true,
+                     "supportsFunctionBreakpoints": true,
+                     "supportsConditionalBreakpoints": true,
+                     "supportsHitConditionalBreakpoints": true,
+                     "supportsEvaluateForHovers": true,
+                     "exceptionBreakpointFilters": [
+                         {
+                             "filter": "raised",
+                             "label": "Raised Exceptions",
+                             "default": false
+                         },
+                         {
+                             "filter": "uncaught",
+                             "label": "Uncaught Exceptions",
+                             "default": true
+                         },
+                         {
+                             "filter": "userUnhandled",
+                             "label": "User Uncaught Exceptions",
+                             "default": false
+                         }
+                     ],
+                     "supportsStepBack": false,
+                     "supportsSetVariable": true,
+                     "supportsRestartFrame": false,
+                     "supportsGotoTargetsRequest": true,
+                     "supportsStepInTargetsRequest": true,
+                     "supportsCompletionsRequest": true,
+                     "completionTriggerCharacters": [],
+                     "supportsModulesRequest": true,
+                     "additionalModuleColumns": [],
+                     "supportedChecksumAlgorithms": [],
+                     "supportsRestartRequest": false,
+                     "supportsExceptionOptions": true,
+                     "supportsValueFormattingOptions": true,
+                     "supportsExceptionInfoRequest": true,
+                     "supportTerminateDebuggee": true,
+                     "supportsDelayedStackTraceLoading": true,
+                     "supportsLoadedSourcesRequest": false,
+                     "supportsLogPoints": true,
+                     "supportsTerminateThreadsRequest": false,
+                     "supportsSetExpression": true,
+                     "supportsTerminateRequest": true,
+                     "supportsDataBreakpoints": false,
+                     "supportsReadMemoryRequest": false,
+                     "supportsDisassembleRequest": false,
+                     "supportsClipboardContext": true,
+                     "supportsDebuggerProperties": true,
+                     "pydevd": {
+                         "processId": 7372
+                     }
+                 }
+             }
+
+D+00010.016: /handling #2 request "attach" from Client[1]/
+             Capabilities: {
+                 "supportsCompletionsRequest": true,
+                 "supportsConditionalBreakpoints": true,
+                 "supportsConfigurationDoneRequest": true,
+                 "supportsDataBreakpoints": false,
+                 "supportsDelayedStackTraceLoading": true,
+                 "supportsDisassembleRequest": false,
+                 "supportsEvaluateForHovers": true,
+                 "supportsExceptionInfoRequest": true,
+                 "supportsExceptionOptions": true,
+                 "supportsFunctionBreakpoints": true,
+                 "supportsGotoTargetsRequest": true,
+                 "supportsHitConditionalBreakpoints": true,
+                 "supportsLoadedSourcesRequest": false,
+                 "supportsLogPoints": true,
+                 "supportsModulesRequest": true,
+                 "supportsReadMemoryRequest": false,
+                 "supportsRestartFrame": false,
+                 "supportsRestartRequest": false,
+                 "supportsSetExpression": true,
+                 "supportsSetVariable": true,
+                 "supportsStepBack": false,
+                 "supportsStepInTargetsRequest": true,
+                 "supportsTerminateRequest": true,
+                 "supportsTerminateThreadsRequest": false,
+                 "supportsValueFormattingOptions": true,
+                 "exceptionBreakpointFilters": [
+                     {
+                         "filter": "raised",
+                         "label": "Raised Exceptions",
+                         "default": false
+                     },
+                     {
+                         "filter": "uncaught",
+                         "label": "Uncaught Exceptions",
+                         "default": true
+                     },
+                     {
+                         "filter": "userUnhandled",
+                         "label": "User Uncaught Exceptions",
+                         "default": false
+                     }
+                 ],
+                 "additionalModuleColumns": [],
+                 "supportedChecksumAlgorithms": []
+             }
+
+D+00010.016: /handling #2 request "attach" from Client[1]/
+             Server[1] <-- {
+                 "seq": 5,
+                 "type": "request",
+                 "command": "attach",
+                 "arguments": {
+                     "name": "Attach (Remote Debug)",
+                     "type": "python",
+                     "request": "attach",
+                     "port": 5678,
+                     "host": "localhost",
+                     "preLaunchTask": "start-godot",
+                     "__configurationTarget": 6,
+                     "clientOS": "windows",
+                     "debugOptions": [
+                         "RedirectOutput",
+                         "FixFilePathCase",
+                         "ShowReturnValue"
+                     ],
+                     "justMyCode": true,
+                     "showReturnValue": true,
+                     "workspaceFolder": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                     "pathMappings": [
+                         {
+                             "localRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                             "remoteRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project"
+                         }
+                     ],
+                     "__sessionId": "686f4f58-a088-4576-958d-ed0e5a56a106"
+                 }
+             }
+
+D+00010.016: Server[1] --> {
+                 "pydevd_cmd_id": 204,
+                 "seq": 10,
+                 "type": "event",
+                 "event": "process",
+                 "body": {
+                     "name": "",
+                     "systemProcessId": 7372,
+                     "isLocalProcess": true,
+                     "startMethod": "attach"
+                 }
+             }
+
+D+00010.016: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 12,
+                 "type": "event",
+                 "event": "initialized"
+             }
+
+D+00010.016: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 14,
+                 "type": "response",
+                 "request_seq": 5,
+                 "success": true,
+                 "command": "attach"
+             }
+
+D+00010.016: /handling #2 request "attach" from Client[1]/
+             Client[1] <-- {
+                 "seq": 5,
+                 "type": "event",
+                 "event": "initialized"
+             }
+
+D+00010.016: /handling #10 event "process" from Server[1]/
+             Propagation deferred.
+
+D+00010.031: Client[1] --> {
+                 "seq": 3,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "hello.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+                     },
+                     "lines": [
+                         5
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 5
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00010.031: /handling #3 request "setBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 6,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "hello.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+                     },
+                     "lines": [
+                         5
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 5
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00010.031: Client[1] --> {
+                 "seq": 4,
+                 "type": "request",
+                 "command": "setFunctionBreakpoints",
+                 "arguments": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00010.031: Client[1] --> {
+                 "seq": 5,
+                 "type": "request",
+                 "command": "setExceptionBreakpoints",
+                 "arguments": {
+                     "filters": [
+                         "uncaught"
+                     ]
+                 }
+             }
+
+D+00010.031: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 16,
+                 "type": "response",
+                 "request_seq": 6,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 0,
+                             "source": {
+                                 "name": "hello.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+                             },
+                             "line": 1
+                         }
+                     ]
+                 }
+             }
+
+D+00010.031: /handling #3 request "setBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 6,
+                 "type": "response",
+                 "request_seq": 3,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 0,
+                             "source": {
+                                 "name": "hello.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+                             },
+                             "line": 1
+                         }
+                     ]
+                 }
+             }
+
+D+00010.031: /handling #4 request "setFunctionBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 7,
+                 "type": "request",
+                 "command": "setFunctionBreakpoints",
+                 "arguments": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00010.031: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 18,
+                 "type": "response",
+                 "request_seq": 7,
+                 "success": true,
+                 "command": "setFunctionBreakpoints",
+                 "body": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00010.031: /handling #4 request "setFunctionBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 7,
+                 "type": "response",
+                 "request_seq": 4,
+                 "success": true,
+                 "command": "setFunctionBreakpoints",
+                 "body": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00010.031: /handling #5 request "setExceptionBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 8,
+                 "type": "request",
+                 "command": "setExceptionBreakpoints",
+                 "arguments": {
+                     "filters": [
+                         "uncaught"
+                     ]
+                 }
+             }
+
+D+00010.031: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 20,
+                 "type": "response",
+                 "request_seq": 8,
+                 "success": true,
+                 "command": "setExceptionBreakpoints",
+                 "body": {}
+             }
+
+D+00010.031: /handling #5 request "setExceptionBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 8,
+                 "type": "response",
+                 "request_seq": 5,
+                 "success": true,
+                 "command": "setExceptionBreakpoints"
+             }
+
+D+00010.031: Client[1] --> {
+                 "seq": 6,
+                 "type": "request",
+                 "command": "configurationDone"
+             }
+
+D+00010.031: /handling #6 request "configurationDone" from Client[1]/
+             Server[1] <-- {
+                 "seq": 9,
+                 "type": "request",
+                 "command": "configurationDone"
+             }
+
+D+00010.031: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 22,
+                 "type": "response",
+                 "request_seq": 9,
+                 "success": true,
+                 "command": "configurationDone"
+             }
+
+D+00010.031: /handling #6 request "configurationDone" from Client[1]/
+             Client[1] <-- {
+                 "seq": 9,
+                 "type": "response",
+                 "request_seq": 6,
+                 "success": true,
+                 "command": "configurationDone"
+             }
+
+D+00010.031: /handling #6 request "configurationDone" from Client[1]/
+             Client[1] <-- {
+                 "seq": 10,
+                 "type": "response",
+                 "request_seq": 2,
+                 "success": true,
+                 "command": "attach"
+             }
+
+D+00010.031: Server[1] --> {
+                 "pydevd_cmd_id": 103,
+                 "seq": 24,
+                 "type": "event",
+                 "event": "thread",
+                 "body": {
+                     "reason": "started",
+                     "threadId": 1
+                 }
+             }
+
+D+00010.031: /handling #6 request "configurationDone" from Client[1]/
+             Propagating deferred events to Client[1]...
+
+D+00010.031: /handling #6 request "configurationDone" from Client[1]/
+             Propagating deferred #10 event "process" from Server[1]
+
+D+00010.031: /handling #6 request "configurationDone" from Client[1]/
+             Client[1] <-- {
+                 "seq": 11,
+                 "type": "event",
+                 "event": "process",
+                 "body": {
+                     "name": "",
+                     "systemProcessId": 7372,
+                     "isLocalProcess": true,
+                     "startMethod": "attach"
+                 }
+             }
+
+I+00010.031: /handling #6 request "configurationDone" from Client[1]/
+             All deferred events propagated to Client[1].
+
+D+00010.031: /handling #24 event "thread" from Server[1]/
+             Client[1] <-- {
+                 "seq": 12,
+                 "type": "event",
+                 "event": "thread",
+                 "body": {
+                     "reason": "started",
+                     "threadId": 1
+                 }
+             }
+
+D+00010.047: Client[1] --> {
+                 "seq": 7,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00010.047: /handling #7 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 10,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00010.047: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 26,
+                 "type": "response",
+                 "request_seq": 10,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00010.047: /handling #7 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 13,
+                 "type": "response",
+                 "request_seq": 7,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00010.156: Client[1] --> {
+                 "seq": 8,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00010.156: /handling #8 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 11,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00010.187: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 28,
+                 "type": "response",
+                 "request_seq": 11,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00010.187: /handling #8 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 14,
+                 "type": "response",
+                 "request_seq": 8,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00036.125: Client[1] --> {
+                 "seq": 9,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "CharHandler.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                     },
+                     "lines": [
+                         96
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 96
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00036.125: /handling #9 request "setBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 12,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "CharHandler.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                     },
+                     "lines": [
+                         96
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 96
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00036.125: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 30,
+                 "type": "response",
+                 "request_seq": 12,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 1,
+                             "source": {
+                                 "name": "CharHandler.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                             },
+                             "line": 96
+                         }
+                     ]
+                 }
+             }
+
+D+00036.125: /handling #9 request "setBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 15,
+                 "type": "response",
+                 "request_seq": 9,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 1,
+                             "source": {
+                                 "name": "CharHandler.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                             },
+                             "line": 96
+                         }
+                     ]
+                 }
+             }
+
+D+00048.375: Client[1] --> {
+                 "seq": 10,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "CharHandler.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                     },
+                     "lines": [],
+                     "breakpoints": [],
+                     "sourceModified": false
+                 }
+             }
+
+D+00048.375: /handling #10 request "setBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 13,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "CharHandler.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                     },
+                     "lines": [],
+                     "breakpoints": [],
+                     "sourceModified": false
+                 }
+             }
+
+D+00048.375: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 32,
+                 "type": "response",
+                 "request_seq": 13,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00048.375: /handling #10 request "setBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 16,
+                 "type": "response",
+                 "request_seq": 10,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00055.109: Client[1] --> {
+                 "seq": 11,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "CharHandler.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                     },
+                     "lines": [
+                         145
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 145
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00055.109: /handling #11 request "setBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 14,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "name": "CharHandler.py",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                     },
+                     "lines": [
+                         145
+                     ],
+                     "breakpoints": [
+                         {
+                             "line": 145
+                         }
+                     ],
+                     "sourceModified": false
+                 }
+             }
+
+D+00055.125: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 34,
+                 "type": "response",
+                 "request_seq": 14,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 2,
+                             "source": {
+                                 "name": "CharHandler.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                             },
+                             "line": 145
+                         }
+                     ]
+                 }
+             }
+
+D+00055.125: /handling #11 request "setBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 17,
+                 "type": "response",
+                 "request_seq": 11,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": [
+                         {
+                             "verified": true,
+                             "id": 2,
+                             "source": {
+                                 "name": "CharHandler.py",
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py"
+                             },
+                             "line": 145
+                         }
+                     ]
+                 }
+             }
+
+D+00055.141: Server[1] --> {
+                 "pydevd_cmd_id": 157,
+                 "seq": 36,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00055.141: /handling #36 event "stopped" from Server[1]/
+             Client[1] <-- {
+                 "seq": 18,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00055.172: Client[1] --> {
+                 "seq": 12,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00055.172: /handling #12 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 15,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00055.172: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 38,
+                 "type": "response",
+                 "request_seq": 15,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00055.172: /handling #12 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 19,
+                 "type": "response",
+                 "request_seq": 12,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00055.172: Client[1] --> {
+                 "seq": 13,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00055.172: /handling #13 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 16,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00055.172: Server[1] --> {
+                 "pydevd_cmd_id": 203,
+                 "seq": 40,
+                 "type": "event",
+                 "event": "module",
+                 "body": {
+                     "reason": "new",
+                     "module": {
+                         "id": 0,
+                         "name": "Scripts.CharHandler",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                         "package": "Scripts"
+                     }
+                 }
+             }
+
+D+00055.172: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 42,
+                 "type": "response",
+                 "request_seq": 16,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00055.172: /handling #13 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 20,
+                 "type": "response",
+                 "request_seq": 13,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00055.172: /handling #40 event "module" from Server[1]/
+             Client[1] <-- {
+                 "seq": 21,
+                 "type": "event",
+                 "event": "module",
+                 "body": {
+                     "reason": "new",
+                     "module": {
+                         "id": 0,
+                         "name": "Scripts.CharHandler",
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                         "package": "Scripts"
+                     }
+                 }
+             }
+
+D+00055.609: Client[1] --> {
+                 "seq": 14,
+                 "type": "request",
+                 "command": "scopes",
+                 "arguments": {
+                     "frameId": 2
+                 }
+             }
+
+D+00055.609: /handling #14 request "scopes" from Client[1]/
+             Server[1] <-- {
+                 "seq": 17,
+                 "type": "request",
+                 "command": "scopes",
+                 "arguments": {
+                     "frameId": 2
+                 }
+             }
+
+D+00055.609: Client[1] --> {
+                 "seq": 15,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 1,
+                     "levels": 19
+                 }
+             }
+
+D+00055.609: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 44,
+                 "type": "response",
+                 "request_seq": 17,
+                 "success": true,
+                 "command": "scopes",
+                 "body": {
+                     "scopes": [
+                         {
+                             "name": "Locals",
+                             "variablesReference": 3,
+                             "expensive": false,
+                             "presentationHint": "locals",
+                             "source": {}
+                         },
+                         {
+                             "name": "Globals",
+                             "variablesReference": 4,
+                             "expensive": false,
+                             "source": {}
+                         }
+                     ]
+                 }
+             }
+
+D+00055.609: /handling #14 request "scopes" from Client[1]/
+             Client[1] <-- {
+                 "seq": 22,
+                 "type": "response",
+                 "request_seq": 14,
+                 "success": true,
+                 "command": "scopes",
+                 "body": {
+                     "scopes": [
+                         {
+                             "name": "Locals",
+                             "variablesReference": 3,
+                             "expensive": false,
+                             "presentationHint": "locals",
+                             "source": {}
+                         },
+                         {
+                             "name": "Globals",
+                             "variablesReference": 4,
+                             "expensive": false,
+                             "source": {}
+                         }
+                     ]
+                 }
+             }
+
+D+00055.609: /handling #15 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 18,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 1,
+                     "levels": 19
+                 }
+             }
+
+D+00055.609: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 46,
+                 "type": "response",
+                 "request_seq": 18,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00055.609: /handling #15 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 23,
+                 "type": "response",
+                 "request_seq": 15,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00055.625: Client[1] --> {
+                 "seq": 16,
+                 "type": "request",
+                 "command": "variables",
+                 "arguments": {
+                     "variablesReference": 3
+                 }
+             }
+
+D+00055.625: /handling #16 request "variables" from Client[1]/
+             Server[1] <-- {
+                 "seq": 19,
+                 "type": "request",
+                 "command": "variables",
+                 "arguments": {
+                     "variablesReference": 3
+                 }
+             }
+
+D+00055.625: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 48,
+                 "type": "response",
+                 "request_seq": 19,
+                 "success": true,
+                 "command": "variables",
+                 "body": {
+                     "variables": [
+                         {
+                             "name": "delta",
+                             "value": "0.01666666753590107",
+                             "type": "float",
+                             "evaluateName": "delta",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "ignore",
+                             "value": "False",
+                             "type": "bool",
+                             "evaluateName": "ignore",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "self",
+                             "value": "<Scripts.CharHandler.CharHandler object at 0x000002BC866C8740>",
+                             "type": "CharHandler",
+                             "evaluateName": "self",
+                             "variablesReference": 5
+                         }
+                     ]
+                 }
+             }
+
+D+00055.625: /handling #16 request "variables" from Client[1]/
+             Client[1] <-- {
+                 "seq": 24,
+                 "type": "response",
+                 "request_seq": 16,
+                 "success": true,
+                 "command": "variables",
+                 "body": {
+                     "variables": [
+                         {
+                             "name": "delta",
+                             "value": "0.01666666753590107",
+                             "type": "float",
+                             "evaluateName": "delta",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "ignore",
+                             "value": "False",
+                             "type": "bool",
+                             "evaluateName": "ignore",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "self",
+                             "value": "<Scripts.CharHandler.CharHandler object at 0x000002BC866C8740>",
+                             "type": "CharHandler",
+                             "evaluateName": "self",
+                             "variablesReference": 5
+                         }
+                     ]
+                 }
+             }
+
+D+00059.375: Client[1] --> {
+                 "seq": 17,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": 1
+                 }
+             }
+
+D+00059.375: /handling #17 request "continue" from Client[1]/
+             Server[1] <-- {
+                 "seq": 20,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": "*"
+                 }
+             }
+
+D+00059.391: Server[1] --> {
+                 "pydevd_cmd_id": 158,
+                 "seq": 50,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00059.391: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 52,
+                 "type": "response",
+                 "request_seq": 20,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00059.391: Server[1] --> {
+                 "pydevd_cmd_id": 157,
+                 "seq": 54,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00059.391: /handling #17 request "continue" from Client[1]/
+             Client[1] <-- {
+                 "seq": 25,
+                 "type": "response",
+                 "request_seq": 17,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00059.391: /handling #50 event "continued" from Server[1]/
+             Client[1] <-- {
+                 "seq": 26,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00059.391: /handling #54 event "stopped" from Server[1]/
+             Client[1] <-- {
+                 "seq": 27,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00059.391: Client[1] --> {
+                 "seq": 18,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00059.406: /handling #18 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 21,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00059.406: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 56,
+                 "type": "response",
+                 "request_seq": 21,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00059.406: /handling #18 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 28,
+                 "type": "response",
+                 "request_seq": 18,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00059.406: Client[1] --> {
+                 "seq": 19,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00059.406: /handling #19 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 22,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00059.406: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 58,
+                 "type": "response",
+                 "request_seq": 22,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00059.406: /handling #19 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 29,
+                 "type": "response",
+                 "request_seq": 19,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00059.828: Client[1] --> {
+                 "seq": 20,
+                 "type": "request",
+                 "command": "scopes",
+                 "arguments": {
+                     "frameId": 2
+                 }
+             }
+
+D+00059.828: /handling #20 request "scopes" from Client[1]/
+             Server[1] <-- {
+                 "seq": 23,
+                 "type": "request",
+                 "command": "scopes",
+                 "arguments": {
+                     "frameId": 2
+                 }
+             }
+
+D+00059.828: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 60,
+                 "type": "response",
+                 "request_seq": 23,
+                 "success": true,
+                 "command": "scopes",
+                 "body": {
+                     "scopes": [
+                         {
+                             "name": "Locals",
+                             "variablesReference": 3,
+                             "expensive": false,
+                             "presentationHint": "locals",
+                             "source": {}
+                         },
+                         {
+                             "name": "Globals",
+                             "variablesReference": 4,
+                             "expensive": false,
+                             "source": {}
+                         }
+                     ]
+                 }
+             }
+
+D+00059.828: /handling #20 request "scopes" from Client[1]/
+             Client[1] <-- {
+                 "seq": 30,
+                 "type": "response",
+                 "request_seq": 20,
+                 "success": true,
+                 "command": "scopes",
+                 "body": {
+                     "scopes": [
+                         {
+                             "name": "Locals",
+                             "variablesReference": 3,
+                             "expensive": false,
+                             "presentationHint": "locals",
+                             "source": {}
+                         },
+                         {
+                             "name": "Globals",
+                             "variablesReference": 4,
+                             "expensive": false,
+                             "source": {}
+                         }
+                     ]
+                 }
+             }
+
+D+00059.828: Client[1] --> {
+                 "seq": 21,
+                 "type": "request",
+                 "command": "variables",
+                 "arguments": {
+                     "variablesReference": 3
+                 }
+             }
+
+D+00059.828: /handling #21 request "variables" from Client[1]/
+             Server[1] <-- {
+                 "seq": 24,
+                 "type": "request",
+                 "command": "variables",
+                 "arguments": {
+                     "variablesReference": 3
+                 }
+             }
+
+D+00059.828: Client[1] --> {
+                 "seq": 22,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 1,
+                     "levels": 19
+                 }
+             }
+
+D+00059.844: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 62,
+                 "type": "response",
+                 "request_seq": 24,
+                 "success": true,
+                 "command": "variables",
+                 "body": {
+                     "variables": [
+                         {
+                             "name": "delta",
+                             "value": "0.01666666753590107",
+                             "type": "float",
+                             "evaluateName": "delta",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "ignore",
+                             "value": "False",
+                             "type": "bool",
+                             "evaluateName": "ignore",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "self",
+                             "value": "<Scripts.CharHandler.CharHandler object at 0x000002BC866C8740>",
+                             "type": "CharHandler",
+                             "evaluateName": "self",
+                             "variablesReference": 5
+                         }
+                     ]
+                 }
+             }
+
+D+00059.844: /handling #21 request "variables" from Client[1]/
+             Client[1] <-- {
+                 "seq": 31,
+                 "type": "response",
+                 "request_seq": 21,
+                 "success": true,
+                 "command": "variables",
+                 "body": {
+                     "variables": [
+                         {
+                             "name": "delta",
+                             "value": "0.01666666753590107",
+                             "type": "float",
+                             "evaluateName": "delta",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "ignore",
+                             "value": "False",
+                             "type": "bool",
+                             "evaluateName": "ignore",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "self",
+                             "value": "<Scripts.CharHandler.CharHandler object at 0x000002BC866C8740>",
+                             "type": "CharHandler",
+                             "evaluateName": "self",
+                             "variablesReference": 5
+                         }
+                     ]
+                 }
+             }
+
+D+00059.844: /handling #22 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 25,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 1,
+                     "levels": 19
+                 }
+             }
+
+D+00059.844: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 64,
+                 "type": "response",
+                 "request_seq": 25,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00059.844: /handling #22 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 32,
+                 "type": "response",
+                 "request_seq": 22,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00060.062: Client[1] --> {
+                 "seq": 23,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": 1
+                 }
+             }
+
+D+00060.062: /handling #23 request "continue" from Client[1]/
+             Server[1] <-- {
+                 "seq": 26,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": "*"
+                 }
+             }
+
+D+00060.078: Server[1] --> {
+                 "pydevd_cmd_id": 158,
+                 "seq": 66,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.078: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 68,
+                 "type": "response",
+                 "request_seq": 26,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.078: /handling #23 request "continue" from Client[1]/
+             Client[1] <-- {
+                 "seq": 33,
+                 "type": "response",
+                 "request_seq": 23,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.078: /handling #66 event "continued" from Server[1]/
+             Client[1] <-- {
+                 "seq": 34,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.094: Server[1] --> {
+                 "pydevd_cmd_id": 157,
+                 "seq": 70,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00060.094: /handling #70 event "stopped" from Server[1]/
+             Client[1] <-- {
+                 "seq": 35,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00060.094: Client[1] --> {
+                 "seq": 24,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00060.094: /handling #24 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 27,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00060.094: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 72,
+                 "type": "response",
+                 "request_seq": 27,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00060.094: /handling #24 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 36,
+                 "type": "response",
+                 "request_seq": 24,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00060.109: Client[1] --> {
+                 "seq": 25,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00060.109: /handling #25 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 28,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00060.109: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 74,
+                 "type": "response",
+                 "request_seq": 28,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00060.109: /handling #25 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 37,
+                 "type": "response",
+                 "request_seq": 25,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00060.406: Client[1] --> {
+                 "seq": 26,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": 1
+                 }
+             }
+
+D+00060.406: /handling #26 request "continue" from Client[1]/
+             Server[1] <-- {
+                 "seq": 29,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": "*"
+                 }
+             }
+
+D+00060.406: Server[1] --> {
+                 "pydevd_cmd_id": 158,
+                 "seq": 76,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.406: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 78,
+                 "type": "response",
+                 "request_seq": 29,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.406: /handling #26 request "continue" from Client[1]/
+             Client[1] <-- {
+                 "seq": 38,
+                 "type": "response",
+                 "request_seq": 26,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.406: Server[1] --> {
+                 "pydevd_cmd_id": 157,
+                 "seq": 80,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00060.406: /handling #76 event "continued" from Server[1]/
+             Client[1] <-- {
+                 "seq": 39,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.406: /handling #80 event "stopped" from Server[1]/
+             Client[1] <-- {
+                 "seq": 40,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00060.406: Client[1] --> {
+                 "seq": 27,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00060.422: /handling #27 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 30,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00060.422: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 82,
+                 "type": "response",
+                 "request_seq": 30,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00060.422: /handling #27 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 41,
+                 "type": "response",
+                 "request_seq": 27,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00060.422: Client[1] --> {
+                 "seq": 28,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00060.422: /handling #28 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 31,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00060.422: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 84,
+                 "type": "response",
+                 "request_seq": 31,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00060.422: /handling #28 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 42,
+                 "type": "response",
+                 "request_seq": 28,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00060.562: Client[1] --> {
+                 "seq": 29,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": 1
+                 }
+             }
+
+D+00060.562: /handling #29 request "continue" from Client[1]/
+             Server[1] <-- {
+                 "seq": 32,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": "*"
+                 }
+             }
+
+D+00060.578: Server[1] --> {
+                 "pydevd_cmd_id": 158,
+                 "seq": 86,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.578: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 88,
+                 "type": "response",
+                 "request_seq": 32,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.578: /handling #29 request "continue" from Client[1]/
+             Client[1] <-- {
+                 "seq": 43,
+                 "type": "response",
+                 "request_seq": 29,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.578: Server[1] --> {
+                 "pydevd_cmd_id": 157,
+                 "seq": 90,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00060.578: /handling #86 event "continued" from Server[1]/
+             Client[1] <-- {
+                 "seq": 44,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.578: /handling #90 event "stopped" from Server[1]/
+             Client[1] <-- {
+                 "seq": 45,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00060.578: Client[1] --> {
+                 "seq": 30,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00060.578: /handling #30 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 33,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00060.578: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 92,
+                 "type": "response",
+                 "request_seq": 33,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00060.578: /handling #30 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 46,
+                 "type": "response",
+                 "request_seq": 30,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00060.578: Client[1] --> {
+                 "seq": 31,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00060.578: /handling #31 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 34,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00060.594: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 94,
+                 "type": "response",
+                 "request_seq": 34,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00060.594: /handling #31 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 47,
+                 "type": "response",
+                 "request_seq": 31,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00060.797: Client[1] --> {
+                 "seq": 32,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": 1
+                 }
+             }
+
+D+00060.797: /handling #32 request "continue" from Client[1]/
+             Server[1] <-- {
+                 "seq": 35,
+                 "type": "request",
+                 "command": "continue",
+                 "arguments": {
+                     "threadId": "*"
+                 }
+             }
+
+D+00060.797: Server[1] --> {
+                 "pydevd_cmd_id": 158,
+                 "seq": 96,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.797: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 98,
+                 "type": "response",
+                 "request_seq": 35,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.797: /handling #32 request "continue" from Client[1]/
+             Client[1] <-- {
+                 "seq": 48,
+                 "type": "response",
+                 "request_seq": 32,
+                 "success": true,
+                 "command": "continue",
+                 "body": {
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.797: Server[1] --> {
+                 "pydevd_cmd_id": 157,
+                 "seq": 100,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00060.797: /handling #96 event "continued" from Server[1]/
+             Client[1] <-- {
+                 "seq": 49,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00060.797: /handling #100 event "stopped" from Server[1]/
+             Client[1] <-- {
+                 "seq": 50,
+                 "type": "event",
+                 "event": "stopped",
+                 "body": {
+                     "reason": "breakpoint",
+                     "threadId": 1,
+                     "preserveFocusHint": false,
+                     "allThreadsStopped": true
+                 }
+             }
+
+D+00060.812: Client[1] --> {
+                 "seq": 33,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00060.812: /handling #33 request "threads" from Client[1]/
+             Server[1] <-- {
+                 "seq": 36,
+                 "type": "request",
+                 "command": "threads"
+             }
+
+D+00060.812: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 102,
+                 "type": "response",
+                 "request_seq": 36,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00060.812: /handling #33 request "threads" from Client[1]/
+             Client[1] <-- {
+                 "seq": 51,
+                 "type": "response",
+                 "request_seq": 33,
+                 "success": true,
+                 "command": "threads",
+                 "body": {
+                     "threads": [
+                         {
+                             "id": 1,
+                             "name": "MainThread"
+                         }
+                     ]
+                 }
+             }
+
+D+00060.812: Client[1] --> {
+                 "seq": 34,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00060.812: /handling #34 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 37,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 0,
+                     "levels": 1
+                 }
+             }
+
+D+00060.812: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 104,
+                 "type": "response",
+                 "request_seq": 37,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00060.812: /handling #34 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 52,
+                 "type": "response",
+                 "request_seq": 34,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [
+                         {
+                             "id": 2,
+                             "name": "_physics_process",
+                             "line": 145,
+                             "column": 1,
+                             "source": {
+                                 "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                                 "sourceReference": 0
+                             }
+                         }
+                     ],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00061.234: Client[1] --> {
+                 "seq": 35,
+                 "type": "request",
+                 "command": "scopes",
+                 "arguments": {
+                     "frameId": 2
+                 }
+             }
+
+D+00061.234: /handling #35 request "scopes" from Client[1]/
+             Server[1] <-- {
+                 "seq": 38,
+                 "type": "request",
+                 "command": "scopes",
+                 "arguments": {
+                     "frameId": 2
+                 }
+             }
+
+D+00061.234: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 106,
+                 "type": "response",
+                 "request_seq": 38,
+                 "success": true,
+                 "command": "scopes",
+                 "body": {
+                     "scopes": [
+                         {
+                             "name": "Locals",
+                             "variablesReference": 3,
+                             "expensive": false,
+                             "presentationHint": "locals",
+                             "source": {}
+                         },
+                         {
+                             "name": "Globals",
+                             "variablesReference": 4,
+                             "expensive": false,
+                             "source": {}
+                         }
+                     ]
+                 }
+             }
+
+D+00061.234: /handling #35 request "scopes" from Client[1]/
+             Client[1] <-- {
+                 "seq": 53,
+                 "type": "response",
+                 "request_seq": 35,
+                 "success": true,
+                 "command": "scopes",
+                 "body": {
+                     "scopes": [
+                         {
+                             "name": "Locals",
+                             "variablesReference": 3,
+                             "expensive": false,
+                             "presentationHint": "locals",
+                             "source": {}
+                         },
+                         {
+                             "name": "Globals",
+                             "variablesReference": 4,
+                             "expensive": false,
+                             "source": {}
+                         }
+                     ]
+                 }
+             }
+
+D+00061.234: Client[1] --> {
+                 "seq": 36,
+                 "type": "request",
+                 "command": "variables",
+                 "arguments": {
+                     "variablesReference": 3
+                 }
+             }
+
+D+00061.234: /handling #36 request "variables" from Client[1]/
+             Server[1] <-- {
+                 "seq": 39,
+                 "type": "request",
+                 "command": "variables",
+                 "arguments": {
+                     "variablesReference": 3
+                 }
+             }
+
+D+00061.250: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 108,
+                 "type": "response",
+                 "request_seq": 39,
+                 "success": true,
+                 "command": "variables",
+                 "body": {
+                     "variables": [
+                         {
+                             "name": "delta",
+                             "value": "0.01666666753590107",
+                             "type": "float",
+                             "evaluateName": "delta",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "ignore",
+                             "value": "False",
+                             "type": "bool",
+                             "evaluateName": "ignore",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "self",
+                             "value": "<Scripts.CharHandler.CharHandler object at 0x000002BC866C8740>",
+                             "type": "CharHandler",
+                             "evaluateName": "self",
+                             "variablesReference": 5
+                         }
+                     ]
+                 }
+             }
+
+D+00061.250: Client[1] --> {
+                 "seq": 37,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 1,
+                     "levels": 19
+                 }
+             }
+
+D+00061.250: /handling #36 request "variables" from Client[1]/
+             Client[1] <-- {
+                 "seq": 54,
+                 "type": "response",
+                 "request_seq": 36,
+                 "success": true,
+                 "command": "variables",
+                 "body": {
+                     "variables": [
+                         {
+                             "name": "delta",
+                             "value": "0.01666666753590107",
+                             "type": "float",
+                             "evaluateName": "delta",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "ignore",
+                             "value": "False",
+                             "type": "bool",
+                             "evaluateName": "ignore",
+                             "variablesReference": 0
+                         },
+                         {
+                             "name": "self",
+                             "value": "<Scripts.CharHandler.CharHandler object at 0x000002BC866C8740>",
+                             "type": "CharHandler",
+                             "evaluateName": "self",
+                             "variablesReference": 5
+                         }
+                     ]
+                 }
+             }
+
+D+00061.250: /handling #37 request "stackTrace" from Client[1]/
+             Server[1] <-- {
+                 "seq": 40,
+                 "type": "request",
+                 "command": "stackTrace",
+                 "arguments": {
+                     "threadId": 1,
+                     "startFrame": 1,
+                     "levels": 19
+                 }
+             }
+
+D+00061.250: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 110,
+                 "type": "response",
+                 "request_seq": 40,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00061.250: /handling #37 request "stackTrace" from Client[1]/
+             Client[1] <-- {
+                 "seq": 55,
+                 "type": "response",
+                 "request_seq": 37,
+                 "success": true,
+                 "command": "stackTrace",
+                 "body": {
+                     "stackFrames": [],
+                     "totalFrames": 1
+                 }
+             }
+
+D+00061.969: Client[1] --> {
+                 "seq": 38,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                         "sourceReference": 0
+                     },
+                     "lines": [],
+                     "breakpoints": [],
+                     "sourceModified": false
+                 }
+             }
+
+D+00061.969: /handling #38 request "setBreakpoints" from Client[1]/
+             Server[1] <-- {
+                 "seq": 41,
+                 "type": "request",
+                 "command": "setBreakpoints",
+                 "arguments": {
+                     "source": {
+                         "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\Scripts\\CharHandler.py",
+                         "sourceReference": 0
+                     },
+                     "lines": [],
+                     "breakpoints": [],
+                     "sourceModified": false
+                 }
+             }
+
+D+00061.969: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 112,
+                 "type": "response",
+                 "request_seq": 41,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00061.969: /handling #38 request "setBreakpoints" from Client[1]/
+             Client[1] <-- {
+                 "seq": 56,
+                 "type": "response",
+                 "request_seq": 38,
+                 "success": true,
+                 "command": "setBreakpoints",
+                 "body": {
+                     "breakpoints": []
+                 }
+             }
+
+D+00072.937: Client[1] --> {
+                 "seq": 39,
+                 "type": "request",
+                 "command": "disconnect",
+                 "arguments": {
+                     "restart": false
+                 }
+             }
+
+I+00072.937: /handling #39 request "disconnect" from Client[1]/
+             client requested "disconnect"; finalizing Session[1].
+
+D+00072.937: /handling #39 request "disconnect" from Client[1]/
+             Server[1] <-- {
+                 "seq": 42,
+                 "type": "request",
+                 "command": "disconnect",
+                 "arguments": {
+                     "terminateDebuggee": false
+                 }
+             }
+
+D+00072.937: Server[1] --> {
+                 "pydevd_cmd_id": 502,
+                 "seq": 114,
+                 "type": "response",
+                 "request_seq": 42,
+                 "success": true,
+                 "command": "disconnect"
+             }
+
+D+00072.937: /handling #39 request "disconnect" from Client[1]/
+             Client[1] <-- {
+                 "seq": 57,
+                 "type": "event",
+                 "event": "terminated"
+             }
+
+I+00072.937: /handling #39 request "disconnect" from Client[1]/
+             Session[1] finalized.
+
+D+00072.937: /handling #39 request "disconnect" from Client[1]/
+             Client[1] <-- {
+                 "seq": 58,
+                 "type": "response",
+                 "request_seq": 39,
+                 "success": true,
+                 "command": "disconnect"
+             }
+
+D+00072.937: Server[pid=7372] --> {
+                 "pydevd_cmd_id": 158,
+                 "seq": 116,
+                 "type": "event",
+                 "event": "continued",
+                 "body": {
+                     "threadId": 1,
+                     "allThreadsContinued": true
+                 }
+             }
+
+D+00072.937: Exiting message loop for channel Client[1]: No more messages
+
+D+00072.937: Closing Client[1] message stream
+
+I+00072.937: /handling disconnect from Client[1]/
+             Session[1] has ended.
+
+D+00076.594: Server[pid=7372] --> {
+                 "pydevd_cmd_id": 129,
+                 "seq": 118,
+                 "type": "event",
+                 "event": "terminated",
+                 "body": {}
+             }
+
+D+00076.594: /handling #118 event "terminated" from Server[pid=7372]/
+             Closing Server[pid=7372] message stream
+
+D+00076.594: Exiting message loop for channel Server[pid=7372]: [WinError 10038] Ein Vorgang bezog sich auf ein Objekt, das kein Socket ist
+
+I+00076.594: All debug servers disconnected; waiting for remaining sessions...
+
+I+00076.594: All debug sessions have ended; exiting.
+
+I+00076.594: Not logging to "<stderr>" anymore.
+

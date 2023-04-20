@@ -1,0 +1,425 @@
+0.43s - pydevd: Use libraries filter: False
+
+0.00s - IDE_PROJECT_ROOTS []
+
+0.00s - Collecting default library roots.
+0.00s - LIBRARY_ROOTS ['C:\\Users\\nikla\\AppData\\Roaming\\Python\\Python39\\site-packages', 'C:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\addons\\windows64\\cpython-3.9.7-windows64\\python\\install', 'C:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\addons\\windows64\\cpython-3.9.7-windows64\\python\\install\\Lib', 'C:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\addons\\windows64\\cpython-3.9.7-windows64\\python\\install\\Lib\\site-packages', 'C:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\addons\\windows64\\cpython-3.9.7-windows64\\python\\install\\lib', 'C:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\addons\\windows64\\cpython-3.9.7-windows64\\python\\install\\lib\\site-packages', 'addons/windows64/cpython-3.9.7-windows64/python/install', 'addons/windows64/cpython-3.9.7-windows64/python/install\\lib\\site-packages', 'addons\\windows64\\cpython-3.9.7-windows64\\python\\install\\Lib', 'addons\\windows64\\cpython-3.9.7-windows64\\python\\install\\Lib\\site-packages']
+
+0.00s - Apply debug mode: debugpy-dap
+0.00s - Preimport: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages;debugpy._vendored.force_pydevd
+0.00s - Connecting to 127.0.0.1:57925
+0.00s - Connected.
+0.00s - Applying patching to hide pydevd threads (Py3 version).
+0.00s - Process PydevdAuthorizeRequest: {
+    "arguments": {
+        "debugServerAccessToken": "ef655e208d9d4c9e98b4141f0253c8d75c5f02b5890a6c10f8f1c3a98013fbc0"
+    },
+    "command": "pydevdAuthorize",
+    "seq": 1,
+    "type": "request"
+}
+
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 1, "success": true, "command": "pydevdAuthorize", "body": {"clientAccessToken": null}, "seq": 2, "pydevd_cmd_id": 502}
+
+0.00s - Process PydevdSystemInfoRequest: {
+    "arguments": {},
+    "command": "pydevdSystemInfo",
+    "seq": 2,
+    "type": "request"
+}
+
+0.01s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 2, "success": true, "command": "pydevdSystemInfo", "body": {"python": {"version": "3.9.7final0", "implementation": {"name": "cpython", "version": "3.9.7final0", "description": "CPython"}}, "platform": {"name": "win32"}, "process": {"pid": 17040, "ppid": 9744, "executable": "C:\\Users\\nikla\\Downloads\\Godot_v3.5.1-stable_win64.exe(1)\\Godot_v3.5.1-stable_win64.exe", "bitness": 64}, "pydevd": {"usingCython": true, "usingFrameEval": false}}, "seq": 4, "pydevd_cmd_id": 502}
+
+0.10s - Successfully Loaded helper lib to set tracing to all threads.
+0.01s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _read_line
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\queue.py - get
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - set_tracing_for_untraced_contexts
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _locked_settrace
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - settrace
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - _settrace
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - listen
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - debug
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\public_api.py - wrapper
+0.00s - Set tracing of frame: Scripts/CharHandler.py - _ready
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - settrace
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - _settrace
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - listen
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - debug
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\public_api.py - wrapper
+0.68s - Process PydevdAuthorizeRequest: {
+    "arguments": {
+        "debugServerAccessToken": "ef655e208d9d4c9e98b4141f0253c8d75c5f02b5890a6c10f8f1c3a98013fbc0"
+    },
+    "command": "pydevdAuthorize",
+    "seq": 3,
+    "type": "request"
+}
+
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 3, "success": true, "command": "pydevdAuthorize", "body": {"clientAccessToken": null}, "seq": 6, "pydevd_cmd_id": 502}
+
+0.00s - Process InitializeRequest: {
+    "arguments": {
+        "adapterID": "python",
+        "clientID": "vscode",
+        "clientName": "Visual Studio Code",
+        "columnsStartAt1": true,
+        "linesStartAt1": true,
+        "locale": "en",
+        "pathFormat": "path",
+        "supportsArgsCanBeInterpretedByShell": true,
+        "supportsInvalidatedEvent": true,
+        "supportsMemoryEvent": true,
+        "supportsMemoryReferences": true,
+        "supportsProgressReporting": true,
+        "supportsRunInTerminalRequest": true,
+        "supportsStartDebuggingRequest": true,
+        "supportsVariablePaging": true,
+        "supportsVariableType": true
+    },
+    "command": "initialize",
+    "seq": 4,
+    "type": "request"
+}
+
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 4, "success": true, "command": "initialize", "seq": 8, "body": {"supportsConfigurationDoneRequest": true, "supportsFunctionBreakpoints": true, "supportsConditionalBreakpoints": true, "supportsHitConditionalBreakpoints": true, "supportsEvaluateForHovers": true, "exceptionBreakpointFilters": [{"filter": "raised", "label": "Raised Exceptions", "default": false}, {"filter": "uncaught", "label": "Uncaught Exceptions", "default": true}, {"filter": "userUnhandled", "label": "User Uncaught Exceptions", "default": false}], "supportsStepBack": false, "supportsSetVariable": true, "supportsRestartFrame": false, "supportsGotoTargetsRequest": true, "supportsStepInTargetsRequest": true, "supportsCompletionsRequest": true, "completionTriggerCharacters": [], "supportsModulesRequest": true, "additionalModuleColumns": [], "supportedChecksumAlgorithms": [], "supportsRestartRequest": false, "supportsExceptionOptions": true, "supportsValueFormattingOptions": true, "supportsExceptionInfoRequest": true, "supportTerminateDebuggee": true, "supportsDelayedStackTraceLoading": true, "supportsLoadedSourcesRequest": false, "supportsLogPoints": true, "supportsTerminateThreadsRequest": false, "supportsSetExpression": true, "supportsTerminateRequest": true, "supportsDataBreakpoints": false, "supportsReadMemoryRequest": false, "supportsDisassembleRequest": false, "supportsClipboardContext": true, "supportsDebuggerProperties": true, "pydevd": {"processId": 17040}}, "pydevd_cmd_id": 502}
+
+0.00s - Process AttachRequest: {
+    "arguments": {
+        "__configurationTarget": 6,
+        "__sessionId": "3e16b883-29d8-49f5-9f99-e1bcd9e698ea",
+        "clientOS": "windows",
+        "debugOptions": [
+            "RedirectOutput",
+            "FixFilePathCase",
+            "ShowReturnValue"
+        ],
+        "host": "localhost",
+        "justMyCode": true,
+        "name": "Attach (Remote Debug)",
+        "pathMappings": [
+            {
+                "localRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project",
+                "remoteRoot": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project"
+            }
+        ],
+        "port": 5678,
+        "preLaunchTask": "start-godot",
+        "request": "attach",
+        "showReturnValue": true,
+        "type": "python",
+        "workspaceFolder": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project"
+    },
+    "command": "attach",
+    "seq": 5,
+    "type": "request"
+}
+
+0.00s - sending cmd (http_json) -->    CMD_PROCESS_EVENT {"type": "event", "event": "process", "body": {"name": "", "systemProcessId": 17040, "isLocalProcess": true, "startMethod": "attach"}, "seq": 10, "pydevd_cmd_id": 204}
+
+0.00s - pydevd: Use libraries filter: True
+
+0.00s - Show return values: True
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "event", "event": "initialized", "seq": 12, "pydevd_cmd_id": 502}
+
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 5, "success": true, "command": "attach", "seq": 14, "pydevd_cmd_id": 502}
+
+0.01s - Process SetBreakpointsRequest: {
+    "arguments": {
+        "breakpoints": [
+            {
+                "line": 5
+            }
+        ],
+        "lines": [
+            5
+        ],
+        "source": {
+            "name": "hello.py",
+            "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"
+        },
+        "sourceModified": false
+    },
+    "command": "setBreakpoints",
+    "seq": 6,
+    "type": "request"
+}
+
+0.00s - Request for breakpoint in: c:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\hello.py line: 5
+0.00s - Breakpoint (after path translation) in: c:\users\nikla\onedrive\dokumente\repositories\py4godot---open-project\hello.py line: 5
+0.00s - File traced: c:\users\nikla\onedrive\dokumente\repositories\py4godot---open-project\hello.py
+0.00s - Added breakpoint:c:\users\nikla\onedrive\dokumente\repositories\py4godot---open-project\hello.py - line:1 - func_name:None
+
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - set_tracing_for_untraced_contexts
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - on_breakpoints_changed
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_api.py - add_breakpoint
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_process_net_command_json.py - on_setbreakpoints_request
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_process_net_command_json.py - process_net_command_json
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\queue.py - get
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - block_until_configuration_done
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _wait_for_attach
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - __call__
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\public_api.py - wrapper
+0.00s - Set tracing of frame: Scripts/CharHandler.py - _ready
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 6, "success": true, "command": "setBreakpoints", "body": {"breakpoints": [{"verified": true, "id": 0, "source": {"name": "hello.py", "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\hello.py"}, "line": 1}]}, "seq": 16, "pydevd_cmd_id": 502}
+
+0.00s - Process SetBreakpointsRequest: {
+    "arguments": {
+        "breakpoints": [
+            {
+                "line": 11
+            }
+        ],
+        "lines": [
+            11
+        ],
+        "source": {
+            "name": "start_godot.py",
+            "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\.vscode\\start_godot.py"
+        },
+        "sourceModified": false
+    },
+    "command": "setBreakpoints",
+    "seq": 7,
+    "type": "request"
+}
+
+0.00s - Request for breakpoint in: c:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\.vscode\start_godot.py line: 11
+0.00s - Breakpoint (after path translation) in: c:\users\nikla\onedrive\dokumente\repositories\py4godot---open-project\.vscode\start_godot.py line: 11
+0.00s - File traced: c:\users\nikla\onedrive\dokumente\repositories\py4godot---open-project\.vscode\start_godot.py
+0.00s - Added breakpoint:c:\users\nikla\onedrive\dokumente\repositories\py4godot---open-project\.vscode\start_godot.py - line:11 - func_name:None
+
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - set_tracing_for_untraced_contexts
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - on_breakpoints_changed
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_api.py - add_breakpoint
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_process_net_command_json.py - on_setbreakpoints_request
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_process_net_command_json.py - process_net_command_json
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\queue.py - get
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - block_until_configuration_done
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _wait_for_attach
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - __call__
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\public_api.py - wrapper
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 7, "success": true, "command": "setBreakpoints", "body": {"breakpoints": [{"verified": true, "id": 1, "source": {"name": "start_godot.py", "path": "c:\\Users\\nikla\\OneDrive\\Dokumente\\repositories\\py4godot---Open-Project\\.vscode\\start_godot.py"}, "line": 11}]}, "seq": 18, "pydevd_cmd_id": 502}
+
+0.00s - Process SetFunctionBreakpointsRequest: {
+    "arguments": {
+        "breakpoints": []
+    },
+    "command": "setFunctionBreakpoints",
+    "seq": 8,
+    "type": "request"
+}
+
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - set_tracing_for_untraced_contexts
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - on_breakpoints_changed
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_api.py - set_function_breakpoints
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_process_net_command_json.py - on_setfunctionbreakpoints_request
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_process_net_command_json.py - process_net_command_json
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\queue.py - get
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - block_until_configuration_done
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _wait_for_attach
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - __call__
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\public_api.py - wrapper
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 8, "success": true, "command": "setFunctionBreakpoints", "body": {"breakpoints": []}, "seq": 20, "pydevd_cmd_id": 502}
+
+0.00s - Process SetExceptionBreakpointsRequest: {
+    "arguments": {
+        "filters": [
+            "uncaught"
+        ]
+    },
+    "command": "setExceptionBreakpoints",
+    "seq": 9,
+    "type": "request"
+}
+
+0.00s - Exceptions to hook on terminate: {'BaseException': <_pydevd_bundle.pydevd_breakpoints.ExceptionBreakpoint object at 0x000001329128C640>}.
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - set_tracing_for_untraced_contexts
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - on_breakpoints_changed
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_api.py - add_python_exception_breakpoint
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_process_net_command_json.py - on_setexceptionbreakpoints_request
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_process_net_command_json.py - process_net_command_json
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\queue.py - get
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py - _on_run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_daemon_thread.py - run
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap_inner
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - _bootstrap
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py - wait
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - block_until_configuration_done
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py - _wait_for_attach
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\server\api.py - __call__
+0.00s - SKIP set tracing of frame: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\public_api.py - wrapper
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 9, "success": true, "command": "setExceptionBreakpoints", "seq": 22, "body": {}, "pydevd_cmd_id": 502}
+
+0.01s - Process ConfigurationDoneRequest: {
+    "arguments": {},
+    "command": "configurationDone",
+    "seq": 10,
+    "type": "request"
+}
+
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 10, "success": true, "command": "configurationDone", "seq": 24, "pydevd_cmd_id": 502}
+
+0.00s - sending cmd (http_json) -->    CMD_THREAD_CREATE {"type": "event", "event": "thread", "body": {"reason": "started", "threadId": 1}, "seq": 26, "pydevd_cmd_id": 103}
+
+0.00s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\CharHandler.py
+0.00s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\Check.py
+0.00s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\PushObj.py
+0.00s - Process ThreadsRequest: {
+    "command": "threads",
+    "seq": 11,
+    "type": "request"
+}
+
+0.00s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\Tools\Draw.py
+0.00s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 11, "success": true, "command": "threads", "body": {"threads": [{"id": 1, "name": "MainThread"}]}, "seq": 28, "pydevd_cmd_id": 502}
+
+0.00s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\AreaTrigger.py
+0.00s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\Navigation\AStar.py
+0.00s - File not traced (not in project - force_check_project_scope): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\typing.py
+0.00s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\Navigation\NavigationUtils.py
+0.00s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\Navigation\AStarPoint.py
+0.11s - Process ThreadsRequest: {
+    "command": "threads",
+    "seq": 12,
+    "type": "request"
+}
+
+0.01s - sending cmd (http_json) -->           CMD_RETURN {"type": "response", "request_seq": 12, "success": true, "command": "threads", "body": {"threads": [{"id": 1, "name": "MainThread"}]}, "seq": 30, "pydevd_cmd_id": 502}
+
+0.70s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\InteractionObjects\Lever.py
+2.16s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\PlayerCam.py
+10.59s - File traced: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\Scripts\UI\ZoomButton.py
+13.84s - sending cmd (http_json) -->      CMD_THREAD_KILL {"type": "event", "event": "thread", "body": {"reason": "exited", "threadId": 1}, "seq": 32, "pydevd_cmd_id": 104}
+
+0.15s - No threads alive, finishing debug session
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads (called from: File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\pydevd.py", line 269, in _on_run)
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads (first call)
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads no commands being processed.
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads killing thread: <ReaderThread(pydevd.Reader, started daemon 2720)>
+0.00s - pydevd.Reader received kill signal
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads killing thread: <WriterThread(pydevd.Writer, started daemon 10000)>
+0.00s - sending cmd (http_json) -->             CMD_EXIT {"type": "event", "event": "terminated", "seq": 34, "body": {}, "pydevd_cmd_id": 129}
+
+0.00s - pydevd.Writer received kill signal
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads killing thread: <CheckAliveThread(pydevd.CheckAliveThread, started 3456)>
+0.00s - pydevd.CheckAliveThread received kill signal
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads killing thread: <PyDBCommandThread(pydevd.CommandThread, started daemon 20428)>
+0.00s - pydevd.CommandThread received kill signal
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads waiting for pydb daemon threads to finish
+0.00s - WriterThread: CMD_EXIT received
+0.00s - WriterThread: exit
+0.00s - ReaderThread: empty contents received (len(line) == 0).
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads (called from: File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_comm.py", line 301, in _terminate_on_socket_close)
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads (already disposed - wait)
+0.50s - PyDB.dispose_and_kill_all_pydevd_threads: finished
+0.00s - ReaderThread: exit
+0.00s - PyDB.dispose_and_kill_all_pydevd_threads: finished
+0.00s - pydevd.stoptrace()

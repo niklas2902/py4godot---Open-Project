@@ -1,0 +1,67 @@
+I+00000.047: Windows-10-10.0.22621-SP0 AMD64
+             CPython 3.9.7 (64-bit)
+             debugpy 1.6.7
+
+I+00000.047: debugpy.adapter startup environment:
+             
+             System paths:
+                 sys.executable: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\python.exe
+                 sys.prefix: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 sys.base_prefix: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 sys.real_prefix: <missing>
+                 site.getsitepackages(): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                                         C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages)
+                 site.getusersitepackages(): C:\Users\nikla\AppData\Roaming\Python\Python39\site-packages
+                 sys.path (site-packages): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages)
+                 sysconfig.get_path('stdlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib
+                 sysconfig.get_path('platstdlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib
+                 sysconfig.get_path('purelib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages
+                 sysconfig.get_path('platlib'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages
+                 sysconfig.get_path('include'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Include(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\include)
+                 sysconfig.get_path('scripts'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Scripts
+                 sysconfig.get_path('data'): C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install
+                 os.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\os.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\os.py)
+                 threading.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\threading.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\threading.py)
+                 debugpy.__file__: C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\__init__.py(C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\Lib\site-packages\debugpy\__init__.py)
+
+E+00000.062: Error listening for incoming Client connections on localhost:5678:
+             
+             Traceback (most recent call last):
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\sockets.py", line 100, in serve
+                 listener = create_server(host, port, backlog, timeout)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\sockets.py", line 35, in create_server
+                 server.bind((host, port))
+             OSError: [WinError 10048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden
+             
+             Stack where logged:
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\runpy.py", line 197, in _run_module_as_main
+                 return _run_code(code, main_globals, None,
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\runpy.py", line 87, in _run_code
+                 exec(code, run_globals)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter\__main__.py", line 227, in <module>
+                 main(_parse_argv(sys.argv))
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter\__main__.py", line 58, in main
+                 client_host, client_port = clients.serve(args.host, args.port)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\adapter\clients.py", line 754, in serve
+                 listener = sockets.serve("Client", Client, host, port)
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\sockets.py", line 102, in serve
+                 log.reraise_exception(
+               File "C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\lib\site-packages\debugpy\adapter/../..\debugpy\common\log.py", line 222, in reraise_exception
+                 _exception(format_string, *args, **kwargs)
+             
+
+I+00000.062: Listening for incoming Server connections on 127.0.0.1:57590...
+
+I+00000.062: Sending endpoints info to debug server at localhost:57589:
+             {
+                 "error": "Can't listen for client connections: [WinError 10048] Normalerweise darf jede Socketadresse (Protokoll, Netzwerkadresse oder Anschluss) nur jeweils einmal verwendet werden",
+                 "server": {
+                     "host": "127.0.0.1",
+                     "port": 57590
+                 }
+             }
+
+E+00000.062: Couldn't set up endpoints; exiting.
+
+I+00000.062: Not logging to "<stderr>" anymore.
+

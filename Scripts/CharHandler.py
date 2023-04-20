@@ -123,6 +123,8 @@ class CharHandler(KinematicBody, Draw):
 		self._astar = self.get_node(self.astar_path).get_pyscript()
 
 		try:
+			with open("locked_debug", "w"):
+				pass
 			debugpy.log_to('log.txt')
 			debugpy.configure(python = r"C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\python.exe")
 			debugpy.listen(("localhost", 5678))
