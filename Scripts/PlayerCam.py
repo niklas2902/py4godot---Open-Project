@@ -11,7 +11,8 @@ class PlayerCam(Camera):
 	def __init__(self):
 		super().__init__()
 		self.start_origin:Optional[Vector3] = None
-		self.start_pos:Optional[Vector3] = None
+		self.start_transform:Optional[Transform] = None
+		self.zoom_in_activated:bool = False
 		self._player_path:NodePath = None
 		self._y_offset:float = 0
 		self._z_offset:float = 0
@@ -53,6 +54,8 @@ class PlayerCam(Camera):
 	@gdmethod
 	def handle_zoom_input(self):
 		input = Input.instance()
+		if(self.zoom_in_activated):
+			self.commit_zoom_in()
 		if self.is_zoomed_in or self.is_animating:
 			self.is_key_down = False
 			return
@@ -60,11 +63,20 @@ class PlayerCam(Camera):
 			self.init_move_around_cam()
 
 		elif(input.is_action_just_released(MOUSE_ACTION) and self.scale_multiply == 7):
-			self.finish_move_around_cam()
+			pass
+			#self.finish_move_around_cam()
 
 		if (input.is_action_pressed(MOUSE_ACTION)):
 			self.set_position_of_cam()
 			self.rotate_cam_to_player()
+
+	def commit_zoom_in(self):
+		self.rotate_cam_to_player()
+		self.zoom_in_activated = False
+		child: Node = Node.cast(cast(Node, self.get_children()[0]))
+		child.call("start_zoom_anim_in")
+		self.is_zooming_in = True
+		self.is_animating = True
 
 	def rotate_cam_to_player(self)->None:
 		self.look_at(self.player.global_transform.get_origin(), Vector3(0, 1, 0))
@@ -82,18 +94,17 @@ class PlayerCam(Camera):
 				self.start_mouse_pos.get_y() - self.last_mouse_pos.get_y()) / ROTATION_SCALE))
 
 	def finish_move_around_cam(self)->None:
-		if not self.start_pos:
+		if not self.start_transform:
 			return
 		self.is_key_down = False
 		self.last_mouse_pos = None
-		self.global_transform.set_origin(self.start_pos)
 		self.rotate_cam_to_player()
 
 	def init_move_around_cam(self)->None:
 		self.start_origin = self.global_transform.get_origin()
 		self.is_key_down = True
 		self.start_mouse_pos = self.get_viewport().get_mouse_position()
-		self.start_pos = self.global_transform.get_origin()
+		self.start_transform = self.global_transform
 
 	@gdmethod
 	def toggle_zoom(self)->None:
@@ -107,10 +118,8 @@ class PlayerCam(Camera):
 			self.is_zoomed_in = True
 
 	def _on_zoom_in(self)->None:
-		child:Node = Node.cast(cast(Node,self.get_children()[0]))
-		child.call("start_zoom_anim_in")
-		self.is_zooming_in = True
-		self.is_animating = True
+		self.finish_move_around_cam()
+		self.zoom_in_activated = True
 
 	def _on_zoom_out(self)->None:
 		child:Node = Node.cast(cast(Node,self.get_children()[0]))
