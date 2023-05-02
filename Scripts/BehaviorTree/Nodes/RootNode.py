@@ -1,9 +1,7 @@
+from Scripts.BehaviorTree.Nodes.BehaviorTreeNode import BehaviorTreeNode, NodeStates
 from typing import List
 
-from Scripts.BehaviorTree.BehaviorTreeNode import BehaviorTreeNode, NodeStates
-
-
-class DebugNode(BehaviorTreeNode):
+class RootNode(BehaviorTreeNode):
     def __init__(self, children: List[BehaviorTreeNode]) -> None:
         super().__init__()
         self.children = children
@@ -18,13 +16,13 @@ class DebugNode(BehaviorTreeNode):
                 is_child_running = True
 
             if child.status == NodeStates.SUCCEEDED and self.status != NodeStates.FAILED:
-                child.status = NodeStates.SUCCEEDED
+                self.status = NodeStates.SUCCEEDED
 
             if child.status == NodeStates.CANCELLED and self.status != NodeStates.FAILED:
-                child.status = NodeStates.CANCELLED
+                self.status = NodeStates.CANCELLED
 
             if child.status == NodeStates.FAILED:
-                child.status = NodeStates.FAILED
+                self.status = NodeStates.FAILED
 
         if not is_child_running:
             if self.status == NodeStates.FAILED:

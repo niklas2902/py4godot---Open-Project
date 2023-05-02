@@ -12,11 +12,6 @@ class NodeStates(Enum):
     SUCCEEDED = 3
     CANCELLED = 4
 
-
-class BehaviorTreeNode:
-    pass
-
-
 class BehaviorTreeNode:
     def __init__(self) -> None:
         self.control: Optional[BehaviorTreeNode] = None

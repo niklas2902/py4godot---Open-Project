@@ -1,4 +1,5 @@
-from Scripts.BehaviorTree.BehaviorTreeNode import BehaviorTreeNode, NodeStates
+from Scripts.BehaviorTree.Nodes.BehaviorTreeNode import BehaviorTreeNode, NodeStates
+from py4godot import *
 
 
 class DebugNode(BehaviorTreeNode):
