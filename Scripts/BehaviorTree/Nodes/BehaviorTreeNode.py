@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from Scripts.BehaviorTree.Blackboard import Blackboard
 from enum import Enum
 from typing import Optional, List
 
@@ -13,6 +14,7 @@ class NodeStates(Enum):
     CANCELLED = 4
 
 class BehaviorTreeNode:
+    blackboard:Blackboard
     def __init__(self) -> None:
         self.control: Optional[BehaviorTreeNode] = None
         self.tree = None
@@ -71,3 +73,8 @@ class BehaviorTreeNode:
     def reset(self) -> None:
         self.cancel()
         self.status = NodeStates.FRESH
+
+    def flood_children(self, blackboard:Blackboard)->None:
+        self.blackboard = blackboard
+        for child in self.children:
+            child.flood_children(self.blackboard)
