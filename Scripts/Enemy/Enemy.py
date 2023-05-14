@@ -1,7 +1,9 @@
 from __future__ import annotations  # Without this, the type hint below would not work.
 from Scripts.BehaviorTree.BehaviorTree import BehaviorTree
 from Scripts.BehaviorTree.Nodes.ActionNodes.DebugNode import DebugNode
+from Scripts.BehaviorTree.Nodes.DecoratorNodes.DecoratorNode import DecoratorNode
 from Scripts.BehaviorTree.Nodes.RootNode import RootNode
+from Scripts.BehaviorTree.Nodes.SequenceNodes.SequenceNode import SequenceNode
 from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
 from Scripts.BehaviorTree.Blackboard import Blackboard
@@ -28,7 +30,16 @@ class Enemy(Spatial):
 			debugpy.wait_for_client()  # blocks execution until client is attached
 		except Exception as e:
 			print("Exception:", e)
-		self.enemy_tree: BehaviorTree = BehaviorTree(RootNode([DebugNode("test")]), Blackboard(self))
+		self.enemy_tree: BehaviorTree = BehaviorTree(
+			RootNode(
+				[SequenceNode(
+					[DecoratorNode(DebugNode("test"), 1),
+					 DebugNode("test1"),
+					 DebugNode("test2")
+					 ])
+				]
+			),
+			Blackboard(self))
 
 	@gdmethod
 	def _process(self, delta):
