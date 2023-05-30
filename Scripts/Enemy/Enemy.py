@@ -2,6 +2,7 @@ from __future__ import annotations  # Without this, the type hint below would no
 from Scripts.BehaviorTree.BehaviorTree import BehaviorTree
 from Scripts.BehaviorTree.Nodes.ActionNodes.DebugNode import DebugNode
 from Scripts.BehaviorTree.Nodes.DecoratorNodes.DecoratorNode import DecoratorNode
+from Scripts.BehaviorTree.Nodes.DecoratorNodes.InfiniteRepeatNode import InfiniteRepeatNode
 from Scripts.BehaviorTree.Nodes.DecoratorNodes.RepeatNode import RepeatNode
 from Scripts.BehaviorTree.Nodes.RootNode import RootNode
 from Scripts.BehaviorTree.Nodes.SequenceNodes.SequenceNode import SequenceNode
@@ -34,7 +35,7 @@ class Enemy(Spatial):
 		self.enemy_tree: BehaviorTree = BehaviorTree(
 			RootNode(
 				[SequenceNode(
-					[RepeatNode(DebugNode("test"), 5),
+					[InfiniteRepeatNode(DebugNode("test")),
 					 DebugNode("test1"),
 					 DebugNode("test2")
 					 ])
