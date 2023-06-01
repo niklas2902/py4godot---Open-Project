@@ -5,6 +5,7 @@ from Scripts.BehaviorTree.Nodes.DecoratorNodes.DecoratorNode import DecoratorNod
 from Scripts.BehaviorTree.Nodes.DecoratorNodes.InfiniteRepeatNode import InfiniteRepeatNode
 from Scripts.BehaviorTree.Nodes.DecoratorNodes.RepeatNode import RepeatNode
 from Scripts.BehaviorTree.Nodes.RootNode import RootNode
+from Scripts.BehaviorTree.Nodes.SequenceNodes.ParallelNode import ParallelNode
 from Scripts.BehaviorTree.Nodes.SequenceNodes.SequenceNode import SequenceNode
 from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
@@ -35,7 +36,11 @@ class Enemy(Spatial):
 		self.enemy_tree: BehaviorTree = BehaviorTree(
 			RootNode(
 				[SequenceNode(
-					[InfiniteRepeatNode(DebugNode("test")),
+					[RepeatNode(
+						ParallelNode(
+							[DebugNode("test_parallel1"),
+							 DebugNode("test_parallel2")
+							 ]), 5),
 					 DebugNode("test1"),
 					 DebugNode("test2")
 					 ])
