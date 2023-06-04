@@ -63,11 +63,11 @@ class AStar(Spatial, Draw):
                              color=Color(1, 0, 0) if point in self.disabled_points else Color(0, 1, 1))
 
         """
-        for point in self.points:
-            for connected_point in point.connected_points:
-                self.immediate_geometry_init(self, str(point.id) + "|" + str(connected_point.id))
-                self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position, connected_point.position)
-        """
+		for point in self.points:
+			for connected_point in point.connected_points:
+				self.immediate_geometry_init(self, str(point.id) + "|" + str(connected_point.id))
+				self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position, connected_point.position)
+		"""
         self.disable_obstacles()
 
         self.disable_enable_collision(False)
@@ -143,13 +143,14 @@ class AStar(Spatial, Draw):
                                                                                pos + Vector3(0, -1, 0) * GRIDSIZE,
                                                                                Array(),
                                                                                collision_mask=1 | 2 ** 4 | 2 ** 3 | 2 ** 6)
-        
+
         if (result.size() > 0):
             return pos != cast(Vector3, result["position"])
         return False
-    def point_inside_ground(self, pos:Vector3)->bool:
+
+    def point_inside_ground(self, pos: Vector3) -> bool:
         """Checking if is inside ground by casting upwards ray """
-        erg: Variant = self.utils.callv("sphere_cast", Array(pos + Vector3(0,0.1, 0),
+        erg: Variant = self.utils.callv("sphere_cast", Array(pos + Vector3(0, 0.1, 0),
                                                              0.09, Array(self), 1 | 2 ** 4 | 2 ** 3 | 2 ** 6))
         inside_ground: bool = erg.get_converted_value().size() != 0
         return inside_ground
