@@ -48,15 +48,13 @@ class AStar(Spatial, Draw):
     def _ready(self):
         self.astar = py4godot.AStar._new()
         self.walkables = self.get_tree().get_nodes_in_group(WALKABLE_GROUP)
-
+        self.utils = self.get_node(self.utils_path)
         self.disable_enable_collision(True)
 
         # self.generate_points()
         self.generate_points_advanced()
         for point in self.points:
             self.immediate_geometry_init(self, point.id)
-        self.utils = self.get_node(self.utils_path)
-
         self.generate_point_connections()
 
         self.generate_disabled()
@@ -108,9 +106,11 @@ class AStar(Spatial, Draw):
                                        pos.y,
                                        pos.z,
                                        NavigationUtils.calc_point_id(pos.x // SCALE, pos.y // SCALE, pos.z // SCALE))
-        self.points.append(point)
-        self.dict_points[point.id] = point
-        self.astar.add_point(point.id, point.position, weight_scale=1.)
+
+        if not self.point_inside_ground(pos):
+            self.points.append(point)
+            self.dict_points[point.id] = point
+            self.astar.add_point(point.id, point.position, weight_scale=1.)
         # TODO: convert this to enums
         if (current_dir != DIRECTION.LEFT):
             self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), DIRECTION.RIGHT)
@@ -147,6 +147,12 @@ class AStar(Spatial, Draw):
         if (result.size() > 0):
             return pos != cast(Vector3, result["position"])
         return False
+    def point_inside_ground(self, pos:Vector3)->bool:
+        """Checking if is inside ground by casting upwards ray """
+        erg: Variant = self.utils.callv("sphere_cast", Array(pos + Vector3(0,0.1, 0),
+                                                             0.09, Array(self), 1 | 2 ** 4 | 2 ** 3 | 2 ** 6))
+        inside_ground: bool = erg.get_converted_value().size() != 0
+        return inside_ground
 
     def generate_points(self) -> None:
         """Here we are generating all the points we could later use for astar"""
