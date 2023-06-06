@@ -11,13 +11,12 @@ from py4godot.pluginscript_api.hints import *
 
 @gdclass
 class Lever(StaticBody):
-
+	_activated: bool
+	action_object: TriggerObj
+	connected_obj_path: NodePath
 	def __init__(self)->None:
 		#Don't call any godot-methods here
 		super().__init__()
-		self._activated:bool = False
-		self.action_object:Optional[TriggerObj] = None
-		self.connected_obj_path:Optional[NodePath] = None
 
 	prop("activated",int, 0, hint=FlagsHint("on"))
 	prop("connected_obj_path", NodePath, NodePath())
