@@ -28,7 +28,7 @@ class DIRECTION(Enum):
 @gdclass
 class AStar(Spatial, Draw):
 
-	def __init__(self):
+	def __init__(self) -> None:
 		# Don't call any godot-methods here
 		super().__init__()
 		self.astar: Optional[py4godot.AStar] = None
@@ -45,7 +45,7 @@ class AStar(Spatial, Draw):
 	prop("push_obj_layer", int, 32)
 
 	@gdmethod
-	def _ready(self):
+	def _ready(self) ->None:
 		self.astar = py4godot.AStar._new()
 		self.walkables = self.get_tree().get_nodes_in_group(WALKABLE_GROUP)
 		self.utils = self.get_node(self.utils_path)
@@ -209,7 +209,7 @@ class AStar(Spatial, Draw):
 
 		self.astar.set_point_disabled(point.id, disabled=disabled)
 
-	def enable_points(self, x_pos: int, z_pos: int, x_size: int, z_size: int):
+	def enable_points(self, x_pos: int, z_pos: int, x_size: int, z_size: int) -> None:
 		for x in range(round(x_pos - x_size / 2.), round(x_pos + x_size / 2. + 1), GRIDSIZE):
 			for z in range(round(z_pos - z_size / 2.), round(z_pos + z_size / 2. + 1), GRIDSIZE):
 				# TODO: foor loop for y
