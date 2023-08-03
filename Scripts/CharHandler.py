@@ -118,7 +118,7 @@ class CharHandler(KinematicBody, Draw):
 		# Taken from: https://github.com/godotengine/tps-demo/blob/master/player/player.gd
 		self.orientation: Transform = self.transform
 		self.root_motion: Transform = Transform.new_with_axis_origin(Vector3(1, 0, 0), Vector3(0, 1, 0),
-		                                                             Vector3(0, 0, 1), Vector3(0, 0, 0))
+																	 Vector3(0, 0, 1), Vector3(0, 0, 0))
 		self.motion: Vector2 = Vector2(0, 0)
 		self.velocity: Vector3 = Vector3(0, 0, 0)
 
@@ -163,7 +163,7 @@ class CharHandler(KinematicBody, Draw):
 			self.set_key_pressed()
 			if self.is_pushing:
 				if not self.selected_push_obj.callv("is_move_allowed",
-				                                    Array(self.get_move_dir())).get_converted_value():
+													Array(self.get_move_dir())).get_converted_value():
 					ignore = True
 			self.apply_root_motion(delta, mouse_angle)
 			self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1, self.get_speed(ignore))))
@@ -175,8 +175,8 @@ class CharHandler(KinematicBody, Draw):
 
 		if (self.selected_push_obj != None):
 			self.selected_push_obj.global_transform.set_origin(self.global_transform.get_origin() + \
-			                                                   self.selected_push_obj.call(
-				                                                   "get_delta_pushing").get_converted_value())
+															   self.selected_push_obj.call(
+																   "get_delta_pushing").get_converted_value())
 
 	@gdmethod
 	def entered_ramp(self) -> None:
@@ -195,10 +195,10 @@ class CharHandler(KinematicBody, Draw):
 			object_pos: Vector2 = self.get_viewport().get_camera().unproject_position(self.transform.get_origin())
 			if (abs(object_pos.get_x() - mouse_pos.get_x()) > abs(object_pos.get_y() - mouse_pos.get_y())):
 				return Vector2((object_pos.get_x() - mouse_pos.get_x()) /
-				               abs(object_pos.get_x() - mouse_pos.get_x()), 0)
+							   abs(object_pos.get_x() - mouse_pos.get_x()), 0)
 			else:
 				return Vector2(0,
-				               (object_pos.get_y() - mouse_pos.get_y()) / abs(object_pos.get_y() - mouse_pos.get_y()))
+							   (object_pos.get_y() - mouse_pos.get_y()) / abs(object_pos.get_y() - mouse_pos.get_y()))
 		return Vector2(0, 0)
 
 	def apply_gravity(self, delta):
@@ -222,7 +222,7 @@ class CharHandler(KinematicBody, Draw):
 				return
 			self._clicked_before = True
 			return math.atan2(object_pos.get_x() - mouse_pos.get_x(),
-			                  object_pos.get_y() - mouse_pos.get_y())
+							  object_pos.get_y() - mouse_pos.get_y())
 		return
 
 	def reset_pushing(self) -> None:
@@ -326,9 +326,9 @@ class CharHandler(KinematicBody, Draw):
 			exclude.append(self)
 
 			result = self.get_world().direct_space_state.intersect_ray(from_,
-			                                                           from_ + camera.project_ray_normal(
-				                                                           mouse_pos) * ray_length, exclude,
-			                                                           collision_mask=self.push_obj_layer)
+																	   from_ + camera.project_ray_normal(
+																		   mouse_pos) * ray_length, exclude,
+																	   collision_mask=self.push_obj_layer)
 
 			if result["position"] == None:
 				return None
@@ -351,7 +351,7 @@ class CharHandler(KinematicBody, Draw):
 		self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to)
 		self.path = Array()
 		for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
-		                                             point_to_move_to):
+													 point_to_move_to):
 			self.path.append(path_point)
 		self.current_path_ind = 1
 		self.lever_obj_selected = typing.cast(Node, result["collider"]).get_pyscript()
@@ -359,12 +359,12 @@ class CharHandler(KinematicBody, Draw):
 	def handle_ray_hit_push_obj(self, result: Dictionary) -> None:
 		self.push_obj_selected = result["collider"]
 		point_to_move_to = self.get_min_point(result["position"],
-		                                      result["collider"].get_node(NodePath("Triggers")).get_children(),
-		                                      result["collider"])
+											  result["collider"].get_node(NodePath("Triggers")).get_children(),
+											  result["collider"])
 		self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to.global_transform.get_origin())
 		self.path = Array()
 		for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
-		                                             point_to_move_to.global_transform.get_origin()):
+													 point_to_move_to.global_transform.get_origin()):
 			self.path.append(path_point)
 		self.current_path_ind = 1
 
