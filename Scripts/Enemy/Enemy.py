@@ -1,6 +1,7 @@
 from __future__ import annotations  # Without this, the type hint below would not work.
 
 import debugpy
+import typing
 from Scripts.BehaviorTree.BehaviorTree import BehaviorTree
 from Scripts.BehaviorTree.Blackboard import Blackboard
 from Scripts.BehaviorTree.Nodes.ActionNodes.DebugNode import DebugNode
@@ -10,15 +11,18 @@ from Scripts.BehaviorTree.Nodes.DecoratorNodes.RepeatNode import RepeatNode
 from Scripts.BehaviorTree.Nodes.RootNode import RootNode
 from Scripts.BehaviorTree.Nodes.SequenceNodes.ParallelNode import ParallelNode
 from Scripts.BehaviorTree.Nodes.SequenceNodes.SequenceNode import SequenceNode
+from Scripts.Navigation import RouteHolder
 from py4godot.classes.generated import *
 from py4godot.core.node_path.NodePath import NodePath
 from py4godot.pluginscript_api.utils.annotations import *
 
+
 @gdclass
 class Enemy(Spatial):
-	target_point_path: NodePath
-	_target_point: Spatial
-	delta:float 
+	route_holder: RouteHolder
+	route_holder_path: NodePath
+	delta: float
+	route_accept_length: float
 
 	def __init__(self):
 		# Don't call any godot-methods here
@@ -26,7 +30,8 @@ class Enemy(Spatial):
 		self.velocity = 0
 		self.delta = 0
 
-	prop("target_point_path", NodePath, NodePath())
+	prop("route_holder_path", NodePath, NodePath())
+	prop("route_accept_length", float, 0.1)
 
 	@gdmethod
 	def _ready(self):
@@ -42,7 +47,8 @@ class Enemy(Spatial):
 		except Exception as e:
 			print("Exception:", e)
 
-		self._target_point = Spatial.cast(self.get_node(self.target_point_path))
+		self.route_holder = typing.cast(RouteHolder, self.get_node(self.route_holder_path).get_pyscript())
+
 		self.enemy_tree: BehaviorTree = BehaviorTree(
 			RootNode(
 				[SequenceNode(
@@ -66,8 +72,12 @@ class Enemy(Spatial):
 		try:
 			self.global_transform.set_origin(
 				self.global_transform.get_origin() +
-				(self._target_point.global_transform.get_origin() - self.global_transform.get_origin()).normalized() * self.delta)
+				(self.route_holder.get_current_route_point() - self.global_transform.get_origin())
+				.normalized() * self.delta)
 			print(self.global_transform.get_origin().x)
+			if (
+					self.route_holder.get_current_route_point() - self.global_transform.get_origin()).length() < self.route_accept_length:
+				self.route_holder.increase_point()
 
 		except Exception as e:
 			print(e)
