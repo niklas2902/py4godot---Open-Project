@@ -16,8 +16,10 @@ class RouteHolder(Spatial):
 		self.route_points = []
 		for child in self.get_children():
 			self.route_points.append(child)
+		print(len(self.route_points))
 
 	def get_current_route_point(self) -> Vector3:
+		print("route_index:",self.current_route_index)
 		return self.route_points[self.current_route_index].get_global_transform().get_origin()
 
 	def increase_point(self) -> None:
