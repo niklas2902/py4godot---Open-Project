@@ -10,6 +10,7 @@ from Scripts.BehaviorTree.Blackboard import Blackboard
 from Scripts.BehaviorTree.Nodes.ActionNodes.DebugNode import DebugNode
 from Scripts.BehaviorTree.Nodes.ActionNodes.FollowNode import FollowNode
 from Scripts.BehaviorTree.Nodes.ActionNodes.MoveNode import MoveNode
+from Scripts.BehaviorTree.Nodes.BehaviorTreeNode import BehaviorTreeNode
 from Scripts.BehaviorTree.Nodes.DecoratorNodes.InfiniteRepeatNode import InfiniteRepeatNode
 from Scripts.BehaviorTree.Nodes.DecoratorNodes.RepeatNode import RepeatNode
 from Scripts.BehaviorTree.Nodes.RootNode import RootNode
@@ -17,6 +18,7 @@ from Scripts.BehaviorTree.Nodes.SequenceNodes.ParallelNode import ParallelNode
 from Scripts.BehaviorTree.Nodes.SequenceNodes.SequenceNode import SequenceNode
 from Scripts.CharHandler import DIST_NAVIGATION
 from Scripts.Navigation import RouteHolder
+from Scripts.Utils import BehaviorTreeVisualizerLogic
 from py4godot.classes.generated import *
 from py4godot.core.array.Array import Array
 from py4godot.core.node_path.NodePath import NodePath
@@ -29,6 +31,9 @@ from Scripts.Navigation.AStar import AStar as NavAstar
 class Enemy(Spatial):
 	route_holder: RouteHolder
 	route_holder_path: NodePath
+
+	tree_visualizer: BehaviorTreeVisualizerLogic.BehaviorTreeVisualizerLogic
+
 	delta: float
 	route_accept_length: float
 	player: typing.Optional[Spatial]
@@ -38,6 +43,7 @@ class Enemy(Spatial):
 	path: typing.Optional[Array]
 	last_player_pos: typing.Optional[Vector3]
 	speed_modifier: float
+	tree_visualizer_initialized: bool
 
 	def __init__(self):
 		# Don't call any godot-methods here
@@ -47,11 +53,14 @@ class Enemy(Spatial):
 		self.delta = 0
 		self.path = None
 		self.speed_modifier = 2
+		self.tree_visualizer_initialized = False
 
 	prop("route_holder_path", NodePath, NodePath())
 	prop("route_accept_length", float, 0.1)
 	prop("astar_path", NodePath, NodePath())
 	prop("player_path", NodePath, NodePath())
+	prop("utils_path", NodePath, NodePath())
+	prop("tree_path", NodePath, NodePath())
 
 	@gdmethod
 	def _ready(self):
@@ -59,8 +68,11 @@ class Enemy(Spatial):
 		self._astar = typing.cast(NavAstar, self.get_node(self.astar_path).get_pyscript())
 
 		self.route_holder = typing.cast(RouteHolder, self.get_node(self.route_holder_path).get_pyscript())
+		self.tree_visualizer = typing.cast(BehaviorTreeVisualizerLogic.BehaviorTreeVisualizerLogic,
+		                                   self.get_node(self.tree_path).get_pyscript())
 		self.player: typing.Optional[Spatial] = Spatial.cast(self.get_node(self.player_path))
 		self.last_player_pos: typing.Optional[Vector3] = None
+		self.utils = self.get_node(self.utils_path)
 
 		self.enemy_tree: BehaviorTree = BehaviorTree(
 			RootNode(
@@ -80,6 +92,11 @@ class Enemy(Spatial):
 				]
 			),
 			Blackboard(self))
+
+	def visualize_nodes(self, parent: BehaviorTreeNode, node: BehaviorTreeNode):
+		self.tree_visualizer.add_item(parent, node)
+		for child in node.children:
+			self.visualize_nodes(node, child)
 
 	def move(self) -> None:
 		try:
@@ -133,5 +150,10 @@ class Enemy(Spatial):
 
 	@gdmethod
 	def _process(self, delta: float) -> None:
+		if not self.tree_visualizer_initialized:
+			self.tree_visualizer.init_tree(self.enemy_tree.root_node)
+			for child in self.enemy_tree.root_node.children:
+				self.visualize_nodes(self.enemy_tree.root_node, child)
+			self.tree_visualizer_initialized = True
 		self.enemy_tree.run()
 		self.delta = delta

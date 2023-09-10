@@ -31,3 +31,9 @@ func box_cast(origin, x, y, z, exclude, layer):
 		params.set_exclude(exclude) # here exclude is an array of... RID??
 	var res = get_world().direct_space_state.intersect_shape(params, 1)
 	return res
+
+func open_popup():
+	print("open_popup")
+	var popup = PopupDialog.new()
+	popup.show_modal()
+	#popup.show()

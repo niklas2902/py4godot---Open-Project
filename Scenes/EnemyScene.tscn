@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Enemy/Enemy.py" type="Script" id=1]
 [ext_resource path="res://Scripts/Navigation/RouteHolder.py" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scripts/Check.py" type="Script" id=6]
 [ext_resource path="res://Scripts/Navigation/AStar.py" type="Script" id=7]
 [ext_resource path="res://Prefabs/DebugNode.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Utils/BehaviorTreeVisualizerLogic.py" type="Script" id=9]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -48,6 +49,8 @@ albedo_color = Color( 0.239216, 0.713726, 0.184314, 1 )
 
 [node name="Enemy" type="Spatial" parent="."]
 script = ExtResource( 1 )
+utils_path = NodePath("../Util")
+tree_path = NodePath("../Node2D/Tree/TreeLogic")
 astar_path = NodePath("../AStar")
 route_holder_path = NodePath("../RouteHolder")
 player_path = NodePath("../PlayerStub")
@@ -118,8 +121,8 @@ collision_layer = 33
 collision_mask = 33
 script = ExtResource( 5 )
 util_path = NodePath("../../../Util")
-collision_layer_direction = 97
 push_layer = 0
+collision_layer_direction = 97
 arrow_path = NodePath("ArrawPos")
 trigger = NodePath("Triggers")
 
@@ -298,3 +301,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.03506 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02689, 0 )
 mesh = SubResource( 14 )
 material/0 = SubResource( 15 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Tree" type="Tree" parent="Node2D"]
+margin_right = 200.0
+margin_bottom = 600.0
+
+[node name="TreeLogic" type="Node2D" parent="Node2D/Tree"]
+script = ExtResource( 9 )
+tree_path = NodePath("..")
