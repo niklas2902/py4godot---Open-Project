@@ -1,4 +1,4 @@
-from Scripts.BehaviorTree.Nodes.BehaviorTreeNode import BehaviorTreeNode
+import Scripts.BehaviorTree.Nodes.BehaviorTreeNode as tree_node
 from py4godot.classes.generated import *
 from py4godot.core.color.Color import Color
 from py4godot.core.node_path.NodePath import NodePath
@@ -11,7 +11,7 @@ class BehaviorTreeVisualizerLogic(Node2D):
 	tree_path: NodePath
 	tree: Tree
 
-	dict_node: Dict[BehaviorTreeNode, TreeItem]
+	dict_node: Dict[tree_node.BehaviorTreeNode, TreeItem]
 
 	def __init__(self):
 		# Don't call any godot-methods here
@@ -34,14 +34,28 @@ class BehaviorTreeVisualizerLogic(Node2D):
 		subchild1.set_custom_color(0, Color.new_rgb(1, 0, 0))
 		subchild1.set_text(0, "Subchild1")
 
-	def init_tree(self, node: BehaviorTreeNode) -> None:
+	def init_tree(self, node: tree_node.BehaviorTreeNode) -> None:
 		self.tree.clear()
 		item: TreeItem = self.tree.create_item()
 		item.set_text(0, type(node).__name__)
 		self.dict_node[node] = item
 
-	def add_item(self, parent: BehaviorTreeNode, node: BehaviorTreeNode) -> None:
+	def add_item(self, parent: tree_node.BehaviorTreeNode, node: tree_node.BehaviorTreeNode) -> None:
 		parent_item: TreeItem = self.dict_node[parent]
 		item = self.tree.create_item(parent_item)
 		item.set_text(0, type(node).__name__)
 		self.dict_node[node] = item
+
+	def update_node_status(self, node: tree_node.BehaviorTreeNode) -> None:
+		item = self.dict_node[node]
+		if node.status == tree_node.NodeStates.FAILED:
+			item.set_custom_color(0, Color.new_rgb(1, 0, 0))
+
+		if node.status == tree_node.NodeStates.SUCCEEDED:
+			item.set_custom_color(0, Color.new_rgb(0, 1, 0))
+
+		if node.status == tree_node.NodeStates.RUNNING:
+			item.set_custom_color(0, Color.new_rgb(1, 1, 0))
+
+		if node.status == tree_node.NodeStates.CANCELLED:
+			item.set_custom_color(0, Color.new_rgb(0.5, 0.5, 0.5))

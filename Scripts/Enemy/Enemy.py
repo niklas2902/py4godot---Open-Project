@@ -91,7 +91,7 @@ class Enemy(Spatial):
 					])
 				]
 			),
-			Blackboard(self))
+			Blackboard(self, self.tree_visualizer))
 
 	def visualize_nodes(self, parent: BehaviorTreeNode, node: BehaviorTreeNode):
 		self.tree_visualizer.add_item(parent, node)
@@ -151,9 +151,14 @@ class Enemy(Spatial):
 	@gdmethod
 	def _process(self, delta: float) -> None:
 		if not self.tree_visualizer_initialized:
-			self.tree_visualizer.init_tree(self.enemy_tree.root_node)
-			for child in self.enemy_tree.root_node.children:
-				self.visualize_nodes(self.enemy_tree.root_node, child)
-			self.tree_visualizer_initialized = True
+			self.init_tree_visualizer()
+
+		self.enemy_tree.update_states()
 		self.enemy_tree.run()
 		self.delta = delta
+
+	def init_tree_visualizer(self):
+		self.tree_visualizer.init_tree(self.enemy_tree.root_node)
+		for child in self.enemy_tree.root_node.children:
+			self.visualize_nodes(self.enemy_tree.root_node, child)
+		self.tree_visualizer_initialized = True

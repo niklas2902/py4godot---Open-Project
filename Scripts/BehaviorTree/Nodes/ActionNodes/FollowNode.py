@@ -7,6 +7,7 @@ class FollowNode(BehaviorTreeNode):
 		super().__init__()
 
 	def run(self) -> None:
+		self.status = NodeStates.RUNNING
 		self.blackboard.enemy.follow_player()
 
 	def success(self) -> None:
