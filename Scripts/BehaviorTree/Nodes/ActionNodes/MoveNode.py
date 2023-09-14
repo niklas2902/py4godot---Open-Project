@@ -7,6 +7,7 @@ class MoveNode(BehaviorTreeNode):
 		super().__init__()
 
 	def run(self) -> None:
+		self.status = NodeStates.RUNNING
 		self.blackboard.enemy.move()
 
 	def success(self) -> None:

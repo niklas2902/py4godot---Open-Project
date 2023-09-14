@@ -85,8 +85,8 @@ class Enemy(Spatial):
 						DebugNode("test1"),
 						DebugNode("test2"),
 						InfiniteRepeatNode(
-							FollowNode()
-							# MoveNode()
+							#FollowNode()
+							MoveNode()
 						)
 					])
 				]
