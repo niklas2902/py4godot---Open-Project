@@ -69,7 +69,7 @@ class Enemy(Spatial):
 
 		self.route_holder = typing.cast(RouteHolder, self.get_node(self.route_holder_path).get_pyscript())
 		self.tree_visualizer = typing.cast(BehaviorTreeVisualizerLogic.BehaviorTreeVisualizerLogic,
-		                                   self.get_node(self.tree_path).get_pyscript())
+										   self.get_node(self.tree_path).get_pyscript())
 		self.player: typing.Optional[Spatial] = Spatial.cast(self.get_node(self.player_path))
 		self.last_player_pos: typing.Optional[Vector3] = None
 		self.utils = self.get_node(self.utils_path)
@@ -102,7 +102,7 @@ class Enemy(Spatial):
 		try:
 			if self.path is None:
 				self.path = self._astar.get_way_points(self.global_transform.get_origin(),
-				                                       self.route_holder.get_current_route_point())
+													   self.route_holder.get_current_route_point())
 
 			self.follow_path()
 
@@ -133,7 +133,7 @@ class Enemy(Spatial):
 	def follow_player(self) -> None:
 		if self.path == None or self.player.global_transform.get_origin() != self.last_player_pos:
 			self.path = self._astar.get_way_points(self.global_transform.get_origin(),
-			                                       self.player.global_transform.get_origin())
+												   self.player.global_transform.get_origin())
 		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
 		dist: float = dist_vector.length()
 		vel: Vector3 = (self.path[self.current_path_ind] - self.transform.get_origin())

@@ -37,6 +37,7 @@ class CharHandler(KinematicBody, Draw):
 	_sprint_dist: float
 	_can_move: int
 	_move_possible: bool
+	_particle_system: CPUParticles
 
 	def __init__(self) -> None:
 		# Don't call any godot-methods here
@@ -56,6 +57,7 @@ class CharHandler(KinematicBody, Draw):
 
 	prop("can_move", int, 1, hint=FlagsHint("enabled"))
 	prop("astar_path", NodePath, NodePath())
+	prop("particle_path", NodePath, NodePath())
 
 	@gdproperty(NodePath, NodePath())
 	def node(self) -> NodePath:
@@ -115,6 +117,9 @@ class CharHandler(KinematicBody, Draw):
 		nav: Node = self.get_node(self._navigation)
 		self.navigation_obj: Navigation = Navigation.cast(nav)
 
+		particle: Node = self.get_node(self.particle_path)
+		self._particle_system = CPUParticles.cast(particle)
+
 		# Taken from: https://github.com/godotengine/tps-demo/blob/master/player/player.gd
 		self.orientation: Transform = self.transform
 		self.root_motion: Transform = Transform.new_with_axis_origin(Vector3(1, 0, 0), Vector3(0, 1, 0),
@@ -139,6 +144,7 @@ class CharHandler(KinematicBody, Draw):
 		# debugpy.breakpoint()
 		if not self._can_move:
 			return
+		self._particle_system.emitting = self.get_speed() > 0.9
 		self.emit_sound()
 
 	@gdmethod
