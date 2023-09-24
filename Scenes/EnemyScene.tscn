@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/Enemy/Enemy.py" type="Script" id=1]
 [ext_resource path="res://Scripts/Navigation/RouteHolder.py" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/Navigation/AStar.py" type="Script" id=7]
 [ext_resource path="res://Prefabs/DebugNode.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Utils/BehaviorTreeVisualizerLogic.py" type="Script" id=9]
+[ext_resource path="res://Scripts/Enemy/EnemyGizmo.py" type="Script" id=10]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -52,12 +53,18 @@ script = ExtResource( 1 )
 utils_path = NodePath("../Util")
 tree_path = NodePath("../Node2D/Tree/TreeLogic")
 astar_path = NodePath("../AStar")
-route_holder_path = NodePath("../RouteHolder")
 player_path = NodePath("../PlayerStub")
+route_holder_path = NodePath("../RouteHolder")
+action_radius = 4.8
 
 [node name="MeshInstance" type="MeshInstance" parent="Enemy"]
 mesh = SubResource( 1 )
 material/0 = SubResource( 13 )
+
+[node name="EnemyGizmod" type="Spatial" parent="Enemy"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06256, 0 )
+script = ExtResource( 10 )
+enemy_path = NodePath("..")
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 45.2539, 0.324391 )
@@ -121,9 +128,9 @@ collision_layer = 33
 collision_mask = 33
 script = ExtResource( 5 )
 util_path = NodePath("../../../Util")
-collision_layer_direction = 97
-arrow_path = NodePath("ArrawPos")
 push_layer = 0
+arrow_path = NodePath("ArrawPos")
+collision_layer_direction = 97
 trigger = NodePath("Triggers")
 
 [node name="CSGMesh" type="CSGMesh" parent="Environment/PushObj"]

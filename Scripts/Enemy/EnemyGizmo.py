@@ -1,0 +1,34 @@
+import typing
+from Scripts.Enemy.Enemy import Enemy
+from Scripts.Tools.Draw import Draw
+from py4godot.enums.enums import *
+from py4godot import *
+from py4godot.pluginscript_api.hints import *
+
+ACTION_RADIUS_HANDLE = "ActionRadius"
+
+
+@gdclass
+class EnemyGizmo(Spatial, Draw):
+	enemy: typing.Optional[Enemy]
+	enemy_path: NodePath
+
+	def __init__(self) -> None:
+		# Don't call any godot-methods here
+		super().__init__()
+		self.velocity = 0
+		self.enemy = None
+
+	prop("enemy_path", NodePath, NodePath())
+
+	@gdmethod
+	def _ready(self) -> None:
+		if self.enemy_path and self.get_node(self.enemy_path):
+			self.enemy = typing.cast(Enemy, self.get_node(self.enemy_path).get_pyscript())
+			self.immediate_geometry_init(self, ACTION_RADIUS_HANDLE)
+
+	@gdmethod
+	def _process(self, delta: float) -> None:
+		if self.enemy:
+			self.draw_sphere(ACTION_RADIUS_HANDLE, self.enemy.action_radius, self.global_transform.get_origin(),
+							 Color.new_rgb(1, 0, 1))
