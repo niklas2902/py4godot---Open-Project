@@ -138,6 +138,8 @@ class CharHandler(KinematicBody, Draw):
 			self._sprint_dist = DEFAULT_SPRINT_DIST
 		a = NavigationMeshInstance._new()
 		self._astar = self.get_node(self.astar_path).get_pyscript()
+		
+		self._particle_system.emitting = False
 
 	@gdmethod
 	def _process(self, delta: float):
