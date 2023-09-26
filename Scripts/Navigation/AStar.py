@@ -11,6 +11,7 @@ SCALE = 1
 DRAW_RAD = 0.2
 FLOAT_TOLERANCE = 0.1
 WEIGHT_SCALE = 1
+GROUND_MASK = 2  # 1 | 2 ** 4 | 2 ** 3 | 2 ** 6
 
 from enum import Enum
 
@@ -45,7 +46,7 @@ class AStar(Spatial, Draw):
 	prop("push_obj_layer", int, 32)
 
 	@gdmethod
-	def _ready(self) ->None:
+	def _ready(self) -> None:
 		self.astar = py4godot.AStar._new()
 		self.walkables = self.get_tree().get_nodes_in_group(WALKABLE_GROUP)
 		self.utils = self.get_node(self.utils_path)
@@ -142,7 +143,7 @@ class AStar(Spatial, Draw):
 		result: Dictionary = self.get_world().direct_space_state.intersect_ray(pos,
 																			   pos + Vector3(0, -1, 0) * GRIDSIZE,
 																			   Array(),
-																			   collision_mask=1 | 2 ** 4 | 2 ** 3 | 2 ** 6)
+																			   collision_mask=GROUND_MASK)
 
 		if (result.size() > 0):
 			return pos != cast(Vector3, result["position"])
@@ -151,7 +152,7 @@ class AStar(Spatial, Draw):
 	def point_inside_ground(self, pos: Vector3) -> bool:
 		"""Checking if is inside ground by casting upwards ray """
 		erg: Variant = self.utils.callv("sphere_cast", Array(pos + Vector3(0, 0.1, 0),
-															 0.09, Array(self), 1 | 2 ** 4 | 2 ** 3 | 2 ** 6))
+															 0.09, Array(self), GROUND_MASK))
 		inside_ground: bool = erg.get_converted_value().size() != 0
 		return inside_ground
 

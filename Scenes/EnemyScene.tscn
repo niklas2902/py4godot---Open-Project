@@ -4,7 +4,6 @@
 [ext_resource path="res://Scripts/Navigation/RouteHolder.py" type="Script" id=2]
 [ext_resource path="res://Models/slope.glb" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Utils.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/PushObj.py" type="Script" id=5]
 [ext_resource path="res://Scripts/Check.py" type="Script" id=6]
 [ext_resource path="res://Scripts/Navigation/AStar.py" type="Script" id=7]
 [ext_resource path="res://Prefabs/DebugNode.tscn" type="PackedScene" id=8]
@@ -46,6 +45,8 @@ extents = Vector3( 16.5305, 0.302151, 15.817 )
 [sub_resource type="SpatialMaterial" id=15]
 albedo_color = Color( 0.239216, 0.713726, 0.184314, 1 )
 
+[sub_resource type="BoxShape" id=16]
+
 [node name="Spatial" type="Spatial"]
 
 [node name="Enemy" type="Spatial" parent="."]
@@ -53,15 +54,15 @@ script = ExtResource( 1 )
 utils_path = NodePath("../Util")
 tree_path = NodePath("../Node2D/Tree/TreeLogic")
 astar_path = NodePath("../AStar")
+action_radius = 4.8
 player_path = NodePath("../PlayerStub")
 route_holder_path = NodePath("../RouteHolder")
-action_radius = 4.8
 
 [node name="MeshInstance" type="MeshInstance" parent="Enemy"]
 mesh = SubResource( 1 )
 material/0 = SubResource( 13 )
 
-[node name="EnemyGizmod" type="Spatial" parent="Enemy"]
+[node name="EnemyGizmo" type="Spatial" parent="Enemy"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06256, 0 )
 script = ExtResource( 10 )
 enemy_path = NodePath("..")
@@ -94,6 +95,7 @@ mesh = SubResource( 2 )
 [node name="AStar" type="Spatial" parent="."]
 script = ExtResource( 7 )
 utils_path = NodePath("../Util")
+push_obj_layer = 2
 
 [node name="Util" type="Spatial" parent="."]
 script = ExtResource( 4 )
@@ -102,8 +104,8 @@ script = ExtResource( 4 )
 
 [node name="Ramp" type="StaticBody" parent="Environment" groups=["obstace"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.168214, 4.62002 )
-collision_layer = 265
-collision_mask = 265
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Ramp"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -0.964805, -0.248904, -2.05632 )
@@ -113,6 +115,8 @@ shape = SubResource( 3 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.746843, -1.06652 )
 
 [node name="Ground" type="StaticBody" parent="Environment" groups=["walkable"]]
+collision_layer = 2
+collision_mask = 65535
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Ground"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.358482, 0 )
@@ -124,14 +128,8 @@ mesh = SubResource( 5 )
 
 [node name="PushObj" type="StaticBody" parent="Environment" groups=["obstacle"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.704, 1, 0 )
-collision_layer = 33
-collision_mask = 33
-script = ExtResource( 5 )
-util_path = NodePath("../../../Util")
-push_layer = 0
-arrow_path = NodePath("ArrawPos")
-collision_layer_direction = 97
-trigger = NodePath("Triggers")
+collision_layer = 32
+collision_mask = 32
 
 [node name="CSGMesh" type="CSGMesh" parent="Environment/PushObj"]
 mesh = SubResource( 6 )
@@ -179,34 +177,31 @@ mesh = SubResource( 12 )
 [node name="Trigger1" type="Spatial" parent="Environment/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.19474 )
 script = ExtResource( 6 )
-util_path = NodePath("../../../../../Util")
 orientation = 1
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger2" type="Spatial" parent="Environment/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.35827 )
 script = ExtResource( 6 )
-util_path = NodePath("../../../../../Util")
 orientation = 2
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger3" type="Spatial" parent="Environment/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71112, 0, 0.0103167 )
 script = ExtResource( 6 )
-util_path = NodePath("../../../../../Util")
 orientation = 4
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger4" type="Spatial" parent="Environment/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37227, 0, 0.0206334 )
 script = ExtResource( 6 )
-util_path = NodePath("../../../../../Util")
 orientation = 8
+util_path = NodePath("../../../../../Util")
 
 [node name="PushObj3" type="StaticBody" parent="Environment" groups=["obstacle"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.704, 1, 4.12028 )
-collision_mask = 33
-script = ExtResource( 5 )
-util_path = NodePath("../../../Util")
-arrow_path = NodePath("ArrawPos")
-trigger = NodePath("Triggers")
+collision_layer = 34
+collision_mask = 34
 
 [node name="CSGMesh" type="CSGMesh" parent="Environment/PushObj3"]
 mesh = SubResource( 6 )
@@ -254,26 +249,26 @@ mesh = SubResource( 12 )
 [node name="Trigger1" type="Spatial" parent="Environment/PushObj3/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.15374 )
 script = ExtResource( 6 )
-util_path = NodePath("../../../../../Util")
 orientation = 1
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger2" type="Spatial" parent="Environment/PushObj3/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.09569 )
 script = ExtResource( 6 )
-util_path = NodePath("../../../../../Util")
 orientation = 2
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger3" type="Spatial" parent="Environment/PushObj3/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71112, 0, 0.0103167 )
 script = ExtResource( 6 )
-util_path = NodePath("../../../../../Util")
 orientation = 4
+util_path = NodePath("../../../../../Util")
 
 [node name="Trigger4" type="Spatial" parent="Environment/PushObj3/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11146, 0, 0.0103167 )
 script = ExtResource( 6 )
-util_path = NodePath("../../../../../Util")
 orientation = 8
+util_path = NodePath("../../../../../Util")
 
 [node name="GroundObj" type="StaticBody" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0132506, 0.918345, 5.56421 )
@@ -287,6 +282,8 @@ shape = SubResource( 8 )
 
 [node name="PushObj4" type="StaticBody" parent="Environment" groups=["obstacle"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.90428, 1, 0.0257483 )
+collision_layer = 34
+collision_mask = 34
 
 [node name="CSGMesh" type="CSGMesh" parent="Environment/PushObj4"]
 mesh = SubResource( 6 )
@@ -301,13 +298,17 @@ shape = SubResource( 8 )
 
 [node name="DebugNode" parent="." instance=ExtResource( 8 )]
 
-[node name="PlayerStub" type="Spatial" parent="."]
+[node name="PlayerStub" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.03506 )
+collision_mask = 65535
 
 [node name="MeshInstance" type="MeshInstance" parent="PlayerStub"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02689, 0 )
 mesh = SubResource( 14 )
 material/0 = SubResource( 15 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerStub"]
+shape = SubResource( 16 )
 
 [node name="Node2D" type="Node2D" parent="."]
 

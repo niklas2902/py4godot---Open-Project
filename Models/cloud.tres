@@ -1,4 +1,14 @@
-[gd_resource type="ArrayMesh" format=2]
+[gd_resource type="ArrayMesh" load_steps=2 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+metallic_specular = 0.0
+roughness = 0.0
+clearcoat_enabled = true
+clearcoat = 0.53
+clearcoat_gloss = 0.0
 
 [resource]
 resource_name = "cloud_Plane"
@@ -9,6 +19,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194711,
 "index_count": 1344,
+"material": SubResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 258
