@@ -73,6 +73,7 @@ class AStar(Spatial, Draw):
 
 		self.disable_enable_collision(False)
 
+
 	def disable_enable_collision(self, disable: bool) -> None:
 		for node in self.get_tree().get_nodes_in_group("obstacle"):
 			obstacle: Spatial = Spatial.cast(node)

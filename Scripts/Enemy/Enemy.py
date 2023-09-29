@@ -106,6 +106,7 @@ class Enemy(KinematicBody):
 	def move(self) -> None:
 		try:
 			if self.path is None:
+				self._astar.points
 				self.path = self._astar.get_way_points(self.global_transform.get_origin(),
 													   self.route_holder.get_current_route_point())
 
