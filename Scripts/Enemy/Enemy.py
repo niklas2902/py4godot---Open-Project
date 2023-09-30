@@ -46,7 +46,9 @@ class Enemy(KinematicBody):
 	last_player_pos: typing.Optional[Vector3]
 	speed_modifier: float
 	tree_visualizer_initialized: bool
-	action_radius: int
+	action_radius: float
+	out_of_sight_radius: float
+	player_found: bool
 
 	def __init__(self):
 		# Don't call any godot-methods here
@@ -57,6 +59,7 @@ class Enemy(KinematicBody):
 		self.path = None
 		self.speed_modifier = 2
 		self.tree_visualizer_initialized = False
+		self.player_found = False
 
 	prop("route_holder_path", NodePath, NodePath())
 	prop("route_accept_length", float, 0.1)
@@ -65,6 +68,7 @@ class Enemy(KinematicBody):
 	prop("utils_path", NodePath, NodePath())
 	prop("tree_path", NodePath, NodePath())
 	prop("action_radius", float, 1, hint=RangeHint(0, 50, 0.1))
+	prop("out_of_sight_radius", float, 1, hint=RangeHint(0, 50, 0.1))
 
 	@gdmethod
 	def _ready(self):
@@ -91,7 +95,7 @@ class Enemy(KinematicBody):
 						InfiniteRepeatNode(
 							IfElseNode([
 								FollowNode(),
-								MoveNode()], lambda: self.player_in_sight())
+								MoveNode()], lambda: self.should_follow_player())
 						)
 					])
 				]
@@ -106,7 +110,6 @@ class Enemy(KinematicBody):
 	def move(self) -> None:
 		try:
 			if self.path is None:
-				self._astar.points
 				self.path = self._astar.get_way_points(self.global_transform.get_origin(),
 													   self.route_holder.get_current_route_point())
 
@@ -166,12 +169,30 @@ class Enemy(KinematicBody):
 	def player_in_sight(self) -> bool:
 		res = self.utils.callv("sphere_cast",
 							   Array(self.global_transform.get_origin(), self.action_radius, Array(),
-									 0)).get_converted_value()
+									 1)).get_converted_value()
 		number_of_hits = res.size()
 		return number_of_hits != 0
+
+	def player_out_of_sight(self) -> bool:
+		res = self.utils.callv("sphere_cast",
+							   Array(self.global_transform.get_origin(), self.out_of_sight_radius, Array(),
+									 1)).get_converted_value()
+		number_of_hits = res.size()
+		return number_of_hits != 0
+
+	def should_follow_player(self) -> bool:
+		if not self.player_found:
+			self.player_found = self.player_in_sight()
+		else:
+			self.player_found = self.player_out_of_sight()
+		return self.player_found
 
 	def init_tree_visualizer(self):
 		self.tree_visualizer.init_tree(self.enemy_tree.root_node)
 		for child in self.enemy_tree.root_node.children:
 			self.visualize_nodes(self.enemy_tree.root_node, child)
 		self.tree_visualizer_initialized = True
+
+	def reset(self) -> None:
+		self.current_path_ind = 0
+		self.path = None
