@@ -31,5 +31,3 @@ class ParallelNode(BehaviorTreeNode):
     def success(self) -> None:
         super().success()
         self.status = NodeStates.SUCCEEDED
-        for child in self.children:
-            child.status = NodeStates.FRESH #TODO: Better possibility for resetting is needed
