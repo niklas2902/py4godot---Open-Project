@@ -14,5 +14,6 @@ class MoveNode(BehaviorTreeNode):
         self.status = NodeStates.SUCCEEDED
 
     def fail(self) -> None:
+        print("fail move")
         self.blackboard.enemy.reset()
         self.status = NodeStates.FAILED

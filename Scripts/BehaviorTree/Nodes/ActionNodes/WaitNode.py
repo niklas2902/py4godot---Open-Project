@@ -19,3 +19,4 @@ class WaitNode(BehaviorTreeNode):
 
     def success(self) -> None:
         self.status = NodeStates.SUCCEEDED
+        self._counter = 0
