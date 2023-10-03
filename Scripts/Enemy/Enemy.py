@@ -189,6 +189,10 @@ class Enemy(KinematicBody):
 							   Array(self.global_transform.get_origin(), self.action_radius, Array(),
 									 1)).get_converted_value()
 		number_of_hits = res.size()
+		if (number_of_hits > 0):
+			vector: Vector3 = self.player.global_transform.get_origin() - self.global_transform.get_origin()
+			angle: float = vector.angle_to(self.look_direction)
+			return abs(angle) < self.field_of_view / 2
 		return number_of_hits != 0
 
 	def player_out_of_sight(self) -> bool:
