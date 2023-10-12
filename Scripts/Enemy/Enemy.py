@@ -21,6 +21,7 @@ from Scripts.BehaviorTree.Nodes.SequenceNodes.ParallelNode import ParallelNode
 from Scripts.BehaviorTree.Nodes.SequenceNodes.SequenceNode import SequenceNode
 from Scripts.CharHandler import DIST_NAVIGATION
 from Scripts.Navigation import RouteHolder
+from Scripts.Tools.Draw import Draw
 from Scripts.Utils import BehaviorTreeVisualizerLogic
 from py4godot.classes.generated import *
 from py4godot.core.array.Array import Array
@@ -30,9 +31,12 @@ from py4godot.pluginscript_api.utils.annotations import *
 from Scripts.Navigation.AStar import AStar as NavAstar
 from py4godot.pluginscript_api.hints.range_hint.RangeHint import *
 
+HANDLE_CHECK_VIEW: str = "Check_View"
+PUSH_OBJ_MASK:int = 4
+
 
 @gdclass
-class Enemy(KinematicBody):
+class Enemy(KinematicBody, Draw):
 	route_holder: RouteHolder
 	route_holder_path: NodePath
 
@@ -80,6 +84,7 @@ class Enemy(KinematicBody):
 
 	@gdmethod
 	def _ready(self):
+		self.immediate_geometry_init(self, HANDLE_CHECK_VIEW)
 
 		self.look_direction = Vector3(1, 0, 1)
 		self._astar = typing.cast(NavAstar, self.get_node(self.astar_path).get_pyscript())
@@ -190,10 +195,13 @@ class Enemy(KinematicBody):
 									 1)).get_converted_value()
 		number_of_hits = res.size()
 		if (number_of_hits > 0):
-			vector: Vector3 = self.player.global_transform.get_origin() - self.global_transform.get_origin()
-			angle: float = vector.angle_to(self.look_direction)
-			return abs(angle) < self.field_of_view / 2
-		return number_of_hits != 0
+			player_direction: Vector3 = self.player.global_transform.get_origin() - self.global_transform.get_origin()
+			angle: float = player_direction.angle_to(self.look_direction)
+			if abs(angle) < self.field_of_view / 2:
+				object_in_view: bool = self.object_in_view(player_direction)
+				return not object_in_view
+			return False
+		return False
 
 	def player_out_of_sight(self) -> bool:
 		res = self.utils.callv("sphere_cast",
@@ -209,11 +217,25 @@ class Enemy(KinematicBody):
 			self.player_found = self.player_out_of_sight()
 		return self.player_found
 
-	def init_tree_visualizer(self):
+	def init_tree_visualizer(self) -> None:
 		self.tree_visualizer.init_tree(self.enemy_tree.root_node)
 		for child in self.enemy_tree.root_node.children:
 			self.visualize_nodes(self.enemy_tree.root_node, child)
 		self.tree_visualizer_initialized = True
+
+	def object_in_view(self, direction: Vector3) -> bool:
+		ray_length: float = self.action_radius
+		to: Vector3 = direction.normalized() * ray_length
+		exclude: Array = Array()
+		exclude.append(self)
+
+		result = self.get_world().direct_space_state.intersect_ray(
+			self.global_transform.get_origin() + Vector3(0, 0.1, 0),
+			self.global_transform.get_origin() + to + Vector3(0, 0.1, 0),
+			exclude, collision_mask=PUSH_OBJ_MASK)
+		self.draw_line(HANDLE_CHECK_VIEW, self.global_transform.get_origin() + Vector3(0, 0.1, 0),
+					   self.global_transform.get_origin() + to + Vector3(0, 0.1, 0))
+		return result["position"] != None
 
 	def reset(self) -> None:
 		self.current_path_ind = 0

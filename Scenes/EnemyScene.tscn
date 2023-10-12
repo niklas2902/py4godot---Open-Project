@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/Enemy/Enemy.py" type="Script" id=1]
 [ext_resource path="res://Scripts/Navigation/RouteHolder.py" type="Script" id=2]
@@ -28,11 +28,15 @@ extents = Vector3( 16.5305, 0.302151, 15.817 )
 
 [sub_resource type="CubeMesh" id=5]
 
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 0, 0.811765, 1, 1 )
+
 [sub_resource type="CubeMesh" id=6]
 
 [sub_resource type="ShaderMaterial" id=7]
 
 [sub_resource type="BoxShape" id=8]
+extents = Vector3( 1, 1.21828, 1 )
 
 [sub_resource type="SphereMesh" id=9]
 
@@ -56,12 +60,12 @@ script = ExtResource( 1 )
 utils_path = NodePath("../Util")
 tree_path = NodePath("../Node2D/Tree/TreeLogic")
 astar_path = NodePath("../AStar")
-field_of_view = 1.5
-action_radius = 6.0
-route_holder_path = NodePath("../RouteHolder")
 player_path = NodePath("../PlayerStub")
-sprint_modifier = 2.0
+field_of_view = 1.5
+route_holder_path = NodePath("../RouteHolder")
 out_of_sight_radius = 8.1
+action_radius = 6.0
+sprint_modifier = 2.0
 
 [node name="MeshInstance" type="MeshInstance" parent="Enemy"]
 mesh = SubResource( 1 )
@@ -130,6 +134,7 @@ shape = SubResource( 4 )
 [node name="MeshInstance" type="MeshInstance" parent="Environment/Ground"]
 transform = Transform( 15, 0, 0, 0, 0.1, 0, 0, 0, 15, 0, 0, 0 )
 mesh = SubResource( 5 )
+material/0 = SubResource( 17 )
 
 [node name="PushObj" type="StaticBody" parent="Environment" groups=["obstacle"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.704, 1, 0 )
@@ -198,6 +203,79 @@ util_path = NodePath("../../../../../Util")
 orientation = 4
 
 [node name="Trigger4" type="Spatial" parent="Environment/PushObj/ArrawPos"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37227, 0, 0.0206334 )
+script = ExtResource( 6 )
+util_path = NodePath("../../../../../Util")
+orientation = 8
+
+[node name="PushObj" type="StaticBody" parent="Environment/PushObj" groups=["obstacle"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72943, -0.141828, -5.58131 )
+collision_layer = 4
+collision_mask = 65535
+
+[node name="CSGMesh" type="CSGMesh" parent="Environment/PushObj/PushObj"]
+mesh = SubResource( 6 )
+material = SubResource( 7 )
+
+[node name="CSGMesh2" type="CSGMesh" parent="Environment/PushObj/PushObj"]
+mesh = SubResource( 6 )
+material = SubResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/PushObj/PushObj"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.203508, 0 )
+shape = SubResource( 8 )
+
+[node name="Triggers" type="Spatial" parent="Environment/PushObj/PushObj"]
+
+[node name="Trigger1" type="Spatial" parent="Environment/PushObj/PushObj/Triggers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+
+[node name="CSGMesh" type="CSGMesh" parent="Environment/PushObj/PushObj/Triggers/Trigger1"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = SubResource( 9 )
+material = SubResource( 10 )
+
+[node name="Trigger2" type="Spatial" parent="Environment/PushObj/PushObj/Triggers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Environment/PushObj/PushObj/Triggers/Trigger2"]
+radius = 0.1
+
+[node name="Trigger3" type="Spatial" parent="Environment/PushObj/PushObj/Triggers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+
+[node name="CSGMesh" type="CSGMesh" parent="Environment/PushObj/PushObj/Triggers/Trigger3"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = SubResource( 11 )
+
+[node name="Trigger4" type="Spatial" parent="Environment/PushObj/PushObj/Triggers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+
+[node name="CSGMesh" type="CSGMesh" parent="Environment/PushObj/PushObj/Triggers/Trigger4"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = SubResource( 12 )
+
+[node name="ArrawPos" type="Spatial" parent="Environment/PushObj/PushObj"]
+
+[node name="Trigger1" type="Spatial" parent="Environment/PushObj/PushObj/ArrawPos"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.19474 )
+script = ExtResource( 6 )
+util_path = NodePath("../../../../../Util")
+orientation = 1
+
+[node name="Trigger2" type="Spatial" parent="Environment/PushObj/PushObj/ArrawPos"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.35827 )
+script = ExtResource( 6 )
+util_path = NodePath("../../../../../Util")
+orientation = 2
+
+[node name="Trigger3" type="Spatial" parent="Environment/PushObj/PushObj/ArrawPos"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71112, 0, 0.0103167 )
+script = ExtResource( 6 )
+util_path = NodePath("../../../../../Util")
+orientation = 4
+
+[node name="Trigger4" type="Spatial" parent="Environment/PushObj/PushObj/ArrawPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37227, 0, 0.0206334 )
 script = ExtResource( 6 )
 util_path = NodePath("../../../../../Util")
