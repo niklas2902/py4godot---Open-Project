@@ -162,7 +162,8 @@ class Enemy(KinematicBody, Draw):
 
     def follow_player(self) -> None:
         if self.path == None or self.player.global_transform.get_origin() != self.last_player_pos:
-            self.path = self._astar.get_way_points(self.global_transform.get_origin(),
+            self.path = self._astar.get_way_points(self.global_transform.get_origin() + (
+                    self.player.global_transform.get_origin() - self.global_transform.get_origin()).normalized(),
                                                    self.player.global_transform.get_origin())
         dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
         dist: float = dist_vector.length()
@@ -214,7 +215,7 @@ class Enemy(KinematicBody, Draw):
             if abs(angle) < self.field_of_view / 2:
                 object_in_view: bool = self.object_in_view(player_direction, self.out_of_sight_radius)
                 return not object_in_view
-            return True
+            return False
         return False
 
     def should_follow_player(self) -> bool:
