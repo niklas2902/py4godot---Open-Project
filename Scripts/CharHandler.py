@@ -14,7 +14,7 @@ DEFAULT_SPRINT_DIST = 200
 GRAVITY = 20
 SPHERE_HANDLE = "SPHERE"
 RAY_HANDLE = "RAY"
-DIST_NAVIGATION = 0.1
+DIST_NAVIGATION = 0.2
 MOUSE_ACTION = "mouse_action"
 
 
@@ -67,14 +67,6 @@ class CharHandler(KinematicBody, Draw):
 	def node(self, value: NodePath):
 		self._node = value
 
-	@gdproperty(NodePath, NodePath())
-	def navigation(self) -> NodePath:
-		return self._navigation
-
-	@navigation.setter
-	def navigation(self, value: NodePath):
-		self._navigation = value
-
 	@gdproperty(float, DEFAULT_MAX_DIST)
 	def max_dist(self) -> float:
 		return self._max_dist
@@ -113,9 +105,6 @@ class CharHandler(KinematicBody, Draw):
 		self.save_rotation: int = 0
 		node = self.get_node(self._node)
 		self.animation_tree: AnimationTree = AnimationTree.cast(node)
-
-		nav: Node = self.get_node(self._navigation)
-		self.navigation_obj: Navigation = Navigation.cast(nav)
 
 		particle: Node = self.get_node(self.particle_path)
 		self._particle_system = CPUParticles.cast(particle)
@@ -403,3 +392,7 @@ class CharHandler(KinematicBody, Draw):
 	@gdmethod
 	def move_possible(self) -> None:
 		self._move_possible = True
+
+
+
+
