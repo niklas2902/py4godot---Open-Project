@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scripts/Navigation/AStar.py" type="Script" id=1]
 [ext_resource path="res://Scripts/InteractionObjects/ActionObject.py" type="Script" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Scripts/UI/ZoomButton.py" type="Script" id=13]
 [ext_resource path="res://Scripts/Check.py" type="Script" id=14]
 [ext_resource path="res://Scripts/PlayerCam.py" type="Script" id=15]
+[ext_resource path="res://Scripts/Spike.py" type="Script" id=16]
+[ext_resource path="res://Prefabs/DebugNode.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CapsuleMesh" id=52]
 
@@ -47,6 +49,10 @@ extents = Vector3( 9.83321, 0.302151, 10.148 )
 
 [sub_resource type="SpatialMaterial" id=51]
 albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="CapsuleMesh" id=53]
+
+[sub_resource type="SpatialMaterial" id=54]
 
 [node name="Spatial" type="Spatial"]
 
@@ -96,28 +102,28 @@ bones/3/bound_children = [ NodePath("BoneAttachment5"), NodePath("BoneAttachment
 bones/7/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3"), NodePath("BoneAttachment4") ]
 
 [node name="BoneAttachment" parent="Player/Armature/Skeleton" index="0"]
-transform = Transform( -0.999802, 0.00635006, 0.0188922, 0.00140395, 0.967968, -0.251069, -0.0198819, -0.250992, -0.967784, -2.24712, 122.346, 0.615852 )
+transform = Transform( -0.999442, 0.00964093, 0.0320193, 0.000656139, 0.963004, -0.269487, -0.0334334, -0.269314, -0.962471, -2.47437, 122.338, 0.459255 )
 
 [node name="BoneAttachment2" parent="Player/Armature/Skeleton" index="1"]
-transform = Transform( -0.999802, 0.00635006, 0.0188922, 0.00140395, 0.967968, -0.251069, -0.0198819, -0.250992, -0.967784, -2.24712, 122.346, 0.615852 )
+transform = Transform( -0.999442, 0.00964093, 0.0320193, 0.000656139, 0.963004, -0.269487, -0.0334334, -0.269314, -0.962471, -2.47437, 122.338, 0.459255 )
 
 [node name="BoneAttachment3" parent="Player/Armature/Skeleton" index="2"]
-transform = Transform( -0.999802, 0.00635006, 0.0188922, 0.00140395, 0.967968, -0.251069, -0.0198819, -0.250992, -0.967784, -2.24712, 122.346, 0.615852 )
+transform = Transform( -0.999442, 0.00964093, 0.0320193, 0.000656139, 0.963004, -0.269487, -0.0334334, -0.269314, -0.962471, -2.47437, 122.338, 0.459255 )
 
 [node name="BoneAttachment4" parent="Player/Armature/Skeleton" index="3"]
-transform = Transform( -0.999802, 0.00635006, 0.0188922, 0.00140395, 0.967968, -0.251069, -0.0198819, -0.250992, -0.967784, -2.24712, 122.346, 0.615852 )
+transform = Transform( -0.999442, 0.00964093, 0.0320193, 0.000656139, 0.963004, -0.269487, -0.0334334, -0.269314, -0.962471, -2.47437, 122.338, 0.459255 )
 
 [node name="BoneAttachment5" parent="Player/Armature/Skeleton" index="4"]
-transform = Transform( -0.998169, 0.0315299, 0.0516307, 0.0312936, 0.999496, -0.00537695, -0.0517741, -0.00375155, -0.998651, -3.64371, 87.1221, 0.778 )
+transform = Transform( -0.997527, 0.0297754, 0.0636726, 0.0293901, 0.999544, -0.00697847, -0.0638513, -0.00509002, -0.997946, -3.85469, 87.1123, 0.916843 )
 
 [node name="BoneAttachment6" parent="Player/Armature/Skeleton" index="5"]
-transform = Transform( -0.998169, 0.0315299, 0.0516307, 0.0312936, 0.999496, -0.00537695, -0.0517741, -0.00375155, -0.998651, -3.64371, 87.1221, 0.778 )
+transform = Transform( -0.997527, 0.0297754, 0.0636726, 0.0293901, 0.999544, -0.00697847, -0.0638513, -0.00509002, -0.997946, -3.85469, 87.1123, 0.916843 )
 
 [node name="BoneAttachment7" parent="Player/Armature/Skeleton" index="6"]
-transform = Transform( -0.998169, 0.0315299, 0.0516307, 0.0312936, 0.999496, -0.00537695, -0.0517741, -0.00375155, -0.998651, -3.64371, 87.1221, 0.778 )
+transform = Transform( -0.997527, 0.0297754, 0.0636726, 0.0293901, 0.999544, -0.00697847, -0.0638513, -0.00509002, -0.997946, -3.85469, 87.1123, 0.916843 )
 
 [node name="BoneAttachment8" parent="Player/Armature/Skeleton" index="7"]
-transform = Transform( -0.998169, 0.0315299, 0.0516307, 0.0312936, 0.999496, -0.00537695, -0.0517741, -0.00375155, -0.998651, -3.64371, 87.1221, 0.778 )
+transform = Transform( -0.997527, 0.0297754, 0.0636726, 0.0293901, 0.999544, -0.00697847, -0.0638513, -0.00509002, -0.997946, -3.85469, 87.1123, 0.916843 )
 
 [node name="OnRampCheck" parent="Player" index="5"]
 collision_layer = 0
@@ -137,7 +143,6 @@ shape = SubResource( 37 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.746843, -1.06652 )
 
 [node name="Ground" type="StaticBody" parent="Environment" groups=["walkable"]]
-collision_mask = 255
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Ground"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.358482, 0 )
@@ -368,6 +373,16 @@ material = SubResource( 51 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.67577, 0, 0.0367827 )
 script = ExtResource( 3 )
 mesh_path = NodePath("../CSGMesh")
+
+[node name="Spikes" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.02747, 0, 5.23892 )
+script = ExtResource( 16 )
+
+[node name="CSGMesh" type="CSGMesh" parent="Spikes"]
+mesh = SubResource( 53 )
+material = SubResource( 54 )
+
+[node name="DebugNode" parent="." instance=ExtResource( 17 )]
 
 [connection signal="finished_animation" from="Camera" to="Button2/Logic" method="_on_Camera_finished_animation"]
 [connection signal="zoomed_in" from="Camera" to="Player" method="_on_Camera_zoomed_in"]
