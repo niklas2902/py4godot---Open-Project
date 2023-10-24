@@ -37,3 +37,6 @@ func open_popup():
 	var popup = PopupDialog.new()
 	popup.show_modal()
 	#popup.show()
+	
+func load_resource(path):
+	return load(path)
