@@ -80,8 +80,8 @@ mesh = SubResource( 52 )
 
 [node name="AStar" type="Spatial" parent="."]
 script = ExtResource( 1 )
-utils_path = NodePath("../Util")
 push_obj_layer = 4
+utils_path = NodePath("../Util")
 
 [node name="Button2" type="Button" parent="."]
 margin_right = 80.0
@@ -106,28 +106,28 @@ bones/3/bound_children = [ NodePath("BoneAttachment5"), NodePath("BoneAttachment
 bones/7/bound_children = [ NodePath("BoneAttachment"), NodePath("BoneAttachment2"), NodePath("BoneAttachment3"), NodePath("BoneAttachment4") ]
 
 [node name="BoneAttachment" parent="Player/Armature/Skeleton" index="0"]
-transform = Transform( -0.999907, 0.00337681, 0.0132359, -0.000507724, 0.9591, -0.283065, -0.0136511, -0.283045, -0.959008, -2.31807, 122.33, 0.316777 )
+transform = Transform( -0.99875, 0.01045, 0.0488965, -0.00173635, 0.970076, -0.242794, -0.0499711, -0.242574, -0.968844, -2.76021, 122.322, 1.22619 )
 
 [node name="BoneAttachment2" parent="Player/Armature/Skeleton" index="1"]
-transform = Transform( -0.999907, 0.00337681, 0.0132359, -0.000507724, 0.9591, -0.283065, -0.0136511, -0.283045, -0.959008, -2.31807, 122.33, 0.316777 )
+transform = Transform( -0.99875, 0.01045, 0.0488965, -0.00173635, 0.970076, -0.242794, -0.0499711, -0.242574, -0.968844, -2.76021, 122.322, 1.22619 )
 
 [node name="BoneAttachment3" parent="Player/Armature/Skeleton" index="2"]
-transform = Transform( -0.999907, 0.00337681, 0.0132359, -0.000507724, 0.9591, -0.283065, -0.0136511, -0.283045, -0.959008, -2.31807, 122.33, 0.316777 )
+transform = Transform( -0.99875, 0.01045, 0.0488965, -0.00173635, 0.970076, -0.242794, -0.0499711, -0.242574, -0.968844, -2.76021, 122.322, 1.22619 )
 
 [node name="BoneAttachment4" parent="Player/Armature/Skeleton" index="3"]
-transform = Transform( -0.999907, 0.00337681, 0.0132359, -0.000507724, 0.9591, -0.283065, -0.0136511, -0.283045, -0.959008, -2.31807, 122.33, 0.316777 )
+transform = Transform( -0.99875, 0.01045, 0.0488965, -0.00173635, 0.970076, -0.242794, -0.0499711, -0.242574, -0.968844, -2.76021, 122.322, 1.22619 )
 
 [node name="BoneAttachment5" parent="Player/Armature/Skeleton" index="4"]
-transform = Transform( -0.998382, 0.0328427, 0.0464355, 0.0324624, 0.999433, -0.00891817, -0.046702, -0.00739646, -0.998881, -3.70891, 87.1085, 1.05594 )
+transform = Transform( -0.997281, 0.028482, 0.067975, 0.0287758, 0.99958, 0.00334696, -0.0678511, 0.00529374, -0.997681, -4.07813, 87.0976, 1.06552 )
 
 [node name="BoneAttachment6" parent="Player/Armature/Skeleton" index="5"]
-transform = Transform( -0.998382, 0.0328427, 0.0464355, 0.0324624, 0.999433, -0.00891817, -0.046702, -0.00739646, -0.998881, -3.70891, 87.1085, 1.05594 )
+transform = Transform( -0.997281, 0.028482, 0.067975, 0.0287758, 0.99958, 0.00334696, -0.0678511, 0.00529374, -0.997681, -4.07813, 87.0976, 1.06552 )
 
 [node name="BoneAttachment7" parent="Player/Armature/Skeleton" index="6"]
-transform = Transform( -0.998382, 0.0328427, 0.0464355, 0.0324624, 0.999433, -0.00891817, -0.046702, -0.00739646, -0.998881, -3.70891, 87.1085, 1.05594 )
+transform = Transform( -0.997281, 0.028482, 0.067975, 0.0287758, 0.99958, 0.00334696, -0.0678511, 0.00529374, -0.997681, -4.07813, 87.0976, 1.06552 )
 
 [node name="BoneAttachment8" parent="Player/Armature/Skeleton" index="7"]
-transform = Transform( -0.998382, 0.0328427, 0.0464355, 0.0324624, 0.999433, -0.00891817, -0.046702, -0.00739646, -0.998881, -3.70891, 87.1085, 1.05594 )
+transform = Transform( -0.997281, 0.028482, 0.067975, 0.0287758, 0.99958, 0.00334696, -0.0678511, 0.00529374, -0.997681, -4.07813, 87.0976, 1.06552 )
 
 [node name="OnRampCheck" parent="Player" index="5"]
 collision_layer = 0
@@ -198,8 +198,8 @@ collision_layer = 4
 collision_mask = 65535
 script = ExtResource( 12 )
 util_path = NodePath("../../../Util")
-arrow_path = NodePath("ArrawPos")
 trigger = NodePath("Triggers")
+arrow_path = NodePath("ArrawPos")
 
 [node name="CSGMesh" type="CSGMesh" parent="Environment/Interaction/PushObj3"]
 mesh = SubResource( 40 )
@@ -274,10 +274,10 @@ collision_layer = 4
 collision_mask = 65535
 script = ExtResource( 12 )
 util_path = NodePath("../../../Util")
-collision_layer_direction = 97
-arrow_path = NodePath("ArrawPos")
 trigger = NodePath("Triggers")
 push_layer = 0
+arrow_path = NodePath("ArrawPos")
+collision_layer_direction = 97
 
 [node name="CSGMesh" type="CSGMesh" parent="Environment/Interaction/PushObj"]
 mesh = SubResource( 40 )
@@ -390,14 +390,15 @@ material = SubResource( 54 )
 
 [node name="DebugNode" parent="." instance=ExtResource( 17 )]
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="ProjectileDispenser" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.11069, 1.116, -6.56639 )
 script = ExtResource( 18 )
+reload_time = 4.0
 utils_path = NodePath("../Util")
 
-[node name="CSGBox" type="CSGBox" parent="StaticBody"]
+[node name="CSGBox" type="CSGBox" parent="ProjectileDispenser"]
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="ProjectileDispenser"]
 shape = SubResource( 55 )
 
 [connection signal="finished_animation" from="Camera" to="Button2/Logic" method="_on_Camera_finished_animation"]
