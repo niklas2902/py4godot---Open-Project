@@ -36,6 +36,8 @@ class Spawner(StaticBody):
         self.projectiles_list = []
         for i in range(10):
             self.projectiles_list.append(self.demo_projectile.duplicate())
+            self.projectiles_list[-1].get_pyscript().lifetime = 10
+            self.projectiles_list[-1].get_pyscript().spawner = self
 
     @gdmethod
     def _physics_process(self, delta: float) -> None:
@@ -47,8 +49,13 @@ class Spawner(StaticBody):
     @gdmethod
     def _process(self, delta: float) -> None:
         pass
+    
+    @gdmethod
+    def lifetime_over(self, projectile: Object) -> None:
+        print("lifetime_over")
 
     def spawn_projectile(self) -> None:
         if self.current_projectile_id < len(self.projectiles_list):
+            #self.projectiles_list[self.current_projectile_id].get_pyscript().connect("lifetime_over", self, "lifetime_over")
             self.add_child(self.projectiles_list[self.current_projectile_id])
             self.current_projectile_id += 1
