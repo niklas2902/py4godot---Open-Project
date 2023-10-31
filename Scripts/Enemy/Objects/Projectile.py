@@ -10,26 +10,31 @@ from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.pluginscript_api.hints import *
 
 
-
 @gdclass
 class Projectile(Spatial):
-	velocity: Vector3
+    velocity: Vector3
 
-	lifetime: float
-	_current_lifetime_counter: float
-	spawner:Spawner
+    lifetime: float
+    _current_lifetime_counter: float
+    spawner: Spawner
+    stopped: bool
 
-	prop("lifetime", float, 10)
-	register_signal("lifetime_over")
+    prop("lifetime", float, 10)
+    register_signal("lifetime_over")
 
-	@gdmethod
-	def _ready(self) -> None:
-		self._current_lifetime_counter = 0
-		self.velocity = Vector3(1,0,0)
+    @gdmethod
+    def _ready(self) -> None:
+        self._current_lifetime_counter = 0
+        self.velocity = Vector3(1, 0, 0)
 
-	@gdmethod
-	def _process(self, delta: float) -> None:
-		self._current_lifetime_counter += delta
-		if (self._current_lifetime_counter > self.lifetime):
-			self.spawner.lifetime_over(self)
-		self.global_transform.set_origin(self.global_transform.get_origin() + self.velocity * delta)
+    @gdmethod
+    def _process(self, delta: float) -> None:
+        if self.is_inside_tree():
+            self._current_lifetime_counter += delta
+            if (self._current_lifetime_counter > self.lifetime):
+                self.spawner.lifetime_over(self)
+            else:
+                self.global_transform.set_origin(self.global_transform.get_origin() + self.velocity * delta)
+
+    def reset_lifetime(self) -> None:
+        self._current_lifetime_counter = 0
