@@ -56,7 +56,6 @@ class Spawner(StaticBody):
 
 	@gdmethod
 	def lifetime_over(self, projectile: Projectile) -> None:
-		print("lifetime_over")
 		typing.cast(Projectile, projectile.get_pyscript()).global_transform.set_origin(
 			self.global_transform.get_origin())
 		projectile.reset_lifetime()

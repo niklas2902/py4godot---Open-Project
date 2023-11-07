@@ -50,7 +50,6 @@ class Projectile(Spatial):
 
 		hitting_player: bool = self.is_hitting_player()
 		if hitting_player:
-			print("hitting player")
 			self.spawner.lifetime_over(self)
 
 	def is_hitting_wall(self) -> None:
