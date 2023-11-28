@@ -1,13 +1,22 @@
+from py4godot.classes.AnimationTree.AnimationTree import AnimationTree
+from py4godot.classes.CPUParticles3D.CPUParticles3D import CPUParticles3D
+from py4godot.classes.Camera3D.Camera3D import Camera3D
+from py4godot.classes.CharacterBody3D.CharacterBody3D import CharacterBody3D
+from py4godot.classes.Input.Input import Input
+from py4godot.classes.Node3D.Node3D import Node3D
+from py4godot.classes.Object.Object import Object
+from py4godot.classes.generated4_core import NodePath, Vector3, Vector2, Basis, Dictionary, Array, Transform3D
+from py4godot.pluginscript_api.utils.annotations import gdclass, prop, gdproperty, gdmethod
+
 import typing
 from Scripts.InteractionObjects.Lever import Lever
 
 from Scripts.PushObj import PushObj
-from py4godot import *
 import math
 from Scripts.Tools.Draw import Draw
 from Scripts.Navigation.AStar import AStar as NavAstar
+from py4godot.classes.Node.Node import Node
 from typing import Optional
-import debugpy, os
 
 DEFAULT_MAX_DIST = 10
 DEFAULT_SPRINT_DIST = 200
@@ -19,8 +28,8 @@ MOUSE_ACTION = "mouse_action"
 
 
 @gdclass
-class CharHandler(KinematicBody, Draw):
-    selected_push_obj: Optional[KinematicBody]
+class CharHandler(CharacterBody3D, Draw):
+    selected_push_obj: Optional[CharacterBody3D]
     push_obj_selected: Optional[Object]
     lever_obj_selected: Optional[Lever]
     astar_path: NodePath
@@ -37,7 +46,7 @@ class CharHandler(KinematicBody, Draw):
     _sprint_dist: float
     _can_move: int
     _move_possible: bool
-    _particle_system: CPUParticles
+    _particle_system: CPUParticles3D
 
     def __init__(self) -> None:
         # Don't call any godot-methods here
@@ -55,45 +64,46 @@ class CharHandler(KinematicBody, Draw):
         self.selected_push_obj = None
         self.lever_obj_selected = None
 
-    prop("can_move", int, 1, hint=FlagsHint("enabled"))
+    prop("can_move", int, 1)  # , hint=FlagsHint("enabled"))
     prop("astar_path", NodePath, NodePath())
     prop("particle_path", NodePath, NodePath())
 
-    @gdproperty(NodePath, NodePath())
-    def node(self) -> NodePath:
-        return self._node
-
-    @node.setter
-    def node(self, value: NodePath):
-        self._node = value
-
-    @gdproperty(float, DEFAULT_MAX_DIST)
-    def max_dist(self) -> float:
-        return self._max_dist
-
-    @max_dist.setter
-    def max_dist(self, value: float):
-        self._max_dist = value
-
-    @gdproperty(float, DEFAULT_SPRINT_DIST)
-    def sprint_dist(self) -> float:
-        return self._sprint_dist
-
-    @sprint_dist.setter
-    def sprint_dist(self, value: float):
-        self._sprint_dist = value
-
-    @gdproperty(int, 0, hint=RangeHint(0, 2147483647))
-    def push_obj_layer(self) -> int:
-        return self._push_obj_layer
-
-    @push_obj_layer.setter
-    def push_obj_layer(self, value):
-        self._push_obj_layer = value
+    #
+    # @gdproperty(NodePath, NodePath())
+    # def node(self) -> NodePath:
+    #     return self._node
+    #
+    # @node.setter
+    # def node(self, value: NodePath):
+    #     self._node = value
+    #
+    # @gdproperty(float, DEFAULT_MAX_DIST)
+    # def max_dist(self) -> float:
+    #     return self._max_dist
+    #
+    # @max_dist.setter
+    # def max_dist(self, value: float):
+    #     self._max_dist = value
+    #
+    # @gdproperty(float, DEFAULT_SPRINT_DIST)
+    # def sprint_dist(self) -> float:
+    #     return self._sprint_dist
+    #
+    # @sprint_dist.setter
+    # def sprint_dist(self, value: float):
+    #     self._sprint_dist = value
+    #
+    # @gdproperty(int, 0)  # , hint=RangeHint(0, 2147483647))
+    # def push_obj_layer(self) -> int:
+    #     return self._push_obj_layer
+    #
+    # @push_obj_layer.setter
+    # def push_obj_layer(self, value):
+    #     self._push_obj_layer = value
 
     @gdmethod
     def test_call(self):
-        return Array()
+        return Array.new0()
 
     @gdmethod
     def _ready(self):
@@ -107,12 +117,12 @@ class CharHandler(KinematicBody, Draw):
         self.animation_tree: AnimationTree = AnimationTree.cast(node)
 
         particle: Node = self.get_node(self.particle_path)
-        self._particle_system = CPUParticles.cast(particle)
+        self._particle_system = CPUParticles3D.cast(particle)
 
         # Taken from: https://github.com/godotengine/tps-demo/blob/master/player/player.gd
-        self.orientation: Transform = self.transform
-        self.root_motion: Transform = Transform.new_with_axis_origin(Vector3(1, 0, 0), Vector3(0, 1, 0),
-                                                                     Vector3(0, 0, 1), Vector3(0, 0, 0))
+        self.orientation: Transform3D = self.transform
+        self.root_motion: Transform3D = Transform3D.new_with_axis_origin(Vector3.new3(1, 0, 0), Vector3.new3(0, 1, 0),
+                                                                         Vector3.new3(0, 0, 1), Vector3.new3(0, 0, 0))
         self.motion: Vector2 = Vector2(0, 0)
         self.velocity: Vector3 = Vector3(0, 0, 0)
 
@@ -125,7 +135,6 @@ class CharHandler(KinematicBody, Draw):
             self._max_dist = DEFAULT_MAX_DIST
         if self._sprint_dist == None:
             self._sprint_dist = DEFAULT_SPRINT_DIST
-        a = NavigationMeshInstance._new()
         self._astar = self.get_node(self.astar_path).get_pyscript()
 
         self._particle_system.emitting = False
@@ -141,7 +150,7 @@ class CharHandler(KinematicBody, Draw):
     @gdmethod
     def _physics_process(self, delta: float):
         if not self._can_move or not self._move_possible:
-            self.animation_tree.set("parameters/Movement/blend_position", Variant(0))
+            self.animation_tree.set("parameters/Movement/blend_position", 0)
             return
         ignore: bool = False
         self.handle_ray()
@@ -149,7 +158,7 @@ class CharHandler(KinematicBody, Draw):
 
         mouse_angle: float = self.follow_path(delta)
         self.apply_gravity(delta)
-        self.animation_tree.set("parameters/Movement/blend_position", Variant(1))
+        self.animation_tree.set("parameters/Movement/blend_position", 1)
         if (self.path == None):
             mouse_angle = self.mouse_angle()
             if (mouse_angle != None):
@@ -163,7 +172,7 @@ class CharHandler(KinematicBody, Draw):
                                                     Array(self.get_move_dir())).get_converted_value():
                     ignore = True
             self.apply_root_motion(delta, mouse_angle)
-            self.animation_tree.set("parameters/Movement/blend_position", Variant(min(1, self.get_speed(ignore))))
+            self.animation_tree.set("parameters/Movement/blend_position", (min(1, self.get_speed(ignore))))
 
         if (mouse_angle != None):
             self.orientation.set_basis(Basis.new_with_axis_and_angle(Vector3(0, 1, 0), mouse_angle))
@@ -255,15 +264,15 @@ class CharHandler(KinematicBody, Draw):
         self.orientation.set_origin(Vector3(0, 0, 0))
         self.orientation = self.orientation.orthonormalized()
 
-        trans: Transform = Transform(self.orientation.get_basis(), self.global_transform.get_origin())
+        trans: Transform3D = Transform3D(self.orientation.get_basis(), self.global_transform.get_origin())
         self.global_transform = trans
 
     def set_key_pressed(self):
         """Function for setting pressed keys"""
-        self.left_pressed = self.input.is_key_pressed(GlobalConstants.KEY_A)
-        self.right_pressed = self.input.is_key_pressed(GlobalConstants.KEY_D)
-        self.up_pressed = self.input.is_key_pressed(GlobalConstants.KEY_W)
-        self.down_pressed = self.input.is_key_pressed(GlobalConstants.KEY_S)
+        self.left_pressed = self.input.is_key_pressed(Key.KEY_A)
+        self.right_pressed = self.input.is_key_pressed(Key.KEY_D)
+        self.up_pressed = self.input.is_key_pressed(Key.KEY_W)
+        self.down_pressed = self.input.is_key_pressed(Key.KEY_S)
 
     def emit_sound(self):
         pass
@@ -316,7 +325,7 @@ class CharHandler(KinematicBody, Draw):
             self.current_path_ind: int = 0
             ray_length: float = 100000
             mouse_pos: Vector2 = self.get_viewport().get_mouse_position()
-            camera: Camera = self.get_viewport().get_camera()
+            camera: Camera3D = self.get_viewport().get_camera()
             from_: Vector3 = camera.project_ray_origin(mouse_pos)
             to: Vector3 = from_ - camera.project_ray_normal(mouse_pos) * ray_length
             exclude: Array = Array()
@@ -365,14 +374,14 @@ class CharHandler(KinematicBody, Draw):
             self.path.append(path_point)
         self.current_path_ind = 1
 
-    def get_min_point(self, collider: Spatial, points: Array, alt_object: Spatial):
+    def get_min_point(self, collider: Node3D, points: Array, alt_object: Node3D):
         if (points.size() == 0):
             return alt_object
-        return_val: Spatial = points[0]
+        return_val: Node3D = points[0]
         min_dist: float = abs((collider - points[0].global_transform.get_origin()).length())
 
         for point_index in range(1, points.size()):
-            point: Spatial = points[point_index]
+            point: Node3D = points[point_index]
             length: float = abs((collider - point.global_transform.get_origin()).length())
             if (min_dist > length):
                 return_val = point

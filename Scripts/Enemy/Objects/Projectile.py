@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+from py4godot.classes.Node.Node import Node
+from py4godot.classes.Node3D.Node3D import Node3D
+from py4godot.classes.generated4_core import Vector3, NodePath, Array
+
 from Scripts.CharHandler import CharHandler
 from typing import TYPE_CHECKING
 
@@ -7,13 +11,12 @@ if TYPE_CHECKING:
     from Scripts.Enemy.Objects.Spawner import Spawner
 from py4godot.enums.enums import *
 from py4godot.core import *
-from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.pluginscript_api.hints import *
 
 
 @gdclass
-class Projectile(Spatial):
+class Projectile(Node3D):
     velocity: Vector3
 
     lifetime: float
@@ -60,8 +63,8 @@ class Projectile(Spatial):
 
     def extract_player_from_collision(self) -> CharHandler:
         return self.utils.callv("sphere_cast",
-                                Array(self.global_transform.get_origin(), 0.1, Array(self.spawner),
-                                      1)).get_converted_value()[0]["collider"].get_pyscript()
+                                Array(self.get_global_position(), 0.1, Array(self.spawner),
+                                      1))[0]["collider"].get_pyscript()
 
     def is_hitting_wall(self) -> bool:
         res = self.utils.callv("sphere_cast",

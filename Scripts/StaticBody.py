@@ -1,19 +1,18 @@
+from py4godot.classes.Area3D.Area3D import Area3D
+from py4godot.pluginscript_api.utils.annotations import gdclass, gdmethod
 
-from py4godot import *
 
 @gdclass
-class TriggerArea(Area):
+class TriggerArea(Area3D):
 
-	def __init__(self):
-		#Don't call any godot-methods here
-		super().__init__()
-	
-	
-	@gdmethod
-	def _ready(self):
-		print("I'm alive")
+    def __init__(self):
+        # Don't call any godot-methods here
+        super().__init__()
 
-	@gdmethod
-	def _process(self, delta):
-		print(delta)
+    @gdmethod
+    def _ready(self):
+        print("I'm alive")
 
+    @gdmethod
+    def _process(self, delta):
+        print(delta)

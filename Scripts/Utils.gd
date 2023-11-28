@@ -1,10 +1,10 @@
-extends Spatial
+extends Node3D
 
 func sphere_cast(origin, radius, exclude, layer):
-	var shape = SphereShape.new()
+	var shape = SphereShape3D.new()
 	shape.set_radius(radius)
 	
-	var params = PhysicsShapeQueryParameters.new()
+	var params = PhysicsShapeQueryParameters3D.new()
 	params.set_shape(shape)
 	if(layer != -1):
 		params.collision_mask = layer
@@ -12,16 +12,16 @@ func sphere_cast(origin, radius, exclude, layer):
 	
 	if exclude != null:
 		params.set_exclude(exclude) # here exclude is an array of... RID??
-	var res = get_world().direct_space_state.intersect_shape(params, 1)
+	var res = get_world_3d().direct_space_state.intersect_shape(params, 1)
 	return res
 
 
 
 func box_cast(origin, x, y, z, exclude, layer):
-	var shape = BoxShape.new()
+	var shape = BoxShape3D.new()
 	shape.extents = Vector3(x,y,z)
 
-	var params = PhysicsShapeQueryParameters.new()
+	var params = PhysicsShapeQueryParameters3D.new()
 	params.set_shape(shape)
 	if(layer != -1):
 		params.collision_mask = layer
@@ -29,14 +29,18 @@ func box_cast(origin, x, y, z, exclude, layer):
 
 	if exclude != null:
 		params.set_exclude(exclude) # here exclude is an array of... RID??
-	var res = get_world().direct_space_state.intersect_shape(params, 1)
+	var res = get_world_3d().direct_space_state.intersect_shape(params, 1)
 	return res
 
 func open_popup():
 	print("open_popup")
-	var popup = PopupDialog.new()
+	var popup = Popup.new()
 	popup.show_modal()
 	#popup.show()
 	
 func load_resource(path):
 	return load(path)
+	
+
+func _process(delta):
+	1 ==1

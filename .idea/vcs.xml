@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/submodules/py4godot" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/submodules/py4godot/py4godot/gdextension-api" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/submodules/py4godot/py4godot/godot-headers" vcs="Git" />
   </component>
 </project>

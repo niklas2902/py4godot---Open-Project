@@ -6,8 +6,12 @@
       <sourceFolder url="file://$MODULE_DIR$/addons/windows64/cpython-3.9.7-windows64/python/install/DLLs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/addons/windows64/cpython-3.9.7-windows64/python/install/Lib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/addons/windows64/cpython-3.9.7-windows64/python/install/Lib/site-packages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/submodules/py4godot/build/addons/windows64/cpython-3.11.3-windows64/python/install" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/submodules/py4godot/build/addons/windows64/cpython-3.11.3-windows64/python/install/DLLs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/submodules/py4godot/build/addons/windows64/cpython-3.11.3-windows64/python/install/Lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/submodules/py4godot/build/addons/windows64/cpython-3.11.3-windows64/python/install/Lib/site-packages" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.11 (g)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
