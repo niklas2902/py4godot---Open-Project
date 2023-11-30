@@ -58,6 +58,7 @@ class Draw():
         immediate_geometry: ImmediateMesh = self.immediate_geometry_dict[handle]
         immediate_geometry.clear_surfaces()
         my_mat: StandardMaterial3D = StandardMaterial3D.constructor()
+        my_mat.albedo_color = color
         immediate_geometry.surface_begin(1, my_mat)
         immediate_geometry.surface_set_color(color)
 
@@ -79,6 +80,7 @@ class Draw():
         immediate_geometry: ImmediateMesh = self.immediate_geometry_dict[handle]
         immediate_geometry.clear_surfaces()
         my_mat: StandardMaterial3D = StandardMaterial3D.constructor()
+        my_mat.albedo_color = color
         immediate_geometry.surface_begin(1, my_mat)
         immediate_geometry.surface_set_color(color)
         num_points = RESOLUTION
@@ -128,6 +130,7 @@ class Draw():
         immediate_geometry: ImmediateMesh = self.immediate_geometry_dict[handle]
         immediate_geometry.clear_surfaces()
         my_mat: StandardMaterial3D = StandardMaterial3D.constructor()
+        my_mat.albedo_color = color
         immediate_geometry.surface_begin(1, my_mat)
         immediate_geometry.surface_set_color(color)
         immediate_geometry.surface_add_vertex(origin)
@@ -140,6 +143,7 @@ class Draw():
         immediate_geometry: ImmediateMesh = self.immediate_geometry_dict[handle]
         immediate_geometry.clear_surfaces()
         my_mat: StandardMaterial3D = StandardMaterial3D.constructor()
+        my_mat.albedo_color = color
         immediate_geometry.surface_begin(1, my_mat)
         immediate_geometry.surface_set_color(color)
         immediate_geometry.surface_add_vertex(origin)
