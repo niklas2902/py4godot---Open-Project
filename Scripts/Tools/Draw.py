@@ -39,7 +39,6 @@ class Draw():
         immediate_geometry.surface_begin(0, my_mat)
         new_mat: StandardMaterial3D = StandardMaterial3D.constructor()
         new_mat.albedo_color = Color.new3(1, 1, 1)
-        immediate_geometry.surface_set_material(0, new_mat)
         immediate_geometry.surface_end()
         instance.set_mesh(immediate_geometry)
         get_tree(caller).get_root().add_child(instance)

@@ -4,13 +4,11 @@ import Scripts.Enemy as enemy
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:  # Only imports the below statements during type checking
-	from Scripts.Utils.BehaviorTreeVisualizerLogic import *
+    from Scripts.Utils.BehaviorTreeVisualizerLogic import *
 
 
 class Blackboard:
-	enemy: enemy.Enemy
-	tree_visualizer: BehaviorTreeVisualizerLogic
+    enemy: enemy.Enemy
 
-	def __init__(self, enemy: enemy.Enemy, tree_visualizer: BehaviorTreeVisualizerLogic) -> None:
-		self.enemy = enemy
-		self.tree_visualizer = tree_visualizer
+    def __init__(self, enemy: enemy.Enemy) -> None:
+        self.enemy = enemy

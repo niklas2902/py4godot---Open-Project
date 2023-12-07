@@ -36,7 +36,7 @@ PUSH_OBJ_MASK: int = 4
 
 
 @gdclass
-class Enemy(CharacterBody3D):
+class Enemy(CharacterBody3D, Draw):
     route_holder: RouteHolder
     route_holder_path: NodePath
 
@@ -59,6 +59,8 @@ class Enemy(CharacterBody3D):
     sprint_modifier: float
 
     field_of_view: float
+
+    utils_path: NodePath
 
     def __init__(self):
         # Don't call any godot-methods here
@@ -84,15 +86,14 @@ class Enemy(CharacterBody3D):
 
     @gdmethod
     def _ready(self):
-        return
-        # self.immediate_geometry_init(self, HANDLE_CHECK_VIEW)
+        self.immediate_geometry_init(self, HANDLE_CHECK_VIEW)
 
-        self.look_direction = Vector3(1, 0, 1)
+        self.look_direction = Vector3.new3(1, 0, 1)
         self._astar = typing.cast(NavAstar, self.get_node(self.astar_path).get_pyscript())
 
         self.route_holder = typing.cast(RouteHolder, self.get_node(self.route_holder_path).get_pyscript())
-        self.tree_visualizer = typing.cast(BehaviorTreeVisualizerLogic.BehaviorTreeVisualizerLogic,
-                                           self.get_node(self.tree_path).get_pyscript())
+        # self.tree_visualizer = typing.cast(BehaviorTreeVisualizerLogic.BehaviorTreeVisualizerLogic,
+        #                                   self.get_node(self.tree_path).get_pyscript())
         self.player: typing.Optional[Node3D] = Node3D.cast(self.get_node(self.player_path))
         self.last_player_pos: typing.Optional[Vector3] = None
         self.utils = self.get_node(self.utils_path)
@@ -121,9 +122,10 @@ class Enemy(CharacterBody3D):
                     ])
                 ]
             ),
-            Blackboard(self, self.tree_visualizer))
+            Blackboard(self))
 
-    def visualize_nodes(self, parent: BehaviorTreeNode, node: BehaviorTreeNode):
+    def visualize_nodes(self, parent: BehaviorTreeNode, node: BehaviorTreeNode) -> None:
+        return
         self.tree_visualizer.add_item(parent, node)
         for child in node.children:
             self.visualize_nodes(node, child)
