@@ -34,6 +34,9 @@ class DIRECTION(Enum):
     UP = 5
 
 
+POINT_OFFSET: int = 0.01
+
+
 @gdclass
 class AStar(Node3D, Draw):
 
@@ -72,16 +75,6 @@ class AStar(Node3D, Draw):
 
         self.generate_disabled()
         print_error("len_points:", len(self.points))
-        for point in self.points:
-            print_error(f"draw point:{point.position.x}|{point.position.y}|{point.position.z}")
-            self.draw_sphere(point.id, DRAW_RAD, point.position,
-                             color=Color.new3(1, 0, 0) if point in self.disabled_points else Color.new3(0, 1, 1))
-
-        for point in self.points:
-            for connected_point in point.connected_points:
-                self.immediate_geometry_init(self, str(point.id) + "|" + str(connected_point.id))
-                self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position, connected_point.position)
-
         # self.disable_obstacles()
         #
         # self.disable_enable_collision(False)
@@ -113,6 +106,17 @@ class AStar(Node3D, Draw):
 
     @gdmethod
     def _process(self, delta: float) -> None:
+        print_error("process_astar")
+        for point in self.points:
+            print_error(f"draw point:{point.position.x}|{point.position.y}|{point.position.z}")
+            self.draw_sphere(point.id, DRAW_RAD, point.position,
+                             color=Color.new3(1, 0, 0) if point in self.disabled_points else Color.new3(0, 1, 1))
+
+        for point in self.points:
+            for connected_point in point.connected_points:
+                self.immediate_geometry_init(self, str(point.id) + "|" + str(connected_point.id))
+                self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position, connected_point.position)
+
         for point in self.disabled_points:
             self.draw_sphere(point.id, DRAW_RAD, point.position,
                              color=Color(1, 0, 0) if point in self.disabled_points else Color(1, 1, 1))
@@ -203,21 +207,22 @@ class AStar(Node3D, Draw):
 
     def generate_squares(self, box_to_fill: AABB, scale: Vector3) -> None:
         """ Generate objects at matching points """
-        print_error("position:", box_to_fill.position.x)
+        print_error("position:", box_to_fill.get_center().x, box_to_fill.get_center().y, box_to_fill.get_center().z)
         size_to_calc_with: Vector3 = Vector3.new3(box_to_fill.size.x * scale.x, box_to_fill.size.y * scale.y,
                                                   box_to_fill.size.z * scale.z)
         print_error(f"size: {size_to_calc_with.x}|{size_to_calc_with.y}|{size_to_calc_with.z}")
-        for x in range(int(box_to_fill.position.x * SCALE),
-                       int((box_to_fill.position.x + size_to_calc_with.x) * SCALE),
+        for x in range(int((box_to_fill.get_center().x - size_to_calc_with.x / 2) * SCALE),
+                       int((box_to_fill.get_center().x + size_to_calc_with.x / 2) * SCALE),
                        int(GRIDSIZE * SCALE)):
-            for z in range(int(box_to_fill.position.z * SCALE),
-                           int((box_to_fill.position.z + size_to_calc_with.z) * SCALE),
+            for z in range(int((box_to_fill.get_center().z - size_to_calc_with.x / 2) * SCALE),
+                           int((box_to_fill.get_center().z + size_to_calc_with.z) * SCALE),
                            int(GRIDSIZE * SCALE)):
                 point: AStarPoint = AStarPoint(x / SCALE,
-                                               box_to_fill.position.y + size_to_calc_with.y,
+                                               box_to_fill.get_center().y + size_to_calc_with.y + POINT_OFFSET,
+                                               # TODO:remove 1
                                                z / SCALE,
                                                NavigationUtils.calc_point_id(x // SCALE,
-                                                                             box_to_fill.position.y // SCALE,
+                                                                             box_to_fill.get_center().y // SCALE,
                                                                              z // SCALE))
                 print_error("point added")
                 self.points.append(point)
