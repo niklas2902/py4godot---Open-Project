@@ -1,9 +1,13 @@
+import math
+import debugpy
 from py4godot.classes.AStar3D.AStar3D import AStar3D
 from py4godot.classes.CollisionShape3D.CollisionShape3D import CollisionShape3D
 from py4godot.classes.Mesh.Mesh import Mesh
 from py4godot.classes.PhysicsRayQueryParameters3D.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
 from py4godot.classes.Node.Node import Node
 from py4godot.classes.Node3D.Node3D import Node3D
+from py4godot.classes.SphereShape3D.SphereShape3D import SphereShape3D
+from py4godot.classes.PhysicsShapeQueryParameters3D.PhysicsShapeQueryParameters3D import PhysicsShapeQueryParameters3D
 from py4godot.classes.generated4_core import Array, NodePath, AABB, PackedVector3Array, Dictionary, StringName
 import typing
 from Scripts.Navigation import NavigationUtils
@@ -39,6 +43,7 @@ POINT_OFFSET: int = 0.01
 
 @gdclass
 class AStar(Node3D, Draw):
+    is_initialized: bool
 
     def __init__(self) -> None:
         # Don't call any godot-methods here
@@ -51,42 +56,51 @@ class AStar(Node3D, Draw):
         self.utils: Optional[Node3D] = None
         self.push_obj_layer: int = 32
         self.disabled_points: Set[AStarPoint] = set()
-        self.already_traced_pos: Set[Tuple[int, int, int]] = set()
+        self.already_traced_pos: Set[Tuple[float, float, float]] = set()
 
     prop("utils_path", NodePath, NodePath())
 
     prop("push_obj_layer", int, 32)
 
-    def _process(self, time: float) -> None:
-        print_error("process_astar")
-
     def _ready(self) -> None:
+        print_error("ready")
+        
+        try:
+            with open("locked_debug", "w"):
+                pass
+            debugpy.log_to('log.txt')
+            debugpy.configure(
+                python=r"C:\g\addons\windows64\cpython-3.11.3-windows64\python\install\python.exe")
+            debugpy.listen(("localhost", 5678))
+            debugpy.wait_for_client()  # blocks execution until client is attached
+        except Exception as e:
+            print_error("Exception:", e)
+        
         self.astar = AStar3D.constructor()
         self.walkables: Array = get_tree(self).get_nodes_in_group(StringName.new2(WALKABLE_GROUP))
-        print_error("walkables size:", self.walkables.size())
         self.utils = self.get_node(self.utils_path)
         self.disable_enable_collision(True)
 
-        self.generate_points()
+        #self.generate_points()
         self.generate_points_advanced()
+        print_error("before init immediate_geometry")
         for point in self.points:
             self.immediate_geometry_init(self, point.id)
+        print_error("after init immediate_geometry")
         self.generate_point_connections()
 
         self.generate_disabled()
-        print_error("len_points:", len(self.points))
-        # self.disable_obstacles()
-        #
-        # self.disable_enable_collision(False)
+        self.disable_obstacles()
+        self.disable_enable_collision(False)
+        #self.is_initialized: bool = False
+        self.draw_points()
 
     def disable_enable_collision(self, disable: bool) -> None:
         obstacles: Array = get_tree(self).get_nodes_in_group(StringName.new2("obstacle"))
 
         for node in obstacles:
-            print_error("before cast:", node)
             obstacle: Node3D = Node3D.cast(node)
 
-            print_error("node:", node)
             child: Node = Node.constructor()
             for child in obstacle.get_children():
                 if child.get_name() == "CollisionShape":
@@ -94,43 +108,39 @@ class AStar(Node3D, Draw):
                     collider.disabled = disable
 
         for node in get_tree(self).get_nodes_in_group(StringName.new2("obstacle")):
-            print_error("before cast:", node)
             obstacle: Node3D = Node3D.cast(node)
 
-            print_error("node:", node)
             child: Node = Node.constructor()
             for child in obstacle.get_children():
                 if child.get_name() == "CollisionShape":
                     collider: CollisionShape3D = CollisionShape3D.cast(child)
                     collider.disabled = disable
 
-    @gdmethod
-    def _process(self, delta: float) -> None:
-        print_error("process_astar")
+    def draw_points(self) -> None:
+        offset:Vector3 = Vector3.new3(0,0.1,0)
         for point in self.points:
-            print_error(f"draw point:{point.position.x}|{point.position.y}|{point.position.z}")
-            self.draw_sphere(point.id, DRAW_RAD, point.position,
+            self.draw_sphere(point.id, DRAW_RAD, point.position + offset,
                              color=Color.new3(1, 0, 0) if point in self.disabled_points else Color.new3(0, 1, 1))
 
         for point in self.points:
             for connected_point in point.connected_points:
                 self.immediate_geometry_init(self, str(point.id) + "|" + str(connected_point.id))
-                self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position, connected_point.position)
+                self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position + offset, connected_point.position + offset)
 
         for point in self.disabled_points:
-            self.draw_sphere(point.id, DRAW_RAD, point.position,
-                             color=Color(1, 0, 0) if point in self.disabled_points else Color(1, 1, 1))
+            self.draw_sphere(point.id, DRAW_RAD, point.position + offset,
+                             color=Color.new3(1, 0, 0) if point in self.disabled_points else Color.new3(1, 1, 1))
 
     def disable_obstacles(self) -> None:
         for node in get_tree(self).get_nodes_in_group(StringName.new2("obstacle")):
             vector3_node: Node3D = Node3D.cast(node)
-            self.disable_points(vector3_node.global_transform.get_origin().x,
-                                vector3_node.global_transform.get_origin().z,
+            self.disable_points(vector3_node.global_transform.origin.x,
+                                vector3_node.global_transform.origin.z,
                                 2, 2)
 
     def generate_points_advanced(self) -> None:
         """Here we use advanced generation to calculate points"""
-        self.add_point(Vector3(0, GRIDSIZE / 100., 0), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(0, GRIDSIZE / 100., 0), DIRECTION.UNDEFINED)
 
     def add_point(self, pos: Vector3, current_dir: DIRECTION) -> None:
         """Recursive algorithm to run over all possible points."""
@@ -148,34 +158,34 @@ class AStar(Node3D, Draw):
             self.astar.add_point(point.id, point.position, weight_scale=1.)
         # TODO: convert this to enums
         if (current_dir != DIRECTION.LEFT):
-            self.add_point(Vector3(pos.x + GRIDSIZE, pos.y, pos.z), DIRECTION.RIGHT)
+            self.add_point(Vector3.new3(pos.x + GRIDSIZE, pos.y, pos.z), DIRECTION.RIGHT)
         if (current_dir != DIRECTION.RIGHT):
-            self.add_point(Vector3(pos.x - GRIDSIZE, pos.y, pos.z), DIRECTION.LEFT)
+            self.add_point(Vector3.new3(pos.x - GRIDSIZE, pos.y, pos.z), DIRECTION.LEFT)
         if (current_dir != DIRECTION.FORWARD):
-            self.add_point(Vector3(pos.x, pos.y, pos.z + GRIDSIZE), DIRECTION.BACKWARDS)
+            self.add_point(Vector3.new3(pos.x, pos.y, pos.z + GRIDSIZE), DIRECTION.BACKWARDS)
         if (current_dir != DIRECTION.BACKWARDS):
-            self.add_point(Vector3(pos.x, pos.y, pos.z - GRIDSIZE), DIRECTION.FORWARD)
+            self.add_point(Vector3.new3(pos.x, pos.y, pos.z - GRIDSIZE), DIRECTION.FORWARD)
         if (current_dir != DIRECTION.DOWN):
-            self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z), DIRECTION.UP)
+            self.add_point(Vector3.new3(pos.x, pos.y + GRIDSIZE, pos.z), DIRECTION.UP)
         if (current_dir != DIRECTION.UP):
-            self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z), DIRECTION.DOWN)
+            self.add_point(Vector3.new3(pos.x, pos.y - GRIDSIZE, pos.z), DIRECTION.DOWN)
 
         # TODO add diagonal movement
 
-        self.add_point(Vector3(pos.x + GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
-        self.add_point(Vector3(pos.x + GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
-        self.add_point(Vector3(pos.x - GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
-        self.add_point(Vector3(pos.x - GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(pos.x + GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(pos.x + GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(pos.x - GRIDSIZE, pos.y + GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(pos.x - GRIDSIZE, pos.y - GRIDSIZE, pos.z), DIRECTION.UNDEFINED)
 
-        self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED)
-        self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED)
-        self.add_point(Vector3(pos.x, pos.y + GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED)
-        self.add_point(Vector3(pos.x, pos.y - GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(pos.x, pos.y + GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(pos.x, pos.y - GRIDSIZE, pos.z + GRIDSIZE), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(pos.x, pos.y + GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED)
+        self.add_point(Vector3.new3(pos.x, pos.y - GRIDSIZE, pos.z - GRIDSIZE), DIRECTION.UNDEFINED)
 
     def point_below(self, pos: Vector3) -> bool:
         """Function for checking point below"""
         query_3d = PhysicsRayQueryParameters3D.constructor()
-        query_3d.collision_mask = GROUND_MASK
+        query_3d.collision_mask = 1
         query_3d.from_ = pos
         query_3d.to = pos + VECTOR3_DOWN
         result: Dictionary = self.get_world_3d().direct_space_state.intersect_ray(query_3d)
@@ -184,16 +194,39 @@ class AStar(Node3D, Draw):
             return pos != cast(Vector3, result["position"])
         return False
 
+    def sphere_cast(self, position, radius, mask=GROUND_MASK) -> Array:
+        shape: SphereShape3D = SphereShape3D.constructor()
+        shape.set_radius(radius)
+
+        params = PhysicsShapeQueryParameters3D.constructor()
+        params.set_shape(shape)
+        if (mask != -1):
+            params.collision_mask = mask
+
+        translated_transform: Transform3D = self.global_transform.translated(position)
+        x, y, z = translated_transform.origin.x, translated_transform.origin.y, translated_transform.origin.z
+        params.set_transform(translated_transform)  # same transform as parent, just translate
+
+        # array: Array = Array.new0()
+        # array.push_back(self)
+        # params.set_exclude(array)  # here exclude is an array of... RID??
+        res: Array = self.get_world_3d().direct_space_state.intersect_shape(params)
+        if (res.size() > 0):
+            pass
+        return res
+
     def point_inside_ground(self, pos: Vector3) -> bool:
         """Checking if is inside ground by casting upwards ray """
-        erg: object = self.utils.callv("sphere_cast", Array(pos + Vector3(0, 0.1, 0),
-                                                            0.09, Array(self), GROUND_MASK))
+        # erg: object = self.utils.callv("sphere_cast", Array(pos + Vector3.new3(0, 0.1, 0),
+        #                                                    0.09, Array(self), GROUND_MASK))
+        erg: Array = self.sphere_cast(pos + Vector3.new3(0, 0.1, 0), 0.09, GROUND_MASK)
         inside_ground: bool = erg.size() != 0
+        if inside_ground:
+            pass
         return inside_ground
 
     def generate_points(self) -> None:
         """Here we are generating all the points we could later use for astar"""
-        print_error("before generating waypoints")
         for walkable in self.walkables:
             print(walkable.get_class())
             mesh: Optional[CSGMesh3D] = self.get_mesh(Node.cast(walkable))
@@ -203,14 +236,11 @@ class AStar(Node3D, Draw):
             aabb: AABB = mesh.get_mesh().get_aabb()
             scale: Vector3 = mesh.get_scale()
             self.generate_squares(aabb, scale)
-        print_error("after generating waypoints")
 
     def generate_squares(self, box_to_fill: AABB, scale: Vector3) -> None:
         """ Generate objects at matching points """
-        print_error("position:", box_to_fill.get_center().x, box_to_fill.get_center().y, box_to_fill.get_center().z)
         size_to_calc_with: Vector3 = Vector3.new3(box_to_fill.size.x * scale.x, box_to_fill.size.y * scale.y,
                                                   box_to_fill.size.z * scale.z)
-        print_error(f"size: {size_to_calc_with.x}|{size_to_calc_with.y}|{size_to_calc_with.z}")
         for x in range(int((box_to_fill.get_center().x - size_to_calc_with.x / 2) * SCALE),
                        int((box_to_fill.get_center().x + size_to_calc_with.x / 2) * SCALE),
                        int(GRIDSIZE * SCALE)):
@@ -224,7 +254,6 @@ class AStar(Node3D, Draw):
                                                NavigationUtils.calc_point_id(x // SCALE,
                                                                              box_to_fill.get_center().y // SCALE,
                                                                              z // SCALE))
-                print_error("point added")
                 self.points.append(point)
                 self.dict_points[point.id] = point
                 self.astar.add_point(point.id, point.position, weight_scale=10.)
@@ -254,6 +283,7 @@ class AStar(Node3D, Draw):
         #
         # disabled: bool = erg.size() != 0
         # TODO: enable again
+        self.sphere_cast(point.position, GRIDSIZE * math.sqrt(2), self.push_obj_layer)
         disabled: bool = False
         self.astar.set_point_disabled(point.id, disabled=disabled)
 
@@ -269,7 +299,8 @@ class AStar(Node3D, Draw):
                         self.disabled_points.remove(self.dict_points[point_id])
                     else:
                         print("point not in disabled_points")
-                    self.draw_sphere(point.id, DRAW_RAD, Vector3(point.position.x, point.position.y, point.position.z),
+                    self.draw_sphere(point.id, DRAW_RAD,
+                                     Vector3.new3(point.position.x, point.position.y, point.position.z),
                                      color=Color(0, 1, 0))
                 else:
                     print("point_to_enable_not_found:", point_id)
