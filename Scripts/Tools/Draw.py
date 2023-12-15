@@ -8,7 +8,7 @@ from py4godot.classes.MeshInstance3D.MeshInstance3D import MeshInstance3D
 from py4godot.classes.ORMMaterial3D.ORMMaterial3D import ORMMaterial3D
 from py4godot.classes.ShaderMaterial.ShaderMaterial import ShaderMaterial
 from py4godot.classes.StandardMaterial3D.StandardMaterial3D import StandardMaterial3D
-from py4godot.classes.generated4_core import Color, Vector3
+from py4godot.classes.generated4_core import Color, Vector3, StringName
 from py4godot.classes.Node.Node import Node
 from py4godot.classes.utils import *
 from py4godot.pluginscript_api.utils.annotations import *
@@ -39,9 +39,10 @@ class Draw():
         immediate_geometry.surface_begin(0, my_mat)
         new_mat: StandardMaterial3D = StandardMaterial3D.constructor()
         new_mat.albedo_color = Color.new3(1, 1, 1)
+        immediate_geometry.surface_add_vertex(Vector3.new3(0, 0, 0))
         immediate_geometry.surface_end()
         instance.set_mesh(immediate_geometry)
-        get_tree(caller).get_root().add_child(instance)
+        get_tree(caller).get_root().call_deferred(StringName.new2("add_child"), instance)
         self.caller = caller
 
         vector: Vector3 = Vector3.new0()
@@ -73,7 +74,6 @@ class Draw():
                 immediate_geometry.surface_add_vertex(vector_before)
             vector_before = Vector3.new3(x * rad, 0, y * rad) + Vector3.new3(0, pos.y, 0)
         immediate_geometry.surface_end()
-        self.finish_initialization(handle, immediate_geometry)
 
     def draw_sphere(self, handle, rad, position, color=Color.new3(1, 1, 1)):
         immediate_geometry: ImmediateMesh = self.immediate_geometry_dict[handle]
@@ -114,14 +114,6 @@ class Draw():
             immediate_geometry.surface_add_vertex(vector_to_add)
 
         immediate_geometry.surface_end()
-        self.finish_initialization(handle, immediate_geometry)
-
-    def finish_initialization(self, handle: str, immediate_geometry: ImmediateMesh) -> None:
-        if not self.initialized[handle]:
-            instance: MeshInstance3D = MeshInstance3D.constructor()
-            instance.set_mesh(immediate_geometry)
-            get_tree(self.caller).get_root().add_child(instance)
-            self.initialized[handle] = True
 
     @gdmethod
     def draw_ray(self, handle, origin: Vector3, direction: Vector3, length: float,
@@ -135,7 +127,6 @@ class Draw():
         immediate_geometry.surface_add_vertex(origin)
         immediate_geometry.surface_add_vertex(origin + direction * length)
         immediate_geometry.surface_end()
-        self.finish_initialization(handle, immediate_geometry)
 
     @gdmethod
     def draw_line(self, handle: str, origin: Vector3, target: Vector3, color: Color = Color.new0()) -> None:
@@ -148,4 +139,3 @@ class Draw():
         immediate_geometry.surface_add_vertex(origin)
         immediate_geometry.surface_add_vertex(target)
         immediate_geometry.surface_end()
-        self.finish_initialization(handle, immediate_geometry)
