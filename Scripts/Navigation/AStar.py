@@ -1,31 +1,25 @@
-import math
-import debugpy
+from enum import Enum
 from py4godot.classes.AStar3D.AStar3D import AStar3D
 from py4godot.classes.CollisionShape3D.CollisionShape3D import CollisionShape3D
-from py4godot.classes.Mesh.Mesh import Mesh
-from py4godot.classes.PhysicsRayQueryParameters3D.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
-from py4godot.classes.Node.Node import Node
 from py4godot.classes.Node3D.Node3D import Node3D
-from py4godot.classes.SphereShape3D.SphereShape3D import SphereShape3D
+from py4godot.classes.PhysicsRayQueryParameters3D.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
 from py4godot.classes.PhysicsShapeQueryParameters3D.PhysicsShapeQueryParameters3D import PhysicsShapeQueryParameters3D
-from py4godot.classes.generated4_core import Array, NodePath, AABB, PackedVector3Array, Dictionary, StringName
-import typing
+from py4godot.classes.SphereShape3D.SphereShape3D import SphereShape3D
+from py4godot.classes.generated4_core import Array, NodePath, AABB, PackedVector3Array, Dictionary, Transform3D
+
 from Scripts.Navigation import NavigationUtils
 from Scripts.Navigation.AStarPoint import AStarPoint
 from Scripts.Tools.Draw import *
-from py4godot.classes.StaticBody3D.StaticBody3D import StaticBody3D
-from py4godot.classes.constants import VECTOR3_BACK, VECTOR3_DOWN
+from py4godot.classes.constants import VECTOR3_DOWN
 from typing import Optional, List, Dict, Set, Tuple, cast
 
 WALKABLE_GROUP = "walkable"
 GRIDSIZE = 1
-SCALE = 1
+SCALE: float = 1
 DRAW_RAD = 0.2
 FLOAT_TOLERANCE = 0.1
 WEIGHT_SCALE = 1
 GROUND_MASK = 2  # 1 | 2 ** 4 | 2 ** 3 | 2 ** 6
-
-from enum import Enum
 
 
 class DIRECTION(Enum):
@@ -38,7 +32,14 @@ class DIRECTION(Enum):
     UP = 5
 
 
-POINT_OFFSET: int = 0.01
+POINT_OFFSET: float = 0.01
+
+
+def get_mesh(node: Node) -> Optional[CSGMesh3D]:
+    """This function is used to get a mesh child from a given Node"""
+    for child in node.get_children():
+        if isinstance(child, CSGMesh3D):
+            return child
 
 
 @gdclass
@@ -64,24 +65,24 @@ class AStar(Node3D, Draw):
 
     def _ready(self) -> None:
         print_error("ready")
-        
-        try:
-            with open("locked_debug", "w"):
-                pass
-            debugpy.log_to('log.txt')
-            debugpy.configure(
-                python=r"C:\g\addons\windows64\cpython-3.11.3-windows64\python\install\python.exe")
-            debugpy.listen(("localhost", 5678))
-            debugpy.wait_for_client()  # blocks execution until client is attached
-        except Exception as e:
-            print_error("Exception:", e)
-        
+
+        # try:
+        #     with open("locked_debug", "w"):
+        #         pass
+        #     debugpy.log_to('log.txt')
+        #     debugpy.configure(
+        #         python=r"C:\g\addons\windows64\cpython-3.11.3-windows64\python\install\python.exe")
+        #     debugpy.listen(("localhost", 5678))
+        #     debugpy.wait_for_client()  # blocks execution until client is attached
+        # except Exception as e:
+        #     print_error("Exception:", e)
+
         self.astar = AStar3D.constructor()
         self.walkables: Array = get_tree(self).get_nodes_in_group(StringName.new2(WALKABLE_GROUP))
         self.utils = self.get_node(self.utils_path)
         self.disable_enable_collision(True)
 
-        #self.generate_points()
+        # self.generate_points()
         self.generate_points_advanced()
         print_error("before init immediate_geometry")
         for point in self.points:
@@ -92,7 +93,7 @@ class AStar(Node3D, Draw):
         self.generate_disabled()
         self.disable_obstacles()
         self.disable_enable_collision(False)
-        #self.is_initialized: bool = False
+        # self.is_initialized: bool = False
         self.draw_points()
 
     def disable_enable_collision(self, disable: bool) -> None:
@@ -101,7 +102,6 @@ class AStar(Node3D, Draw):
         for node in obstacles:
             obstacle: Node3D = Node3D.cast(node)
 
-            child: Node = Node.constructor()
             for child in obstacle.get_children():
                 if child.get_name() == "CollisionShape":
                     collider: CollisionShape3D = CollisionShape3D.cast(child)
@@ -110,14 +110,13 @@ class AStar(Node3D, Draw):
         for node in get_tree(self).get_nodes_in_group(StringName.new2("obstacle")):
             obstacle: Node3D = Node3D.cast(node)
 
-            child: Node = Node.constructor()
             for child in obstacle.get_children():
                 if child.get_name() == "CollisionShape":
                     collider: CollisionShape3D = CollisionShape3D.cast(child)
                     collider.disabled = disable
 
     def draw_points(self) -> None:
-        offset:Vector3 = Vector3.new3(0,0.1,0)
+        offset: Vector3 = Vector3.new3(0, 0.1, 0)
         for point in self.points:
             self.draw_sphere(point.id, DRAW_RAD, point.position + offset,
                              color=Color.new3(1, 0, 0) if point in self.disabled_points else Color.new3(0, 1, 1))
@@ -125,7 +124,8 @@ class AStar(Node3D, Draw):
         for point in self.points:
             for connected_point in point.connected_points:
                 self.immediate_geometry_init(self, str(point.id) + "|" + str(connected_point.id))
-                self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position + offset, connected_point.position + offset)
+                self.draw_line(str(point.id) + "|" + str(connected_point.id), point.position + offset,
+                               connected_point.position + offset)
 
         for point in self.disabled_points:
             self.draw_sphere(point.id, DRAW_RAD, point.position + offset,
@@ -150,24 +150,25 @@ class AStar(Node3D, Draw):
         point: AStarPoint = AStarPoint(pos.x / SCALE,
                                        pos.y,
                                        pos.z,
-                                       NavigationUtils.calc_point_id(pos.x // SCALE, pos.y // SCALE, pos.z // SCALE))
+                                       NavigationUtils.calc_point_id(int(pos.x / SCALE), int(pos.y / SCALE),
+                                                                     int(pos.z // SCALE)))
 
         if not self.point_inside_ground(pos):
             self.points.append(point)
             self.dict_points[point.id] = point
             self.astar.add_point(point.id, point.position, weight_scale=1.)
         # TODO: convert this to enums
-        if (current_dir != DIRECTION.LEFT):
+        if current_dir != DIRECTION.LEFT:
             self.add_point(Vector3.new3(pos.x + GRIDSIZE, pos.y, pos.z), DIRECTION.RIGHT)
-        if (current_dir != DIRECTION.RIGHT):
+        if current_dir != DIRECTION.RIGHT:
             self.add_point(Vector3.new3(pos.x - GRIDSIZE, pos.y, pos.z), DIRECTION.LEFT)
-        if (current_dir != DIRECTION.FORWARD):
+        if current_dir != DIRECTION.FORWARD:
             self.add_point(Vector3.new3(pos.x, pos.y, pos.z + GRIDSIZE), DIRECTION.BACKWARDS)
-        if (current_dir != DIRECTION.BACKWARDS):
+        if current_dir != DIRECTION.BACKWARDS:
             self.add_point(Vector3.new3(pos.x, pos.y, pos.z - GRIDSIZE), DIRECTION.FORWARD)
-        if (current_dir != DIRECTION.DOWN):
+        if current_dir != DIRECTION.DOWN:
             self.add_point(Vector3.new3(pos.x, pos.y + GRIDSIZE, pos.z), DIRECTION.UP)
-        if (current_dir != DIRECTION.UP):
+        if current_dir != DIRECTION.UP:
             self.add_point(Vector3.new3(pos.x, pos.y - GRIDSIZE, pos.z), DIRECTION.DOWN)
 
         # TODO add diagonal movement
@@ -190,7 +191,7 @@ class AStar(Node3D, Draw):
         query_3d.to = pos + VECTOR3_DOWN
         result: Dictionary = self.get_world_3d().direct_space_state.intersect_ray(query_3d)
 
-        if (result.size() > 0):
+        if result.size() > 0:
             return pos != cast(Vector3, result["position"])
         return False
 
@@ -200,18 +201,17 @@ class AStar(Node3D, Draw):
 
         params = PhysicsShapeQueryParameters3D.constructor()
         params.set_shape(shape)
-        if (mask != -1):
+        if mask != -1:
             params.collision_mask = mask
 
         translated_transform: Transform3D = self.global_transform.translated(position)
-        x, y, z = translated_transform.origin.x, translated_transform.origin.y, translated_transform.origin.z
         params.set_transform(translated_transform)  # same transform as parent, just translate
 
         # array: Array = Array.new0()
         # array.push_back(self)
         # params.set_exclude(array)  # here exclude is an array of... RID??
         res: Array = self.get_world_3d().direct_space_state.intersect_shape(params)
-        if (res.size() > 0):
+        if res.size() > 0:
             pass
         return res
 
@@ -229,8 +229,8 @@ class AStar(Node3D, Draw):
         """Here we are generating all the points we could later use for astar"""
         for walkable in self.walkables:
             print(walkable.get_class())
-            mesh: Optional[CSGMesh3D] = self.get_mesh(Node.cast(walkable))
-            if (not mesh):
+            mesh: Optional[CSGMesh3D] = get_mesh(Node.cast(walkable))
+            if not mesh:
                 print_error("no mesh found")
                 continue
             aabb: AABB = mesh.get_mesh().get_aabb()
@@ -251,18 +251,12 @@ class AStar(Node3D, Draw):
                                                box_to_fill.get_center().y + size_to_calc_with.y + POINT_OFFSET,
                                                # TODO:remove 1
                                                z / SCALE,
-                                               NavigationUtils.calc_point_id(x // SCALE,
+                                               NavigationUtils.calc_point_id(int(x // SCALE),
                                                                              box_to_fill.get_center().y // SCALE,
-                                                                             z // SCALE))
+                                                                             int(z // SCALE)))
                 self.points.append(point)
                 self.dict_points[point.id] = point
                 self.astar.add_point(point.id, point.position, weight_scale=10.)
-
-    def get_mesh(self, node: Node) -> Optional[CSGMesh3D]:
-        """This function is used to get a mesh child from a given Node"""
-        for child in node.get_children():
-            if isinstance(child, CSGMesh3D):
-                return child
 
     def generate_point_connections(self) -> None:
         """Here we generate the connections between the points, the player can walk"""
