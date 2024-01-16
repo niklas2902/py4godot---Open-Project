@@ -6,7 +6,7 @@ from typing import List
 class AStarPoint():
     position: Vector3
     id: int
-    connected_points: List
+    connected_points: List["AStarPoint"]
 
     def __init__(self, x: float, y: float, z: float, id: int) -> None:
         self.position = Vector3.new3(x, y, z)

@@ -65,6 +65,11 @@ class AStar(Node3D, Draw):
 
     def _ready(self) -> None:
         print_error("ready")
+        print_error("Name:")
+        print_error(self.get_class())
+        print_error("Before get_children:")
+        print_error(self.get_children())
+        print_error("After get_children")
 
         # try:
         #     with open("locked_debug", "w"):
@@ -103,7 +108,7 @@ class AStar(Node3D, Draw):
             obstacle: Node3D = Node3D.cast(node)
 
             for child in obstacle.get_children():
-                if child.get_name() == "CollisionShape":
+                if child.get_class() == "CollisionShape":
                     collider: CollisionShape3D = CollisionShape3D.cast(child)
                     collider.disabled = disable
 
@@ -111,7 +116,7 @@ class AStar(Node3D, Draw):
             obstacle: Node3D = Node3D.cast(node)
 
             for child in obstacle.get_children():
-                if child.get_name() == "CollisionShape":
+                if child.get_class() == "CollisionShape":
                     collider: CollisionShape3D = CollisionShape3D.cast(child)
                     collider.disabled = disable
 

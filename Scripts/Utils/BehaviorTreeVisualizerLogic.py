@@ -1,7 +1,8 @@
 from py4godot.classes.Node2D.Node2D import Node2D
 from py4godot.classes.Tree.Tree import Tree
 from py4godot.classes.TreeItem.TreeItem import TreeItem
-from py4godot.classes.generated4_core import NodePath, Color
+from py4godot.classes.generated4_core import NodePath, Color, StringName
+from py4godot.utils.print_tools import print_error
 
 import Scripts.BehaviorTree.Nodes.BehaviorTreeNode as tree_node
 from py4godot.pluginscript_api.utils.annotations import *
@@ -25,6 +26,9 @@ class BehaviorTreeVisualizerLogic(Node2D):
     def _ready(self):
         self.dict_node = dict()
         self.tree = Tree.cast(self.get_node(self.tree_path))
+        self.call_deferred(StringName.new2("init_tree_example"))
+
+    def init_tree_example(self):
         root = self.tree.create_item()
         self.tree.hide_root = False
         root.set_text(0, "Root")
@@ -33,7 +37,7 @@ class BehaviorTreeVisualizerLogic(Node2D):
         child1.set_text(0, "Child1")
         child2.set_text(0, "Child2")
         subchild1 = self.tree.create_item(child1)
-        subchild1.set_custom_color(0, Color.new_rgb(1, 0, 0))
+        subchild1.set_custom_color(0, Color.new3(1, 0, 0))
         subchild1.set_text(0, "Subchild1")
 
     def init_tree(self, node: tree_node.BehaviorTreeNode) -> None:

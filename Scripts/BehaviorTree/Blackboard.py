@@ -9,6 +9,8 @@ if TYPE_CHECKING:  # Only imports the below statements during type checking
 
 class Blackboard:
     enemy: enemy.Enemy
+    tree_visualizer: BehaviorTreeVisualizerLogic
 
-    def __init__(self, enemy: enemy.Enemy) -> None:
+    def __init__(self, enemy: enemy.Enemy, tree_visualizer: BehaviorTreeVisualizerLogic) -> None:
         self.enemy = enemy
+        self.tree_visualizer = tree_visualizer
