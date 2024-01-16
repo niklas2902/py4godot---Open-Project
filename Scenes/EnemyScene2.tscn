@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://ck1ysw4w8p"]
+
+[ext_resource type="Script" path="res://Scripts/Navigation/AStar.py" id="1_7usgc"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Enemy.py" id="1_ft515"]
+[ext_resource type="Script" uid="uid://5g" path="res://Scripts/Navigation/RouteHolder.py" id="3_8d7bs"]
+[ext_resource type="Script" path="res://Scripts/Utils/BehaviorTreeVisualizerLogic.py" id="3_ubm44"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3sj72"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y3q66"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p3trp"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sth81"]
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l56m6"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n5o3r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ytxe"]
+size = Vector3(19.9508, 0.001, 19.8882)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_afrfp"]
+size = Vector3(4.9908, 3, 6.63533)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Enemy" type="CharacterBody3D" parent="."]
+_import_path = "import_path"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.472874, 0)
+collision_layer = 2
+collision_mask = 2
+platform_floor_layers = -1
+script = ExtResource("1_ft515")
+route_holder_path = NodePath("../Route")
+route_accept_length = 0.1
+astar_path = NodePath("../AStar")
+player_path = NodePath("../Player")
+utils_path = NodePath("")
+tree_path = NodePath("../Node2D")
+action_radius = 1
+out_of_sight_radius = 1
+field_of_view = 1
+sprint_modifier = 1
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Enemy"]
+mesh = SubResource("BoxMesh_3sj72")
+material = SubResource("StandardMaterial3D_y3q66")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+shape = SubResource("BoxShape3D_p3trp")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+editor_description = "test
+tesf
+tzes	"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9567, 0.549225, 0)
+collision_layer = 4
+collision_mask = 6
+collision_priority = 0.0
+wall_min_slide_angle = 0.0
+floor_max_angle = 0.0
+floor_snap_length = 0.0
+safe_margin = 0.0
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Player"]
+mesh = SubResource("CylinderMesh_sth81")
+material = SubResource("StandardMaterial3D_l56m6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("BoxShape3D_p3trp")
+
+[node name="AStar" type="Node3D" parent="."]
+_import_path = "import_path"
+script = ExtResource("1_7usgc")
+utils_path = NodePath("../Utils")
+push_obj_layer = 3
+
+[node name="Utils" type="Node3D" parent="."]
+_import_path = NodePath("import_path")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10.7645, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0152885, 0.999883, 0, -0.999883, -0.0152885, 0, 5.98603, 0)
+
+[node name="Route" type="Node3D" parent="."]
+_import_path = "import_path"
+script = ExtResource("3_8d7bs")
+
+[node name="RoutePoint" type="Node3D" parent="Route"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.78601)
+
+[node name="RoutePoint2" type="Node3D" parent="Route"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.21712, 0, 0)
+
+[node name="Ground" type="StaticBody3D" parent="." groups=["walkable"]]
+collision_mask = 65535
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Ground"]
+transform = Transform3D(25, 0, 0, 0, 0.1, 0, 0, 0, 25, 0, 0, 0)
+mesh = SubResource("BoxMesh_n5o3r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_5ytxe")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.49699)
+collision_layer = 4
+collision_mask = 65535
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_afrfp")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.21735, 0, -1.51688)
+collision_layer = 2
+collision_mask = 65535
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_afrfp")
+
+[node name="Node2D" type="Node2D" parent="."]
+_import_path = "import_path"
+script = ExtResource("3_ubm44")
+tree_path = NodePath("Tree")
+
+[node name="Tree" type="Tree" parent="Node2D"]
+offset_right = 317.0
+offset_bottom = 646.0
