@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Navigation/AStar.py" id="1_7usgc"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Enemy.py" id="1_ft515"]
-[ext_resource type="Script" uid="uid://5g" path="res://Scripts/Navigation/RouteHolder.py" id="3_8d7bs"]
+[ext_resource type="Script" path="res://Scripts/Navigation/RouteHolder.py" id="3_nrf4f"]
 [ext_resource type="Script" path="res://Scripts/Utils/BehaviorTreeVisualizerLogic.py" id="3_ubm44"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3sj72"]
@@ -90,7 +90,7 @@ transform = Transform3D(1, 0, 0, 0, -0.0152885, 0.999883, 0, -0.999883, -0.01528
 
 [node name="Route" type="Node3D" parent="."]
 _import_path = "import_path"
-script = ExtResource("3_8d7bs")
+script = ExtResource("3_nrf4f")
 
 [node name="RoutePoint" type="Node3D" parent="Route"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.78601)
