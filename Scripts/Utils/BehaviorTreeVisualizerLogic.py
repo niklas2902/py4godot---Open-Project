@@ -2,10 +2,9 @@ from py4godot.classes.Node2D.Node2D import Node2D
 from py4godot.classes.Tree.Tree import Tree
 from py4godot.classes.TreeItem.TreeItem import TreeItem
 from py4godot.classes.generated4_core import NodePath, Color, StringName
-from py4godot.utils.print_tools import print_error
+from py4godot.pluginscript_api.utils.annotations import *
 
 import Scripts.BehaviorTree.Nodes.BehaviorTreeNode as tree_node
-from py4godot.pluginscript_api.utils.annotations import *
 from typing import Dict
 
 
