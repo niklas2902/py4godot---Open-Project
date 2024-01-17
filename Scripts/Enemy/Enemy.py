@@ -1,15 +1,16 @@
 from __future__ import annotations  # Without this, the type hint below would not work.
 
+import math
+
 from py4godot.classes.CharacterBody3D.CharacterBody3D import CharacterBody3D
 from py4godot.classes.Node3D.Node3D import Node3D
+from py4godot.classes.generated4_core import NodePath, Array, Vector3, Transform3D
 from py4godot.classes.PhysicsRayQueryParameters3D.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
 from py4godot.classes.PhysicsShapeQueryParameters3D.PhysicsShapeQueryParameters3D import PhysicsShapeQueryParameters3D
 from py4godot.classes.SphereShape3D.SphereShape3D import SphereShape3D
-from py4godot.classes.generated4_core import NodePath, Array, Vector3, Transform3D
-from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.utils.print_tools import print_error
 
 import typing
+from Scripts import CharHandler
 from Scripts.BehaviorTree.BehaviorTree import BehaviorTree
 from Scripts.BehaviorTree.Blackboard import Blackboard
 from Scripts.BehaviorTree.Nodes.ActionNodes.DebugNode import DebugNode
@@ -26,9 +27,10 @@ from Scripts.BehaviorTree.Nodes.SequenceNodes.ParallelNode import ParallelNode
 from Scripts.BehaviorTree.Nodes.SequenceNodes.SequenceNode import SequenceNode
 from Scripts.CharHandler import DIST_NAVIGATION
 from Scripts.Navigation import RouteHolder
-from Scripts.Navigation.AStar import AStar as NavAstar
 from Scripts.Tools.Draw import Draw
 from Scripts.Utils import BehaviorTreeVisualizerLogic
+from py4godot.pluginscript_api.utils.annotations import *
+from Scripts.Navigation.AStar import AStar as NavAstar
 
 # from py4godot.pluginscript_api.hints.range_hint.RangeHint import *
 
@@ -63,8 +65,6 @@ class Enemy(CharacterBody3D, Draw):
     field_of_view: float
 
     utils_path: NodePath
-    tree_path: NodePath
-    player_path: NodePath
 
     def __init__(self):
         # Don't call any godot-methods here
@@ -113,7 +113,7 @@ class Enemy(CharacterBody3D, Draw):
                         DebugNode("test1"),
                         DebugNode("test2"),
                         InfiniteRepeatNode(
-                            IfElseNode((
+                            IfElseNode([
                                 SequenceNode([
                                     WaitNode(0.1),
                                     FollowNode()
@@ -121,7 +121,7 @@ class Enemy(CharacterBody3D, Draw):
                                 SequenceNode([
                                     WaitNodeSkipFirst(2),
                                     MoveNode()])
-                            ), lambda: self.should_follow_player())
+                            ], lambda: self.should_follow_player())
                         )
                     ])
                 ]
@@ -134,15 +134,18 @@ class Enemy(CharacterBody3D, Draw):
             self.visualize_nodes(node, child)
 
     def move(self) -> None:
-        print_error("Move")
-        if self.path is None:
-            self.path = self._astar.get_way_points(self.global_position,
-                                                   self.route_holder.get_current_route_point())
+        try:
+            if self.path is None:
+                self.path = self._astar.get_way_points(self.global_transform.get_origin(),
+                                                       self.route_holder.get_current_route_point())
 
-        self.follow_path()
+            self.follow_path()
+
+        except Exception as e:
+            print(e)
 
     def follow_path(self) -> None:
-        if self.path is None:
+        if self.path == None:
             return
 
         if self.current_path_ind >= self.path.size():
@@ -151,30 +154,30 @@ class Enemy(CharacterBody3D, Draw):
             self.route_holder.increase_point()
             return
 
-        dist_vector = self.path[self.current_path_ind] - self.global_position
+        dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
         dist: float = dist_vector.length()
-        vel: Vector3 = (self.path[self.current_path_ind] - self.global_position)
+        vel: Vector3 = (self.path[self.current_path_ind] - self.transform.get_origin())
         vel.y = 0
         self.look_direction = vel.normalized()
 
-        new_pos: Vector3 = self.global_position + vel.normalized() * self.delta * self.speed_modifier
-        self.global_position = new_pos
+        new_pos: Vector3 = self.global_transform.get_origin() + vel.normalized() * self.delta * self.speed_modifier
+        self.global_transform.set_origin(new_pos)
 
         if dist < DIST_NAVIGATION:
             self.current_path_ind += 1
 
     def follow_player(self) -> None:
-        if self.path is None or self.player.global_position != self.last_player_pos:
-            self.path = self._astar.get_way_points(self.global_position + (
-                    self.player.global_position - self.global_position).normalized(),
-                                                   self.player.global_position)
-        dist_vector = self.path[self.current_path_ind] - self.global_position
+        if self.path == None or self.player.global_transform.get_origin() != self.last_player_pos:
+            self.path = self._astar.get_way_points(self.global_transform.get_origin() + (
+                    self.player.global_transform.get_origin() - self.global_transform.get_origin()).normalized(),
+                                                   self.player.global_transform.get_origin())
+        dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
         dist: float = dist_vector.length()
-        vel: Vector3 = (self.path[self.current_path_ind] - self.global_position)
+        vel: Vector3 = (self.path[self.current_path_ind] - self.transform.get_origin())
         vel.y = 0
         self.look_direction = vel.normalized()
 
-        new_pos: Vector3 = (self.global_position + vel.normalized() * self.delta * self.speed_modifier *
+        new_pos: Vector3 = (self.global_transform.get_origin() + vel.normalized() * self.delta * self.speed_modifier *
                             self.sprint_modifier)
         self.global_transform.set_origin(new_pos)
 
@@ -182,7 +185,7 @@ class Enemy(CharacterBody3D, Draw):
             self.current_path_ind += 1
             self.current_path_ind = min(self.current_path_ind, self.path.size() - 1)
 
-        self.last_player_pos = self.player.global_position
+        self.last_player_pos = self.player.global_transform.get_origin()
 
     @gdmethod
     def _process(self, delta: float) -> None:
@@ -218,7 +221,7 @@ class Enemy(CharacterBody3D, Draw):
         res = self.sphere_cast(self.global_position, self.action_radius,
                                1)
         number_of_hits = res.size()
-        if number_of_hits > 0:
+        if (number_of_hits > 0):
             player_direction: Vector3 = self.player.global_position - self.global_position
             angle: float = player_direction.angle_to(self.look_direction)
             if abs(angle) < self.field_of_view / 2:
@@ -227,10 +230,10 @@ class Enemy(CharacterBody3D, Draw):
         return False
 
     def player_out_of_sight(self) -> bool:
-        res = self.sphere_cast(self.global_position, self.out_of_sight_radius,
+        res = self.sphere_cast(self.global_transform.get_origin(), self.out_of_sight_radius,
                                1)
         number_of_hits = res.size()
-        if number_of_hits > 0:
+        if (number_of_hits > 0):
             player_direction: Vector3 = self.player.global_position - self.global_position()
             angle: float = player_direction.angle_to(self.look_direction)
             if abs(angle) < self.field_of_view / 2:
@@ -254,16 +257,16 @@ class Enemy(CharacterBody3D, Draw):
 
     def object_in_view(self, direction: Vector3, ray_length: float) -> bool:
         to: Vector3 = direction.normalized() * ray_length
+        exclude: Array = Array()
         exclude.append(self)
-        params: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.constructor()
-        params.collision_mask = PUSH_OBJ_MASK
-        params.from_ = self.global_position + Vector3.new3(0, 0.1, 0)
-        params.to = self.global_position + to + Vector3.new3(0, 0.1, 0)
 
-        result = self.get_world_3d().direct_space_state.intersect_ray(params)
-        self.draw_line(HANDLE_CHECK_VIEW, self.global_position + Vector3.new3(0, 0.1, 0),
-                       self.global_position + to + Vector3.new3(0, 0.1, 0))
-        return not result["position"] is None
+        result = self.get_world().direct_space_state.intersect_ray(
+            self.global_transform.get_origin() + Vector3(0, 0.1, 0),
+            self.global_transform.get_origin() + to + Vector3(0, 0.1, 0),
+            exclude, collision_mask=PUSH_OBJ_MASK)
+        self.draw_line(HANDLE_CHECK_VIEW, self.global_transform.get_origin() + Vector3(0, 0.1, 0),
+                       self.global_transform.get_origin() + to + Vector3(0, 0.1, 0))
+        return result["position"] != None
 
     def reset(self) -> None:
         self.current_path_ind = 0
