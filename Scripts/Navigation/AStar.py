@@ -1,3 +1,4 @@
+import debugpy
 from enum import Enum
 from py4godot.classes.AStar3D.AStar3D import AStar3D
 from py4godot.classes.CollisionShape3D.CollisionShape3D import CollisionShape3D
@@ -71,16 +72,16 @@ class AStar(Node3D, Draw):
         print_error(self.get_children())
         print_error("After get_children")
 
-        # try:
-        #     with open("locked_debug", "w"):
-        #         pass
-        #     debugpy.log_to('log.txt')
-        #     debugpy.configure(
-        #         python=r"C:\g\addons\windows64\cpython-3.11.3-windows64\python\install\python.exe")
-        #     debugpy.listen(("localhost", 5678))
-        #     debugpy.wait_for_client()  # blocks execution until client is attached
-        # except Exception as e:
-        #     print_error("Exception:", e)
+        try:
+            with open("locked_debug", "w"):
+                pass
+            debugpy.log_to('log.txt')
+            debugpy.configure(
+                python=r"C:\g\addons\windows64\cpython-3.11.3-windows64\python\install\python.exe")
+            debugpy.listen(("localhost", 5678))
+            debugpy.wait_for_client()  # blocks execution until client is attached
+        except Exception as e:
+            print_error("Exception:", e)
 
         self.astar = AStar3D.constructor()
         self.walkables: Array = get_tree(self).get_nodes_in_group(StringName.new2(WALKABLE_GROUP))
@@ -122,6 +123,7 @@ class AStar(Node3D, Draw):
 
     def draw_points(self) -> None:
         offset: Vector3 = Vector3.new3(0, 0.1, 0)
+        return
         for point in self.points:
             self.draw_sphere(point.id, DRAW_RAD, point.position + offset,
                              color=Color.new3(1, 0, 0) if point in self.disabled_points else Color.new3(0, 1, 1))
@@ -319,4 +321,14 @@ class AStar(Node3D, Draw):
     def get_way_points(self, start_position: Vector3, end_position: Vector3) -> PackedVector3Array:
         start = self.astar.get_closest_point(start_position)
         end = self.astar.get_closest_point(end_position)
-        return self.astar.get_point_path(start, end)
+        point_path: Array = self.astar.get_point_path(start, end)
+        id_path:Array = self.astar.get_id_path(start, end)
+        result_points:List[Vector3] = []
+        for id in id_path:
+            print_error("id:", id)
+            point:AStarPoint = self.dict_points[id]
+            result_points.append(point.position)
+            print_error(f"ASTarPoint<{point.position.x}|{point.position.y}|{point.position.z}>")
+        for point in point_path:
+            print_error(f"point:{point.x}|{point.y}|{point.z}")
+        return result_points
