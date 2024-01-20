@@ -4,7 +4,7 @@ import math
 
 from py4godot.classes.CharacterBody3D.CharacterBody3D import CharacterBody3D
 from py4godot.classes.Node3D.Node3D import Node3D
-from py4godot.classes.generated4_core import NodePath, Array, Vector3, Transform3D, Color
+from py4godot.classes.generated4_core import Dictionary, NodePath, Array, Vector3, Transform3D, Color
 from py4godot.classes.PhysicsRayQueryParameters3D.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
 from py4godot.classes.PhysicsShapeQueryParameters3D.PhysicsShapeQueryParameters3D import PhysicsShapeQueryParameters3D
 from py4godot.classes.SphereShape3D.SphereShape3D import SphereShape3D
@@ -35,6 +35,8 @@ from Scripts.Navigation.AStar import AStar as NavAstar
 # from py4godot.pluginscript_api.hints.range_hint.RangeHint import *
 
 HANDLE_CHECK_VIEW: str = "Check_View"
+HANDLE_ACTION: str = "Action"
+HANDLE_PLayer:str = "Player"
 PUSH_OBJ_MASK: int = 4
 GROUND_MASK: int = 1
 
@@ -91,7 +93,8 @@ class Enemy(CharacterBody3D, Draw):
     @gdmethod
     def _ready(self):
         self.immediate_geometry_init(self, HANDLE_CHECK_VIEW)
-
+        self.immediate_geometry_init(self, HANDLE_ACTION)
+        self.immediate_geometry_init(self, HANDLE_PLayer)
         self.look_direction = Vector3.new3(1, 0, 1)
         self._astar = typing.cast(NavAstar, self.get_node(self.astar_path).get_pyscript())
 
@@ -161,7 +164,7 @@ class Enemy(CharacterBody3D, Draw):
         new_pos: Vector3 = self.global_position + vel.normalized() * self.delta * self.speed_modifier
         self.global_position = new_pos
 
-        self.draw_sphere("sphere", 2, self.path[self.current_path_ind], Color.new3(0, 1, 0))
+        self.draw_sphere("sphere", 0.2, self.path[self.current_path_ind], Color.new3(0, 1, 0))
 
         if dist < DIST_NAVIGATION:
             self.current_path_ind += 1
@@ -171,9 +174,10 @@ class Enemy(CharacterBody3D, Draw):
             self.path = self._astar.get_way_points(self.global_position + (
                     self.player.global_position - self.global_position).normalized(),
                                                    self.player.global_position)
-        dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
+        dist_vector = self.path[self.current_path_ind] - self.global_position
+        dist_vector.y = 0
         dist: float = dist_vector.length()
-        vel: Vector3 = (self.path[self.current_path_ind] - self.transform.get_origin())
+        vel: Vector3 = (self.path[self.current_path_ind] - self.global_position)
         vel.y = 0
         self.look_direction = vel.normalized()
 
@@ -184,6 +188,7 @@ class Enemy(CharacterBody3D, Draw):
         if dist < DIST_NAVIGATION:
             self.current_path_ind += 1
             self.current_path_ind = min(self.current_path_ind, len(self.path) - 1)
+        self.draw_sphere(HANDLE_PLayer, 2, self.player.global_position, Color.new3(1,0,1))
 
         self.last_player_pos = self.player.global_position
 
@@ -218,7 +223,8 @@ class Enemy(CharacterBody3D, Draw):
     def player_in_sight(self) -> bool:
 
         res = self.sphere_cast(self.global_position, self.action_radius,
-                               1)
+                               2)
+        self.draw_sphere(HANDLE_ACTION, self.action_radius, self.global_position, Color.new3(1, 0, 1))
         number_of_hits = res.size()
         if (number_of_hits > 0):
             player_direction: Vector3 = self.player.global_position - self.global_position
@@ -233,7 +239,7 @@ class Enemy(CharacterBody3D, Draw):
                                1)
         number_of_hits = res.size()
         if (number_of_hits > 0):
-            player_direction: Vector3 = self.player.global_position - self.global_position()
+            player_direction: Vector3 = self.player.global_position - self.global_position
             angle: float = player_direction.angle_to(self.look_direction)
             if abs(angle) < self.field_of_view / 2:
                 object_in_view: bool = self.object_in_view(player_direction, self.out_of_sight_radius)
@@ -256,16 +262,19 @@ class Enemy(CharacterBody3D, Draw):
 
     def object_in_view(self, direction: Vector3, ray_length: float) -> bool:
         to: Vector3 = direction.normalized() * ray_length
-        exclude: Array = Array()
-        exclude.append(self)
+        exclude: Array = Array.new0()
+        # exclude.append(self)
 
-        result = self.get_world_3d().direct_space_state.intersect_ray(
-            self.global_position + Vector3(0, 0.1, 0),
-            self.global_position + to + Vector3(0, 0.1, 0),
-            exclude, collision_mask=PUSH_OBJ_MASK)
+        params: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.constructor()
+        params.from_ = self.global_position + Vector3.new3(0, 0.1, 0)
+        params.to = self.global_position + Vector3.new3(0, 0.1, 0)
+        #        params.exclude = exclude
+        params.collision_mask = PUSH_OBJ_MASK
+
+        result: Dictionary = self.get_world_3d().direct_space_state.intersect_ray(params)
         self.draw_line(HANDLE_CHECK_VIEW, self.global_position + Vector3(0, 0.1, 0),
-                       self.global_position + to + Vector3(0, 0.1, 0))
-        return result["position"] != None
+                       self.global_position + to + Vector3(0, 0.1, 0), Color.new3(1, 1, 0))
+        return result.has("position")
 
     def reset(self) -> None:
         self.current_path_ind = 0
