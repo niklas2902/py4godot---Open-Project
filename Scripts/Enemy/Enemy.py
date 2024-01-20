@@ -236,7 +236,7 @@ class Enemy(CharacterBody3D, Draw):
 
     def player_out_of_sight(self) -> bool:
         res = self.sphere_cast(self.global_position, self.out_of_sight_radius,
-                               1)
+                               2)
         number_of_hits = res.size()
         if (number_of_hits > 0):
             player_direction: Vector3 = self.player.global_position - self.global_position
