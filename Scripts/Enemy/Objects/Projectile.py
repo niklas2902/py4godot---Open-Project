@@ -9,10 +9,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from Scripts.Enemy.Objects.Spawner import Spawner
-from py4godot.enums.enums import *
-from py4godot.core import *
 from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.pluginscript_api.hints import *
 
 
 @gdclass
@@ -28,13 +25,12 @@ class Projectile(Node3D):
     utils_path: NodePath
 
     prop("lifetime", float, 10)
-    prop("utils_path", NodePath, NodePath())
-    register_signal("lifetime_over")
+    prop("utils_path", NodePath, NodePath.new0())
 
     @gdmethod
     def _ready(self) -> None:
         self._current_lifetime_counter = 0
-        self.velocity = Vector3(1, 0, 0)
+        self.velocity = Vector3.new3(1, 0, 0)
 
     # self.utils = self.get_node(self.utils_path)
 
@@ -45,7 +41,7 @@ class Projectile(Node3D):
             if (self._current_lifetime_counter > self.lifetime):
                 self.spawner.lifetime_over(self)
             else:
-                self.global_transform.set_origin(self.global_transform.get_origin() + self.velocity * delta)
+                self.global_position = self.global_position + self.velocity * delta
 
     @gdmethod
     def _physics_process(self, delta: float) -> None:
@@ -67,16 +63,20 @@ class Projectile(Node3D):
                                       1))[0]["collider"].get_pyscript()
 
     def is_hitting_wall(self) -> bool:
-        res = self.utils.callv("sphere_cast",
-                               Array(self.global_transform.get_origin(), 0.1, Array(self.spawner),
-                                     4)).get_converted_value()
-        return res.size() != 0
+        # res = self.utils.callv("sphere_cast",
+        #                       Array(self.global_transform.get_origin(), 0.1, Array(self.spawner),
+        #                             4)).get_converted_value()
+
+        # return res.size() != 0
+
+        return False
 
     def is_hitting_player(self) -> bool:
-        res = self.utils.callv("sphere_cast",
-                               Array(self.global_transform.get_origin(), 0.1, Array(self.spawner),
-                                     1)).get_converted_value()
-        return res.size() != 0
+        # res = self.utils.callv("sphere_cast",
+        #                       Array(self.global_transform.get_origin(), 0.1, Array(self.spawner),
+        #                             1)).get_converted_value()
+        # return res.size() != 0
+        return False
 
     def reset_lifetime(self) -> None:
         self._current_lifetime_counter = 0

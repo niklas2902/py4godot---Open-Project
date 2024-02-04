@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://ck1ysw4w8p"]
+[gd_scene load_steps=16 format=3 uid="uid://ck1ysw4w8p"]
 
 [ext_resource type="Script" path="res://Scripts/Navigation/AStar.py" id="1_7usgc"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Enemy.py" id="1_ft515"]
 [ext_resource type="Script" path="res://Scripts/Navigation/RouteHolder.py" id="3_nrf4f"]
 [ext_resource type="Script" path="res://Scripts/Utils/BehaviorTreeVisualizerLogic.py" id="3_ubm44"]
 [ext_resource type="Script" path="res://Scripts/Navigation/RoutePoint.py" id="4_iyyj6"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Objects/Spawner.py" id="6_b6ju5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3sj72"]
 
@@ -26,6 +27,8 @@ size = Vector3(19.9508, 0.001, 19.8882)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afrfp"]
 size = Vector3(4.9908, 3, 6.63533)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_trba1"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -139,3 +142,20 @@ tree_path = NodePath("Tree")
 [node name="Tree" type="Tree" parent="Node2D"]
 offset_right = 317.0
 offset_bottom = 646.0
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.22825, 0.602715, 5.87139)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+_import_path = "import_path"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50066, 0, 0)
+script = ExtResource("6_b6ju5")
+utils_path = NodePath("../Utils")
+reload_time = 0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CylinderShape3D_trba1")
