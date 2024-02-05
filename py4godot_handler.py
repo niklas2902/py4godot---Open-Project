@@ -53,4 +53,14 @@ if __name__ == "__main__":
     if os.path.exists(f"addons/{args.target_platform}"):
         shutil.rmtree(f"addons/{args.target_platform}/", onerror=onerror)
     copytree(f"submodules/py4godot/build/final/{args.target_platform}", f"addons/{args.target_platform}")
+    shutil.copyfile("build_files/get-pip.py", "addons/windows64/cpython-3.11.3-windows64/python/install/get-pip.py")
+
+    try:
+        res = subprocess.Popen(f"cd addons/windows64/cpython-3.11.3-windows64/python/install &&"
+                               f"python get-pip.py && "
+                               f"python -m pip install debugpy ",
+                               shell=True)
+        res.wait()
+    except Exception as e:
+        print(e)
     print("======================End copying files=======================")
