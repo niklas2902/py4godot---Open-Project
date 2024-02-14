@@ -33,10 +33,9 @@ from py4godot.pluginscript_api.utils.annotations import *
 from Scripts.Navigation.AStar import AStar as NavAstar
 
 # from py4godot.pluginscript_api.hints.range_hint.RangeHint import *
-
 HANDLE_CHECK_VIEW: str = "Check_View"
 HANDLE_ACTION: str = "Action"
-HANDLE_PLayer:str = "Player"
+HANDLE_PLayer: str = "Player"
 PUSH_OBJ_MASK: int = 4
 GROUND_MASK: int = 1
 
@@ -117,7 +116,7 @@ class Enemy(CharacterBody3D, Draw):
                         DebugNode("test1"),
                         DebugNode("test2"),
                         InfiniteRepeatNode(
-                            IfElseNode([
+                            IfElseNode((
                                 SequenceNode([
                                     WaitNode(0.1),
                                     FollowNode()
@@ -125,7 +124,7 @@ class Enemy(CharacterBody3D, Draw):
                                 SequenceNode([
                                     WaitNodeSkipFirst(2),
                                     MoveNode()])
-                            ], lambda: self.should_follow_player())
+                            ), lambda: self.should_follow_player())
                         )
                     ])
                 ]
@@ -188,7 +187,7 @@ class Enemy(CharacterBody3D, Draw):
         if dist < DIST_NAVIGATION:
             self.current_path_ind += 1
             self.current_path_ind = min(self.current_path_ind, len(self.path) - 1)
-        self.draw_sphere(HANDLE_PLayer, 2, self.player.global_position, Color.new3(1,0,1))
+        self.draw_sphere(HANDLE_PLayer, 2, self.player.global_position, Color.new3(1, 0, 1))
 
         self.last_player_pos = self.player.global_position
 
