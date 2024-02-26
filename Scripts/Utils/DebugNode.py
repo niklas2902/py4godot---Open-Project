@@ -7,6 +7,6 @@ from py4godot.pluginscript_api.utils.annotations import *
 @gdclass
 class DebugNode(Node):
 
-    @gdmethod
-    def _enter_tree(self) -> None:
-        pass
+	@gdmethod
+	def _enter_tree(self) -> None:
+		pass
