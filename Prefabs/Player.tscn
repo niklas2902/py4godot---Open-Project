@@ -1,21 +1,48 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://b5dp2st44sktt"]
 
-[ext_resource path="res://Scripts/Player.py" type="Script" id=1]
+[ext_resource type="Script" path="res://Scripts/Player.py" id="1"]
 
-[sub_resource type="CapsuleMesh" id=2]
+[sub_resource type="CapsuleMesh" id="2"]
 
-[sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.945098, 0, 0, 1 )
+[sub_resource type="StandardMaterial3D" id="3"]
+albedo_color = Color(0.945098, 0, 0, 1)
 
-[sub_resource type="CapsuleShape" id=4]
+[sub_resource type="CapsuleShape3D" id="4"]
 
-[node name="Player" type="KinematicBody"]
-script = ExtResource( 1 )
-vel = 3
+[node name="Player" type="CharacterBody3D"]
+_import_path = "import_path"
+disable_mode = null
+collision_layer = null
+collision_mask = null
+collision_priority = null
+input_ray_pickable = null
+input_capture_on_drag = null
+axis_lock_linear_x = null
+axis_lock_linear_y = null
+axis_lock_linear_z = null
+axis_lock_angular_x = null
+axis_lock_angular_y = null
+axis_lock_angular_z = null
+motion_mode = null
+up_direction = null
+slide_on_ceiling = null
+velocity = null
+max_slides = null
+wall_min_slide_angle = null
+floor_stop_on_slope = null
+floor_constant_speed = null
+floor_block_on_wall = null
+floor_max_angle = null
+floor_snap_length = null
+platform_on_leave = null
+platform_floor_layers = null
+platform_wall_layers = null
+safe_margin = null
+script = ExtResource("1")
 
-[node name="CSGMesh" type="CSGMesh" parent="."]
-mesh = SubResource( 2 )
-material = SubResource( 3 )
+[node name="CSGMesh" type="CSGMesh3D" parent="."]
+mesh = SubResource("2")
+material = SubResource("3")
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 4 )
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("4")

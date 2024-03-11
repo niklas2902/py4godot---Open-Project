@@ -1,19 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://7n04htj1mx3d"]
 
-[ext_resource path="res://Models/lever.glb" type="PackedScene" id=1]
-[ext_resource path="res://Scripts/InteractionObjects/Lever.py" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://b5lbxpr6v6t4r" path="res://Models/lever.glb" id="1"]
+[ext_resource type="Script" path="res://Scripts/InteractionObjects/Lever.py" id="2"]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.159804, 0.735149, 1 )
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.319608, 1.4703, 2)
 
-[node name="Lever" type="StaticBody"]
+[node name="Lever" type="StaticBody3D"]
+_import_path = "import_path"
 collision_layer = 33
 collision_mask = 33
-script = ExtResource( 2 )
+script = ExtResource("2")
+activated = 0
+connected_obj_path = NodePath("")
 
-[node name="lever" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0 )
+[node name="lever" parent="." instance=ExtResource("1")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.573897, 0 )
-shape = SubResource( 1 )
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.573897, 0)
+shape = SubResource("1")
