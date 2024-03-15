@@ -1,28 +1,27 @@
 import math
 
-from py4godot.classes.AnimationTree.AnimationTree import AnimationTree
-from py4godot.classes.CPUParticles3D.CPUParticles3D import CPUParticles3D
-from py4godot.classes.Camera3D.Camera3D import Camera3D
-from py4godot.classes.CharacterBody3D.CharacterBody3D import CharacterBody3D
 from py4godot.classes.Input.Input import Input
-from py4godot.classes.Node.Node import Node
-from py4godot.classes.Node3D.Node3D import Node3D
 from py4godot.classes.Object.Object import Object
 from py4godot.classes.generated4_core import NodePath, Vector3, Vector2, Basis, Dictionary, Array, Transform3D, \
 	StringName
 from py4godot.classes.typedarrays import RIDTypedArray
+from py4godot.classes.utils import get_viewport
 from py4godot.pluginscript_api.utils.annotations import gdclass, gdmethod
 
+import debugpy
 import typing
 from Scripts.InteractionObjects.Lever import Lever
 from Scripts.Navigation.AStar import AStar as NavAstar, AStar
 from Scripts.PushObj import PushObj
 from Scripts.Tools.Draw import Draw
-from py4godot.classes.utils import get_viewport
-
+from py4godot.classes.AnimationTree.AnimationTree import AnimationTree
+from py4godot.classes.CPUParticles3D.CPUParticles3D import CPUParticles3D
+from py4godot.classes.Camera3D.Camera3D import Camera3D
+from py4godot.classes.CharacterBody3D.CharacterBody3D import CharacterBody3D
+from py4godot.classes.Node.Node import Node
+from py4godot.classes.Node3D.Node3D import Node3D
 from py4godot.classes.PhysicsRayQueryParameters3D.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
 from py4godot.pluginscript_api.utils.experimental import gdproperty
-from py4godot.utils.print_tools import print_error
 from typing import Optional
 
 DEFAULT_MAX_DIST = 10
@@ -32,6 +31,7 @@ SPHERE_HANDLE = "SPHERE"
 RAY_HANDLE = "RAY"
 DIST_NAVIGATION = 0.2
 MOUSE_ACTION = StringName.new2("mouse_action")
+HANDLE_PATH = "PATH"
 
 
 @gdclass
@@ -54,6 +54,8 @@ class CharHandler(CharacterBody3D, Draw):
 	_move_possible: bool
 	_particle_system: CPUParticles3D
 
+	path_temp:list
+
 	# properties
 	can_move: bool = gdproperty(bool, True)
 	astar_path: NodePath = gdproperty(NodePath, NodePath.new0())
@@ -66,6 +68,8 @@ class CharHandler(CharacterBody3D, Draw):
 	def __init__(self) -> None:
 		# Don't call any godot-methods here
 		super().__init__()
+		self.orientation: Transform3D = Transform3D.new0()
+		self.root_motion: Transform3D = Transform3D.new0()
 		self.is_on_ramp = False
 		self._clicked_before = False
 		self._move_possible = False
@@ -87,7 +91,9 @@ class CharHandler(CharacterBody3D, Draw):
 
 	@gdmethod
 	def _ready(self):
-		self.path: Optional[Array] = None
+		#self._init_debug()
+		
+		self.path: Optional[list[Vector3]] = None
 		self.current_path_ind: int = 0
 		self.immediate_geometry_init(self, SPHERE_HANDLE)
 		self.immediate_geometry_init(self, RAY_HANDLE)
@@ -107,8 +113,7 @@ class CharHandler(CharacterBody3D, Draw):
 		vector.x = 1
 
 		origin = self.transform.origin
-		self.root_motion = Transform3D.new3(Vector3.new3(0, 0, 0), Vector3.new3(0, 0, 0), Vector3.new3(0, 0, 0),
-											origin)
+		self.root_motion = Transform3D.new3(Vector3.new3(0, 0, 0), Vector3.new3(0, 0, 0), Vector3.new3(0, 0, 0), origin)
 		self.root_motion: Transform3D = Transform3D.new0()
 		self.root_motion.origin = self.global_position
 		self.root_motion.set_basis(self.transform.basis)
@@ -125,7 +130,24 @@ class CharHandler(CharacterBody3D, Draw):
 			self._sprint_dist = DEFAULT_SPRINT_DIST
 		self._astar = typing.cast(AStar, self.get_node(self.astar_path).get_pyscript())
 
+		for i in range(20):
+			self.immediate_geometry_init(self, HANDLE_PATH+str(i))
+
+
 	# TODO:enable self._particle_system.emitting = False
+
+	def _init_debug(self)->None:
+		try:
+			with open("locked_debug", "w"):
+				pass
+			debugpy.log_to('log.txt')
+			debugpy.configure(
+				python=r"C:\Users\nikla\OneDrive\Dokumente\repositories\py4godot---Open-Project\addons\windows64\cpython-3.9.7-windows64\python\install\python.exe")
+			debugpy.listen(("localhost", 5678))
+			print("before wait for client")
+			debugpy.wait_for_client()  # blocks execution until client is attached
+		except Exception as e:
+			print("Exception:", e)
 
 	@gdmethod
 	def _process(self, delta: float):
@@ -134,6 +156,7 @@ class CharHandler(CharacterBody3D, Draw):
 			return
 		# TODO:enable self._particle_system.emitting = self.get_speed() > 0.9
 		self.emit_sound()
+		self.draw_path()
 
 	@gdmethod
 	def _physics_process(self, delta: float):
@@ -250,7 +273,6 @@ class CharHandler(CharacterBody3D, Draw):
 		# Taken from: https://github.com/godotengine/tps-demo/blob/master/player/player.gd
 		# and https://www.youtube.com/watch?v=2AUMMmTNijg&list=LL&index=1
 		pos: Vector3 = self.animation_tree.get_root_motion_position()
-		accumulator: Vector3 = self.animation_tree.get_root_motion_position_accumulator()
 		self.root_motion = Transform3D.new2(Basis.new3(Vector3.new3(0, 1, 0),
 													   self.animation_tree.get_root_motion_rotation().get_angle()),
 											pos)
@@ -263,12 +285,20 @@ class CharHandler(CharacterBody3D, Draw):
 		# Fix -1 in movement
 		self.set_velocity(h_velocity * -1 * (1.0 / delta))
 		self.set_up_direction(Vector3.new3(0, 1, 0).normalized())
-		# self.velocity = self.get_velocity()
 		self.move_and_slide()
 		self.orientation.origin = Vector3.new3(0, 0, 0)
 		self.orientation = self.orientation.orthonormalized()
 
 		self.global_transform = Transform3D.new2(self.orientation.get_basis(), self.global_transform.get_origin())
+
+	def draw_path(self)->None:
+		if not self.path:
+			return
+		index:int = 0
+		for point in self.path:
+			self.draw_sphere(HANDLE_PATH+str(index), 0.2, Vector3.new3(point.x, point.y, point.z))
+			index += 1
+		index = 0
 
 	def emit_sound(self):
 		pass
@@ -277,12 +307,15 @@ class CharHandler(CharacterBody3D, Draw):
 		if self.path is None:
 			return
 
-		if self.current_path_ind >= self.path.size():
+		if self.current_path_ind >= len(self.path):
 			self.path = None
 			self.current_path_ind = 0
 			if self.push_obj_selected:
 				self.selected_push_obj = self.push_obj_selected
-				self.selected_push_obj.callv("start_pushing", Array(self))
+
+				args:Array = Array.new0()
+				args.push_back(self)
+				self.selected_push_obj.callv("start_pushing", args)
 				scripts: PushObj = typing.cast(PushObj, self.selected_push_obj.get_pyscript())
 				self._astar.enable_points(round(scripts.pos_before.x), round(scripts.pos_before.z), 2, 2)
 				self.is_pushing = True
@@ -292,11 +325,14 @@ class CharHandler(CharacterBody3D, Draw):
 				self.lever_obj_selected.trigger_connected_object()
 				self.lever_obj_selected = None
 			return
-
-		dist_vector = self.path[self.current_path_ind] - self.transform.get_origin()
+		
+		vector:Vector3 = self.path[self.current_path_ind]
+		dist_vector = vector - self.global_position
 		dist_vector.y = 0
 		dist: float = dist_vector.length()
-		vel: Vector3 = (self.path[self.current_path_ind] - self.transform.get_origin())
+
+		vel: Vector3 = (vector - self.global_position)
+		vel *= -1
 		if dist < DIST_NAVIGATION:
 			self.current_path_ind += 1
 		vel_z = vel.z
@@ -325,18 +361,19 @@ class CharHandler(CharacterBody3D, Draw):
 			mouse_pos: Vector2 = get_viewport(self).get_mouse_position()
 			camera: Camera3D = get_viewport(self).get_camera_3d()
 			from_: Vector3 = camera.project_ray_origin(mouse_pos)
-			to: Vector3 = from_ - camera.project_ray_normal(mouse_pos) * ray_length
 			exclude: RIDTypedArray = RIDTypedArray.new0()
 			# exclude.append(self)
 
 			params: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.constructor()
 			params.from_ = from_
 			params.to = from_ + camera.project_ray_normal(mouse_pos) * ray_length
-			params.exclude = exclude
 			params.collision_mask = self.push_obj_layer
-			result = self.get_world_3d().direct_space_state.intersect_ray(params)
+			result:Dictionary = self.get_world_3d().direct_space_state.intersect_ray(params)
+			print(result.size())
+			for key in result.keys():
+				print(key)
 
-			if result["position"] == None:
+			if not result.has("position") or result["position"] == None:
 				return None
 
 			self.interpret_result(result)
@@ -355,7 +392,7 @@ class CharHandler(CharacterBody3D, Draw):
 		point_to_move_to: Vector3 = typing.cast(Vector3, result["position"])
 		point_to_move_to = Vector3(point_to_move_to.x, 0, point_to_move_to.z)
 		self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to)
-		self.path = Array()
+		self.path = []
 		for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
 													 point_to_move_to):
 			self.path.append(path_point)
@@ -365,13 +402,15 @@ class CharHandler(CharacterBody3D, Draw):
 	def handle_ray_hit_push_obj(self, result: Dictionary) -> None:
 		self.push_obj_selected = result["collider"]
 		point_to_move_to = self.get_min_point(result["position"],
-											  result["collider"].get_node(NodePath("Triggers")).get_children(),
+											  result["collider"].get_node(NodePath.new2("Triggers")).get_children(),
 											  result["collider"])
 		self.draw_sphere(RAY_HANDLE, 0.5, point_to_move_to.global_transform.get_origin())
-		self.path = Array()
-		for path_point in self._astar.get_way_points(self.global_transform.get_origin(),
-													 point_to_move_to.global_transform.get_origin()):
+		self.path = []
+		way_points:list = self._astar.get_way_points(self.global_transform.get_origin(),
+													 point_to_move_to.global_transform.get_origin())
+		for path_point in way_points:
 			self.path.append(path_point)
+			print(f"Path_point:< {path_point.x}, {path_point.y}, {path_point.z}")
 		self.current_path_ind = 1
 
 	def get_min_point(self, collider: Vector3, points: Array, alt_object: Node3D):

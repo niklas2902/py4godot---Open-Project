@@ -1,5 +1,5 @@
 from py4godot.classes.generated4_core import NodePath
-from py4godot.pluginscript_api.utils.annotations import gdclass, gdmethod, gdtool
+from py4godot.pluginscript_api.utils.annotations import gdmethod, gdtool
 
 import typing
 from Scripts.CharHandler import CharHandler
